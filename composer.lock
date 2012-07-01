@@ -16,19 +16,14 @@
         {
             "package": "pimple/pimple",
             "version": "dev-master",
-            "source-reference": "d2cfa2f02f50abef65c238747c753a5f6786f6be"
-        },
-        {
-            "package": "pimple/pimple",
-            "version": "dev-master",
             "source-reference": "d2cfa2f02f50abef65c238747c753a5f6786f6be",
             "alias-pretty-version": "1.0.x-dev",
             "alias-version": "1.0.9999999.9999999-dev"
         },
         {
-            "package": "silex/silex",
+            "package": "pimple/pimple",
             "version": "dev-master",
-            "source-reference": "a282dd088975b8302cf3312a4f51ef34b55f8f1c"
+            "source-reference": "d2cfa2f02f50abef65c238747c753a5f6786f6be"
         },
         {
             "package": "silex/silex",
@@ -36,6 +31,11 @@
             "source-reference": "a282dd088975b8302cf3312a4f51ef34b55f8f1c",
             "alias-pretty-version": "1.0.x-dev",
             "alias-version": "1.0.9999999.9999999-dev"
+        },
+        {
+            "package": "silex/silex",
+            "version": "dev-master",
+            "source-reference": "a282dd088975b8302cf3312a4f51ef34b55f8f1c"
         },
         {
             "package": "symfony/event-dispatcher",
@@ -64,19 +64,21 @@
         {
             "package": "symfony/http-kernel",
             "version": "dev-master",
-            "source-reference": "3c13c8b8f78d8c0a20b1aeac5e0fb84d840ce365"
-        },
-        {
-            "package": "symfony/http-kernel",
-            "version": "dev-master",
             "source-reference": "3c13c8b8f78d8c0a20b1aeac5e0fb84d840ce365",
             "alias-pretty-version": "2.1.x-dev",
             "alias-version": "2.1.9999999.9999999-dev"
         },
         {
+            "package": "symfony/http-kernel",
+            "version": "dev-master",
+            "source-reference": "3c13c8b8f78d8c0a20b1aeac5e0fb84d840ce365"
+        },
+        {
             "package": "symfony/routing",
             "version": "dev-master",
-            "source-reference": "ed1a7d9118dd1ee332b485f19b920a9e0077022a"
+            "source-reference": "3559f342da691b98f78e13680291724b94340d8d",
+            "alias-pretty-version": "2.1.x-dev",
+            "alias-version": "2.1.9999999.9999999-dev"
         },
         {
             "package": "symfony/routing",
@@ -86,16 +88,21 @@
             "alias-version": "2.1.9999999.9999999-dev"
         },
         {
-            "package": "twig/twig",
+            "package": "symfony/routing",
             "version": "dev-master",
-            "source-reference": "73da773aaad0f97f2e967ec8241b8adf7b1e03d2",
-            "alias-pretty-version": "1.8.x-dev",
-            "alias-version": "1.8.9999999.9999999-dev"
+            "source-reference": "3559f342da691b98f78e13680291724b94340d8d"
         },
         {
             "package": "twig/twig",
             "version": "dev-master",
             "source-reference": "73da773aaad0f97f2e967ec8241b8adf7b1e03d2"
+        },
+        {
+            "package": "twig/twig",
+            "version": "dev-master",
+            "source-reference": "73da773aaad0f97f2e967ec8241b8adf7b1e03d2",
+            "alias-pretty-version": "1.8.x-dev",
+            "alias-version": "1.8.9999999.9999999-dev"
         }
     ],
     "packages-dev": null,
