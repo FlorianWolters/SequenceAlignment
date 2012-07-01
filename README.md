@@ -1,5 +1,7 @@
 # SequenceAlignment
 
+[![Build Status](https://secure.travis-ci.org/FlorianWolters/SequenceAlignment.png?branch=master)](http://travis-ci.org/FlorianWolters/SequenceAlignment)
+
 Coming soon.
 
 ## Introduction
