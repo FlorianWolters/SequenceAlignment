@@ -1,0 +1,29 @@
+{
+    "name": "florianwolters/sequence-alignment",
+    "description": "A simple web application demonstrating sequence alignment.",
+    "type": "application",
+    "keywords": ["biology", "sequence alignment", "amino acids"],
+    "homepage": "http://github.com/FlorianWolters/SequenceAlignment",
+    "license": "LGPL-3.0+",
+    "authors": [
+      {
+        "name": "Florian Wolters",
+        "email": "wolters.fl@gmail.com",
+        "homepage": "http://blog.florianwolters.de",
+        "role": "Developer"
+      }
+    ],
+    "require": {
+        "php": ">=5.4.0",
+        "florianwolters/component-core-enum": "0.3.*",
+        "florianwolters/component-util-singleton": "0.2.*",
+        "monolog/monolog": "1.1.*",
+        "silex/silex": "1.*",
+        "twig/twig": "1.*"
+    },
+    "autoload": {
+        "psr-0": {
+            "HSBremen": ["src/php", "src/tests/unit-tests/php"]
+        }
+    }
+}
