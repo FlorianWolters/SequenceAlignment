@@ -27,8 +27,6 @@
  * @since     File available since Release 0.1.0
  */
 
-declare(encoding = 'UTF-8');
-
 namespace HSBremen\ISBio\SequenceAlignment;
 
 use Silex\Application;

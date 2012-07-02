@@ -28,8 +28,6 @@
  * @since      File available since Release 0.1.0
  */
 
-declare(encoding = 'UTF-8');
-
 namespace HSBremen\ISBio\SequenceAlignment\Algorithm;
 
 use HSBremen\ISBio\SequenceAlignment\Model\ScoringMatrix\ScoringMatrixAbstract;

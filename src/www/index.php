@@ -27,8 +27,6 @@
  * @since     File available since Release 0.1.0
  */
 
-declare(encoding = 'UTF-8');
-
 require __DIR__ . '/../php/HSBremen/PPCSM/app.php';
 
 $app->run();
