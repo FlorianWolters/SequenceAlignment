@@ -57,6 +57,16 @@
          verbose="false">
 
     <!--
+     ! The <testsuites> element and its one or more <testsuite> children can be
+     ! used to compose a test suite out of test suites and test cases.
+     !-->
+    <testsuites>
+        <testsuite>
+            <directory>src/tests/unit-tests/php</directory>
+        </testsuite>
+    </testsuites>
+
+    <!--
      ! The <filter> element and its children can be used to configure the
      ! blacklist and whitelist for the code coverage reporting.
      !-->
@@ -69,6 +79,7 @@
             <directory suffix=".php">src/bin</directory>
             <directory suffix=".php">src/php</directory>
             <exclude>
+                <directory suffix="Enum.php">src/php</directory>
                 <directory suffix="Exception.php">src/php</directory>
                 <directory suffix="Interface.php">src/php</directory>
             </exclude>
@@ -80,7 +91,6 @@
      ! logging of the test execution.
      !-->
     <logging>
-        <!--<log type="coverage-text" target="php://stdout" showUncoveredFiles="true" />-->
         <log type="coverage-clover" target="review/phpcov/coverage.xml" />
         <log type="coverage-html"
              target="review/phpcov/coverage"
@@ -106,27 +116,50 @@
     </logging>
 
     <!--
+     ! The <selenium> element and its <browser> children can be used configure a
+     ! list of Selenium RC servers.
+     !-->
+    <selenium>
+        <browser name="Mozilla Firefox"
+                 browser="*firefox"
+                 host="127.0.0.1"
+                 port="4444"
+                 timeout="30" />
+        <browser name="Google Chrome"
+                 browser="*chrome"
+                 host="127.0.0.1"
+                 port="4444"
+                 timeout="30" />
+        <browser name="Internet Explorer"
+                 browser="*iexplore"
+                 host="127.0.0.1"
+                 port="4444"
+                 timeout="30" />
+    </selenium>
+
+    <!--
      ! The <php> element and its children can be used to configure PHP settings,
      ! constants, and global variables. It can also be used to prepend the
      ! include_path.
      ! -->
     <php>
         <ini name="error_reporting" value="-1" />
-        <ini name="display_errors" value="On" />
-        <ini name="display_startup_errors" value="On" />
+        <ini name="display_errors" value="1" />
+        <ini name="display_startup_errors" value="1" />
         <ini name="log_errors" value="On" />
         <ini name="log_errors_max_len" value="0" />
-        <ini name="ignore_repeated_errors" value="Off" />
-        <ini name="ignore_repeated_source" value="Off" />
-        <ini name="report_memleaks" value="On" />
-        <ini name="track_errors" value="On" />
-        <ini name="html_errors" value="Off" />
-        <ini name="xmlrpc_errors" value="Off" />
-        <ini name="xmlrpc_error_number" value="Off" />
+        <ini name="ignore_repeated_errors" value="0" />
+        <ini name="ignore_repeated_source" value="0" />
+        <ini name="report_memleaks" value="1" />
+        <ini name="track_errors" value="1" />
+        <ini name="html_errors" value="0" />
+        <ini name="xmlrpc_errors" value="0" />
+        <ini name="xmlrpc_error_number" value="0" />
         <ini name="docref_root" value=".php" />
         <ini name="error_prepend_string" value="" />
         <ini name="error_append_string" value="" />
         <ini name="memory_limit" value="1024M" />
+        <ini name="short_open_tag" value="0" />
     </php>
 
 </phpunit>
