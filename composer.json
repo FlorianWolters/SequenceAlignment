@@ -18,8 +18,9 @@
         "florianwolters/component-core-enum": "0.3.*",
         "florianwolters/component-util-singleton": "0.2.*",
         "monolog/monolog": "1.1.*",
-        "silex/silex": "1.*",
-        "twig/twig": "1.*"
+        "pimple/pimple": "1.0.*",
+        "silex/silex": "1.0.*",
+        "twig/twig": "1.8.*"
     },
     "autoload": {
         "psr-0": {
