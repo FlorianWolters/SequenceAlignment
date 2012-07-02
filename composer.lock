@@ -28,19 +28,21 @@
         {
             "package": "silex/silex",
             "version": "dev-master",
-            "source-reference": "a282dd088975b8302cf3312a4f51ef34b55f8f1c",
+            "source-reference": "9acfa332f95a2fa72e33f4c6fc8499b721db2705",
             "alias-pretty-version": "1.0.x-dev",
             "alias-version": "1.0.9999999.9999999-dev"
         },
         {
             "package": "silex/silex",
             "version": "dev-master",
-            "source-reference": "a282dd088975b8302cf3312a4f51ef34b55f8f1c"
+            "source-reference": "9acfa332f95a2fa72e33f4c6fc8499b721db2705"
         },
         {
-            "package": "symfony/event-dispatcher",
+            "package": "silex/silex",
             "version": "dev-master",
-            "source-reference": "v2.1.0-BETA1"
+            "source-reference": "a282dd088975b8302cf3312a4f51ef34b55f8f1c",
+            "alias-pretty-version": "1.0.x-dev",
+            "alias-version": "1.0.9999999.9999999-dev"
         },
         {
             "package": "symfony/event-dispatcher",
@@ -50,9 +52,21 @@
             "alias-version": "2.1.9999999.9999999-dev"
         },
         {
+            "package": "symfony/event-dispatcher",
+            "version": "dev-master",
+            "source-reference": "v2.1.0-BETA1"
+        },
+        {
             "package": "symfony/http-foundation",
             "version": "dev-master",
-            "source-reference": "ee1c424f8ee48db84a60f8c5bd8dd3b25706e4e9"
+            "source-reference": "211cba98f1f068f500b8f9f95b7b0036f458739d"
+        },
+        {
+            "package": "symfony/http-foundation",
+            "version": "dev-master",
+            "source-reference": "211cba98f1f068f500b8f9f95b7b0036f458739d",
+            "alias-pretty-version": "2.1.x-dev",
+            "alias-version": "2.1.9999999.9999999-dev"
         },
         {
             "package": "symfony/http-foundation",
@@ -64,14 +78,33 @@
         {
             "package": "symfony/http-kernel",
             "version": "dev-master",
-            "source-reference": "3c13c8b8f78d8c0a20b1aeac5e0fb84d840ce365",
+            "source-reference": "a6111c260e33fb03d0068407d6e1a238855d1c86"
+        },
+        {
+            "package": "symfony/http-kernel",
+            "version": "dev-master",
+            "source-reference": "a6111c260e33fb03d0068407d6e1a238855d1c86",
             "alias-pretty-version": "2.1.x-dev",
             "alias-version": "2.1.9999999.9999999-dev"
         },
         {
             "package": "symfony/http-kernel",
             "version": "dev-master",
-            "source-reference": "3c13c8b8f78d8c0a20b1aeac5e0fb84d840ce365"
+            "source-reference": "3c13c8b8f78d8c0a20b1aeac5e0fb84d840ce365",
+            "alias-pretty-version": "2.1.x-dev",
+            "alias-version": "2.1.9999999.9999999-dev"
+        },
+        {
+            "package": "symfony/routing",
+            "version": "dev-master",
+            "source-reference": "6efe2369ad32ccdb648018f2eac83997d2d9b33b",
+            "alias-pretty-version": "2.1.x-dev",
+            "alias-version": "2.1.9999999.9999999-dev"
+        },
+        {
+            "package": "symfony/routing",
+            "version": "dev-master",
+            "source-reference": "6efe2369ad32ccdb648018f2eac83997d2d9b33b"
         },
         {
             "package": "symfony/routing",
@@ -79,18 +112,6 @@
             "source-reference": "3559f342da691b98f78e13680291724b94340d8d",
             "alias-pretty-version": "2.1.x-dev",
             "alias-version": "2.1.9999999.9999999-dev"
-        },
-        {
-            "package": "symfony/routing",
-            "version": "dev-master",
-            "source-reference": "ed1a7d9118dd1ee332b485f19b920a9e0077022a",
-            "alias-pretty-version": "2.1.x-dev",
-            "alias-version": "2.1.9999999.9999999-dev"
-        },
-        {
-            "package": "symfony/routing",
-            "version": "dev-master",
-            "source-reference": "3559f342da691b98f78e13680291724b94340d8d"
         },
         {
             "package": "twig/twig",
