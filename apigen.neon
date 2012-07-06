@@ -27,7 +27,7 @@ exclude:
 skipDocPath:
 skipDocPrefix:
 main:
-title: SequenceAlignment
+title: HSBremen\ISBio\SequenceAlignment
 baseUrl: http://florianwolters.github.com/PHP-Component-Util-Singleton
 googleCseId:
 googleCseLabel:
