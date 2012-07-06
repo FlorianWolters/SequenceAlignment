@@ -22,14 +22,16 @@ This project implements the **local alignment variant** of the software.
 
 Coming soon.
 
-## Requirements
+## Used Software
 
 * [PHP][1] 5.4.0 (or later)
 * [Silex][2] 1.1.0 (or later)
 * [Twig][3] 1.8.0 (or later)
 * [Monolog][4] 1.8.0 (or later)
-* [FlorianWolters\Component\Core\Enum][5]
-* [FlorianWolters\Component\Util\Singleton][6]
+* [FlorianWolters\Component\Core\Enum][5] 0.3.1 (or later)
+* [FlorianWolters\Component\Util\Singleton][6] 0.2.1 (or later)
+* [Twitter Bootstrap][7] 2.0.4 (or later)
+* [jQuery][8] 1.7.2 (or later)
 
 ## License
 
@@ -47,5 +49,7 @@ You should have received a copy of the GNU Lesser General Public License along w
 [4]: https://github.com/Seldaek/monolog
 [5]: https://github.com/FlorianWolters/PHP-Component-Core-Enum
 [6]: https://github.com/FlorianWolters/PHP-Component-Util-Singleton
+[7]: http://twitter.github.com/bootstrap
+[8]: http://jquery.com
 [10]: http://hs-bremen.de
 [11]: http://hs-bremen.de/internet/de/studium/stg/infmsc
