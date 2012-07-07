@@ -4,24 +4,55 @@
     "license": "LGPL-3.0+",
     "authors": [
       {
+        "name": "Andreas Schnieders",
+        "email": "schnieders.a@gmail.com",
+        "role": "Developer"
+      },
+      {
         "name": "Florian Wolters",
         "email": "wolters.fl@gmail.com",
         "homepage": "http://blog.florianwolters.de",
         "role": "Developer"
+      },
+      {
+        "name": "Michael James Malocha",
+        "email": "mjm159@gmail.com",
+        "role": "Developer"
+      },
+      {
+        "name": "Olav Hoffmann",
+        "email": "olavhoffmann@gmail.com",
+        "role": "Developer"
+      },
+      {
+        "name": "Steffen Wolfgang Schütte",
+        "email": "parvus23@gmail.com",
+        "role": "Developer"
       }
     ],
     "require": {
-        "php": ">=5.4.0",
+        "php": ">=5.3,<5.5",
         "florianwolters/component-core-enum": "0.3.*",
         "florianwolters/component-util-singleton": "0.2.*",
         "monolog/monolog": "1.1.*",
         "pimple/pimple": "1.0.*",
         "silex/silex": "1.0.*",
-        "twig/twig": "1.8.*"
+        "symfony/config": "2.1.*",
+        "symfony/form": "2.1.*",
+        "symfony/http-foundation": "2.1.*",
+        "symfony/translation": "2.1.*",
+        "symfony/twig-bridge": "2.1.*",
+        "symfony/validator": "2.1.*",
+        "symfony/yaml": "2.1.*",
+        "twig/twig": ">=1.8,<2.0-dev"
     },
     "autoload": {
         "psr-0": {
-            "HSBremen": ["src/php", "src/tests/unit-tests/php"]
+            "HSBremen": [
+                "src/php",
+                "src/tests/unit-tests/php",
+                "src/tests/integration-tests/php"
+            ]
         }
     }
 }
