@@ -15,7 +15,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with this program.  If not, see http://gnu.org/licenses/lgpl.txt.
  *
- * PHP version 5.4
+ * PHP version 5.3
  *
  * @category  Biology
  * @package   SequenceAlignment
@@ -27,6 +27,6 @@
  * @since     File available since Release 0.1.0
  */
 
-require __DIR__ . '/../php/HSBremen/PPCSM/app.php';
+require __DIR__ . '/../php/HSBremen/ISBio/SequenceAlignment/app.php';
 
 $app->run();
