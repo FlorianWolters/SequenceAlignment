@@ -15,7 +15,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with this program.  If not, see http://gnu.org/licenses/lgpl.txt.
  *
- * PHP version 5.4
+ * PHP version 5.3
  *
  * @category  Biology
  * @package   SequenceAlignment
@@ -33,21 +33,20 @@ use Silex\Application;
 use Silex\Provider\FormServiceProvider;
 use Silex\Provider\TwigServiceProvider;
 use Silex\Provider\ValidatorServiceProvider;
+use Silex\Provider\TranslationServiceProvider;
 use Silex\Provider\UrlGeneratorServiceProvider;
-
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-
-// TODO: Place configuration options in .yml or .json file.
-
-define('PROGRAM_DEBUG', true);
-define('PATH_VENDOR', __DIR__ . '/../../../../../vendor');
-define('PATH_WWW', __DIR__ . '/../../../../www');
+use Symfony\Component\Yaml\Yaml;
+use Symfony\Component\Yaml\Exception\ParseException;
 
 /**
- * Include the *Composer* autoloader file.
+ * Include the *Composer* autoloader.
  */
-require_once PATH_VENDOR . '/autoload.php';
+require __DIR__ . '/../../../../../vendor/autoload.php';
+
+// TODO Add error handling.
+$config = Yaml::parse(__DIR__ . '/../../../../data/config.yml');
 
 /**
  * The Silex application object.
@@ -55,25 +54,23 @@ require_once PATH_VENDOR . '/autoload.php';
 $app = new Application;
 
 // Set Silex core parameters.
-// http://silex.sensiolabs.org/doc/services.html#core-parameters
+// @link http://silex.sensiolabs.org/doc/services.html#core-parameters
 
 // The charset to use for Responses.
-$app['charset'] = 'UTF-8';
+$app['charset'] = $config['charset'];
 // Whether or not the application is running in debug mode.
-$app['debug'] = PROGRAM_DEBUG;
+$app['debug'] = $config['debug'];
 // Set the default port for non-HTTPS URLs.
-$app['request.http_port'] = 80;
+$app['request.http_port'] = $config['request']['http_port'];
 // Set the default port for HTTPS URLs.
-$app['request.https_port'] = 443;
+$app['request.https_port'] = $config['request']['https_port'];
 
 // Register Silex service providers.
 
 // Provides a service for building forms in the application with the Symfony2
 // Form component.
 // http://symfony.com/doc/2.0/book/forms.html
-$app->register(
-    new FormServiceProvider, array('form.class_path' => PATH_VENDOR)
-);
+$app->register(new FormServiceProvider);
 
 // Provides integration with the Twig template engine.
 // http://silex.sensiolabs.org/doc/providers/twig.html
@@ -81,31 +78,33 @@ $app->register(
 $app->register(
     new TwigServiceProvider,
     array(
-        'twig.path' => PATH_WWW . '/views',
+        'twig.path' => $config['dir']['assets']['views'],
         'twig.templates' => array(),
         'twig.options' => array(
-            'debug' => PROGRAM_DEBUG,
-            'charset' => 'utf-8',
+            'debug' => $config['debug'],
+            'charset' => $config['charset'],
             'base_template_class' => 'Twig_Template',
-            'cache' => PATH_WWW . '/cache',
-            'auto_reload' => PROGRAM_DEBUG,
+            'cache' => $config['dir']['cache'],
+            'auto_reload' => $config['debug'],
             'strict_variables' => true,
             'autoescape' => true,
-            'optimizations' => 1,
+            'optimizations' => 1
         ),
-        'twig.class_path' => PATH_VENDOR,
         'twig.form.templates' => array(
-            'form.html.twig'
+            'form_div_layout.html.twig'
         )
     )
 );
 
 // Provides a service for validating data.
 // http://silex.sensiolabs.org/doc/providers/validator.html
-$app->register(
-    new ValidatorServiceProvider,
-    array('validator.class_path' => PATH_VENDOR)
-);
+$app->register(new ValidatorServiceProvider);
+
+// Provides a service for translating the pplication into different languages.
+// http://silex.sensiolabs.org/doc/providers/translation.html
+$app->register(new TranslationServiceProvider, array(
+    'translator.messages' => array(),
+));
 
 // Provides a service for generating URLs for named routes.
 // http://silex.sensiolabs.org/doc/providers/url_generator.html
@@ -120,6 +119,7 @@ $app->error(
             return;
         }
 
+        // TODO Create custom error page.
         return $app['twig']->render(
             'error.html.twig',
             array(
@@ -152,11 +152,41 @@ $app->after(
     }
 );
 
-// TODO: Simple routes should be enough. We can mount controllers later.
+// TODO Move into Controller class.
 
-$app->get('/hello/{name}', function($name) use($app) {
-    return 'Hello '.$app->escape($name);
-} );
+$app->get('/', function() use ($app, $config) {
+
+    $type = new Form\SmithWatermanType;
+    $entity = new Entity\SmithWatermanEntity;
+
+    /* @var $form Symfony\Component\Form\Form */
+    $form = $app['form.factory']->create($type, $entity);
+
+    /* @var $request Symfony\Component\HttpFoundation\Request */
+    $request = $app['request'];
+
+    // Check if the current HTTP request method is 'GET'.
+    if ('GET' === $request->getMethod()) {
+        // Bind the request to the form.
+        $form->bindRequest($request);
+
+        // Check whether the form is valid.
+        if ( $form->isValid() ) {
+            //$data = $form->getData();
+            // TODO
+            return $app->redirect('/');
+        }
+    }
+
+    // Render the template and pass configuration data and the form view into
+    // the template.
+    return $app['twig']->render('index.html.twig', array(
+        'meta' => $config['meta'],
+        'dir' => $config['dir'],
+        'form' => $form->createView()
+    ));
+})
+->bind('local_alignment');
 
 // "It is possible to execute a return() statement inside an included file in
 // order to terminate processing in that file and return to the script which
