@@ -61,8 +61,14 @@
      ! used to compose a test suite out of test suites and test cases.
      !-->
     <testsuites>
-        <testsuite>
+        <testsuite name="Unit Test Suite">
             <directory>src/tests/unit-tests/php</directory>
+        </testsuite>
+        <testsuite name="Integration Test Suite">
+            <directory>src/tests/integration-tests/php</directory>
+        </testsuite>
+        <testsuite name="Functional Test Suite">
+            <directory>src/tests/functional-tests/php</directory>
         </testsuite>
     </testsuites>
 
