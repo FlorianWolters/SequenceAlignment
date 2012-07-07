@@ -1,0 +1,84 @@
+{# default.html.twig #}
+<!DOCTYPE HTML>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <!-- Specifies the character encoding for the HTML document. -->
+        <meta charset="{{ _charset }}" />
+
+        <!--
+        Specifies the name of the Web application that the page represents.
+        -->
+        <meta name="application-name" content="{{ meta.title }}" />
+
+        <!-- Specifies the name of the author of the document. -->
+        <meta name="author" content="{{ meta.author }}" />
+
+        <!--
+        Specifies a description of the page. Search engines can pick up this
+        description to show with the results of searches.
+        -->
+        <meta name="description" content="{{ meta.description }}" />
+
+        <!--
+        Provides a list of keywords or phrases, separated by commas, that can be
+        used to guide search engines with a list of search terms for which the
+        web page might be relevant.
+        -->
+        <meta name="keywords" content="{{ meta.keywords }}" />
+
+        <!--
+        Can be used to control how HTML content will appear in mobile browsers.
+        -->
+        <meta name="viewport" content="width=device-width,initial-scale=1" />
+
+        <title>{{ meta.title }}</title>
+
+        <!-- Enable manual DNS prefetching. -->
+        <link rel="dns-prefetch" href="//ajax.googleapis.com" />
+
+        <!-- Import Cascading Stylesheets (CSS). -->
+
+        <link rel="stylesheet" href="{{ dir.assets.css }}/bootstrap.min.css" />
+        <link rel="stylesheet" href="{{ dir.assets.css }}/style.css" />
+
+        <link rel="apple-touch-icon" href="apple-touch-icon-iphone.png" /><!-- 57x57 -->
+        <link rel="apple-touch-icon" sizes="72x72" href="apple-touch-icon-ipad.png" />
+        <link rel="apple-touch-icon" sizes="114x114" href="apple-touch-icon-iphone4.png" />
+        <link rel="author" href="humans.txt" />
+        <link rel="shortcut icon" href="favicon.ico" />
+    </head>
+    <body>
+        <!-- TODO
+        <a href="{{ meta.project_url }}">
+            <img style="position: absolute; top: 0; left: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_left_darkblue_121621.png" alt="Fork me on GitHub" />
+        </a>
+        -->
+
+        <header>
+            {% block header %}{% endblock %}
+        </header>
+
+        <div role="main">
+            {% block main %}{% endblock %}
+        </div>
+
+        <footer>
+            {% block footer %}{% endblock %}
+        </footer>
+
+        <!-- Import JavaScript (JS) files. -->
+
+        <!--
+            Import jQuery from Google Ajax Content Delivery Network (CDN).
+            Fall back to the local copy if necessary.
+        -->
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js" charset="{{ _charset }}"></script>
+        <script>
+            window.jQuery || document.write(unescape('%3Cscript src="{{ dir.assets.js }}/jquery-1.7.2.min.js" charset="{{ _charset }}"%3E3C/script%3E'));
+        </script>
+
+        <!-- Import Twitter Bootstrap. -->
+        <script src="{{ dir.assets.js }}/bootstrap.min.js" charset="{{ _charset }}"></script>
+
+    </body>
+</html>
