@@ -1,8 +1,7 @@
 {# form.html.twig #}
-<form action="{{ path('local_alignment') }}" method="get" {{ form_enctype(form) }}>
+<form action="{{ path('home') }}" method="post" {{ form_enctype(form) }}>
     <fieldset>
         {{ form_widget(form) }}
-
-        <input type="submit" />
+        <button type="submit">Go</button>
     </fieldset>
 </form>
