@@ -19,7 +19,7 @@
  *
  * @category   Biology
  * @package    SequenceAlignment
- * @subpackage Algorithm
+ * @subpackage Model
  * @author     Florian Wolters <wolters.fl@gmail.com>
  * @copyright  2012 Florian Wolters
  * @license    http://gnu.org/licenses/lgpl.txt LGPL-3.0+
@@ -31,13 +31,11 @@
 namespace HSBremen\ISBio\SequenceAlignment\Algorithm;
 
 /**
- * TODO: Add short class comment.
- *
- * TODO: Add long class comment.
+ * A cell in a similarity matrix, to hold row, column and score.
  *
  * @category   Biology
  * @package    SequenceAlignment
- * @subpackage Algorithm
+ * @subpackage Model
  * @author     Florian Wolters <wolters.fl@gmail.com>
  * @copyright  2012 Florian Wolters
  * @license    http://gnu.org/licenses/lgpl.txt LGPL-3.0+
@@ -47,20 +45,6 @@ namespace HSBremen\ISBio\SequenceAlignment\Algorithm;
  */
 class Cell
 {
-
-    /**
-     * The previous {@link Cell} relative to this {@link Cell}.
-     *
-     * @var Cell
-     */
-    private $previousCell = null;
-
-    /**
-     * The score of this {@link Cell}.
-     *
-     * @var integer
-     */
-    private $score = 0;
 
     /**
      * The row of this {@link Cell}.
@@ -77,6 +61,13 @@ class Cell
     private $column;
 
     /**
+     * The score of this {@link Cell}.
+     *
+     * @var integer
+     */
+    private $score;
+
+    /**
      * Constructs a new {@link Cell} with a specified row and a specified
      * column.
      *
@@ -87,6 +78,7 @@ class Cell
     {
         $this->row = $row;
         $this->column = $column;
+        $this->setScore(~\PHP_INT_MAX);
     }
 
     /**
@@ -112,16 +104,6 @@ class Cell
     }
 
     /**
-     * @param Cell $previousCell The {@link Cell}. to set.
-     *
-     * @return void
-     */
-    public function setPreviousCell(Cell $previousCell)
-    {
-        $this->previousCell = $previousCell;
-    }
-
-    /**
      * Returns the row of this {@link Cell}.
      *
      * @return integer The row.
@@ -142,21 +124,14 @@ class Cell
     }
 
     /**
-     * @return Cell The previous Cell.
-     */
-    public function getPreviousCell()
-    {
-        return $this->previousCell;
-    }
-
-    /**
+     * Returns a string representation of this {@link Cell}.
      *
-     * @return string
+     * @return string The string representation.
      */
     public function __toString()
     {
         return 'Cell(' . $this->row . ', ' . $this->column . '): score='
-            . $this->score . ', prevCell=' . $this->previousCell . ']';
+            . $this->score;
     }
 
 }
