@@ -29,6 +29,8 @@
 
 namespace HSBremen\ISBio\SequenceAlignment;
 
+use FlorianWolters\Component\Core\Enum\EnumUtils;
+use HSBremen\ISBio\SequenceAlignment\Model\SubstitutionMatrix\SubstitutionMatrixFactory;
 use Silex\Application;
 use Silex\Provider\FormServiceProvider;
 use Silex\Provider\TwigServiceProvider;
@@ -38,7 +40,6 @@ use Silex\Provider\UrlGeneratorServiceProvider;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Yaml\Yaml;
-use Symfony\Component\Yaml\Exception\ParseException;
 
 /**
  * Include the *Composer* autoloader.
@@ -155,28 +156,11 @@ $app->after(
 // TODO Move into Controller class.
 
 $app->get('/', function() use ($app, $config) {
-
-    $type = new Form\SmithWatermanType;
-    $entity = new Entity\SmithWatermanEntity;
+    $type = new Form\AlignmentType;
+    $entity = new Entity\AlignmentEntity;
 
     /* @var $form Symfony\Component\Form\Form */
     $form = $app['form.factory']->create($type, $entity);
-
-    /* @var $request Symfony\Component\HttpFoundation\Request */
-    $request = $app['request'];
-
-    // Check if the current HTTP request method is 'GET'.
-    if ('GET' === $request->getMethod()) {
-        // Bind the request to the form.
-        $form->bindRequest($request);
-
-        // Check whether the form is valid.
-        if ( $form->isValid() ) {
-            //$data = $form->getData();
-            // TODO
-            return $app->redirect('/');
-        }
-    }
 
     // Render the template and pass configuration data and the form view into
     // the template.
@@ -186,7 +170,51 @@ $app->get('/', function() use ($app, $config) {
         'form' => $form->createView()
     ));
 })
-->bind('local_alignment');
+->bind('home');
+
+$app->post('/', function() use ($app, $config) {
+    $type = new Form\AlignmentType;
+    $entity = new Entity\AlignmentEntity;
+
+    /* @var $form Symfony\Component\Form\Form */
+    $form = $app['form.factory']->create($type, $entity);
+
+    /* @var $request Symfony\Component\HttpFoundation\Request */
+    $request = $app['request'];
+
+    // Check if the current HTTP request method is 'POST'.
+    if ('POST' === $request->getMethod()) {
+        // Bind the request to the form.
+        $form->bindRequest($request);
+
+        // Check whether the form is valid.
+        if ( $form->isValid() ) {
+            $entity = $form->getData();
+
+            // TODO Find a way to use the enumeration constant IN the entity.
+            $enumType = __NAMESPACE__ . '\Model\SubstitutionMatrix\SubstitutionMatrixEnum';
+            $matrixName = EnumUtils::getNameForOrdinal(
+                $enumType, $entity->getScoringMatrix()
+            );
+
+            $matrixEnum = EnumUtils::valueOf($enumType, $matrixName);
+
+            $alignment = new Model\Alignment(
+                $entity->getFirstSequence(),
+                $entity->getSecondSequence(),
+                SubstitutionMatrixFactory::getInstance()->create($matrixEnum),
+                $entity->getGapOpenCosts(),
+                $entity->getGapExtendCosts()
+            );
+
+            // TODO Run pairwise local alignment.
+             \var_dump($alignment);
+
+             // TODO Visualize the alignment.
+        }
+    }
+
+});
 
 // "It is possible to execute a return() statement inside an included file in
 // order to terminate processing in that file and return to the script which
