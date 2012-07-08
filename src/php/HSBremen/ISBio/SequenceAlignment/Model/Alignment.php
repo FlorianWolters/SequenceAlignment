@@ -28,7 +28,9 @@
  * @since      File available since Release 0.1.0
  */
 
-namespace HSBremen\ISBio\SequenceAlignment\Algorithm;
+namespace HSBremen\ISBio\SequenceAlignment\Model;
+
+use HSBremen\ISBio\SequenceAlignment\Model\SubstitutionMatrix\SubstitutionMatrixAbstract;
 
 /**
  * Holds the output of a pairwise sequences alignment.
