@@ -33,9 +33,8 @@ namespace HSBremen\ISBio\SequenceAlignment\Algorithm;
 use HSBremen\ISBio\SequenceAlignment\Model\ScoringMatrix\ScoringMatrixAbstract;
 
 /**
- * TODO: Add short class comment.
- *
- * TODO: Add long class comment.
+ * An implementation of the Smith-Waterman algorithm for biological local
+ * pairwise sequence alignment.
  *
  * @category   Biology
  * @package    SequenceAlignment
@@ -48,6 +47,8 @@ use HSBremen\ISBio\SequenceAlignment\Model\ScoringMatrix\ScoringMatrixAbstract;
  * @link       http://en.wikipedia.org/wiki/Smith-Waterman
  * @link       http://mathworks.de/help/toolbox/bioinfo/ref/swalign.html
  * @since      Class available since Release 0.1.0
+ * @todo       Implement class `Alignment` to reduce the complexity of this
+ *             class (cf. jaligner).
  * @todo       This is the local alignment algorithm. We should try to keep this
  * @todo       The current approach uses an array as the matrix, we could also
  *             use an object structure together with the class {@link Cell}.
@@ -76,6 +77,26 @@ class SmithWaterman
      */
     private $scoringMatrix;
 
+    /**
+     * The penalty for opening a gap in the alignment.
+     *
+     * @var float
+     */
+    private $gapOpen;
+
+    /**
+     * The penalty for extending a gap in the alignment.
+     *
+     * @var float
+     */
+    private $gapExtend;
+
+    /**
+     * The length of the first input sequence.
+     *
+     * @var array
+     */
+    private $firstSeqLen;
 
     /**
      * The length of the second input sequence.
@@ -85,11 +106,11 @@ class SmithWaterman
     private $secondSeqLen;
 
     /**
-     * The matrix.
+     * The result matrix.
      *
      * @var array
      */
-    private $matrix = [];
+    private $scores = [];
 
     /**
      * The score.
@@ -97,13 +118,6 @@ class SmithWaterman
      * @var integer
      */
     private $score;
-
-    /**
-     * The length of the first input sequence.
-     *
-     * @var array
-     */
-    private $firstSeqLen;
 
     /**
      * The first aligned sequence.
@@ -132,21 +146,23 @@ class SmithWaterman
      *                                             locally.
      * @param ScoringMatrixAbstract $scoringMatrix The scoring matrix to use for
      *                                             the local alignment.
-     * @param integer               $gapOpen       The penalty for opening a gap
+     * @param float                 $gapOpen       The penalty for opening a gap
      *                                             in the alignment.
+     * @param float                 $gapExtend     The penalty for extending a
+     *                                             gap in the alignment.
      * @todo Implement input validation.
      */
     public function __construct(
-        $firstSeq, $secondSeq, ScoringMatrixAbstract $scoringMatrix,
-        $gapOpen = 8
+        $firstSeq, $secondSeq, SubstitutionMatrixAbstract $scoringMatrix,
+        $gapOpen = 10, $gapExtend = 0.5
     ) {
         $this->firstSeq = \str_split($firstSeq);
         $this->secondSeq = \str_split($secondSeq);
         $this->firstSeqLen = \strlen($firstSeq);
         $this->secondSeqLen = \strlen($secondSeq);
         $this->gapOpen = $gapOpen;
-
-        $this->scoringMatrix = $scoringMatrix->getMatrix();
+        $this->gapExtend = $gapExtend;
+        $this->scoringMatrix = $scoringMatrix->getScores();
     }
 
     /**
@@ -158,7 +174,7 @@ class SmithWaterman
     {
         for ($i = 0; $i <= $this->firstSeqLen; ++$i) {
             for ($j = 0; $j <= $this->secondSeqLen; ++$j) {
-                $this->matrix[$i][$j] = 0;
+                $this->scores[$i][$j] = 0;
             }
         }
     }
@@ -180,10 +196,10 @@ class SmithWaterman
                 $weight = $this->weight(
                     $this->firstSeq[$i - 1], $this->secondSeq[$j - 1]
                 );
-                $diagonalScore = $this->matrix[$i - 1][$j - 1] + $weight;
-                $leftScore = $this->matrix[$i][$j - 1] - 1;
-                $topScore = $this->matrix[$i - 1][$j] - 1;
-                $this->matrix[$i][$j] = \max(
+                $diagonalScore = $this->scores[$i - 1][$j - 1] + $weight;
+                $leftScore = $this->scores[$i][$j - 1] - 1;
+                $topScore = $this->scores[$i - 1][$j] - 1;
+                $this->scores[$i][$j] = \max(
                     $diagonalScore, $leftScore, $topScore, 0
                 );
             }
@@ -214,13 +230,13 @@ class SmithWaterman
     }
 
     /**
-     * Returns the matrix.
+     * Returns the result matrix.
      *
-     * @return array The matrix.
+     * @return array The result matrix.
      */
-    public function getMatrix()
+    public function getScores()
     {
-        return $this->matrix;
+        return $this->scores;
     }
 
     /**
@@ -234,12 +250,3 @@ class SmithWaterman
     }
 
 }
-
-// TODO: Add unit test.
-//$sequenceA = "MSEFRILSDREHVLKRAGMYIGSTTYEEHQRFLFGKWTKISYVPGLVKIIDEIIDNSVDEAIRTNFEFANVISVDIQNNIVTVTDNGRGIPQHMVTTPEGTQIPQPVAAWTRTKAGSNFDDTNRLTQGMNGVGSSLSNFFSDWFTGVTCDGETEMTVQCTNGAENITWSSKPSKLKGTNVTFCPDFDHFEGYMMDNSVLDIVHDRLQSLSVIFPKITFKFNGKRIVSKFKDYAKLYNDDPFVIEDKNFSLALVPAVEGEGFKSVSFANGLFTKNGGTHVDYVTDDLCEEIVKRIKKEYKVDVTKAAVKSGLTCILIVRELPNLRFDSQTKERLTNPTGDIKRHIDLDFKKLAKVIAKKENIIMPIIAVVLARKEAADKAAATKAAKAAKRAKVAKHVKANLIGTDAETTLFLTEGDSAINYLISVRDQDLHGGFPLRGKTLTTWEQPEAKIVKNAEIFNIMAITGLQFGVDALDVMQYKNIAIMTDADTDGIGSIKPSLISFFARWPELFEDGRIRFIKTPIIIAEPKKGDDVRWYYDLEDFENDRDNIkGYNIRYIKGLASLTESDYHRVINDPVMEIITLPENYKELFDLLYSEDADQRKIWMQS";
-//$sequenceB = "MSIRLLVHLNQIYTTYNYTNMSDLLLNVDNDYLDLAAALNIDINTITDNIDINTSKSSLNTYFTSLPKDVVVRRLNSASYQDSQEMRWPYPGQDNQKLFEQFEGVNGVIVQLQGVILQHQAQLDHSYWDEANSKYVRFCNSVGYKRTYPDGSIKLIQGLPENVCLKGVTEYGDPPNRPLPVIDKLGLVGKKGMTCSECIRAGLHSQEVEGKDRPVTCSPTGQLIFYVTGFTTRVLSNKGGKVTSTFNDYTVKELMDDTGFILIIPLKAKSTRRGIWDASTKQWTSVGYEAMVNNLIYKHSKDFANAPVGKRDTIAMKMSPYFQTIIISIVPPNPEDKNPKASLNFAVKEIPDLGAIKAARKYWQQINPAGEINVLNEDDFSNTKSVGLCAAEIVEEEPIEINKNPWAE";
-//
-//$obj = new SmithWaterman($sequenceA, $sequenceB);
-//$obj->buildMatrix();
-//$obj->fillMatrix();
-//$matrix = $obj->getMatrix();
