@@ -1,6 +1,6 @@
 <?php
 /**
- * `ScoringMatrixEnum.php`
+ * `SubstitutionMatrixEnum.php`
  *
  * This program is free software: you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -28,12 +28,12 @@
  * @since      File available since Release 0.1.0
  */
 
-namespace HSBremen\ISBio\SequenceAlignment\Model\ScoringMatrix;
+namespace HSBremen\ISBio\SequenceAlignment\Model\SubstitutionMatrix;
 
 use \FlorianWolters\Component\Core\Enum\EnumAbstract;
 
 /**
- * Enumerates scoring matrices to use for the local alignment.
+ * Enumerates substitution matrices.
  *
  * @category   Biology
  * @package    Alignment
@@ -45,19 +45,37 @@ use \FlorianWolters\Component\Core\Enum\EnumAbstract;
  * @link       http://github.com/FlorianWolters/SequenceAlignment
  * @since      Class available since Release 0.1.0
  */
-final class ScoringMatrixEnum extends EnumAbstract
+class SubstitutionMatrixEnum extends EnumAbstract
 {
 
     /**
-     * The *BLOSUM62* scoring matrix type.
+     * The BLOcks of Amino Acid SUbstitution Matrix number 60 (BLOSUM62).
      *
-     * @return ScoringMatrixEnum The *BLOSUM62* scoring matrix type.
+     * @return SubstitutionMatrixEnum The BLOSUM60.
+     */
+    final public static function BLOSUM60()
+    {
+        return self::getConstant(__CLASS__, __FUNCTION__);
+    }
+
+    /**
+     * The BLOcks of Amino Acid SUbstitution Matrix number 62 (BLOSUM62).
+     *
+     * @return SubstitutionMatrixEnum The BLOSUM62.
      */
     final public static function BLOSUM62()
     {
         return self::getConstant(__CLASS__, __FUNCTION__);
     }
 
-    // TODO: Add more scoring matrices.
+    /**
+     * The BLOcks of Amino Acid SUbstitution Matrix number 65 (BLOSUM65).
+     *
+     * @return SubstitutionMatrixEnum The BLOSUM65.
+     */
+    final public static function BLOSUM65()
+    {
+        return self::getConstant(__CLASS__, __FUNCTION__);
+    }
 
 }

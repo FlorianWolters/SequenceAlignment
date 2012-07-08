@@ -1,6 +1,6 @@
 <?php
 /**
- * `ScoringMatrixFactoryTest.php`
+ * `SubstitutionMatrixFactoryTest.php`
  *
  * This program is free software: you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -28,10 +28,10 @@
  * @since      File available since Release 0.1.0
  */
 
-namespace HSBremen\ISBio\SequenceAlignment\Model\ScoringMatrix;
+namespace HSBremen\ISBio\SequenceAlignment\Model\SubstitutionMatrix;
 
 /**
- * Test class for {@link ScoringMatrixFactory}.
+ * Test class for {@link SubstitutionMatrixFactory}.
  *
  * @category   Biology
  * @package    Alignment
@@ -42,57 +42,75 @@ namespace HSBremen\ISBio\SequenceAlignment\Model\ScoringMatrix;
  * @version    Release: @package_version@
  * @link       http://github.com/FlorianWolters/SequenceAlignment
  * @since      Class available since Release 0.1.0
+ *
+ * @covers     HSBremen\ISBio\SequenceAlignment\Model\SubstitutionMatrix\SubstitutionMatrixFactory
  */
-class ScoringMatrixFactoryTest extends \PHPUnit_Framework_TestCase
+class SubstitutionMatrixFactoryTest extends \PHPUnit_Framework_TestCase
 {
 
     /**
      * The object under test.
      *
-     * @var ScoringMatrixFactory
+     * @var SubstitutionMatrixFactory
      */
-    protected $object;
+    private $factory;
 
     /**
-     * Sets up the fixture, for example.
+     * Sets up the fixture.
      *
      * This method is called before a test is executed.
      *
      * @return void
      */
     protected function setUp() {
-        $this->object = ScoringMatrixFactory::getInstance();
-    }
-
-    /**
-     * @return void
-     */
-    public function testClassImplementsSingleton() {
-        $reflectedClass = new \ReflectionClass(
-            __NAMESPACE__ . '\ScoringMatrixFactory'
-        );
-        $this->assertFalse($reflectedClass->isInstantiable());
-        $this->assertTrue($reflectedClass->hasMethod('getInstance'));
+        $this->factory = SubstitutionMatrixFactory::getInstance();
     }
 
     /**
      * @return void
      *
-     * @covers HSBremen\ISBio\SequenceAlignment\Model\ScoringMatrix\ScoringMatrixFactory::create
+     * @covers HSBremen\ISBio\SequenceAlignment\Model\SubstitutionMatrix\SubstitutionMatrixFactory::create
      */
     public function testCreateReturnsCorrectInstance() {
-        $expected = 'HSBremen\ISBio\SequenceAlignment\Model\ScoringMatrix\ScoringMatrixAbstract';
-        $this->assertInstanceOf($expected, $this->object->create());
+        $expected = 'HSBremen\ISBio\SequenceAlignment\Model\SubstitutionMatrix\SubstitutionMatrixAbstract';
+        $this->assertInstanceOf($expected, $this->factory->create());
     }
 
     /**
      * @return void
      *
-     * @covers HSBremen\ISBio\SequenceAlignment\Model\ScoringMatrix\ScoringMatrixFactory::create
+     * @covers HSBremen\ISBio\SequenceAlignment\Model\SubstitutionMatrix\SubstitutionMatrixFactory::create
      */
     public function testCreateReturnsBlosum62AsDefault() {
-        $expected = 'HSBremen\ISBio\SequenceAlignment\Model\ScoringMatrix\Blosum62';
-        $this->assertInstanceOf($expected, $this->object->create());
+        $expected = 'HSBremen\ISBio\SequenceAlignment\Model\SubstitutionMatrix\Blosum62';
+        $this->assertInstanceOf($expected, $this->factory->create());
+    }
+
+    /**
+     * @return void
+     *
+     * @covers HSBremen\ISBio\SequenceAlignment\Model\SubstitutionMatrix\SubstitutionMatrixFactory::create
+     * @expectedException InvalidArgumentException
+     */
+    public function testCreateThrowsInvalidArgumentException() {
+        $this->factory->create(SubstitutionMatrixEnumMock::UNKNOWN());
+    }
+
+    /**
+     * @return void
+     *
+     * @covers HSBremen\ISBio\SequenceAlignment\Model\SubstitutionMatrix\SubstitutionMatrixFactory::getInstance
+     */
+    public function testGetInstance()
+    {
+        $reflectedClass = new \ReflectionClass(
+            __NAMESPACE__ . '\SubstitutionMatrixFactory'
+        );
+        $this->assertFalse($reflectedClass->isInstantiable());
+
+        $this->assertEquals(
+            $this->factory, SubstitutionMatrixFactory::getInstance()
+        );
     }
 
 }

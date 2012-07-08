@@ -1,6 +1,6 @@
 <?php
 /**
- * `ScoringMatrixFactory.php`
+ * `SubstitutionMatrixFactory.php`
  *
  * This program is free software: you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -28,12 +28,12 @@
  * @since      File available since Release 0.1.0
  */
 
-namespace HSBremen\ISBio\SequenceAlignment\Model\ScoringMatrix;
+namespace HSBremen\ISBio\SequenceAlignment\Model\SubstitutionMatrix;
 
 use \FlorianWolters\Component\Util\Singleton\SingletonTrait;
 
 /**
- * TODO
+ * Constructs instances of substitution matrices.
  *
  * @category   Biology
  * @package    Alignment
@@ -45,36 +45,41 @@ use \FlorianWolters\Component\Util\Singleton\SingletonTrait;
  * @link       http://github.com/FlorianWolters/SequenceAlignment
  * @since      Class available since Release 0.1.0
  */
-class ScoringMatrixFactory
+class SubstitutionMatrixFactory
 {
 
     /**
-     * This class implements the *Singleton* creation design pattern.
+     * This class implements the *Singleton* creational design pattern.
      */
     use SingletonTrait;
 
     /**
-     * Constructs a new scoring matrix.
+     * Constructs and returns the substitution matrix for the specified type of
+     * substitution matrix.
      *
-     * @param ScoringMatrixEnum $type The type of the scoring matrix to create.
+     * @param SubstitutionMatrixEnum $type The type of the substitution matrix
+     *                                     to create.
      *
-     * @return ScoringMatrixAbstract The scoring matrix.
-     * @throws InvalidArgumentException If the specified type is not supported.
+     * @return SubstitutionMatrixAbstract The substitution matrix.
+     * @throws InvalidArgumentException If the specified substitution matrix
+     *                                  type is not supported.
      */
-    public function create(ScoringMatrixEnum $type = null)
+    public function create(SubstitutionMatrixEnum $type = null)
     {
-        /* @var $result ScoringMatrixAbstract */
-        $result = null;
-
-        switch ($type) {
-            case null:
-                // Create a BLOSUM62 scoring matrix if no type is specified.
-            case ScoringMatrixEnum::BLOSUM62();
-                $result = Blosum62::getInstance();
-                break;
-            default:
-                throw new \InvalidArgumentException;
+        if (null === $type) {
+            $type = SubstitutionMatrixEnum::BLOSUM62();
         }
+
+        $className = __NAMESPACE__ . '\\' . \ucwords(\strtolower($type->getName()));
+
+        if (false === \class_exists($className)) {
+            throw new \InvalidArgumentException(
+                "The substitution matrix of type {$type} is not supported."
+            );
+        }
+
+        /* @var $result SubstitutionMatrixAbstract */
+        $result = $className::getInstance();
 
         return $result;
     }

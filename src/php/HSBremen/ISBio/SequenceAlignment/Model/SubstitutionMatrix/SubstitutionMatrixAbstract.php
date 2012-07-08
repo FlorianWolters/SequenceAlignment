@@ -1,6 +1,6 @@
 <?php
 /**
- * `ScoringMatrixAbstract.php`
+ * `SubstitutionMatrixAbstract.php`
  *
  * This program is free software: you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -28,14 +28,13 @@
  * @since      File available since Release 0.1.0
  */
 
-namespace HSBremen\ISBio\SequenceAlignment\Model\ScoringMatrix;
+namespace HSBremen\ISBio\SequenceAlignment\Model\SubstitutionMatrix;
 
 use \FlorianWolters\Component\Util\Singleton\SingletonTrait;
 
 /**
- * TODO: Add short class comment.
- *
- * TODO: Add long class comment.
+ * An object of class SubstitutionMatrixAbstract wraps a substitution matrix
+ * into an object.
  *
  * @category   Biology
  * @package    SequenceAlignment
@@ -47,45 +46,118 @@ use \FlorianWolters\Component\Util\Singleton\SingletonTrait;
  * @link       http://github.com/FlorianWolters/SequenceAlignment
  * @since      Class available since Release 0.1.0
  */
-class ScoringMatrixAbstract
+abstract class SubstitutionMatrixAbstract
 {
 
     /**
-     * This class implements the *Singleton* creation design pattern.
+     * This class implements the *Singleton* creational design pattern.
      */
     use SingletonTrait;
 
     /**
-     * The substitution matrix.
+     * The scores of this substitution matrix.
      *
      * @var array
      */
-    private $matrix;
+    private $scores;
 
     /**
-     * Returns the substitution matrix.
+     * The identifier of this substitution matrix.
      *
-     * @param array $matrix The substitution matrix to set.
-     *
-     * @return void
+     * @var string
      */
-    protected function setMatrix(array $matrix)
-    {
-        if (!is_array($matrix)) {
-            throw new \InvalidArgumentException;
-        }
+    private $id;
 
-        $this->matrix = $matrix;
+    /**
+     * Constructs a new substitution matrix with the specified scores and the
+     * optionally specified identifier.
+     *
+     * This constructor is *package-private*.
+     *
+     * @param array  $scores The scores of the substitution matrix.
+     * @param string $id     The identifier of the substitution matrix.
+     */
+    protected function __construct(array $scores, $id = null)
+    {
+        $this->setScores($scores);
+        $this->setId($id);
     }
 
     /**
-     * Returns the substitution matrix.
+     * Sets the scores of this substitution matrix.
      *
-     * @return array The substitution matrix.
+     * @param array $scores The scores to set.
+     *
+     * @return void
      */
-    public function getMatrix()
+    private function setScores(array $scores)
     {
-        return $this->matrix;
+        if (!is_array($scores)) {
+            throw new \InvalidArgumentException;
+        }
+
+        $this->scores = $scores;
+    }
+
+    /**
+     * Sets the identifier of this substitution matrix.
+     *
+     * @param string $id The identifier to set.
+     *
+     * @return void
+     */
+    private function setId($id)
+    {
+        if (null === $id) {
+            $id = \get_called_class();
+            $id = \strtoupper($id);
+        }
+
+        $this->id = $id;
+    }
+
+    /**
+     * Returns the scores of this substitution matrix.
+     *
+     * @return array The scores.
+     */
+    public function getScores()
+    {
+        return $this->scores;
+    }
+
+    /**
+     * Returns the identifier of this substitution matrix.
+     *
+     * @return string The identifier.
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Returns the score from a specified row and a specified column of this
+     * substitution matrix.
+     *
+     * @param integer $row    The row.
+     * @param integer $column The column.
+     *
+     * @return integer The score.
+     *
+     * @throws OutOfBoundsException If the cell with the specified row and the
+     *                              specified column does not exist.
+     */
+    public function getScore($row, $column)
+    {
+        if (false === isset($this->scores[$row][$column])) {
+            throw new \OutOfBoundsException(
+                'A cell with the specified row ' . $row
+                . ' and the specified column ' . $column. ' does not exist.'
+            );
+        }
+
+        return $this->scores[$row][$column];
     }
 
 }
