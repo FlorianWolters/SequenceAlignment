@@ -17,8 +17,6 @@
  *
  * PHP version 5.3
  *
- * @category  Biology
- * @package   SequenceAlignment
  * @author    Florian Wolters <wolters.fl@gmail.com>
  * @copyright 2012 Florian Wolters
  * @license   http://gnu.org/licenses/lgpl.txt LGPL-3.0+
