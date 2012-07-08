@@ -1,6 +1,6 @@
 <?php
 /**
- * `SmithWatermanType.php`
+ * `AlignmentType.php`
  *
  * This program is free software: you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -30,12 +30,13 @@
 
 namespace HSBremen\ISBio\SequenceAlignment\Form;
 
+use HSBremen\ISBio\SequenceAlignment\Model\SubstitutionMatrix\SubstitutionMatrixEnum;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 
 /**
- * The {@link SmithWatermanType} class houses the logic for building the form
- * for class {@link SmithWatermanEntity}.
+ * The {@link AlignmentType} class houses the logic for building the form for
+ * class {@link AlignmentEntity}.
  *
  * @category   Biology
  * @package    SequenceAlignment
@@ -47,7 +48,7 @@ use Symfony\Component\Form\FormBuilderInterface;
  * @link       http://github.com/FlorianWolters/SequenceAlignment
  * @since      Class available since Release 0.1.0
  */
-class SmithWatermanType extends AbstractType
+class AlignmentType extends AbstractType
 {
 
     /**
@@ -61,32 +62,32 @@ class SmithWatermanType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add(
-            'firstSequence', 'text', array(
-                'label' => 'First sequence (horizontal):'
-            )
-        )->add(
-            'secondSequence', 'text', array(
-                'label' => 'Second sequence (vertical):'
-            )
-        );
-    }
+        $scoringMatrixChoices = SubstitutionMatrixEnum::names();
 
-    /**
-     * Returns the default options for this form.
-     *
-     * @param array $options The options for this form.
-     *
-     * @return array The default options.
-     */
-    public function getDefaultOptions()
-    {
-        return array(
-            'data_class' => 'HSBremen\ISBio\SequenceAlignment\Entity\SmithWatermanEntity',
-            'display_custom_field' => false,
-            'csrf_protection' => true,
-            'csrf_field_name' => '_token',
-            'intention' => $this->getName()
+        $builder->add(
+            'firstSequence', 'textarea', [
+                'label' => 'First sequence (horizontal):'
+            ]
+        )->add(
+            'secondSequence', 'textarea', [
+                'label' => 'Second sequence (vertical):'
+            ]
+        )->add(
+            'scoringMatrix', 'choice', [
+                'label' => 'Scoring matrix:',
+                'choices' => $scoringMatrixChoices,
+                'preferred_choices' => [
+                    SubstitutionMatrixEnum::BLOSUM62()->getName()
+                ]
+            ]
+        )->add(
+            'gapOpenCosts', 'number', [
+                'label' => 'Gap open costs:'
+            ]
+        )->add(
+            'gapExtendCosts', 'number', [
+                'label' => 'Gap extends costs:'
+            ]
         );
     }
 
@@ -99,7 +100,7 @@ class SmithWatermanType extends AbstractType
      */
     public function getName()
     {
-        return 'smithwaterman';
+        return 'alignment';
     }
 
 }

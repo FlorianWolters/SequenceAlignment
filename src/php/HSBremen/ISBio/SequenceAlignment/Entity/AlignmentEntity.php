@@ -1,6 +1,6 @@
 <?php
 /**
- * `SmithWatermanEntity.php`
+ * `AlignmentEntity.php`
  *
  * This program is free software: you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -35,8 +35,8 @@ use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Validator\Constraints\Type;
 
 /**
- * An object of type {@link SmithWatermanEntity} represents and stores the data
- * to run the {@link SmithWaterman} algorithm.
+ * An object of type {@link AlignmentEntity} represents and stores the data for
+ * a pairwise sequence alignment.
  *
  * @category   Biology
  * @package    SequenceAlignment
@@ -48,7 +48,7 @@ use Symfony\Component\Validator\Constraints\Type;
  * @link       http://github.com/FlorianWolters/SequenceAlignment
  * @since      Class available since Release 0.1.0
  */
-class SmithWatermanEntity
+class AlignmentEntity
 {
 
     /**
@@ -65,6 +65,27 @@ class SmithWatermanEntity
      */
     private $secondSequence;
 
+	/**
+	 * The ordinal of a {@link SubstitutionMatrixEnum}.
+     *
+     * @var integer
+	 */
+    private $scoringMatrix;
+
+	/**
+	 * The costs for opening a gap.
+     *
+     * @var float
+	 */
+    private $gapOpenCosts = 10.0;
+
+	/**
+	 * The costs for extending a gap.
+     *
+     * @var float
+	 */
+    private $gapExtendCosts = 0.5;
+
     /**
      * Adds the constraints for this class.
      *
@@ -74,17 +95,19 @@ class SmithWatermanEntity
      */
     public static function loadValidatorMetadata(ClassMetadata $metadata)
     {
-        self::addGetterConstraintsToElement($metadata, 'firstSequence');
-        self::addGetterConstraintsToElement($metadata, 'secondSequence');
+        self::addGetterConstraintsToSequences($metadata, 'firstSequence');
+        self::addGetterConstraintsToSequences($metadata, 'secondSequence');
+        self::addGetterConstraintsToGapCosts($metadata, 'gapOpenCosts');
+        self::addGetterConstraintsToGapCosts($metadata, 'gapExtendCosts');
     }
 
     /**
      * @param ClassMetadata $metadata The constraints on this class.
-     * @param string $name
+     * @param string        $name
      *
      * @return void
      */
-    private static function addGetterConstraintsToElement(
+    private static function addGetterConstraintsToSequences(
         ClassMetadata $metadata, $name
     ) {
         $metadata->addGetterConstraint($name, new NotBlank);
@@ -92,18 +115,31 @@ class SmithWatermanEntity
     }
 
     /**
-     * Constructs a new {@link SmithWatermanEntity} with the specified first
-     * sequence and the specified second sequence.
+     * @param ClassMetadata $metadata The constraints on this class.
+     * @param string        $name
      *
-     * @param string $firstSequence  The first sequence.
-     * @param string $secondSequence The second sequence.
-     * @todo  This constructor can be removed before release.
+     * @return void
      */
-    public function __construct($firstSequence = null, $secondSequence = null)
-    {
-        $this->setFirstSequence($firstSequence);
-        $this->setSecondSequence($secondSequence);
+    private static function addGetterConstraintsToGapCosts(
+        ClassMetadata $metadata, $name
+    ) {
+        $metadata->addGetterConstraint($name, new NotBlank);
+        $metadata->addGetterConstraint($name, new Type('float'));
     }
+
+//    /**
+//     * Constructs a new {@link SmithWatermanEntity} with the specified first
+//     * sequence and the specified second sequence.
+//     *
+//     * @param string $firstSequence  The first sequence.
+//     * @param string $secondSequence The second sequence.
+//     * @todo  This constructor can be removed before release.
+//     */
+//    public function __construct($firstSequence = null, $secondSequence = null)
+//    {
+//        $this->setFirstSequence($firstSequence);
+//        $this->setSecondSequence($secondSequence);
+//    }
 
     /**
      * Returns the first sequence of this {@link SmithWatermanEntity}.
@@ -147,6 +183,37 @@ class SmithWatermanEntity
     public function setSecondSequence($secondSequence)
     {
         $this->secondSequence = $secondSequence;
+    }
+
+    public function getScoringMatrix()
+    {
+        return $this->scoringMatrix;
+    }
+
+    public function setScoringMatrix($scoringMatrix)
+    {
+        $this->scoringMatrix = $scoringMatrix;
+        var_dump($this->scoringMatrix);
+    }
+
+    public function getGapOpenCosts()
+    {
+        return $this->gapOpenCosts;
+    }
+
+    public function setGapOpenCosts($gapOpenCosts)
+    {
+        $this->gapOpenCosts = $gapOpenCosts;
+    }
+
+    public function getGapExtendCosts()
+    {
+        return $this->gapExtendCosts;
+    }
+
+    public function setGapExtendCosts($gapExtendCosts)
+    {
+        $this->gapExtendCosts = $gapExtendCosts;
     }
 
 }
