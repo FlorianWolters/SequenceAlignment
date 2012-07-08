@@ -82,7 +82,6 @@
             <directory suffix=".php">src/tests</directory>
         </blacklist>
         <whitelist addUncoveredFilesFromWhitelist="true">
-            <directory suffix=".php">src/bin</directory>
             <directory suffix=".php">src/php</directory>
             <exclude>
                 <directory suffix="Enum.php">src/php</directory>
