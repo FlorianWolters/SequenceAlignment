@@ -3,20 +3,26 @@
 
 {% block main %}
 
-<table class="matrix">
+<button type="button" id="stepButton">NextStep</button>
+<br/>
+<br/>
+
+<table id="matrix" border="1">
     <tr>
-        <td></td>
+        <td>&nbsp;</td>
     {% for firstChar in alignment.getFirstSequence %}
         <td>{{ firstChar }}</td>
     {% endfor %}
+    </tr>
     {% for secondChar in alignment.getSecondSequence %}
     <tr>
         <td>{{ secondChar }}</td>
         {% for i in range (0, alignment.getFirstSequence|length-1) %}
-            <td></td>
+            <td>&nbsp;</td>
         {% endfor %}
     </tr>
     {% endfor %}
-    </tr>
-</table
+</table>
+
+<br/>
 {% endblock %}
