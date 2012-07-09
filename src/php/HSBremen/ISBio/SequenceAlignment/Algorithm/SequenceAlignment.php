@@ -64,7 +64,7 @@ abstract class SequenceAlignment extends DynamicProgramming
     /**
      * @var array
      */
-    protected $alignments = [];
+    protected $alignments = null;
 
     /**
      * @param string  $firstSequence
@@ -128,7 +128,7 @@ abstract class SequenceAlignment extends DynamicProgramming
 
         $this->score = 0;
 
-        for ($i = 0; i < count($this->alignments[0]); ++$i) {
+        for ($i = 0; $i < count($this->alignments[0]); ++$i) {
             $c1 = substr($this->alignments[0], $i, 1);
             $c2 = substr($this->alignments[1], $i, 1);
 
