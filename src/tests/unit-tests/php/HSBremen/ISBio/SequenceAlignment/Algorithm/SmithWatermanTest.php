@@ -20,8 +20,9 @@
  * @category   Biology
  * @package    SmithWaterman
  * @subpackage Algorithm
- * @author     Steffen Schuette <steffen.schuette@web.de>
- * @copyright  2012 Steffen Schuette
+ * @author     Steffen Schütte <steffen.schuette@web.de>
+ * @author     Florian Wolters <wolters.fl@gmail.com>
+ * @copyright  2012 Steffen Schütte, Florian Wolters
  * @license    http://gnu.org/licenses/lgpl.txt LGPL-3.0+
  * @version    GIT: $Id$
  * @link       http://github.com/FlorianWolters/SequenceAlignment
@@ -30,103 +31,105 @@
 
 namespace HSBremen\ISBio\SequenceAlignment\Algorithm;
 
-use HSBremen\ISBio\SequenceAlignment\Model\SubstitutionMatrix\Blosum60;
-
 /**
  * Test class for {@link SmithWaterman}.
  *
  * @category   Biology
  * @package    SmithWaterman
  * @subpackage Algorithm
- * @author     Steffen Schuette <steffen.schuette@web.de>
- * @copyright  2012 Steffen Schuette
+ * @author     Steffen Schütte <steffen.schuette@web.de>
+ * @author     Florian Wolters <wolters.fl@gmail.com>
+ * @copyright  2012 Steffen Schütte, Florian Wolters
  * @license    http://gnu.org/licenses/lgpl.txt LGPL-3.0+
  * @version    Release: @package_version@
  * @link       http://github.com/FlorianWolters/SequenceAlignment
  * @since      Class available since Release 0.1.0
  *
- * @covers     HSBremen\ISBio\SequenceAlignment\Model\SubstitutionMatrix\Blosum60
+ * @covers     HSBremen\ISBio\SequenceAlignment\Algorithm\SmithWaterman
  */
 class SmithWatermanTest extends \PHPUnit_Framework_TestCase
 {
-    /**
-     * @var SmithWaterman
-     */
-    private $smithWaterman;
 
-    /*
-     * Generel method calling method helperGetAligmentScore for each test case
-     */
-    public function testAlignmentScores()
-    {
-        // 01 Test scenario
-        $this->helperGetAlignmentScore('ACACACTA', 'AGCACACA', 5); 
-        
-        // 02 Test scenario
-        $this->helperGetAlignmentScore('ACTTGGAAGT', 'GTGAGACT', 3); 
-    }
-    
     /**
-     * Generel method calling method helperGetScoreTable for each test case
+     * @return array
      */
-    public function testScoreTables()
+    public static function providerGetAlignmentScore()
     {
-        // 01 Test scenario
-        // Source: http://en.wikipedia.org/wiki/Smith-Waterman_algorithm (score matrix self calculated)
-        // Sequence1: ACACACTA
-        // Sequence2: AGCACACA
-        // Match:    +1
-        // Mismatch: -1
-        $result = [
-            [ 0, 0, 0, 0, 0, 0, 0, 0, 0], 
-            [ 0, 1, 0, 1, 0, 1, 0, 0, 1],
-            [ 0, 0, 0, 0, 0, 0, 0, 0, 0],
-            [ 0, 0, 1, 0, 1, 0, 1, 0, 0],
-            [ 0, 1, 0, 2, 1, 2, 1, 0, 1],
-            [ 0, 0, 2, 1, 3, 2, 3, 2, 1],
-            [ 0, 1, 1, 3, 2, 4, 3, 2, 3],
-            [ 0, 0, 2, 2, 4, 3, 5, 4, 3],
-            [ 0, 1, 1, 3, 3, 5, 4, 4, 5] 
+        return [
+            // firstSequence, secondSequence, expected
+            ['ACACACTA', 'AGCACACA', 5],
+            ['ACTTGGAAGT', 'GTGAGACT', 3]
         ];
-        $this->helperGetScoreTable('ACACACTA', 'AGCACACA', $result);
-         
-        // 02 Test scenario
-        // Source: Exercise: Pairwise Alignment and BLAST
-        // Sequence1: ACTTGGAAGT
-        // Sequence2: GTGAGACT
-        // Match:    +1
-        // Mismatch: -1
-        $result = [
-            [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], 
-            [ 0, 0, 0, 0, 0, 1, 1, 0, 0, 1, 0],
-            [ 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 2],
-            [ 0, 0, 0, 0, 0, 2, 1, 0, 0, 1, 1],
-            [ 0, 1, 0, 0, 0, 1, 1, 2, 1, 0, 0],
-            [ 0, 0, 0, 0, 0, 1, 2, 1, 1, 2, 0],
-            [ 0, 1, 0, 0, 0, 0, 1, 3, 2, 1, 1],
-            [ 0, 0, 2, 1, 0, 0, 0, 2, 2, 1, 0],
-            [ 0, 0, 1, 3, 2, 1, 0, 1, 1, 1, 2] 
+    }
+
+    /**
+     * @return void
+     *
+     * @covers HSBremen\ISBio\SequenceAlignment\Algorithm\SmithWaterman::getAlignmentScore
+     * @dataProvider providerGetAlignmentScore
+     * @test
+     */
+    public function testGetAlignmentScore(
+        $firstSequence, $secondSequence, $expected
+    ) {
+        $smithWaterman = new SmithWaterman($firstSequence, $secondSequence);
+        $actual = $smithWaterman->getAlignmentScore();
+
+        $this->assertEquals($expected, $actual);
+    }
+
+    /**
+     * @return array
+     */
+    public static function providerGetScoreTable()
+    {
+        return [
+            [
+                'ACACACTA', // firstSequence
+                'AGCACACA', // secondSequence
+                [
+                    [0, 0, 0, 0, 0, 0, 0, 0, 0], // expected
+                    [0, 1, 0, 1, 0, 1, 0, 0, 1],
+                    [0, 0, 0, 0, 0, 0, 0, 0, 0],
+                    [0, 0, 1, 0, 1, 0, 1, 0, 0],
+                    [0, 1, 0, 2, 1, 2, 1, 0, 1],
+                    [0, 0, 2, 1, 3, 2, 3, 2, 1],
+                    [0, 1, 1, 3, 2, 4, 3, 2, 3],
+                    [0, 0, 2, 2, 4, 3, 5, 4, 3],
+                    [0, 1, 1, 3, 3, 5, 4, 4, 5]
+                ]
+            ], [
+                'ACTTGGAAGT',
+                'GTGAGACT',
+                [
+                    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                    [0, 0, 0, 0, 0, 1, 1, 0, 0, 1, 0],
+                    [0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 2],
+                    [0, 0, 0, 0, 0, 2, 1, 0, 0, 1, 1],
+                    [0, 1, 0, 0, 0, 1, 1, 2, 1, 0, 0],
+                    [0, 0, 0, 0, 0, 1, 2, 1, 1, 2, 0],
+                    [0, 1, 0, 0, 0, 0, 1, 3, 2, 1, 1],
+                    [0, 0, 2, 1, 0, 0, 0, 2, 2, 1, 0],
+                    [0, 0, 1, 3, 2, 1, 0, 1, 1, 1, 2]
+                ]
+            ]
         ];
-        $this->helperGetScoreTable('ACTTGGAAGT', 'GTGAGACT', 3);
     }
-    
-    /*
-     * Method calling the SmithWaterman method getAligmentScore.
+
+    /**
+     * @return void
+     *
+     * @covers HSBremen\ISBio\SequenceAlignment\Algorithm\SmithWaterman::getScoreTable
+     * @dataProvider providerGetScoreTable
+     * @test
      */
-    private function helperGetAlignmentScore($firstSequence, $secondSequence, $result)
-    {
-        $this->smithWaterman = new SmithWaterman($firstSequence, $secondSequence);
-        $expected = $result;
-        $this->assertEquals($expected, $this->smithWaterman->getAlignmentScore());
+    public function testGetScoreTable(
+        $firstSequence, $secondSequence, $expected
+    ) {
+        $smithWaterman = new SmithWaterman($firstSequence, $secondSequence);
+        $actual = $smithWaterman->getScoreTable();
+
+        $this->assertEquals($expected, $actual);
     }
-        
-    /*
-     * Method calling the SmithWaterman method getScoreTable.
-     */
-    private function helperGetScoreTable($firstSequence, $secondSequence, $result)
-    {
-        $this->smithWaterman = new SmithWaterman($firstSequence, $secondSequence);
-        $expected = $result;
-        $this->assertEquals($expected, $this->smithWaterman->getScoreTable());
-    }
+
 }
