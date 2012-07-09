@@ -193,7 +193,6 @@ class AlignmentEntity
     public function setScoringMatrix($scoringMatrix)
     {
         $this->scoringMatrix = $scoringMatrix;
-        var_dump($this->scoringMatrix);
     }
 
     public function getGapOpenCosts()
