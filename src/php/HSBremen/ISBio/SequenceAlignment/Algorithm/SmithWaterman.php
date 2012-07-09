@@ -139,7 +139,7 @@ class SmithWaterman extends SequenceAlignment
      */
     protected function getTracebackStartingCell()
     {
-        return highScoreCell;
+        return $this->highScoreCell;
     }
 
     /**
