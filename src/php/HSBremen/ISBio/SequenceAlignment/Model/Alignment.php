@@ -59,14 +59,14 @@ class Alignment
      *
      * @var string
      */
-    private $firstSeq;
+    private $firstSequence;
 
     /**
      * The second input sequence.
      *
      * @var array
      */
-    private $secondSeq;
+    private $secondSequence;
 
 	/**
 	 * The scoring matrix to use for this Alignment.
@@ -115,8 +115,8 @@ class Alignment
         $firstSeq, $secondSeq, SubstitutionMatrixAbstract $scoringMatrix,
         $gapOpenCosts = 10, $gapExtendCosts = 0.5
     ) {
-        $this->firstSeq = \str_split($firstSeq);
-        $this->secondSeq = \str_split($secondSeq);
+        $this->firstSequence = \str_split($firstSeq);
+        $this->secondSequence = \str_split($secondSeq);
         $this->scoringMatrix = $scoringMatrix->getScores();
         $this->gapOpen = $gapOpenCosts;
         $this->gapExtend = $gapExtendCosts;
@@ -193,5 +193,35 @@ class Alignment
     {
 		return ($this->calculateScore() === $this->score);
 	}
+
+    public function getFirstSequence()
+    {
+        return $this->firstSequence;
+    }
+
+    public function getSecondSequence()
+    {
+        return $this->secondSequence;
+    }
+
+    public function getScoringMatrix()
+    {
+        return $this->scoringMatrix;
+    }
+
+    public function getGapOpenCosts()
+    {
+        return $this->gapOpenCosts;
+    }
+
+    public function getGapExtendCosts()
+    {
+        return $this->gapExtendCosts;
+    }
+
+    public function getScore()
+    {
+        return $this->score;
+    }
 
 }
