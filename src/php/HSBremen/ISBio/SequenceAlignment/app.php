@@ -198,21 +198,22 @@ $app->post('/', function() use ($app, $config) {
             );
 
             $matrixEnum = EnumUtils::valueOf($enumType, $matrixName);
-
-            $alignment = new Model\Alignment(
-                $entity->getFirstSequence(),
-                $entity->getSecondSequence(),
-                SubstitutionMatrixFactory::getInstance()->create($matrixEnum),
-                $entity->getGapOpenCosts(),
-                $entity->getGapExtendCosts()
+            $matrix = SubstitutionMatrixFactory::getInstance()->create(
+                $matrixEnum
             );
 
-            // TODO Run pairwise local alignment.
+            $algorithm = new Algorithm\SmithWaterman(
+                $entity->getFirstSequence(),
+                $entity->getSecondSequence()
+            );
+
+            $scoreTable = $algorithm->getScoreTable();
 
             return $app['twig']->render('matrix.html.twig', array(
                'meta' => $config['meta'],
                'dir' => $config['dir'],
-               'alignment' => $alignment
+               'alignment' => $entity,
+               'algorithm' => $algorithm
            ));
         }
     }

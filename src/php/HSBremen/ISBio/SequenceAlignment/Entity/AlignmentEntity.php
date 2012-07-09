@@ -127,20 +127,6 @@ class AlignmentEntity
         $metadata->addGetterConstraint($name, new Type('float'));
     }
 
-//    /**
-//     * Constructs a new {@link SmithWatermanEntity} with the specified first
-//     * sequence and the specified second sequence.
-//     *
-//     * @param string $firstSequence  The first sequence.
-//     * @param string $secondSequence The second sequence.
-//     * @todo  This constructor can be removed before release.
-//     */
-//    public function __construct($firstSequence = null, $secondSequence = null)
-//    {
-//        $this->setFirstSequence($firstSequence);
-//        $this->setSecondSequence($secondSequence);
-//    }
-
     /**
      * Returns the first sequence of this {@link SmithWatermanEntity}.
      *

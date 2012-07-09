@@ -30,8 +30,6 @@
 
 namespace HSBremen\ISBio\SequenceAlignment\Algorithm;
 
-use HSBremen\ISBio\SequenceAlignment\Model\ScoringMatrix\ScoringMatrixAbstract;
-
 /**
  * An implementation of the Smith-Waterman algorithm for biological local
  * pairwise sequence alignment.
@@ -44,209 +42,120 @@ use HSBremen\ISBio\SequenceAlignment\Model\ScoringMatrix\ScoringMatrixAbstract;
  * @license    http://gnu.org/licenses/lgpl.txt LGPL-3.0+
  * @version    Release: @package_version@
  * @link       http://github.com/FlorianWolters/SequenceAlignment
- * @link       http://en.wikipedia.org/wiki/Smith-Waterman
- * @link       http://mathworks.de/help/toolbox/bioinfo/ref/swalign.html
  * @since      Class available since Release 0.1.0
- * @todo       Implement class `Alignment` to reduce the complexity of this
- *             class (cf. jaligner).
- * @todo       This is the local alignment algorithm. We should try to keep this
- * @todo       The current approach uses an array as the matrix, we could also
- *             use an object structure together with the class {@link Cell}.
  */
-class SmithWaterman
+class SmithWaterman extends SequenceAlignment
 {
 
     /**
-     * The first input sequence.
-     *
-     * @var string
+     * @var Cell
      */
-    private $firstSeq;
+    private $highScoreCell;
 
     /**
-     * The second input sequence.
-     *
-     * @var array
-     */
-    private $secondSeq;
-
-    /**
-     * The scoring matrix, e.g. BLOSUM62.
-     *
-     * @var ScoringMatrixEnum
-     */
-    private $scoringMatrix;
-
-    /**
-     * The penalty for opening a gap in the alignment.
-     *
-     * @var float
-     */
-    private $gapOpen;
-
-    /**
-     * The penalty for extending a gap in the alignment.
-     *
-     * @var float
-     */
-    private $gapExtend;
-
-    /**
-     * The length of the first input sequence.
-     *
-     * @var array
-     */
-    private $firstSeqLen;
-
-    /**
-     * The length of the second input sequence.
-     *
-     * @var integer
-     */
-    private $secondSeqLen;
-
-    /**
-     * The result matrix.
-     *
-     * @var array
-     */
-    private $scores = [];
-
-    /**
-     * The score.
-     *
-     * @var integer
-     */
-    private $score;
-
-    /**
-     * The first aligned sequence.
-     *
-     * @var string
-     */
-    private $firstAlignmentSequence;
-
-    /**
-     * The second aligned sequence.
-     *
-     * @var string
-     */
-    private $secondAlignmentSequence;
-
-    /**
-     * Constructs a new Smith-Waterman algorithm with the specified two
-     * sequences, the specified scoring matrix and the specified penalty for
-     * opening a gap in the alignment.
-     *
-     * @param string                $firstSeq      The first amino acid or
-     *                                             nucleotide sequence to align
-     *                                             locally.
-     * @param string                $secondSeq     The second amino acid or
-     *                                             nucleotide sequence to align
-     *                                             locally.
-     * @param ScoringMatrixAbstract $scoringMatrix The scoring matrix to use for
-     *                                             the local alignment.
-     * @param float                 $gapOpen       The penalty for opening a gap
-     *                                             in the alignment.
-     * @param float                 $gapExtend     The penalty for extending a
-     *                                             gap in the alignment.
-     * @todo Implement input validation.
+     * @param string  $firstSequence
+     * @param string  $secondSequence
+     * @param integer $match
+     * @param integer $mismatch
+     * @param integer $gap
      */
     public function __construct(
-        $firstSeq, $secondSeq, SubstitutionMatrixAbstract $scoringMatrix,
-        $gapOpen = 10, $gapExtend = 0.5
+        $firstSequence, $secondSequence, $match = 1, $mismatch = -1, $gap = -1
     ) {
-        $this->firstSeq = \str_split($firstSeq);
-        $this->secondSeq = \str_split($secondSeq);
-        $this->firstSeqLen = \strlen($firstSeq);
-        $this->secondSeqLen = \strlen($secondSeq);
-        $this->gapOpen = $gapOpen;
-        $this->gapExtend = $gapExtend;
-        $this->scoringMatrix = $scoringMatrix->getScores();
+        parent::__construct(
+            $firstSequence, $secondSequence, $match, $mismatch, $gap
+        );
+
+        $this->highScoreCell = $this->scoreTable[0][0];
     }
 
     /**
-     * Builds the matrix.
-     *
      * @return void
      */
-    public function buildMatrix()
-    {
-        for ($i = 0; $i <= $this->firstSeqLen; ++$i) {
-            for ($j = 0; $j <= $this->secondSeqLen; ++$j) {
-                $this->scores[$i][$j] = 0;
+    protected function fillInCell(
+        Cell $currentCell, Cell $cellAbove,
+        Cell $cellToLeft, Cell $cellAboveLeft
+    ) {
+        $rowSpaceScore = $cellAbove->getScore() + $this->space;
+        $colSpaceScore = $cellToLeft->getScore() + $this->space;
+        $matchOrMismatchScore = $cellAboveLeft->getScore();
+
+        if (substr($this->secondSequence, ($currentCell->getRow() - 1), 1) === substr($this->firstSequence, ($currentCell->getColumn() - 1), 1)) {
+            $matchOrMismatchScore += $this->match;
+        } else {
+            $matchOrMismatchScore += $this->mismatch;
+        }
+
+        if ($rowSpaceScore >= $colSpaceScore) {
+            if ($matchOrMismatchScore >= $rowSpaceScore) {
+                if ($matchOrMismatchScore > 0) {
+                    $currentCell->setScore($matchOrMismatchScore);
+                    $currentCell->setPreviousCell($cellAboveLeft);
+                }
+            } else {
+                if ($rowSpaceScore > 0) {
+                    $currentCell->setScore($rowSpaceScore);
+                    $currentCell->setPreviousCell($cellAbove);
+                }
             }
+        } else {
+            if ($matchOrMismatchScore >= $colSpaceScore) {
+                if ($matchOrMismatchScore > 0) {
+                    $currentCell->setScore($matchOrMismatchScore);
+                    $currentCell->setPrevCell($cellAboveLeft);
+                }
+            } else {
+                if ($colSpaceScore > 0) {
+                    $currentCell->setScore($colSpaceScore);
+                    $currentCell->setPrevCell($cellToLeft);
+                }
+            }
+        }
+
+        if ($currentCell->getScore() > $this->highScoreCell->getScore()) {
+            $this->highScoreCell = $currentCell;
         }
     }
 
     /**
-     * Fills the matrix.
-     *
-     * @return void
+     * @return boolean
      */
-    public function fillMatrix()
+    public function __toString()
     {
-        $weight = 0;
-        $diagonalScore = 0;
-        $leftScore = 0;
-        $topScore = 0;
-
-        for ($i = 1; $i <= $this->firstSeqLen; $i++) {
-            for ($j = 1; $j <= $this->secondSeqLen; $j++) {
-                $weight = $this->weight(
-                    $this->firstSeq[$i - 1], $this->secondSeq[$j - 1]
-                );
-                $diagonalScore = $this->scores[$i - 1][$j - 1] + $weight;
-                $leftScore = $this->scores[$i][$j - 1] - 1;
-                $topScore = $this->scores[$i - 1][$j] - 1;
-                $this->scores[$i][$j] = \max(
-                    $diagonalScore, $leftScore, $topScore, 0
-                );
-            }
-        }
+        return "[SmithWaterman: sequence1=" - $this->firstSequence + ", sequence2="
+            . $this->secondSequence . "]";
     }
 
     /**
-     * Run the backtrack.
-     *
-     * @return void
-     * @todo Add implementation.
+     * @return boolean
      */
-    public function backtrack()
+    protected function traceBackIsNotDone(Cell $currentCell)
     {
+        return 0 !== $currentCell->getScore();
     }
 
     /**
-     * Returns the alignment score of the specified two inputs.
-     *
-     * @param string $x The first single character to compare.
-     * @param string $y The second single character to compare.
-     *
-     * @return integer `2` on match; `-1' on mismatch.
+     * return Cell
      */
-    private function weight($x, $y)
+    protected function getTracebackStartingCell()
     {
-        return ($x === $y) ? 2 : -1;
+        return highScoreCell;
     }
 
     /**
-     * Returns the result matrix.
-     *
-     * @return array The result matrix.
+     * return Cell
      */
-    public function getScores()
+    protected function getInitialPointer($row, $col)
     {
-        return $this->scores;
+        return null;
     }
 
     /**
-     * Returns the score.
-     *
-     * @return integer The score.
+     * return integer
      */
-    public function getScore()
+    protected function getInitialScore($row, $col)
     {
-        return $this->score;
+        return 0;
     }
 
 }

@@ -47,6 +47,13 @@ class Cell
 {
 
     /**
+     * The previous cell of this {@link Cell}.
+     *
+     * @var Cell
+     */
+    private $previousCell;
+
+    /**
      * The row of this {@link Cell}.
      *
      * @var integer
@@ -79,6 +86,7 @@ class Cell
         $this->row = $row;
         $this->column = $column;
         $this->setScore(~\PHP_INT_MAX);
+        $this->setPreviousCell();
     }
 
     /**
@@ -91,6 +99,28 @@ class Cell
     public function setScore($score)
     {
         $this->score = $score;
+    }
+
+    /**
+     * Returns the previous {@link Cell} of this {@link Cell}.
+     *
+     * @return Cell The previous {@link Cell}.
+     */
+    public function getPreviousCell()
+    {
+       return $this->previousCell;
+    }
+
+    /**
+     * Sets the previous {@link Cell} of this {@link Cell}.
+     *
+     * @param Cell $cell The previous {@link Cell} to set.
+     *
+     * @return void
+     */
+    public function setPreviousCell(Cell $cell = null)
+    {
+        $this->previousCell = $cell;
     }
 
     /**
