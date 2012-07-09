@@ -35,9 +35,9 @@ dir:
   cache: ./../www/cache
   www: ./../www
   assets:
-    css: ./assets/css
-    img: ./assets/img
-    js: ./assets/js
+    css: ./src/www/assets/css
+    img: ./src/www/assets/img
+    js: ./src/www/assets/js
     views: ./assets/views
 
 request:
