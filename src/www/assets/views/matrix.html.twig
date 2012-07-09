@@ -1,0 +1,19 @@
+{# index.html.twig #}
+{% extends "index.html.twig" %}
+
+{% block main %}
+
+<table>
+    <tr>
+        <td></td>
+    {% for firstChar in alignment.getFirstSequence %}
+        <td>{{ firstChar }}</td>
+    {% endfor %}
+    {% for secondChar in alignment.getSecondSequence %}
+    <tr>
+        <td>{{ secondChar }}</td>
+    </tr>
+    {% endfor %}
+    </tr>
+</table
+{% endblock %}

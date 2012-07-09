@@ -208,9 +208,12 @@ $app->post('/', function() use ($app, $config) {
             );
 
             // TODO Run pairwise local alignment.
-             \var_dump($alignment);
 
-             // TODO Visualize the alignment.
+            return $app['twig']->render('matrix.html.twig', array(
+               'meta' => $config['meta'],
+               'dir' => $config['dir'],
+               'alignment' => $alignment
+           ));
         }
     }
 
