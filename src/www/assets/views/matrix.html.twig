@@ -4,8 +4,11 @@
 {% block main %}
 
 <button type="button" id="stepButton">NextStep</button>
+<br/>
+<br/>
 
-<table id="matrix" border="1">
+{# Remove cellspacing and cellpadding when properly formated with css #}
+<table id="matrix" border="1" cellspacing="5" cellpadding="5">
     <tr>
         <td></td>
     {% for firstChar in firstSequence %}

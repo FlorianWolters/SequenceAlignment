@@ -12,7 +12,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with this program.  If not, see http://gnu.org/licenses/lgpl.txt.
  *
- * @fileOverview A simple chat client based on the WebSocket protocol.
+ * @fileOverview Stepwise display of local sequence alignment calculation
  * @author       <a href="mailto:schnieders.a@gmail.com">Andreas Schnieders</a>
  * @copyright    2012 Andreas Schnieders
  * @license      http://gnu.org/licenses/lgpl.txt LGPL-3.0+
@@ -21,20 +21,51 @@
  * @since        File available since Release 0.1.0
  */
 $(document).ready(function() {
-     // The total number of rows.
-    var numRows = $('#matrix').find('tr').length;
-    var numRowsShown = 1;
+     // Some variables for messing around
+    var numRows       = $('#matrix').find('tr').length;
+    var numColums     = $('#matrix').find($('tr:eq(0)')).find('td').length;
+    var totalCells    = $('#matrix').find($('tr')).find('td').length;
+    var numRowsShown  = 1;
+    
+    // Cells are indexed row by row from 0 to (numRows*numColums)
+    // First alignment value is to be set in the second cell of the second row
+    var fillCellIndex = numColums + 1;
 
-    for(i = 1; i < numRows; ++i)
-    {
-        $('#matrix').find($('tr:eq(' + i + ')').hide());
-        $('#matrix').find($('tr:eq(' + i + ')').find('td:first').show());
-    }
+// Deprecated code to initially hide table rows
+//    for(i = 1; i < numRows; ++i)/
+//    {
+//        $('#matrix').find($('tr:eq(' + i + ')').hide());
+//    }
 
+    // Stepwise enter the calculated alignment values row by row
     $('#stepButton').click(function(event){
-        $('#matrix').find($('tr:eq(' + numRowsShown + ')').show());
-        ++numRowsShown;
+        
+        for(i = fillCellIndex; i < fillCellIndex + numColums-1; ++i)
+        {
+            $('#matrix').find($('td:eq(' + i + ')')).text("*");
+        }
+
+        fillCellIndex += numColums;
+        
+// Deprecated code to show previously hidden table row
+//$('#matrix').find($('tr:eq(' + numRowsShown + ')').show());
+//++numRowsShown;
+
         event.preventDefault();
     });
+    
+    $('#matrix').find($('td:eq(0)')).qtip({
+	content: 'Another example tooltip',
+	position: {
+		my: 'top left', 
+		at: 'bottom right'
+	},
+	show: 'click',
+	hide: 'click',
+	style: { 
+		tip: true,
+		classes: 'ui-tooltip-dark'
+	}
+});
 
 });
