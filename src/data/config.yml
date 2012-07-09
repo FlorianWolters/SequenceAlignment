@@ -30,6 +30,7 @@ meta:
   keywords    : sequence alignment, local sequence alignment
   author      : Andreas Schnieders, Florian Wolters, Michael James Malocha, Olav Hoffmann, Steffen Wolfgang Schütte
   project_url : https://github.com/FlorianWolters/SequenceAlignment
+  year        : 2012
 
 dir:
   cache: ./../www/cache
