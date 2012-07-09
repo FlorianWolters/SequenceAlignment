@@ -102,12 +102,12 @@ class SmithWaterman extends SequenceAlignment
             if ($matchOrMismatchScore >= $colSpaceScore) {
                 if ($matchOrMismatchScore > 0) {
                     $currentCell->setScore($matchOrMismatchScore);
-                    $currentCell->setPrevCell($cellAboveLeft);
+                    $currentCell->setPreviousCell($cellAboveLeft);
                 }
             } else {
                 if ($colSpaceScore > 0) {
                     $currentCell->setScore($colSpaceScore);
-                    $currentCell->setPrevCell($cellToLeft);
+                    $currentCell->setPreviousCell($cellToLeft);
                 }
             }
         }
