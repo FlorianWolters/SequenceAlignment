@@ -64,9 +64,19 @@ class SmithWatermanTest extends \PHPUnit_Framework_TestCase
      */
     protected function setUp()
     {
-        $this->smithWaterman = new SmithWaterman('ABC', 'CDE', 
+         $this->smithWaterman = new SmithWaterman('ABC', 'CDE', 
+            Blosum60::getInstance(), 10, 0.5
+         );
+    }
+
+    public function testPairwiseAlignmentExercise()
+    {
+        $this->smitWaterman = new SmithWaterman('ACTTGGAAGT', 'GTGAGACT',
             Blosum60::getInstance(), 10, 0.5
         );
+        
+        $expected = 3;
+        $this->assertEquals($expected, 3);
     }
 
     /**
@@ -78,7 +88,6 @@ class SmithWatermanTest extends \PHPUnit_Framework_TestCase
     public function testBacktrack()
     {
         $expected = 3;
-
         $this->assertEquals($expected, 3);
     }
 }
