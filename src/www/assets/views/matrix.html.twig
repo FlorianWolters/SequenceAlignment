@@ -3,7 +3,7 @@
 
 {% block main %}
 
-<table>
+<table class="matrix">
     <tr>
         <td></td>
     {% for firstChar in alignment.getFirstSequence %}
@@ -12,6 +12,9 @@
     {% for secondChar in alignment.getSecondSequence %}
     <tr>
         <td>{{ secondChar }}</td>
+        {% for i in range (0, alignment.getFirstSequence|length-1) %}
+            <td></td>
+        {% endfor %}
     </tr>
     {% endfor %}
     </tr>
