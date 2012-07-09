@@ -9,16 +9,26 @@
 
 <table id="matrix" border="1">
     <tr>
+<<<<<<< HEAD
         <td></td>
     {% for firstChar in alignment.getFirstSequence %}
+=======
+        <td>&nbsp;</td>
+    {% for firstChar in firstSequence %}
+>>>>>>> Updated controller and view to latest API.
         <td>{{ firstChar }}</td>
     {% endfor %}
     </tr>
-    {% for secondChar in alignment.getSecondSequence %}
+    {% for secondChar in secondSequence %}
     <tr>
         <td>{{ secondChar }}</td>
+<<<<<<< HEAD
         {% for i in range (0, alignment.getFirstSequence|length-1) %}
             <td>;</td>
+=======
+        {% for i in range (0, firstSequence|length-1) %}
+            <td>&nbsp;</td>
+>>>>>>> Updated controller and view to latest API.
         {% endfor %}
     </tr>
     {% endfor %}

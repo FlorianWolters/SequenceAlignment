@@ -213,7 +213,9 @@ $app->post('/', function() use ($app, $config) {
                'meta' => $config['meta'],
                'dir' => $config['dir'],
                'alignment' => $entity,
-               'algorithm' => $algorithm
+               'algorithm' => $algorithm,
+               'firstSequence' => str_split($entity->getFirstSequence()),
+               'secondSequence' => str_split($entity->getSecondSequence())
            ));
         }
     }

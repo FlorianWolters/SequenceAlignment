@@ -130,7 +130,7 @@ class AlignmentEntity
     /**
      * Returns the first sequence of this {@link SmithWatermanEntity}.
      *
-     * @return The first sequence.
+     * @return string The first sequence.
      */
     public function getFirstSequence()
     {
@@ -152,7 +152,7 @@ class AlignmentEntity
     /**
      * Returns the second sequence of this {@link SmithWatermanEntity}.
      *
-     * @return The second sequence.
+     * @return string The second sequence.
      */
     public function getSecondSequence()
     {
