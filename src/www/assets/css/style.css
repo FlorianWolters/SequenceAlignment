@@ -50,24 +50,36 @@ div[role="main"] {
 }
 
 table#matrix {
-    border-width: 2px;
+    border-width: 0px;
     border-style: solid;
-    border-color: #c5e8f7;
+    border-color: #4fc4fc;
 }
 
 table#matrix td {
-    width: 20px;
-    height: 20px;
+    width: 30px;
+    height: 30px;
     border-width: 1px;
     border-style: solid;
-    border-color: #4fc4fc;
+    border-color: #fff;
+    border-radius: 10px;
+    background-color: #c5e8f7;
     text-transform: uppercase;
     text-align: center;
     vertical-align: central;
-    padding: 5px;
+    padding: 0px;
 }
-table#matrix td.topRow, td.leftColumn {
-    text-align: left;
+table#matrix td.topRow {
+    border-width: 0px;
+    border-radius: 0px;
+    font-weight: bold;
+    background-color: #4fc4fc;
+}
+
+table#matrix td.leftColumn {
+    border-width: 0px;
+    border-radius: 0px;
+    font-weight: bold;
+    background-color: #4fc4fc;
 }
 
 p#copyright {
