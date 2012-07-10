@@ -49,6 +49,27 @@ div[role="main"] {
         no-repeat, no-repeat, no-repeat, no-repeat, repeat;
 }
 
+table#matrix {
+    border-width: 2px;
+    border-style: solid;
+    border-color: #c5e8f7;
+}
+
+table#matrix td {
+    width: 20px;
+    height: 20px;
+    border-width: 1px;
+    border-style: solid;
+    border-color: #4fc4fc;
+    text-transform: uppercase;
+    text-align: center;
+    vertical-align: central;
+    padding: 5px;
+}
+table#matrix td.topRow, td.leftColumn {
+    text-align: left;
+}
+
 p#copyright {
     border-top-width: 1px;
     border-top-color: #4fc4fc;
