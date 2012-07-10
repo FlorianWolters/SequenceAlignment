@@ -12,14 +12,27 @@
     <tr>
         <td class="topLeftCell"></td>
     {% for firstChar in firstSequence %}
-        <td class="topRow">{{ firstChar }}</td>
+        {% if loop.last %}
+            <td class="topRightCell">{{ firstChar }}</td>
+        {% else %}
+            <td class="topRow">{{ firstChar }}</td>
+        {% endif %}
     {% endfor %}
     </tr>
     {% for secondChar in secondSequence %}
     <tr>
-        <td class="leftColumn">{{ secondChar }}</td>
+        {% if loop.last %}
+            <td class="bottomLeftCell">{{ secondChar }}</td>
+        {% else %}
+            <td class="leftColumn">{{ secondChar }}</td>
+        {% endif %}
+            
         {% for i in range (0, firstSequence|length-1) %}
-            <td></td>
+            {% if loop.last and loop.parent.loop.last %}
+                <td class="bottomRightCell"></td>
+            {% else %}
+                <td></td>
+            {% endif %}
         {% endfor %}
     </tr>
     {% endfor %}
