@@ -3,7 +3,7 @@
 
 {% block main %}
 
-<button type="button" id="stepButton">NextStep</button>
+<button type="button" id="nextStep">NextStep</button>
 <br/>
 <br/>
 
@@ -12,12 +12,12 @@
     <tr>
         <td></td>
     {% for firstChar in firstSequence %}
-        <td>{{ firstChar }}</td>
+        <td class="topRow">{{ firstChar }}</td>
     {% endfor %}
     </tr>
     {% for secondChar in secondSequence %}
     <tr>
-        <td>{{ secondChar }}</td>
+        <td class="leftColumn">{{ secondChar }}</td>
         {% for i in range (0, firstSequence|length-1) %}
             <td></td>
         {% endfor %}

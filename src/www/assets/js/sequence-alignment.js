@@ -20,6 +20,7 @@
  * @see          <a href="http://github.com/FlorianWolters/SequenceAlignment">SequenceAlignment</a>
  * @since        File available since Release 0.1.0
  */
+
 $(document).ready(function() {
      // Some variables for messing around
     var numRows       = $('#matrix').find('tr').length;
@@ -36,15 +37,23 @@ $(document).ready(function() {
 //    {
 //        $('#matrix').find($('tr:eq(' + i + ')').hide());
 //    }
-
+        
     // Stepwise enter the calculated alignment values row by row
-    $('#stepButton').click(function(event){
+    $('#nextStep').click(function(event){
         
         for(i = fillCellIndex; i < fillCellIndex + numColums-1; ++i)
         {
             $('#matrix').find($('td:eq(' + i + ')')).text("*");
         }
 
+        // Demo of coloring calculation-relevant table-cells for visualisation 
+        // instead of using tooltips
+        if(fillCellIndex > 2*numColums) 
+        {
+            $('#matrix').find($('td:eq(' + (fillCellIndex+1) + ')')).css('background-color', '#006699');
+            $('#matrix').find($('td:eq(' + (fillCellIndex-numColums+1) + ')')).css('background-color', '#CC3333');
+            $('#matrix').find($('td:eq(' + (fillCellIndex-numColums) + ')')).css('background-color', '#CC3333');
+        }
         fillCellIndex += numColums;
         
 // Deprecated code to show previously hidden table row
@@ -54,18 +63,4 @@ $(document).ready(function() {
         event.preventDefault();
     });
     
-    $('#matrix').find($('td:eq(0)')).qtip({
-	content: 'Another example tooltip',
-	position: {
-		my: 'top left', 
-		at: 'bottom right'
-	},
-	show: 'click',
-	hide: 'click',
-	style: { 
-		tip: true,
-		classes: 'ui-tooltip-dark'
-	}
-});
-
 });
