@@ -24,9 +24,12 @@ other words, by raising the gap open penalty, it increases the cost of creating 
 when comparing sequences, which results in fewer gaps in the sequence. Default values for the gap extension penalty very from program to program, though it is important to have a balanced value; too low and almost everything will be aligned creating a
 relatively worthless comparison, too high and alignments become harder to generate.
 
+Needleman-Wunsch algorithm[5]:
+
 ## References
 
 [1]: http://power.nhri.org.tw/power/OptionClustal.htm
 [2]: https://www.ebi.ac.uk/help/gaps.html
 [3]: https://en.wikipedia.org/wiki/BLOSUM
 [4]: https://www.ebi.ac.uk/help/matrix.html
+[5]: https://en.wikipedia.org/wiki/Needleman%E2%80%93Wunsch_algorithm
