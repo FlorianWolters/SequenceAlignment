@@ -18,6 +18,10 @@ This project is developed during the summer term 2012 of the module *Information
 
 This project implements the **local alignment variant** of the software.
 
+## TODO
+- Integration of Help- / Metainformation in Project-Files to auto-include in templates
+- Send Input-Formular on Enter
+
 ## Features
 
 Coming soon.
