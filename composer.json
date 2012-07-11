@@ -25,7 +25,7 @@
         "role": "Developer"
       },
       {
-        "name": "Steffen Wolfgang Schütte",
+        "name": "Steffen Schütte",
         "email": "parvus23@gmail.com",
         "role": "Developer"
       }
@@ -34,12 +34,12 @@
         "php": ">=5.3,<5.5",
         "florianwolters/component-core-enum": "0.3.*",
         "florianwolters/component-util-singleton": "0.2.*",
-        "monolog/monolog": "1.1.*",
         "pimple/pimple": "1.0.*",
         "silex/silex": "1.0.*",
         "symfony/config": "2.1.*",
         "symfony/form": "2.1.*",
         "symfony/http-foundation": "2.1.*",
+        "symfony/locale": "2.1.*",
         "symfony/translation": "2.1.*",
         "symfony/twig-bridge": "2.1.*",
         "symfony/validator": "2.1.*",
@@ -48,7 +48,7 @@
     },
     "autoload": {
         "psr-0": {
-            "HSBremen": [
+            "HochschuleBremen": [
                 "src/php",
                 "src/tests/unit-tests/php",
                 "src/tests/integration-tests/php"

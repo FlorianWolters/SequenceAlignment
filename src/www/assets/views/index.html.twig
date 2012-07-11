@@ -2,13 +2,16 @@
 {% extends "default.html.twig" %}
 
 {% block header %}
-{% include "header.html.twig" %}
+<a href="{{ config.meta.project_url }}">
+    <img style="position: absolute; top: 0; left: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_left_darkblue_121621.png" alt="Fork me on GitHub" />
+</a>
+<h1>Calculation of a pairwise sequence alignment</h1>
 {% endblock %}
 
 {% block main %}
-{% include "main.html.twig" %}
+{% include 'form.html.twig' %}
 {% endblock %}
 
 {% block footer %}
-{% include "footer.html.twig" %}
+<p id="copyright">&copy; {{ config.meta.year }} {{ config.meta.author }}</p>
 {% endblock %}

@@ -25,6 +25,28 @@
  * @since     File available since Release 0.1.0
  */
 
-require __DIR__ . '/../php/HSBremen/ISBio/SequenceAlignment/app.php';
+use HochschuleBremen\Application\SequenceAlignment\SequenceAlignmentApplication;
 
-$app->run();
+/**
+ * Include the *Composer* autoloader.
+ */
+require __DIR__ . '/../../vendor/autoload.php';
+
+/**
+ * The relative or absolute filepath to the configuration file of the
+ * application.
+ *
+ * @var string
+ */
+define('CONFIG_FILEPATH', __DIR__ . '/../data/config.yml');
+
+try {
+    // Create the application.
+    $app = new SequenceAlignmentApplication(CONFIG_FILEPATH);
+    // Run the application.
+    $app->run();
+} catch (\RuntimeException $ex) {
+    echo 'Unable to locate the file: ' . $ex->getMessage();
+} catch (ParseException $ex) {
+    echo 'Unable to parse the YAML string: ' . $ex->getMessage();
+}
