@@ -21,46 +21,174 @@
  * @since        File available since Release 0.1.0
  */
 
-$(document).ready(function() {
-     // Some variables for messing around
-    var numRows       = $('#matrix').find('tr').length;
-    var numColums     = $('#matrix').find($('tr:eq(0)')).find('td').length;
-    var totalCells    = $('#matrix').find($('tr')).find('td').length;
-    var numRowsShown  = 1;
+// // Some helper-variables for messing around
+var numRows         = 0;
+var numColums       = 0;
+var totalCells      = 0;
+var numRowsShown    = 0;
+var fillCellIndex   = 0;
+
+function initCells()
+{
+    for(i = fillCellIndex; i < totalCells; ++i)
+    {
+        if($('#matrix').find($('td:eq(' + i + ')')).html() == "")
+        {
+            $('#matrix').find($('td:eq(' + i + ')')).toggleClass('valueHidden');
+        }
+    }
+}
+
+// TODO: DOCUMENTATION
+function initIndexes()
+{
+    // Initialisation of helper variables
+    numRows       = $('#matrix').find('tr').length;
+    numColums     = $('#matrix').find($('tr:eq(0)')).find('td').length;
+    totalCells    = $('#matrix').find($('tr')).find('td').length;
+    numRowsShown  = 1;
     
     // Cells are indexed row by row from 0 to (numRows*numColums)
     // First alignment value is to be set in the second cell of the second row
-    var fillCellIndex = numColums + 1;
+    fillCellIndex = numColums + 1;
+}
 
-// Deprecated code to initially hide table rows
-//    for(i = 1; i < numRows; ++i)/
-//    {
-//        $('#matrix').find($('tr:eq(' + i + ')').hide());
-//    }
-        
-    // Stepwise enter the calculated alignment values row by row
+// TODO: DOCUMENTATION
+function nextStep()
+{
+    $('#matrix').find($('td:eq(' + fillCellIndex + ')')).toggleClass('valueShown'); 
+
+    if($('#matrix').find($('td:eq(' + (fillCellIndex+1) + ')')).html() == "")
+    {
+        ++fillCellIndex;           
+    }
+    else
+    {
+        fillCellIndex += 2;
+    }      
+
+    // Demo of coloring calculation-relevant table-cells for visualisation 
+    // instead of using tooltips
+    /*
+    if(fillCellIndex > 2*numColums) 
+    {
+        $('#matrix').find($('td:eq(' + (fillCellIndex+1) + ')')).css('background-color', '#006699');
+        $('#matrix').find($('td:eq(' + (fillCellIndex-numColums+1) + ')')).css('background-color', '#CC3333');
+        $('#matrix').find($('td:eq(' + (fillCellIndex-numColums) + ')')).css('background-color', '#CC3333');
+    }
+    */
+}
+
+// TODO: DOCUMENTATION
+function nextRow()
+{
+    if(fillCellIndex > totalCells) return;
+    // |0 to 'cast' double-division-result to integer
+    var currentRow = (fillCellIndex / numColums)|0;
+    ++currentRow; // Because row-count starts from 0
+    
+    
+
+    for(i = fillCellIndex; i < (currentRow*numColums); ++i)
+    {
+        // Replace by proper getValueFromScoreTable-function
+        $('#matrix').find($('td:eq(' + i + ')')).toggleClass('valueShown');
+        fillCellIndex = i;
+    }
+
+    // Demo of coloring calculation-relevant table-cells for visualisation 
+    // instead of using tooltips
+    /*
+    if(fillCellIndex > 2*numColums) 
+    {
+        $('#matrix').find($('td:eq(' + (fillCellIndex+1) + ')')).css('background-color', '#006699');
+        $('#matrix').find($('td:eq(' + (fillCellIndex-numColums+1) + ')')).css('background-color', '#CC3333');
+        $('#matrix').find($('td:eq(' + (fillCellIndex-numColums) + ')')).css('background-color', '#CC3333');
+    }
+    */
+    fillCellIndex += 2;
+}
+
+// TODO: DOCUMENTATION
+function completeAlignment()
+{
+    for(i = fillCellIndex; i < totalCells; ++i)
+    {
+        if($('#matrix').find($('td:eq(' + i + ')')).html() == "")
+        {
+            $('#matrix').find($('td:eq(' + i + ')')).toggleClass('valueShown');
+        }
+    }
+
+    // Demo of coloring calculation-relevant table-cells for visualisation 
+    // instead of using tooltips
+    /*
+    if(fillCellIndex > 2*numColums) 
+    {
+        $('#matrix').find($('td:eq(' + (fillCellIndex+1) + ')')).css('background-color', '#006699');
+        $('#matrix').find($('td:eq(' + (fillCellIndex-numColums+1) + ')')).css('background-color', '#CC3333');
+        $('#matrix').find($('td:eq(' + (fillCellIndex-numColums) + ')')).css('background-color', '#CC3333');
+    }
+    */
+    fillCellIndex += numColums;
+}
+
+// TODO: DOCUMENTATION
+function reset()
+{
+    initIndexes();    
+    
+    for(i = fillCellIndex; i < totalCells; ++i)
+    {
+        if($('#matrix').find($('td:eq(' + i + ')')).html() == "*")
+        {
+            $('#matrix').find($('td:eq(' + i + ')')).text("");
+            $('#matrix').find($('td:eq(' + i + ')')).css('background-color', '');            
+        }
+    }    
+}
+
+$(document).ready(function() {
+    
+    initIndexes();
+
+    // Stepwise enter the calculated alignment values cell by cell
     $('#nextStep').click(function(event){
-        
-        for(i = fillCellIndex; i < fillCellIndex + numColums-1; ++i)
-        {
-            $('#matrix').find($('td:eq(' + i + ')')).text("*");
-        }
-
-        // Demo of coloring calculation-relevant table-cells for visualisation 
-        // instead of using tooltips
-        if(fillCellIndex > 2*numColums) 
-        {
-            $('#matrix').find($('td:eq(' + (fillCellIndex+1) + ')')).css('background-color', '#006699');
-            $('#matrix').find($('td:eq(' + (fillCellIndex-numColums+1) + ')')).css('background-color', '#CC3333');
-            $('#matrix').find($('td:eq(' + (fillCellIndex-numColums) + ')')).css('background-color', '#CC3333');
-        }
-        fillCellIndex += numColums;
-        
-// Deprecated code to show previously hidden table row
-//$('#matrix').find($('tr:eq(' + numRowsShown + ')').show());
-//++numRowsShown;
-
+        nextStep();
         event.preventDefault();
+    });
+    
+    // Stepwise enter the calculated alignment values row by row
+    $('#nextRow').click(function(event){
+        nextRow();
+        event.preventDefault();
+    });
+    
+    // Display full aligment table at once
+    $('#completeAlignment').click(function(event){
+        completeAlignment();
+        event.preventDefault();
+    });
+    
+    // Reset alignment table, clear all values and colors
+    $('#reset').click(function(event){
+        reset();
+        event.preventDefault();
+    });
+    
+    // Send Form on Enter. Only works from inputs that do not allow 
+    // carriage returns
+    $(function() {
+        $('form').each(function() {
+            $('input').keypress(function(e) {
+                // Enter pressed?
+                if(e.which == 10 || e.which == 13) {
+                    this.form.submit();
+                }
+            });
+
+            $('input[type=submit]').hide();
+        });
     });
     
 });

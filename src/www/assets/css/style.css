@@ -49,10 +49,15 @@ div[role="main"] {
         no-repeat, no-repeat, no-repeat, no-repeat, repeat;
 }
 
+div#matrix {
+    background-color: #fff;
+    border-radius: 15px;
+    overflow: visible;
+    padding: 50px;
+}
+
 table#matrix {
-    border-width: 0px;
-    border-style: solid;
-    border-color: #4fc4fc;
+    background-color: #fff;
 }
 
 table#matrix td {
@@ -61,7 +66,7 @@ table#matrix td {
     border-width: 1px;
     border-style: solid;
     border-color: #fff;
-    border-radius: 10px;
+    border-radius: 2px;
     background-color: #c5e8f7;
     text-transform: uppercase;
     text-align: center;
@@ -69,37 +74,31 @@ table#matrix td {
     padding: 0px;
 }
 table#matrix td.topRow {
-    border-width: 1px;
-    border-radius: 5px;
     font-weight: bold;
     background-color: #4fc4fc;
 }
 
 table#matrix td.leftColumn {
-    border-width: 1px;
-    border-radius: 5px;
     font-weight: bold;
     background-color: #4fc4fc;
 }
 
 table#matrix td.topLeftCell {
-    border-width: 0px;
-    border-radius: 50px 0 5px 0;
+    border-top-left-radius: 15px;
     font-weight: bold;
     background-color: #4fc4fc;
 }
 table#matrix td.topRightCell {
-    border-width: 0px;
-    border-radius: 5px 10px 5px 5px;
+    border-top-right-radius: 15px; 
     font-weight: bold;
     background-color: #4fc4fc;
 }
 table#matrix td.bottomRightCell {
+    border-bottom-right-radius: 15px;
     background-color: #c5e8f7;
 }
 table#matrix td.bottomLeftCell {
-    border-width: 0px;
-    border-radius: 5px 5px 5px 10px;
+    border-bottom-left-radius: 15px;
     font-weight: bold;
     background-color: #4fc4fc;
 }
@@ -123,4 +122,13 @@ div#copyright p {
     color: #2a2a2a;
     font-size: 80%;
     padding-right: 10px;
+}
+
+/* BUTTON AND FORM STYLING*/
+input[type="button"]{
+    
+}
+
+input[type="text"]{
+    
 }

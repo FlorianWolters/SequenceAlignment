@@ -3,11 +3,16 @@
 
 {% block main %}
 
-<button type="button" id="nextStep">NextStep</button>
+<button type="button" id="nextStep" class="btn">Next Step</button>
+<button type="button" id="nextRow" class="btn">Next Row</button>
+<button type="button" id="completeAlignment" class="btn">Show Complete Alignment</button>
+<button type="button" id="reset" class="btn">Reset</button>
+
 <br/>
 <br/>
 
 {# Remove cellspacing and cellpadding when properly formated with css #}
+<div id="matrix">
 <table id="matrix" border="1" cellspacing="5" cellpadding="5">
     <tr>
         <td class="topLeftCell"></td>
@@ -37,5 +42,6 @@
     </tr>
     {% endfor %}
 </table>
+</div>
 
 {% endblock %}
