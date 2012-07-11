@@ -3,14 +3,14 @@
   Developer: Florian Wolters
   Developer: Michael James Malocha
   Developer: Olav Hoffmann
-  Developer: Steffen Wolfgang Schütte
+  Developer: Steffen Schütte
 
 /* THANKS */
   jQuery: http://jquery.com
   Twitter Bootstrap: http://twitter.github.com/bootstrap
 
 /* SITE */
-  Last update: 2012/07/07
+  Last update: 2012/07/11
   Language: English
   Doctype: HTML5
   Standards: HTML5, CSS3
