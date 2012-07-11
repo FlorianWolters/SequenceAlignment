@@ -28,6 +28,17 @@ var totalCells      = 0;
 var numRowsShown    = 0;
 var fillCellIndex   = 0;
 
+function initCells()
+{
+    for(i = fillCellIndex; i < totalCells; ++i)
+    {
+        if($('#matrix').find($('td:eq(' + i + ')')).html() == "")
+        {
+            $('#matrix').find($('td:eq(' + i + ')')).toggleClass('valueHidden');
+        }
+    }
+}
+
 // TODO: DOCUMENTATION
 function initIndexes()
 {
@@ -45,7 +56,7 @@ function initIndexes()
 // TODO: DOCUMENTATION
 function nextStep()
 {
-    $('#matrix').find($('td:eq(' + fillCellIndex + ')')).text("*"); 
+    $('#matrix').find($('td:eq(' + fillCellIndex + ')')).toggleClass('valueShown'); 
 
     if($('#matrix').find($('td:eq(' + (fillCellIndex+1) + ')')).html() == "")
     {
@@ -76,11 +87,12 @@ function nextRow()
     var currentRow = (fillCellIndex / numColums)|0;
     ++currentRow; // Because row-count starts from 0
     
-    //alert(currentRow + " " + numColums + " " + fillCellIndex);
+    
 
     for(i = fillCellIndex; i < (currentRow*numColums); ++i)
     {
-        $('#matrix').find($('td:eq(' + i + ')')).text("*");
+        // Replace by proper getValueFromScoreTable-function
+        $('#matrix').find($('td:eq(' + i + ')')).toggleClass('valueShown');
         fillCellIndex = i;
     }
 
@@ -104,7 +116,7 @@ function completeAlignment()
     {
         if($('#matrix').find($('td:eq(' + i + ')')).html() == "")
         {
-            $('#matrix').find($('td:eq(' + i + ')')).text("*");1
+            $('#matrix').find($('td:eq(' + i + ')')).toggleClass('valueShown');
         }
     }
 
