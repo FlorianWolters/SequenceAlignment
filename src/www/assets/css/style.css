@@ -99,10 +99,10 @@ table#matrix td.bottomLeftCell {
     background-color: #4fc4fc;
 }
 
-valueHidden {
+.valueHidden {
     background-color: #000;
 }
-valueShown {
+.valueShown {
     background-color: #000;
 }
 
