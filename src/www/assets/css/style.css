@@ -98,11 +98,10 @@ table#matrix td.bottomLeftCell {
     font-weight: bold;
     background-color: #4fc4fc;
 }
-
-.valueHidden {
+table#matrix td.valueHidden {
     background-color: #000;
 }
-.valueShown {
+table#matrix td.valueShown {
     background-color: #000;
 }
 
