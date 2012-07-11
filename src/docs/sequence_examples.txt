@@ -1,0 +1,97 @@
+/**
+ * `sequence_examples.txt`
+ *
+ * This program is free software: you can redistribute it and/or modify it under
+ * the terms of the GNU Lesser General Public License as published by the Free
+ * Software Foundation, either version 3 of the License, or (at your option) any
+ * later version.
+ *
+ * This program is distributed in the hope that it will be useful, but WITHOUT
+ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ * FOR A PARTICULAR PURPOSE.  See the GNU Lesser General Public License for more
+ * details.
+ *
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with this program.  If not, see http://gnu.org/licenses/lgpl.txt.
+ *
+ *
+ * @author     Steffen Schütte <steffen.schuette@web.de>
+ * @author     Florian Wolters <wolters.fl@gmail.com>
+ * @copyright  2012 Steffen Schütte
+ * @license    http://gnu.org/licenses/lgpl.txt LGPL-3.0+
+ * @version    GIT: $Id$
+ * @link       http://github.com/FlorianWolters/SequenceAlignment
+ */
+ 
+ 
+################################################################################
+Example 1:
+----------
+
+Sequence 1: ACACACTA
+Sequence 2:	AGCACACA	 
+Alignment Score: 5
+
+Alignment Table:
+
+           A    C    A    C    A    C    T    A 
+      0    0    0    0    0    0    0    0    0 
+ A    0 \  1    0 \  1    0 \  1    0    0 \  1 
+ G    0    0    0    0    0    0    0    0    0 
+ C    0    0 \  1    0 \  1    0 \  1    0    0 
+ A    0 \  1    0 \  2 -  1 \  2 -  1    0 \  1 
+ C    0    0 \  2 |  1 \  3 -  2 \  3 -  2 -  1 
+ A    0 \  1 |  1 \  3 |  2 \  4 -  3 \  2 \  3 
+ C    0    0 \  2 |  2 \  4 |  3 \  5 -  4 -  3 
+ A    0 \  1 |  1 \  3 |  3 \  5 |  4 \  4 \  5 
+
+################################################################################
+
+################################################################################
+Example 2:
+----------
+
+Sequence 1: ACTTGGAAGT
+Sequence 2:	GTGAGACT
+Alignment Score: 3
+
+Alignment Table:
+
+           A    C    T    T    G    G    A    A    G    T 
+      0    0    0    0    0    0    0    0    0    0    0 
+ G    0    0    0    0    0 \  1 \  1    0    0 \  1    0 
+ T    0    0    0 \  1 \  1    0    0    0    0    0 \  2 
+ G    0    0    0    0    0 \  2 \  1    0    0 \  1 |  1 
+ A    0 \  1    0    0    0 |  1 \  1 \  2 \  1    0    0 
+ G    0    0    0    0    0 \  1 \  2 |  1 \  1 \  2 -  1 
+ A    0 \  1    0    0    0    0 |  1 \  3 \  2 |  1 \  1 
+ C    0    0 \  2 -  1    0    0    0 |  2 \  2 \  1    0 
+ T    0    0 |  1 \  3 \  2 -  1    0 |  1 \  1 \  1 \  2 
+
+################################################################################
+
+################################################################################
+Example 3:
+----------
+
+Sequence 1: CTCCAACGCAACCTAGGCCA
+Sequence 2:	TCTCTGTGGGTTAACACCAC
+Alignment Score: 
+
+Alignment Table:
+
+ 
+################################################################################
+
+################################################################################
+Example 4:
+----------
+
+Sequence 1: GAAACGACAAGGACCAGGATGGAACCACCG
+Sequence 2:	ACACACATTAATGATGCTCCTCAGACGACC
+Alignment Score: 
+
+Alignment Table:
+
+
+################################################################################
