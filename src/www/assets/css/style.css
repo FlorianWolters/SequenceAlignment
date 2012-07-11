@@ -99,10 +99,10 @@ table#matrix td.bottomLeftCell {
     background-color: #4fc4fc;
 }
 table#matrix td.valueHidden {
-    background-color: #000;
+    background-color: red;
 }
 table#matrix td.valueShown {
-    background-color: #000;
+    background-color: green;
 }
 
 p#copyright {
