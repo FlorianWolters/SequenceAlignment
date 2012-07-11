@@ -15,17 +15,10 @@ div[role="main"] {
     overflow: hidden;
 }
 
-div#matrix {
+div#cmatrix {
     overflow: hidden;
     padding: 10px 10px;
 }
-
-/*footer {
-    width: 100%;
-    min-width: 1000px;
-    height: 40px;
-    overflow: hidden;
-}*/
 
 /* STYLING AND POSITIONING OF INDIVIDUAL GENERAL ELEMENTS */
 body {
@@ -54,7 +47,7 @@ div[role="main"] {
         no-repeat, no-repeat, no-repeat, no-repeat, repeat;
 }
 
-div#matrix {
+div#cmatrix {
     background-color: #fff;
     border-radius: 10px;
     box-shadow: 0 0 3px 1px #4fc4fc;
@@ -104,6 +97,13 @@ table#matrix td.bottomLeftCell {
     border-bottom-left-radius: 10px;
     font-weight: bold;
     background-color: #4fc4fc;
+}
+
+valueHidden {
+    background-color: #000;
+}
+valueShown {
+    background-color: #000;
 }
 
 p#copyright {
