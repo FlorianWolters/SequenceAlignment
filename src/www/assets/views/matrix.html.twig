@@ -6,10 +6,13 @@
 <button type="button" id="nextStep">Next Step</button>
 <button type="button" id="nextRow">Next Row</button>
 <button type="button" id="completeAlignment">Show Complete Alignment</button>
+<button type="button" id="reset">Reset</button>
+
 <br/>
 <br/>
 
 {# Remove cellspacing and cellpadding when properly formated with css #}
+<div id="matrix">
 <table id="matrix" border="1" cellspacing="5" cellpadding="5">
     <tr>
         <td class="topLeftCell"></td>
@@ -39,5 +42,6 @@
     </tr>
     {% endfor %}
 </table>
+</div>
 
 {% endblock %}
