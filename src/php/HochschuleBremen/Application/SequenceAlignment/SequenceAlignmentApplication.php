@@ -108,7 +108,6 @@ class SequenceAlignmentApplication extends Application
         $this->configureCoreParameters($this->config);
         $this->registerServiceProviders();
         $this->configureParametersForServiceProviders($this->config);
-        $this->registerErrorHandler();
         $this->mountControllerProviders();
     }
 
