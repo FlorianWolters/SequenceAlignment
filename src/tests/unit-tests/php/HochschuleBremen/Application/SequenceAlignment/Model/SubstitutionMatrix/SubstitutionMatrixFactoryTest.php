@@ -28,7 +28,7 @@
  * @since      File available since Release 0.1.0
  */
 
-namespace HSBremen\ISBio\SequenceAlignment\Model\SubstitutionMatrix;
+namespace HochschuleBremen\Application\SequenceAlignment\Model\SubstitutionMatrix;
 
 /**
  * Test class for {@link SubstitutionMatrixFactory}.
@@ -43,7 +43,7 @@ namespace HSBremen\ISBio\SequenceAlignment\Model\SubstitutionMatrix;
  * @link       http://github.com/FlorianWolters/SequenceAlignment
  * @since      Class available since Release 0.1.0
  *
- * @covers     HSBremen\ISBio\SequenceAlignment\Model\SubstitutionMatrix\SubstitutionMatrixFactory
+ * @covers     HochschuleBremen\Application\SequenceAlignment\Model\SubstitutionMatrix\SubstitutionMatrixFactory
  */
 class SubstitutionMatrixFactoryTest extends \PHPUnit_Framework_TestCase
 {
@@ -69,27 +69,27 @@ class SubstitutionMatrixFactoryTest extends \PHPUnit_Framework_TestCase
     /**
      * @return void
      *
-     * @covers HSBremen\ISBio\SequenceAlignment\Model\SubstitutionMatrix\SubstitutionMatrixFactory::create
+     * @covers HochschuleBremen\Application\SequenceAlignment\Model\SubstitutionMatrix\SubstitutionMatrixFactory::create
      */
     public function testCreateReturnsCorrectInstance() {
-        $expected = 'HSBremen\ISBio\SequenceAlignment\Model\SubstitutionMatrix\SubstitutionMatrixAbstract';
+        $expected = 'HochschuleBremen\Application\SequenceAlignment\Model\SubstitutionMatrix\SubstitutionMatrixAbstract';
         $this->assertInstanceOf($expected, $this->factory->create());
     }
 
     /**
      * @return void
      *
-     * @covers HSBremen\ISBio\SequenceAlignment\Model\SubstitutionMatrix\SubstitutionMatrixFactory::create
+     * @covers HochschuleBremen\Application\SequenceAlignment\Model\SubstitutionMatrix\SubstitutionMatrixFactory::create
      */
     public function testCreateReturnsBlosum62AsDefault() {
-        $expected = 'HSBremen\ISBio\SequenceAlignment\Model\SubstitutionMatrix\Blosum62';
+        $expected = 'HochschuleBremen\Application\SequenceAlignment\Model\SubstitutionMatrix\Blosum62';
         $this->assertInstanceOf($expected, $this->factory->create());
     }
 
     /**
      * @return void
      *
-     * @covers HSBremen\ISBio\SequenceAlignment\Model\SubstitutionMatrix\SubstitutionMatrixFactory::create
+     * @covers HochschuleBremen\Application\SequenceAlignment\Model\SubstitutionMatrix\SubstitutionMatrixFactory::create
      * @expectedException InvalidArgumentException
      */
     public function testCreateThrowsInvalidArgumentException() {
@@ -99,7 +99,7 @@ class SubstitutionMatrixFactoryTest extends \PHPUnit_Framework_TestCase
     /**
      * @return void
      *
-     * @covers HSBremen\ISBio\SequenceAlignment\Model\SubstitutionMatrix\SubstitutionMatrixFactory::getInstance
+     * @covers HochschuleBremen\Application\SequenceAlignment\Model\SubstitutionMatrix\SubstitutionMatrixFactory::getInstance
      */
     public function testGetInstance()
     {

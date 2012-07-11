@@ -28,7 +28,7 @@
  * @since      File available since Release 0.1.0
  */
 
-namespace HSBremen\ISBio\SequenceAlignment\Model\SubstitutionMatrix;
+namespace HochschuleBremen\Application\SequenceAlignment\Model\SubstitutionMatrix;
 
 /**
  * An object of class Blosum65 wraps the BLOcks of Amino Acid SUbstitution

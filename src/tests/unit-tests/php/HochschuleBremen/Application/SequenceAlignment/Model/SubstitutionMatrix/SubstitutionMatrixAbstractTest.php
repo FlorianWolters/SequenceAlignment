@@ -28,7 +28,7 @@
  * @since      File available since Release 0.1.0
  */
 
-namespace HSBremen\ISBio\SequenceAlignment\Model\SubstitutionMatrix;
+namespace HochschuleBremen\Application\SequenceAlignment\Model\SubstitutionMatrix;
 
 /**
  * Test class for {@link SubstitutionMatrixAbstract}.
@@ -43,7 +43,7 @@ namespace HSBremen\ISBio\SequenceAlignment\Model\SubstitutionMatrix;
  * @link       http://github.com/FlorianWolters/SequenceAlignment
  * @since      Class available since Release 0.1.0
  *
- * @covers     HSBremen\ISBio\SequenceAlignment\Model\SubstitutionMatrix\SubstitutionMatrixAbstract
+ * @covers     HochschuleBremen\Application\SequenceAlignment\Model\SubstitutionMatrix\SubstitutionMatrixAbstract
  */
 class SubstitutionMatrixAbstractTest extends \PHPUnit_Framework_TestCase
 {
@@ -84,7 +84,7 @@ class SubstitutionMatrixAbstractTest extends \PHPUnit_Framework_TestCase
     /**
      * @return void
      *
-     * @covers HSBremen\ISBio\SequenceAlignment\Model\SubstitutionMatrix\SubstitutionMatrixAbstract::getScores
+     * @covers HochschuleBremen\Application\SequenceAlignment\Model\SubstitutionMatrix\SubstitutionMatrixAbstract::getScores
      * @test
      */
     public function testGetScores()
@@ -103,7 +103,7 @@ class SubstitutionMatrixAbstractTest extends \PHPUnit_Framework_TestCase
     /**
      * @return void
      *
-     * @covers HSBremen\ISBio\SequenceAlignment\Model\SubstitutionMatrix\SubstitutionMatrixAbstract::getId
+     * @covers HochschuleBremen\Application\SequenceAlignment\Model\SubstitutionMatrix\SubstitutionMatrixAbstract::getId
      * @test
      */
     public function testGetId()
@@ -122,7 +122,7 @@ class SubstitutionMatrixAbstractTest extends \PHPUnit_Framework_TestCase
     /**
      * @return void
      *
-     * @covers HSBremen\ISBio\SequenceAlignment\Model\SubstitutionMatrix\SubstitutionMatrixAbstract::getInstance
+     * @covers HochschuleBremen\Application\SequenceAlignment\Model\SubstitutionMatrix\SubstitutionMatrixAbstract::getInstance
      * @test
      * @todo Implement comparison of getInstance().
      */

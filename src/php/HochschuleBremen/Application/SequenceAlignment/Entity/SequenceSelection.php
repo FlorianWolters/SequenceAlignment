@@ -1,6 +1,6 @@
 <?php
 /**
- * `AlignmentEntity.php`
+ * `SequenceSelection.php`
  *
  * This program is free software: you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -28,15 +28,15 @@
  * @since      File available since Release 0.1.0
  */
 
-namespace HSBremen\ISBio\SequenceAlignment\Entity;
+namespace HochschuleBremen\Application\SequenceAlignment\Entity;
 
 use Symfony\Component\Validator\Mapping\ClassMetadata;
 use Symfony\Component\Validator\Constraints\NotBlank;
-use Symfony\Component\Validator\Constraints\Type;
+use Symfony\Component\Validator\Constraints\Choice;
 
 /**
- * An object of type {@link AlignmentEntity} represents and stores the data for
- * a pairwise sequence alignment.
+ * An object of type {@link SequenceSelectionEntity} stores the selection for
+ * the type of sequence to align.
  *
  * @category   Biology
  * @package    SequenceAlignment
@@ -48,43 +48,15 @@ use Symfony\Component\Validator\Constraints\Type;
  * @link       http://github.com/FlorianWolters/SequenceAlignment
  * @since      Class available since Release 0.1.0
  */
-class AlignmentEntity
+class SequenceSelection
 {
 
     /**
-     * The first sequence.
+     * The type of sequence.
      *
      * @var string
      */
-    private $firstSequence;
-
-    /**
-     * The second sequence.
-     *
-     * @var string
-     */
-    private $secondSequence;
-
-	/**
-	 * The ordinal of a {@link SubstitutionMatrixEnum}.
-     *
-     * @var integer
-	 */
-    private $scoringMatrix;
-
-	/**
-	 * The costs for opening a gap.
-     *
-     * @var float
-	 */
-    private $gapOpenCosts = 10.0;
-
-	/**
-	 * The costs for extending a gap.
-     *
-     * @var float
-	 */
-    private $gapExtendCosts = 0.5;
+    private $sequenceType;
 
     /**
      * Adds the constraints for this class.
@@ -95,110 +67,49 @@ class AlignmentEntity
      */
     public static function loadValidatorMetadata(ClassMetadata $metadata)
     {
-        self::addGetterConstraintsToSequences($metadata, 'firstSequence');
-        self::addGetterConstraintsToSequences($metadata, 'secondSequence');
-        self::addGetterConstraintsToGapCosts($metadata, 'gapOpenCosts');
-        self::addGetterConstraintsToGapCosts($metadata, 'gapExtendCosts');
+        $metadata->addGetterConstraint('sequenceType', new NotBlank);
+        $metadata->addGetterConstraint(
+            'sequenceType',
+            new Choice(
+                [
+                    'choices' => ['aa', 'sa'],
+                    'message' => 'Choose a valid sequence type',
+                ]
+            )
+        );
     }
 
     /**
-     * @param ClassMetadata $metadata The constraints on this class.
-     * @param string        $name
+     * Returns the type of the sequence.
+     *
+     * @return string The type of the sequence.
+     */
+    public function getSequenceType()
+    {
+        return $this->sequenceType;
+    }
+
+    /**
+     * Sets the type of the sequence.
+     *
+     * @param $sequenceType string The new type of the sequence
      *
      * @return void
      */
-    private static function addGetterConstraintsToSequences(
-        ClassMetadata $metadata, $name
-    ) {
-        $metadata->addGetterConstraint($name, new NotBlank);
-        $metadata->addGetterConstraint($name, new Type('string'));
+    public function setSequenceType($sequenceType)
+    {
+        $this->sequenceType = $sequenceType;
     }
 
     /**
-     * @param ClassMetadata $metadata The constraints on this class.
-     * @param string        $name
-     *
-     * @return void
+     * @return array
      */
-    private static function addGetterConstraintsToGapCosts(
-        ClassMetadata $metadata, $name
-    ) {
-        $metadata->addGetterConstraint($name, new NotBlank);
-        $metadata->addGetterConstraint($name, new Type('float'));
-    }
-
-    /**
-     * Returns the first sequence of this {@link SmithWatermanEntity}.
-     *
-     * @return string The first sequence.
-     */
-    public function getFirstSequence()
+    public static function getSequenceTypes()
     {
-        return $this->firstSequence;
-    }
-
-    /**
-     * Sets the first sequence of this {@link SmithWatermanEntity}.
-     *
-     * @param string $firstSequence The new first sequence.
-     *
-     * @return void
-     */
-    public function setFirstSequence($firstSequence)
-    {
-        $this->firstSequence = $firstSequence;
-    }
-
-    /**
-     * Returns the second sequence of this {@link SmithWatermanEntity}.
-     *
-     * @return string The second sequence.
-     */
-    public function getSecondSequence()
-    {
-        return $this->secondSequence;
-    }
-
-    /**
-     * Sets the second sequence of this {@link SmithWatermanEntity}.
-     *
-     * @param string $secondSequence The new second sequence.
-     *
-     * @return void
-     */
-    public function setSecondSequence($secondSequence)
-    {
-        $this->secondSequence = $secondSequence;
-    }
-
-    public function getScoringMatrix()
-    {
-        return $this->scoringMatrix;
-    }
-
-    public function setScoringMatrix($scoringMatrix)
-    {
-        $this->scoringMatrix = $scoringMatrix;
-    }
-
-    public function getGapOpenCosts()
-    {
-        return $this->gapOpenCosts;
-    }
-
-    public function setGapOpenCosts($gapOpenCosts)
-    {
-        $this->gapOpenCosts = $gapOpenCosts;
-    }
-
-    public function getGapExtendCosts()
-    {
-        return $this->gapExtendCosts;
-    }
-
-    public function setGapExtendCosts($gapExtendCosts)
-    {
-        $this->gapExtendCosts = $gapExtendCosts;
+        return [
+            'aa' => 'amino acid',
+            'na' => 'nucleic acid'
+        ];
     }
 
 }

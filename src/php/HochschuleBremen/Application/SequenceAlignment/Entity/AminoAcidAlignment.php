@@ -1,6 +1,6 @@
 <?php
 /**
- * `AlignmentEntity.php`
+ * `AminoAcidAlignment.php`
  *
  * This program is free software: you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -18,37 +18,37 @@
  * PHP version 5.3
  *
  * @category   Biology
- * @package    SequenceAlignment
+ * @package    SequenceAminoAcidAlignment
  * @subpackage Entity
  * @author     Florian Wolters <wolters.fl@gmail.com>
  * @copyright  2012 Florian Wolters
  * @license    http://gnu.org/licenses/lgpl.txt LGPL-3.0+
  * @version    GIT: $Id$
- * @link       http://github.com/FlorianWolters/SequenceAlignment
+ * @link       http://github.com/FlorianWolters/SequenceAminoAcidAlignment
  * @since      File available since Release 0.1.0
  */
 
-namespace HSBremen\ISBio\SequenceAlignment\Entity;
+namespace HochschuleBremen\Application\SequenceAlignment\Entity;
 
 use Symfony\Component\Validator\Mapping\ClassMetadata;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Validator\Constraints\Type;
 
 /**
- * An object of type {@link AlignmentEntity} represents and stores the data for
- * a pairwise sequence alignment.
+ * An object of type {@link AminoAcidAlignmentEntity} represents and stores the
+ * data for a pairwise sequence alignment with amino acids.
  *
  * @category   Biology
- * @package    SequenceAlignment
+ * @package    SequenceAminoAcidAlignment
  * @subpackage Entity
  * @author     Florian Wolters <wolters.fl@gmail.com>
  * @copyright  2012 Florian Wolters
  * @license    http://gnu.org/licenses/lgpl.txt LGPL-3.0+
  * @version    GIT: $Id$
- * @link       http://github.com/FlorianWolters/SequenceAlignment
+ * @link       http://github.com/FlorianWolters/SequenceAminoAcidAlignment
  * @since      Class available since Release 0.1.0
  */
-class AlignmentEntity
+class AminoAcidAlignment
 {
 
     /**

@@ -28,7 +28,7 @@
  * @since      File available since Release 0.1.0
  */
 
-namespace HSBremen\ISBio\SequenceAlignment\Algorithm;
+namespace HochschuleBremen\Application\SequenceAlignment\Algorithm;
 
 /**
  * A Cell in a similarity matrix, to hold row, column, score and the previous
@@ -86,8 +86,8 @@ class Cell
     {
         $this->row = $row;
         $this->column = $column;
-//        $this->setScore(~\PHP_INT_MAX);
-//        $this->setPreviousCell();
+        $this->setScore(~\PHP_INT_MAX);
+        $this->setPreviousCell();
     }
 
     /**
@@ -161,8 +161,8 @@ class Cell
      */
     public function __toString()
     {
-        return 'Cell(' . $this->row . ', ' . $this->column . '): score='
-            . $this->score;
+        return 'Cell(' . $this->row . ', ' . $this->column
+            . '): score=' . $this->score;
     }
 
 }

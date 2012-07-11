@@ -28,7 +28,7 @@
  * @since      File available since Release 0.1.0
  */
 
-namespace HSBremen\ISBio\SequenceAlignment\Model\SubstitutionMatrix;
+namespace HochschuleBremen\Application\SequenceAlignment\Model\SubstitutionMatrix;
 
 /**
  * Test class for {@link Blosum62}.
@@ -43,7 +43,7 @@ namespace HSBremen\ISBio\SequenceAlignment\Model\SubstitutionMatrix;
  * @link       http://github.com/FlorianWolters/SequenceAlignment
  * @since      Class available since Release 0.1.0
  *
- * @covers     HSBremen\ISBio\SequenceAlignment\Model\SubstitutionMatrix\Blosum62
+ * @covers     HochschuleBremen\Application\SequenceAlignment\Model\SubstitutionMatrix\Blosum62
  */
 class Blosum62Test extends \PHPUnit_Framework_TestCase
 {
@@ -68,7 +68,7 @@ class Blosum62Test extends \PHPUnit_Framework_TestCase
     /**
      * @return void
      *
-     * @covers HSBremen\ISBio\SequenceAlignment\Model\SubstitutionMatrix\Blosum62::__construct
+     * @covers HochschuleBremen\Application\SequenceAlignment\Model\SubstitutionMatrix\Blosum62::__construct
      * @test
      */
     public function testScores()

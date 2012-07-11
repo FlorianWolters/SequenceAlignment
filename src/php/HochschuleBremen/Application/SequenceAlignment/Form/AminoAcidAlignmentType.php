@@ -1,6 +1,6 @@
 <?php
 /**
- * `AlignmentType.php`
+ * `AminoAcidAlignmentType.php`
  *
  * This program is free software: you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -28,14 +28,14 @@
  * @since      File available since Release 0.1.0
  */
 
-namespace HSBremen\ISBio\SequenceAlignment\Form;
+namespace HochschuleBremen\Application\SequenceAlignment\Form;
 
-use HSBremen\ISBio\SequenceAlignment\Model\SubstitutionMatrix\SubstitutionMatrixEnum;
+use HochschuleBremen\Application\SequenceAlignment\Model\SubstitutionMatrix\SubstitutionMatrixEnum;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 
 /**
- * The {@link AlignmentType} class houses the logic for building the form for
+ * The {@link AminoAcidAlignmentType} class houses the logic for building the form for
  * class {@link AlignmentEntity}.
  *
  * @category   Biology
@@ -48,7 +48,7 @@ use Symfony\Component\Form\FormBuilderInterface;
  * @link       http://github.com/FlorianWolters/SequenceAlignment
  * @since      Class available since Release 0.1.0
  */
-class AlignmentType extends AbstractType
+class AminoAcidAlignmentType extends AbstractType
 {
 
     /**
@@ -100,7 +100,7 @@ class AlignmentType extends AbstractType
      */
     public function getName()
     {
-        return 'alignment';
+        return 'amino_acid_alignment';
     }
 
 }

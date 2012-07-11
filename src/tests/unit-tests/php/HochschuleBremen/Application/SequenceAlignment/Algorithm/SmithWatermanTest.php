@@ -29,7 +29,7 @@
  * @since      File available since Release 0.1.0
  */
 
-namespace HSBremen\ISBio\SequenceAlignment\Algorithm;
+namespace HochschuleBremen\Application\SequenceAlignment\Algorithm;
 
 /**
  * Test class for {@link SmithWaterman}.
@@ -45,7 +45,7 @@ namespace HSBremen\ISBio\SequenceAlignment\Algorithm;
  * @link       http://github.com/FlorianWolters/SequenceAlignment
  * @since      Class available since Release 0.1.0
  *
- * @covers     HSBremen\ISBio\SequenceAlignment\Algorithm\SmithWaterman
+ * @covers     HochschuleBremen\Application\SequenceAlignment\Algorithm\SmithWaterman
  */
 class SmithWatermanTest extends \PHPUnit_Framework_TestCase
 {
@@ -91,7 +91,7 @@ class SmithWatermanTest extends \PHPUnit_Framework_TestCase
     /**
      * @return void
      *
-     * @covers HSBremen\ISBio\SequenceAlignment\Algorithm\SmithWaterman::getScoreTable
+     * @covers HochschuleBremen\Application\SequenceAlignment\Algorithm\SmithWaterman::getScoreTable
      * @dataProvider providerGetScoreTable
      * @test
      */
@@ -119,7 +119,7 @@ class SmithWatermanTest extends \PHPUnit_Framework_TestCase
     /**
      * @return void
      *
-     * @covers HSBremen\ISBio\SequenceAlignment\Algorithm\SequenceAlignment::getAlignment
+     * @covers HochschuleBremen\Application\SequenceAlignment\Algorithm\SequenceAlignment::getAlignment
      * @dataProvider providerGetAlignment
      * @test
      */
@@ -146,7 +146,7 @@ class SmithWatermanTest extends \PHPUnit_Framework_TestCase
     /**
      * @return void
      *
-     * @covers HSBremen\ISBio\SequenceAlignment\Algorithm\SmithWaterman::getAlignmentScore
+     * @covers HochschuleBremen\Application\SequenceAlignment\Algorithm\SmithWaterman::getAlignmentScore
      * @dataProvider providerGetAlignmentScore
      * @test
      */
