@@ -37,7 +37,7 @@ function initCells()
         if( (i) != nextRow*numColums )
         {
             $('#matrix').find($('td:eq(' + i + ')')).removeClass("valueShown"); 
-            $('#matrix').find($('td:eq(' + i + ')')).toggleClass("valueHidden");
+            $('#matrix').find($('td:eq(' + i + ')')).addClass("valueHidden");
             $('#matrix').find($('td:eq(' + i + ')')).text("*");
         }
     }
@@ -102,9 +102,6 @@ function nextRow()
         $('#matrix').find($('td:eq(' + i + ')')).removeClass("valueHidden");
         $('#matrix').find($('td:eq(' + i + ')')).toggleClass("valueShown");
         
-        var cellClass =$('#matrix').find($('td:eq(' + i + ')')).attr("class");
-        alert(cellClass);
-        
         $('#matrix').find($('td:eq(' + i + ')')).text("*");
         fillCellIndex = i;
     }
@@ -154,18 +151,7 @@ function completeAlignment()
 function reset()
 {
     initIndexes();    
-    
-    for(i = fillCellIndex; i < totalCells; ++i)
-    {    
-        var nextRow = (i / numColums)|0;        
-        
-        if( (i) != nextRow*numColums )
-        {
-            $('#matrix').find($('td:eq(' + i + ')')).removeClass("valueShown");
-            $('#matrix').find($('td:eq(' + i + ')')).toggleClass("valueHidden");
-            $('#matrix').find($('td:eq(' + i + ')')).text("");
-        }
-    }
+    initCells();
 }
 
 $(document).ready(function() {
