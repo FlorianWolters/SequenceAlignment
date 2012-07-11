@@ -1,5 +1,5 @@
 {
-    "hash": "b1ecfb2af5761d2ca1dc02e9067b5852",
+    "hash": "043fe64c6390d6bdd4ff8e82242dd095",
     "packages": [
         {
             "package": "florianwolters/component-core-enum",
@@ -10,8 +10,9 @@
             "version": "v0.2.1"
         },
         {
-            "package": "monolog/monolog",
-            "version": "1.1.0"
+            "package": "pimple/pimple",
+            "version": "dev-master",
+            "source-reference": "d2cfa2f02f50abef65c238747c753a5f6786f6be"
         },
         {
             "package": "pimple/pimple",
@@ -21,9 +22,9 @@
             "alias-version": "1.0.9999999.9999999-dev"
         },
         {
-            "package": "pimple/pimple",
+            "package": "silex/silex",
             "version": "dev-master",
-            "source-reference": "d2cfa2f02f50abef65c238747c753a5f6786f6be"
+            "source-reference": "23dc19c334e2f74ec4de037568f5426bceaff421"
         },
         {
             "package": "silex/silex",
@@ -31,11 +32,6 @@
             "source-reference": "23dc19c334e2f74ec4de037568f5426bceaff421",
             "alias-pretty-version": "1.0.x-dev",
             "alias-version": "1.0.9999999.9999999-dev"
-        },
-        {
-            "package": "silex/silex",
-            "version": "dev-master",
-            "source-reference": "23dc19c334e2f74ec4de037568f5426bceaff421"
         },
         {
             "package": "symfony/config",
@@ -52,14 +48,14 @@
         {
             "package": "symfony/event-dispatcher",
             "version": "dev-master",
-            "source-reference": "v2.1.0-BETA1"
+            "source-reference": "v2.1.0-BETA1",
+            "alias-pretty-version": "2.1.x-dev",
+            "alias-version": "2.1.9999999.9999999-dev"
         },
         {
             "package": "symfony/event-dispatcher",
             "version": "dev-master",
-            "source-reference": "v2.1.0-BETA1",
-            "alias-pretty-version": "2.1.x-dev",
-            "alias-version": "2.1.9999999.9999999-dev"
+            "source-reference": "v2.1.0-BETA1"
         },
         {
             "package": "symfony/form",
