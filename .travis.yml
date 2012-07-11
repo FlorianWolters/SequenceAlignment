@@ -12,10 +12,6 @@ script: phpunit --coverage-text
 notifications:
   email:
     recipients:
-      - schnieders.a@gmail.com
       - wolters.fl@gmail.com
-      - mjm159@gmail.com
-      - olavhoffmann@gmail.com
-      - parvus23@gmail.com
     on_success: change
     on_failure: always
