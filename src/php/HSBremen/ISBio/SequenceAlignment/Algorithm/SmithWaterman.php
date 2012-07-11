@@ -118,7 +118,7 @@ class SmithWaterman extends SequenceAlignment
     }
 
     /**
-     * @return boolean
+     * @return string
      */
     public function __toString()
     {

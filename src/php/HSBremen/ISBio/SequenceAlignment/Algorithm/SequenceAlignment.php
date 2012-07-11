@@ -89,27 +89,32 @@ abstract class SequenceAlignment extends DynamicProgramming
     {
         $firstAlignment = '';
         $secondAlignment = '';
-
         $currentCell = $this->getTracebackStartingCell();
 
         while ($this->traceBackIsNotDone($currentCell)) {
-            if ($currentCell->getRow() - $currentCell->getPreviousCell()->getRow() === 1) {
-                $secondAlignment = substr($this->secondSequence, $currentCell->getRow() - 1, 1) + $secondAlignment;
+            $rowDiff = ($currentCell->getRow()
+                - $currentCell->getPreviousCell()->getRow());
+            if (1 === $rowDiff) {
+                $secondAlignment = substr($this->secondSequence, ($currentCell->getRow() - 1), 1) . $secondAlignment;
             } else {
-                $secondAlignment = '-' + $secondAlignment;
+                $secondAlignment = '-' . $secondAlignment;
             }
 
-            if ($currentCell->getColumn() - $currentCell->getPreviousCell()->getColumn() === 1) {
-                $firstAlignment = substr($this->firstSequence, $currentCell->getRow() - 1, 1) + $firstAlignment;
+            $columnDiff = ($currentCell->getColumn()
+                - $currentCell->getPreviousCell()->getColumn());
+            if (1 === $columnDiff) {
+                $firstAlignment = substr(
+                    $this->firstSequence, ($currentCell->getColumn() - 1), 1) . $firstAlignment;
             } else {
-                $firstAlignment = '-' + $firstAlignment;
+                $firstAlignment = '-' . $firstAlignment;
             }
+
             $currentCell = $currentCell->getPreviousCell();
         }
 
-        $this->alignments = [$firstAlignment, $secondAlignment];
+        $alignments = [$firstAlignment, $secondAlignment];
 
-        return $this->alignments;
+        return $alignments;
     }
 
     /**
@@ -126,22 +131,24 @@ abstract class SequenceAlignment extends DynamicProgramming
             $this->getAlignment();
         }
 
-        $this->score = 0;
+        $score = 0;
 
-        for ($i = 0; $i < count($this->alignments[0]); ++$i) {
+        $firstAlignedSeq = $this->alignments[0];
+
+        for ($i = 0; $i < strlen($firstAlignedSeq); ++$i) {
             $c1 = substr($this->alignments[0], $i, 1);
             $c2 = substr($this->alignments[1], $i, 1);
 
-            if ($c1 == '-' || $c2 == '-') {
-                $this->score += $this->space;
-            } else if ($c1 == $c2) {
-                $this->score += $this->match;
+            if ($c1 === '-' || $c2 === '-') {
+                $score += $this->space;
+            } else if ($c1 === $c2) {
+                $score += $this->match;
             } else {
-                $this->score += $this->mismatch;
+                $score += $this->mismatch;
             }
         }
 
-        return $this->score;
+        return $score;
     }
 
     /**

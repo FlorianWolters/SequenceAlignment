@@ -31,7 +31,8 @@
 namespace HSBremen\ISBio\SequenceAlignment\Algorithm;
 
 /**
- * A cell in a similarity matrix, to hold row, column and score.
+ * A Cell in a similarity matrix, to hold row, column, score and the previous
+ * Cell.
  *
  * @category   Biology
  * @package    SequenceAlignment
@@ -85,8 +86,8 @@ class Cell
     {
         $this->row = $row;
         $this->column = $column;
-        $this->setScore(~\PHP_INT_MAX);
-        $this->setPreviousCell();
+//        $this->setScore(~\PHP_INT_MAX);
+//        $this->setPreviousCell();
     }
 
     /**

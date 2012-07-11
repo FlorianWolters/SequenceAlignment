@@ -53,34 +53,6 @@ class SmithWatermanTest extends \PHPUnit_Framework_TestCase
     /**
      * @return array
      */
-    public static function providerGetAlignmentScore()
-    {
-        return [
-            // firstSequence, secondSequence, expected
-            ['ACACACTA', 'AGCACACA', 5],
-            ['ACTTGGAAGT', 'GTGAGACT', 3]
-        ];
-    }
-
-    /**
-     * @return void
-     *
-     * @covers HSBremen\ISBio\SequenceAlignment\Algorithm\SmithWaterman::getAlignmentScore
-     * @dataProvider providerGetAlignmentScore
-     * @test
-     */
-    public function testGetAlignmentScore(
-        $firstSequence, $secondSequence, $expected
-    ) {
-        $smithWaterman = new SmithWaterman($firstSequence, $secondSequence);
-        $actual = $smithWaterman->getAlignmentScore();
-
-        $this->assertEquals($expected, $actual);
-    }
-
-    /**
-     * @return array
-     */
     public static function providerGetScoreTable()
     {
         return [
@@ -107,7 +79,7 @@ class SmithWatermanTest extends \PHPUnit_Framework_TestCase
                     [0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 2],
                     [0, 0, 0, 0, 0, 2, 1, 0, 0, 1, 1],
                     [0, 1, 0, 0, 0, 1, 1, 2, 1, 0, 0],
-                    [0, 0, 0, 0, 0, 1, 2, 1, 1, 2, 0],
+                    [0, 0, 0, 0, 0, 1, 2, 1, 1, 2, 1],
                     [0, 1, 0, 0, 0, 0, 1, 3, 2, 1, 1],
                     [0, 0, 2, 1, 0, 0, 0, 2, 2, 1, 0],
                     [0, 0, 1, 3, 2, 1, 0, 1, 1, 1, 2]
@@ -128,6 +100,61 @@ class SmithWatermanTest extends \PHPUnit_Framework_TestCase
     ) {
         $smithWaterman = new SmithWaterman($firstSequence, $secondSequence);
         $actual = $smithWaterman->getScoreTable();
+
+        $this->assertEquals($expected, $actual);
+    }
+
+    /**
+     * @return array
+     */
+    public static function providerGetAlignment()
+    {
+        return [
+            // firstSequence, secondSequence, expected
+            ['ACACACTA', 'AGCACACA', ['CACAC', 'CACAC']],
+            ['ACTTGGAAGT', 'GTGAGACT', ['TG-GA', 'TGAGA']]
+        ];
+    }
+
+    /**
+     * @return void
+     *
+     * @covers HSBremen\ISBio\SequenceAlignment\Algorithm\SequenceAlignment::getAlignment
+     * @dataProvider providerGetAlignment
+     * @test
+     */
+    public function testGetAlignment($firstSequence, $secondSequence, $expected)
+    {
+        $smithWaterman = new SmithWaterman($firstSequence, $secondSequence);
+        $actual = $smithWaterman->getAlignment();
+
+        $this->assertEquals($expected, $actual);
+    }
+
+    /**
+     * @return array
+     */
+    public static function providerGetAlignmentScore()
+    {
+        return [
+            // firstSequence, secondSequence, expected
+            ['ACACACTA', 'AGCACACA', 5],
+            ['ACTTGGAAGT', 'GTGAGACT', 3]
+        ];
+    }
+
+    /**
+     * @return void
+     *
+     * @covers HSBremen\ISBio\SequenceAlignment\Algorithm\SmithWaterman::getAlignmentScore
+     * @dataProvider providerGetAlignmentScore
+     * @test
+     */
+    public function testGetAlignmentScore(
+        $firstSequence, $secondSequence, $expected
+    ) {
+        $smithWaterman = new SmithWaterman($firstSequence, $secondSequence);
+        $actual = $smithWaterman->getAlignmentScore();
 
         $this->assertEquals($expected, $actual);
     }

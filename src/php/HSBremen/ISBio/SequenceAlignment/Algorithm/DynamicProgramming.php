@@ -59,12 +59,12 @@ abstract class DynamicProgramming
     /**
      * @var integer
      */
-    protected $firstSequenceLength;
+    protected $scoreTableHeight;
 
     /**
      * @var integer
      */
-    protected $secondSequenceLength;
+    protected $scoreTableWidth;
 
     /**
      * @var array
@@ -89,8 +89,8 @@ abstract class DynamicProgramming
     {
         $this->firstSequence = $firstSequence;
         $this->secondSequence = $secondSequence;
-        $this->firstSequenceLength = \strlen($this->firstSequence);
-        $this->secondSequenceLength = \strlen($this->secondSequence);
+        $this->scoreTableHeight = \strlen($this->secondSequence) + 1;
+        $this->scoreTableWidth = \strlen($this->firstSequence) + 1;
         $this->initialize();
     }
 
@@ -101,12 +101,9 @@ abstract class DynamicProgramming
     {
         $this->ensureTableIsFilledIn();
 
-        $m = $this->firstSequenceLength + 1;
-        $n = $this->secondSequenceLength + 1;
-
         $matrix = [];
-        for ($i = 0; $i < $this->firstSequenceLength; ++$i) {
-            for ($j = 0; $j < $this->secondSequenceLength; ++$j) {
+        for ($i = 0; $i < $this->scoreTableHeight; ++$i) {
+            for ($j = 0; $j < $this->scoreTableWidth; ++$j) {
                 $matrix[$i][$j] = $this->scoreTable[$i][$j]->getScore();
             }
         }
@@ -119,9 +116,11 @@ abstract class DynamicProgramming
      */
     protected function initializeScores()
     {
-        for ($i = 0; $i < $this->firstSequenceLength; ++$i) {
-            for ($j = 0; $j < $this->secondSequenceLength; ++$j) {
-                $this->scoreTable[$i][$j]->setScore($this->getInitialScore($i, $j));
+        for ($i = 0; $i < $this->scoreTableHeight; ++$i) {
+            for ($j = 0; $j < $this->scoreTableWidth; ++$j) {
+                $this->scoreTable[$i][$j]->setScore(
+                    $this->getInitialScore($i, $j)
+                );
             }
         }
     }
@@ -131,8 +130,8 @@ abstract class DynamicProgramming
      */
     protected function initializePointers()
     {
-        for ($i = 0; $i < $this->firstSequenceLength; ++$i) {
-            for ($j = 0; $j < $this->secondSequenceLength; ++$j) {
+        for ($i = 0; $i < $this->scoreTableHeight; ++$i) {
+            for ($j = 0; $j < $this->scoreTableWidth; ++$j) {
                 $this->scoreTable[$i][$j]->setPreviousCell(
                     $this->getInitialPointer($i, $j)
                 );
@@ -145,8 +144,8 @@ abstract class DynamicProgramming
      */
     protected function initialize()
     {
-        for ($i = 0; $i < $this->firstSequenceLength; ++$i) {
-            for ($j = 0; $j < $this->secondSequenceLength; ++$j) {
+        for ($i = 0; $i < $this->scoreTableHeight; ++$i) {
+            for ($j = 0; $j < $this->scoreTableWidth; ++$j) {
                 $this->scoreTable[$i][$j] = new Cell($i, $j);
             }
         }
@@ -168,7 +167,7 @@ abstract class DynamicProgramming
 
     protected function fillIn()
     {
-        for ($row = 1; $row < $this->firstSequenceLength; ++$row) {
+        for ($row = 1; $row < $this->scoreTableHeight; ++$row) {
             for ($col = 1; $col < count($this->scoreTable[$row]); ++$col) {
                 $currentCell = $this->scoreTable[$row][$col];
                 $cellAbove = $this->scoreTable[$row - 1][$col];
