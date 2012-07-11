@@ -1,6 +1,5 @@
-@charset "UTF-8";
+@charset "utf-8";
 
-/* GRID LAYOUT */
 header {
     width: 100%;
     min-width: 1000px;
@@ -15,14 +14,16 @@ div[role="main"] {
     overflow: hidden;
 }
 
-div#cmatrix {
-    overflow: hidden;
-    padding: 10px 10px;
+footer {
+    text-align: right;
 }
 
-/* STYLING AND POSITIONING OF INDIVIDUAL GENERAL ELEMENTS */
 body {
     background-color: #c5e8f7;
+}
+
+h1, h2 {
+    padding: 5px 400px 10px 10px;
 }
 
 header {
@@ -34,6 +35,7 @@ header {
     background-color: #c5e8f7;
 }
 
+/* TODO Why don't we use CSS3 borders? Far less overhead. */
 div[role="main"] {
     background-image:
         url(../img/corner_tl.png),
@@ -47,71 +49,52 @@ div[role="main"] {
         no-repeat, no-repeat, no-repeat, no-repeat, repeat;
 }
 
-div#cmatrix {
+table {
     background-color: #fff;
     border-radius: 10px;
+    border-spacing: 0;
     box-shadow: 0 0 3px 1px #4fc4fc;
+    text-align: center;
+    vertical-align: central;
 }
 
-table#matrix {
-    background-color: #fff;
-}
-
-table#matrix td {
+td {
+    background-color: #c5e8f7;
     width: 30px;
     height: 30px;
+    padding: 0px;
     border-width: 1px;
     border-style: solid;
     border-color: #fff;
-    background-color: #c5e8f7;
-    text-transform: uppercase;
-    text-align: center;
-    vertical-align: central;
-    padding: 0px;
 }
-table#matrix td.topRow {
+
+td.topRow, td.leftColumn {
     font-weight: bold;
     background-color: #4fc4fc;
 }
 
-table#matrix td.leftColumn {
-    font-weight: bold;
-    background-color: #4fc4fc;
-}
-
-table#matrix td.topLeftCell {
-    border-top-left-radius: 10px;
-    font-weight: bold;
-    background-color: #4fc4fc;
-}
-table#matrix td.topRightCell {
-    border-top-right-radius: 10px;
-    font-weight: bold;
-    background-color: #4fc4fc;
-}
-table#matrix td.bottomRightCell {
-    border-bottom-right-radius: 10px;
-    background-color: #c5e8f7;
-}
-table#matrix td.bottomLeftCell {
+td.bottomLeftCell {
     border-bottom-left-radius: 10px;
-    font-weight: bold;
-    background-color: #4fc4fc;
 }
-table#matrix td.valueHidden {
+
+td.topLeftCell {
+    border-top-left-radius: 10px;
+}
+
+td.topRightCell {
+    border-top-right-radius: 10px;
+}
+
+/* TODO Does not work, the CSS class is correct, but the background color is not set. */
+td.bottomRightCell {
+    background-color: #c5e8f7;
+    border-bottom-right-radius: 10px;
+}
+
+td.valueHidden {
     visibility: hidden;
 }
-table#matrix td.valueShown {
+
+td.valueShown {
     visibility: visible;
-}
-
-p#copyright {
-    text-align: right;
-}
-
-/* LINK COLORS AND TREATMENT */
-
-/* FONT TREATMENT */
-header h1, h2 {
-    padding: 5px 400px 10px 10px;
 }

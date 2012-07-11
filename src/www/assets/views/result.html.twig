@@ -10,41 +10,44 @@
     <button type="button" id="completeAlignment" class="btn">Show Complete Alignment</button>
     <button type="button" id="reset" class="btn">Reset</button>
 </fieldset>
-<br />
-<div id="cmatrix">
-    <table id="matrix">
-        <tr>
-            <td class="topLeftCell"></td>
-        {% for firstChar in firstSequence %}
-            {% if loop.last %}
-                <td class="topRightCell">{{ firstChar }}</td>
-            {% else %}
-                <td class="topRow">{{ firstChar }}</td>
-            {% endif %}
-        {% endfor %}
-        </tr>
-        {% for secondChar in secondSequence %}
-        <tr>
-            {% if loop.last %}
-                <td class="bottomLeftCell">{{ secondChar }}</td>
-            {% else %}
-                <td class="leftColumn">{{ secondChar }}</td>
-            {% endif %}
 
-            {% for i in range (0, firstSequence|length-1) %}
-                {% if loop.last and loop.parent.loop.last %}
-                    <td class="bottomRightCell"></td>
-                {% else %}
-                    <td></td>
-                {% endif %}
-            {% endfor %}
-        </tr>
-        {% endfor %}
-    </table>
-</div>
-<br />
-<form>
-    <button type="button" class="btn">Back</button>
+<!--
+TODO Hell, isn't this table stuff possible with CSS3 selectors? This sucks!
+This is so fugly, but at least it works. :D Sorry.
+-->
+<table>
+    <tr>
+        <td class="topRow leftColumn topLeftCell"></td>
+{% for currentCharOfFirstSequence in firstSequence %}
+    {% if loop.last %}
+        <td class="topRow topRightCell">{{ currentCharOfFirstSequence }}</td>
+    {% else %}
+        <td class="topRow">{{ currentCharOfFirstSequence }}</td>
+    {% endif %}
+{% endfor %}
+    </tr>
+
+{% for i in range (0, secondSequence|length - 1) %}
+    <tr>
+    {% if loop.last %}
+        <td class="leftColumn bottomLeftCell">{{ secondSequence[i] }}</td>
+    {% else %}
+        <td class="leftColumn">{{ secondSequence[i] }}</td>
+    {% endif %}
+
+    {% for j in range (0, firstSequence|length - 1) %}
+        {% if loop.last and loop.parent.loop.last %}
+        <td class="bottomRightCell">{{ aligner.getScoreTable[j][i] }}</td>
+        {% else %}
+        <td>{{ aligner.getScoreTable[j][i] }}</td>
+        {% endif %}
+    {% endfor %}
+    </tr>
+{% endfor %}
+</table>
+
+<form action="{{ path('home') }}">
+    <button class="btn" type="button">Home</button>
 </form>
 
 {% endblock %}
