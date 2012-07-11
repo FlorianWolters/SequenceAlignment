@@ -38,8 +38,44 @@ $(document).ready(function() {
 //        $('#matrix').find($('tr:eq(' + i + ')').hide());
 //    }
         
-    // Stepwise enter the calculated alignment values row by row
+    // Stepwise enter the calculated alignment values cell by cell
     $('#nextStep').click(function(event){
+        
+        $('#matrix').find($('td:eq(' + fillCellIndex + ')')).text("*"); 
+        
+        if($('#matrix').find($('td:eq(' + (fillCellIndex+1) + ')')).html() == "")
+        {
+            ++fillCellIndex;           
+        }
+        else
+        {
+            fillCellIndex += 2;
+        }
+        
+        
+        
+        // Demo of coloring calculation-relevant table-cells for visualisation 
+        // instead of using tooltips
+        /*
+        if(fillCellIndex > 2*numColums) 
+        {
+            $('#matrix').find($('td:eq(' + (fillCellIndex+1) + ')')).css('background-color', '#006699');
+            $('#matrix').find($('td:eq(' + (fillCellIndex-numColums+1) + ')')).css('background-color', '#CC3333');
+            $('#matrix').find($('td:eq(' + (fillCellIndex-numColums) + ')')).css('background-color', '#CC3333');
+        }
+        */
+        
+// Deprecated code to show previously hidden table row
+//$('#matrix').find($('tr:eq(' + numRowsShown + ')').show());
+//++numRowsShown;
+
+        event.preventDefault();
+    });
+    
+    // Stepwise enter the calculated alignment values row by row
+    $('#nextRow').click(function(event){
+        
+        if(fillCellIndex > totalCells) return;
         
         for(i = fillCellIndex; i < fillCellIndex + numColums-1; ++i)
         {
@@ -56,11 +92,46 @@ $(document).ready(function() {
         }
         fillCellIndex += numColums;
         
-// Deprecated code to show previously hidden table row
-//$('#matrix').find($('tr:eq(' + numRowsShown + ')').show());
-//++numRowsShown;
-
         event.preventDefault();
     });
+    
+    // Display full aligment table at once
+    $('#completeAlignment').click(function(event){
+        
+        for(i = fillCellIndex; i < totalCells; ++i)
+        {
+            if($('#matrix').find($('td:eq(' + i + ')')).html() == "")
+            {
+                $('#matrix').find($('td:eq(' + i + ')')).text("*");1
+            }
+        }
+
+        // Demo of coloring calculation-relevant table-cells for visualisation 
+        // instead of using tooltips
+        if(fillCellIndex > 2*numColums) 
+        {
+            $('#matrix').find($('td:eq(' + (fillCellIndex+1) + ')')).css('background-color', '#006699');
+            $('#matrix').find($('td:eq(' + (fillCellIndex-numColums+1) + ')')).css('background-color', '#CC3333');
+            $('#matrix').find($('td:eq(' + (fillCellIndex-numColums) + ')')).css('background-color', '#CC3333');
+        }
+        fillCellIndex += numColums;
+        
+        event.preventDefault();
+    });
+    
+    // Send Form on Enter. Only works from inputs that do not allow 
+    // carriage returns
+    $(function() {
+    $('form').each(function() {
+        $('input').keypress(function(e) {
+            // Enter pressed?
+            if(e.which == 10 || e.which == 13) {
+                this.form.submit();
+            }
+        });
+
+        $('input[type=submit]').hide();
+    });
+});
     
 });
