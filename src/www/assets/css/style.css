@@ -15,12 +15,17 @@ div[role="main"] {
     overflow: hidden;
 }
 
-footer {
+div#matrix {
+    overflow: hidden;
+    padding: 10px 10px;
+}
+
+/*footer {
     width: 100%;
     min-width: 1000px;
     height: 40px;
     overflow: hidden;
-}
+}*/
 
 /* STYLING AND POSITIONING OF INDIVIDUAL GENERAL ELEMENTS */
 body {
@@ -51,9 +56,8 @@ div[role="main"] {
 
 div#matrix {
     background-color: #fff;
-    border-radius: 15px;
-    overflow: visible;
-    padding: 50px;
+    border-radius: 10px;
+    box-shadow: 0 0 3px 1px #4fc4fc;
 }
 
 table#matrix {
@@ -66,7 +70,6 @@ table#matrix td {
     border-width: 1px;
     border-style: solid;
     border-color: #fff;
-    border-radius: 2px;
     background-color: #c5e8f7;
     text-transform: uppercase;
     text-align: center;
@@ -84,29 +87,26 @@ table#matrix td.leftColumn {
 }
 
 table#matrix td.topLeftCell {
-    border-top-left-radius: 15px;
+    border-top-left-radius: 10px;
     font-weight: bold;
     background-color: #4fc4fc;
 }
 table#matrix td.topRightCell {
-    border-top-right-radius: 15px; 
+    border-top-right-radius: 10px; 
     font-weight: bold;
     background-color: #4fc4fc;
 }
 table#matrix td.bottomRightCell {
-    border-bottom-right-radius: 15px;
+    border-bottom-right-radius: 10px;
     background-color: #c5e8f7;
 }
 table#matrix td.bottomLeftCell {
-    border-bottom-left-radius: 15px;
+    border-bottom-left-radius: 10px;
     font-weight: bold;
     background-color: #4fc4fc;
 }
 
 p#copyright {
-    border-top-width: 1px;
-    border-top-color: #4fc4fc;
-    border-top-style: solid;
     text-align: right;
 }
 
@@ -114,21 +114,5 @@ p#copyright {
 
 /* FONT TREATMENT */
 header h1, h2 {
-    color: #2a2a2a;
     padding: 5px 400px 10px 10px;
-}
-
-div#copyright p {
-    color: #2a2a2a;
-    font-size: 80%;
-    padding-right: 10px;
-}
-
-/* BUTTON AND FORM STYLING*/
-input[type="button"]{
-    
-}
-
-input[type="text"]{
-    
 }
