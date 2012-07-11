@@ -30,15 +30,16 @@ var fillCellIndex   = 0;
 
 function initCells()
 {
-    /*
     for(i = fillCellIndex; i < totalCells; ++i)
-    {
-        if($('#matrix').find($('td:eq(' + i + ')')).html() == "")
+    {    
+        var nextRow = (i / numColums)|0;        
+        
+        if( (i) != nextRow*numColums )
         {
-            $('#matrix').find($('td:eq(' + i + ')')).toggleClass('valueHidden');
+            $('#matrix').find($('td:eq(' + i + ')')).addClass("valueHidden");
+            $('#matrix').find($('td:eq(' + i + ')')).text("*");
         }
     }
-    */
 }
 
 // TODO: DOCUMENTATION
@@ -58,8 +59,8 @@ function initIndexes()
 // TODO: DOCUMENTATION
 function nextStep()
 {
-    $('#matrix').find($('td:eq(' + fillCellIndex + ')')).toggleClass('valueShown'); 
-    //$('#matrix').find($('td:eq(' + fillCellIndex + ')')).text("*");
+    $('#matrix').find($('td:eq(' + fillCellIndex + ')')).addClass("valueShown"); 
+    $('#matrix').find($('td:eq(' + fillCellIndex + ')')).text("*");
 
     var nextRow = (fillCellIndex / numColums)|0;
     ++nextRow;
@@ -96,8 +97,8 @@ function nextRow()
 
     for(i = fillCellIndex; i < (currentRow*numColums); ++i)
     {
-        $('#matrix').find($('td:eq(' + i + ')')).toggleClass('valueShown');
-        //$('#matrix').find($('td:eq(' + i + ')')).text("*");
+        $('#matrix').find($('td:eq(' + i + ')')).addClass("valueShown");
+        $('#matrix').find($('td:eq(' + i + ')')).text("*");
         fillCellIndex = i;
     }
 
@@ -123,8 +124,8 @@ function completeAlignment()
         
         if( (i) != nextRow*numColums )
         {
-            $('#matrix').find($('td:eq(' + i + ')')).toggleClass('valueShown');
-            //$('#matrix').find($('td:eq(' + i + ')')).text("*");
+            $('#matrix').find($('td:eq(' + i + ')')).addClass("valueShown");
+            $('#matrix').find($('td:eq(' + i + ')')).text("*");
         }
     }
 
@@ -152,7 +153,7 @@ function reset()
         
         if( (i) != nextRow*numColums )
         {
-            //$('#matrix').find($('td:eq(' + i + ')')).toggleClass('valueHidden');
+            //$('#matrix').find($('td:eq(' + i + ')')).addClass('valueHidden');
             $('#matrix').find($('td:eq(' + i + ')')).text("");
         }
     }
@@ -161,6 +162,7 @@ function reset()
 $(document).ready(function() {
     
     initIndexes();
+    initCells();
 
     // Stepwise enter the calculated alignment values cell by cell
     $('#nextStep').click(function(event){
