@@ -30,6 +30,7 @@ var fillCellIndex   = 0;
 
 function initCells()
 {
+    /*
     for(i = fillCellIndex; i < totalCells; ++i)
     {
         if($('#matrix').find($('td:eq(' + i + ')')).html() == "")
@@ -37,6 +38,7 @@ function initCells()
             $('#matrix').find($('td:eq(' + i + ')')).toggleClass('valueHidden');
         }
     }
+    */
 }
 
 // TODO: DOCUMENTATION
@@ -57,8 +59,13 @@ function initIndexes()
 function nextStep()
 {
     $('#matrix').find($('td:eq(' + fillCellIndex + ')')).toggleClass('valueShown'); 
+    //$('#matrix').find($('td:eq(' + fillCellIndex + ')')).text("*");
 
-    if($('#matrix').find($('td:eq(' + (fillCellIndex+1) + ')')).html() == "")
+    var nextRow = (fillCellIndex / numColums)|0;
+    ++nextRow;
+
+    //if($('#matrix').find($('td:eq(' + (fillCellIndex+1) + ')')).html() == "")
+    if( (fillCellIndex+1) != nextRow*numColums )
     {
         ++fillCellIndex;           
     }
@@ -85,14 +92,12 @@ function nextRow()
     if(fillCellIndex > totalCells) return;
     // |0 to 'cast' double-division-result to integer
     var currentRow = (fillCellIndex / numColums)|0;
-    ++currentRow; // Because row-count starts from 0
-    
-    
+    ++currentRow; // Because row-count starts from 0   
 
     for(i = fillCellIndex; i < (currentRow*numColums); ++i)
     {
-        // Replace by proper getValueFromScoreTable-function
         $('#matrix').find($('td:eq(' + i + ')')).toggleClass('valueShown');
+        //$('#matrix').find($('td:eq(' + i + ')')).text("*");
         fillCellIndex = i;
     }
 
@@ -113,10 +118,13 @@ function nextRow()
 function completeAlignment()
 {
     for(i = fillCellIndex; i < totalCells; ++i)
-    {
-        if($('#matrix').find($('td:eq(' + i + ')')).html() == "")
+    {    
+        var nextRow = (i / numColums)|0;        
+        
+        if( (i) != nextRow*numColums )
         {
             $('#matrix').find($('td:eq(' + i + ')')).toggleClass('valueShown');
+            //$('#matrix').find($('td:eq(' + i + ')')).text("*");
         }
     }
 
@@ -139,13 +147,15 @@ function reset()
     initIndexes();    
     
     for(i = fillCellIndex; i < totalCells; ++i)
-    {
-        if($('#matrix').find($('td:eq(' + i + ')')).html() == "*")
+    {    
+        var nextRow = (i / numColums)|0;        
+        
+        if( (i) != nextRow*numColums )
         {
+            //$('#matrix').find($('td:eq(' + i + ')')).toggleClass('valueHidden');
             $('#matrix').find($('td:eq(' + i + ')')).text("");
-            $('#matrix').find($('td:eq(' + i + ')')).css('background-color', '');            
         }
-    }    
+    }
 }
 
 $(document).ready(function() {
