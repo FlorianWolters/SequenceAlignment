@@ -20,6 +20,7 @@ This project implements the **local alignment variant** of the software.
 
 ## TODO
 - Integration of Help- / Metainformation in Project-Files to auto-include in templates
+- [AS] Button for "Next Step", "Next Row", "Complete Alignment"
 - Send Input-Formular on Enter
 
 ## Features
