@@ -8,35 +8,35 @@
         <!--
         Specifies the name of the Web application that the page represents.
         -->
-        <meta name="application-name" content="{{ meta.title }}" />
+        <meta name="application-name" content="{{ config.meta.title }}" />
 
         <!-- Specifies the name of the author of the document. -->
-        <meta name="author" content="{{ meta.author }}" />
+        <meta name="author" content="{{ config.meta.author }}" />
 
         <!--
         Specifies a description of the page. Search engines can pick up this
         description to show with the results of searches.
         -->
-        <meta name="description" content="{{ meta.description }}" />
+        <meta name="description" content="{{ config.meta.description }}" />
 
         <!--
         Provides a list of keywords or phrases, separated by commas, that can be
         used to guide search engines with a list of search terms for which the
         web page might be relevant.
         -->
-        <meta name="keywords" content="{{ meta.keywords }}" />
+        <meta name="keywords" content="{{ config.meta.keywords }}" />
 
         <!--
         Can be used to control how HTML content will appear in mobile browsers.
         -->
         <meta name="viewport" content="width=device-width,initial-scale=1" />
 
-        <title>{{ meta.title }}</title>
+        <title>{{ config.meta.title }}</title>
 
         <!-- Import Cascading Stylesheets (CSS). -->
 
-        <link rel="stylesheet" href="{{ dir.assets.css }}/bootstrap.min.css" />
-        <link rel="stylesheet" href="{{ dir.assets.css }}/style.css" />
+        <link rel="stylesheet" href="{{ config.dir.assets.css }}/bootstrap.min.css" />
+        <link rel="stylesheet" href="{{ config.dir.assets.css }}/style.css" />
 
         <link rel="apple-touch-icon" href="apple-touch-icon-iphone.png" /><!-- 57x57 -->
         <link rel="apple-touch-icon" sizes="72x72" href="apple-touch-icon-ipad.png" />
@@ -45,12 +45,6 @@
         <link rel="shortcut icon" href="favicon.ico" />
     </head>
     <body>
-        <!-- TODO
-        <a href="{{ meta.project_url }}">
-            <img style="position: absolute; top: 0; left: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_left_darkblue_121621.png" alt="Fork me on GitHub" />
-        </a>
-        -->
-
         <header>
             {% block header %}{% endblock %}
         </header>
@@ -71,15 +65,14 @@
         -->
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js" charset="{{ _charset }}"></script>
         <script>
-            window.jQuery || document.write(unescape('%3Cscript src="{{ dir.assets.js }}/jquery-1.7.2.min.js" charset="{{ _charset }}"%3E3C/script%3E'));
+            window.jQuery || document.write(unescape('%3Cscript src="{{ config.dir.assets.js }}/jquery-1.7.2.min.js" charset="{{ _charset }}"%3E3C/script%3E'));
         </script>
 
         <!-- Import qTip - The jQuery tooltip plugin. -->
-        <script src="{{ dir.assets.js }}/jquery.qtip.min.js" charset="{{ _charset }}"></script>
+        <script src="{{ config.dir.assets.js }}/jquery.qtip.min.js" charset="{{ _charset }}"></script>
         <!-- Import Twitter Bootstrap. -->
-        <script src="{{ dir.assets.js }}/bootstrap.min.js" charset="{{ _charset }}"></script>
+        <script src="{{ config.dir.assets.js }}/bootstrap.min.js" charset="{{ _charset }}"></script>
         <!-- Import the JavaScript for this application. -->
-        <script src="{{ dir.assets.js }}/sequence-alignment.js" charset="{{ _charset }}"></script>
-
+        <script src="{{ config.dir.assets.js }}/sequence-alignment.js" charset="{{ _charset }}"></script>
     </body>
 </html>

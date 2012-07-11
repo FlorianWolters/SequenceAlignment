@@ -32,9 +32,13 @@ function initCells()
 {
     for(i = fillCellIndex; i < totalCells; ++i)
     {
-        if($('#matrix').find($('td:eq(' + i + ')')).html() == "")
+        var nextRow = (i / numColums)|0;
+
+        if( (i) != nextRow*numColums )
         {
-            $('#matrix').find($('td:eq(' + i + ')')).toggleClass('valueHidden');
+            $('#matrix').find($('td:eq(' + i + ')')).removeClass("valueShown");
+            $('#matrix').find($('td:eq(' + i + ')')).addClass("valueHidden");
+            $('#matrix').find($('td:eq(' + i + ')')).text("*");
         }
     }
 }
@@ -47,7 +51,7 @@ function initIndexes()
     numColums     = $('#matrix').find($('tr:eq(0)')).find('td').length;
     totalCells    = $('#matrix').find($('tr')).find('td').length;
     numRowsShown  = 1;
-    
+
     // Cells are indexed row by row from 0 to (numRows*numColums)
     // First alignment value is to be set in the second cell of the second row
     fillCellIndex = numColums + 1;
@@ -56,21 +60,27 @@ function initIndexes()
 // TODO: DOCUMENTATION
 function nextStep()
 {
-    $('#matrix').find($('td:eq(' + fillCellIndex + ')')).toggleClass('valueShown'); 
+    $('#matrix').find($('td:eq(' + fillCellIndex + ')')).removeClass("valueHidden");
+    $('#matrix').find($('td:eq(' + fillCellIndex + ')')).addClass("valueShown");
+    $('#matrix').find($('td:eq(' + fillCellIndex + ')')).text("*");
 
-    if($('#matrix').find($('td:eq(' + (fillCellIndex+1) + ')')).html() == "")
+    var nextRow = (fillCellIndex / numColums)|0;
+    ++nextRow;
+
+    //if($('#matrix').find($('td:eq(' + (fillCellIndex+1) + ')')).html() == "")
+    if( (fillCellIndex+1) != nextRow*numColums )
     {
-        ++fillCellIndex;           
+        ++fillCellIndex;
     }
     else
     {
         fillCellIndex += 2;
-    }      
+    }
 
-    // Demo of coloring calculation-relevant table-cells for visualisation 
+    // Demo of coloring calculation-relevant table-cells for visualisation
     // instead of using tooltips
     /*
-    if(fillCellIndex > 2*numColums) 
+    if(fillCellIndex > 2*numColums)
     {
         $('#matrix').find($('td:eq(' + (fillCellIndex+1) + ')')).css('background-color', '#006699');
         $('#matrix').find($('td:eq(' + (fillCellIndex-numColums+1) + ')')).css('background-color', '#CC3333');
@@ -86,20 +96,20 @@ function nextRow()
     // |0 to 'cast' double-division-result to integer
     var currentRow = (fillCellIndex / numColums)|0;
     ++currentRow; // Because row-count starts from 0
-    
-    
 
     for(i = fillCellIndex; i < (currentRow*numColums); ++i)
     {
-        // Replace by proper getValueFromScoreTable-function
-        $('#matrix').find($('td:eq(' + i + ')')).toggleClass('valueShown');
+        $('#matrix').find($('td:eq(' + i + ')')).removeClass("valueHidden");
+        $('#matrix').find($('td:eq(' + i + ')')).addClass("valueShown");
+
+        $('#matrix').find($('td:eq(' + i + ')')).text("*");
         fillCellIndex = i;
     }
 
-    // Demo of coloring calculation-relevant table-cells for visualisation 
+    // Demo of coloring calculation-relevant table-cells for visualisation
     // instead of using tooltips
     /*
-    if(fillCellIndex > 2*numColums) 
+    if(fillCellIndex > 2*numColums)
     {
         $('#matrix').find($('td:eq(' + (fillCellIndex+1) + ')')).css('background-color', '#006699');
         $('#matrix').find($('td:eq(' + (fillCellIndex-numColums+1) + ')')).css('background-color', '#CC3333');
@@ -114,69 +124,67 @@ function completeAlignment()
 {
     for(i = fillCellIndex; i < totalCells; ++i)
     {
-        if($('#matrix').find($('td:eq(' + i + ')')).html() == "")
+        var nextRow = (i / numColums)|0;
+
+        if( (i) != nextRow*numColums )
         {
-            $('#matrix').find($('td:eq(' + i + ')')).toggleClass('valueShown');
+            $('#matrix').find($('td:eq(' + i + ')')).removeClass("valueHidden");
+            $('#matrix').find($('td:eq(' + i + ')')).addClass("valueShown");
+            $('#matrix').find($('td:eq(' + i + ')')).text("*");
         }
     }
 
-    // Demo of coloring calculation-relevant table-cells for visualisation 
+    initIndexes();
+
+    // Demo of coloring calculation-relevant table-cells for visualisation
     // instead of using tooltips
     /*
-    if(fillCellIndex > 2*numColums) 
+    if(fillCellIndex > 2*numColums)
     {
         $('#matrix').find($('td:eq(' + (fillCellIndex+1) + ')')).css('background-color', '#006699');
         $('#matrix').find($('td:eq(' + (fillCellIndex-numColums+1) + ')')).css('background-color', '#CC3333');
         $('#matrix').find($('td:eq(' + (fillCellIndex-numColums) + ')')).css('background-color', '#CC3333');
     }
     */
-    fillCellIndex += numColums;
 }
 
 // TODO: DOCUMENTATION
 function reset()
 {
-    initIndexes();    
-    
-    for(i = fillCellIndex; i < totalCells; ++i)
-    {
-        if($('#matrix').find($('td:eq(' + i + ')')).html() == "*")
-        {
-            $('#matrix').find($('td:eq(' + i + ')')).text("");
-            $('#matrix').find($('td:eq(' + i + ')')).css('background-color', '');            
-        }
-    }    
+    initIndexes();
+    initCells();
 }
 
 $(document).ready(function() {
-    
+
     initIndexes();
+    initCells();
 
     // Stepwise enter the calculated alignment values cell by cell
     $('#nextStep').click(function(event){
         nextStep();
         event.preventDefault();
     });
-    
+
     // Stepwise enter the calculated alignment values row by row
     $('#nextRow').click(function(event){
         nextRow();
         event.preventDefault();
     });
-    
+
     // Display full aligment table at once
     $('#completeAlignment').click(function(event){
         completeAlignment();
         event.preventDefault();
     });
-    
+
     // Reset alignment table, clear all values and colors
     $('#reset').click(function(event){
         reset();
         event.preventDefault();
     });
-    
-    // Send Form on Enter. Only works from inputs that do not allow 
+
+    // Send Form on Enter. Only works from inputs that do not allow
     // carriage returns
     $(function() {
         $('form').each(function() {
@@ -190,5 +198,4 @@ $(document).ready(function() {
             $('input[type=submit]').hide();
         });
     });
-    
 });
