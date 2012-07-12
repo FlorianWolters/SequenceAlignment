@@ -12,189 +12,189 @@
         {
             "package": "pimple/pimple",
             "version": "dev-master",
-            "source-reference": "d2cfa2f02f50abef65c238747c753a5f6786f6be"
+            "alias-pretty-version": "1.0.x-dev",
+            "alias-version": "1.0.9999999.9999999-dev"
         },
         {
             "package": "pimple/pimple",
             "version": "dev-master",
             "source-reference": "d2cfa2f02f50abef65c238747c753a5f6786f6be",
+            "commit-date": "1341139100"
+        },
+        {
+            "package": "silex/silex",
+            "version": "dev-master",
             "alias-pretty-version": "1.0.x-dev",
             "alias-version": "1.0.9999999.9999999-dev"
         },
         {
             "package": "silex/silex",
             "version": "dev-master",
-            "source-reference": "23dc19c334e2f74ec4de037568f5426bceaff421"
-        },
-        {
-            "package": "silex/silex",
-            "version": "dev-master",
-            "source-reference": "23dc19c334e2f74ec4de037568f5426bceaff421",
-            "alias-pretty-version": "1.0.x-dev",
-            "alias-version": "1.0.9999999.9999999-dev"
+            "source-reference": "d5f26243645fab7f7d967ceb8e5cb85974719f95",
+            "commit-date": "1342022136"
         },
         {
             "package": "symfony/config",
             "version": "dev-master",
-            "source-reference": "a261cb1571e1f3921a632541299a9f39753a62a7"
+            "alias-pretty-version": "2.1.x-dev",
+            "alias-version": "2.1.9999999.9999999-dev"
         },
         {
             "package": "symfony/config",
             "version": "dev-master",
-            "source-reference": "a261cb1571e1f3921a632541299a9f39753a62a7",
+            "source-reference": "c69e45e6744a607a8b2b9067008a47a0517c7cad",
+            "commit-date": "1341929657"
+        },
+        {
+            "package": "symfony/event-dispatcher",
+            "version": "dev-master",
             "alias-pretty-version": "2.1.x-dev",
             "alias-version": "2.1.9999999.9999999-dev"
         },
         {
             "package": "symfony/event-dispatcher",
             "version": "dev-master",
-            "source-reference": "v2.1.0-BETA1",
+            "source-reference": "0dc437f2eca7dea19facfde6db7f7f5e8e71d0bc",
+            "commit-date": "1341838460"
+        },
+        {
+            "package": "symfony/form",
+            "version": "dev-master",
             "alias-pretty-version": "2.1.x-dev",
             "alias-version": "2.1.9999999.9999999-dev"
         },
         {
-            "package": "symfony/event-dispatcher",
-            "version": "dev-master",
-            "source-reference": "v2.1.0-BETA1"
-        },
-        {
             "package": "symfony/form",
             "version": "dev-master",
-            "source-reference": "0f0b54cde88e753c32103ace9a5ee11b1ced54d1"
+            "source-reference": "ab7e4a777922e2a41db188192c3bc65fafa95dff",
+            "commit-date": "1342018244"
         },
         {
-            "package": "symfony/form",
+            "package": "symfony/http-foundation",
             "version": "dev-master",
-            "source-reference": "0f0b54cde88e753c32103ace9a5ee11b1ced54d1",
             "alias-pretty-version": "2.1.x-dev",
             "alias-version": "2.1.9999999.9999999-dev"
         },
         {
             "package": "symfony/http-foundation",
             "version": "dev-master",
-            "source-reference": "3e53f0a9f802dc1f34a722109df0b0d2679671a8"
+            "source-reference": "032ef316ff0ba4daef8930db0a75cd247f38749b",
+            "commit-date": "1342086230"
         },
         {
-            "package": "symfony/http-foundation",
+            "package": "symfony/http-kernel",
             "version": "dev-master",
-            "source-reference": "3e53f0a9f802dc1f34a722109df0b0d2679671a8",
             "alias-pretty-version": "2.1.x-dev",
             "alias-version": "2.1.9999999.9999999-dev"
         },
         {
             "package": "symfony/http-kernel",
             "version": "dev-master",
-            "source-reference": "6d6f55f6b07b8bfed741a192def8d1bfbf6c590f",
+            "source-reference": "5032709c51ac154be997d99690f80c08b0943057",
+            "commit-date": "1341987182"
+        },
+        {
+            "package": "symfony/locale",
+            "version": "dev-master",
             "alias-pretty-version": "2.1.x-dev",
             "alias-version": "2.1.9999999.9999999-dev"
         },
         {
-            "package": "symfony/http-kernel",
-            "version": "dev-master",
-            "source-reference": "6d6f55f6b07b8bfed741a192def8d1bfbf6c590f"
-        },
-        {
             "package": "symfony/locale",
             "version": "dev-master",
-            "source-reference": "34c160e7ca53800a8497fdc54f8792118e4aa57e"
+            "source-reference": "04a4515e6eb050a3f637b7a56c0fb942a4119c4f",
+            "commit-date": "1341993367"
         },
         {
-            "package": "symfony/locale",
+            "package": "symfony/options-resolver",
             "version": "dev-master",
-            "source-reference": "34c160e7ca53800a8497fdc54f8792118e4aa57e",
             "alias-pretty-version": "2.1.x-dev",
             "alias-version": "2.1.9999999.9999999-dev"
         },
         {
             "package": "symfony/options-resolver",
             "version": "dev-master",
-            "source-reference": "30a23259bb9c82b09c7ad271e5d47027cd01466c"
+            "source-reference": "0ad85af9ec3e1696056901fcf38bffedc683d0c4",
+            "commit-date": "1341838460"
         },
         {
-            "package": "symfony/options-resolver",
+            "package": "symfony/routing",
             "version": "dev-master",
-            "source-reference": "30a23259bb9c82b09c7ad271e5d47027cd01466c",
             "alias-pretty-version": "2.1.x-dev",
             "alias-version": "2.1.9999999.9999999-dev"
         },
         {
             "package": "symfony/routing",
             "version": "dev-master",
-            "source-reference": "622a168a3be54a87e34ad65e9d50a738fb89ff7e"
+            "source-reference": "67c72b042d753e6ee3675eb4b0c2165243d34055",
+            "commit-date": "1341890620"
         },
         {
-            "package": "symfony/routing",
+            "package": "symfony/translation",
             "version": "dev-master",
-            "source-reference": "622a168a3be54a87e34ad65e9d50a738fb89ff7e",
             "alias-pretty-version": "2.1.x-dev",
             "alias-version": "2.1.9999999.9999999-dev"
         },
         {
             "package": "symfony/translation",
             "version": "dev-master",
-            "source-reference": "v2.1.0-BETA1"
+            "source-reference": "d2ce6bcdaf479b2121e35fa850fd229817c1ee2a",
+            "commit-date": "1341851012"
         },
         {
-            "package": "symfony/translation",
+            "package": "symfony/twig-bridge",
             "version": "dev-master",
-            "source-reference": "v2.1.0-BETA1",
             "alias-pretty-version": "2.1.x-dev",
             "alias-version": "2.1.9999999.9999999-dev"
         },
         {
             "package": "symfony/twig-bridge",
             "version": "dev-master",
-            "source-reference": "2a577b6cf0fe32f383acf4a972c1d5d8f48ae1e2",
-            "alias-pretty-version": "2.1.x-dev",
-            "alias-version": "2.1.9999999.9999999-dev"
-        },
-        {
-            "package": "symfony/twig-bridge",
-            "version": "dev-master",
-            "source-reference": "2a577b6cf0fe32f383acf4a972c1d5d8f48ae1e2"
+            "source-reference": "5d3e234a5d366f510185a9de3a545b730f327632",
+            "commit-date": "1341913448"
         },
         {
             "package": "symfony/validator",
             "version": "dev-master",
-            "source-reference": "8e54bffa0853fe66e92bb67c96c80e3a9e1b3cf2",
             "alias-pretty-version": "2.1.x-dev",
             "alias-version": "2.1.9999999.9999999-dev"
         },
         {
             "package": "symfony/validator",
             "version": "dev-master",
-            "source-reference": "8e54bffa0853fe66e92bb67c96c80e3a9e1b3cf2"
+            "source-reference": "cd0190ceddbad95a119b5c37d6ba9c61bd2c7a4b",
+            "commit-date": "1342023789"
         },
         {
             "package": "symfony/yaml",
             "version": "dev-master",
-            "source-reference": "aeba5f4c420d04996b2fd46b0ca35dbd4ed2bab5"
-        },
-        {
-            "package": "symfony/yaml",
-            "version": "dev-master",
-            "source-reference": "aeba5f4c420d04996b2fd46b0ca35dbd4ed2bab5",
             "alias-pretty-version": "2.1.x-dev",
             "alias-version": "2.1.9999999.9999999-dev"
         },
         {
-            "package": "twig/twig",
+            "package": "symfony/yaml",
             "version": "dev-master",
-            "source-reference": "26eb0a2653eade50dffdd31b11ca454232dea8cf"
+            "source-reference": "711eb7f1982184478995c064a132fd70b019f174",
+            "commit-date": "1341838460"
         },
         {
             "package": "twig/twig",
             "version": "dev-master",
-            "source-reference": "26eb0a2653eade50dffdd31b11ca454232dea8cf",
             "alias-pretty-version": "1.9.x-dev",
             "alias-version": "1.9.9999999.9999999-dev"
+        },
+        {
+            "package": "twig/twig",
+            "version": "dev-master",
+            "source-reference": "a36aa04decb2e77219e198a7050e5c663020a38e",
+            "commit-date": "1342104720"
         }
     ],
     "packages-dev": null,
     "aliases": [
 
     ],
-    "minimum-stability": "dev",
+    "minimum-stability": "stable",
     "stability-flags": [
 
     ]
