@@ -30,21 +30,24 @@
         "role": "Developer"
       }
     ],
+    "minimum-stability": "beta",
     "require": {
-        "php": ">=5.3,<5.5",
+        "php": "5.4.*",
         "florianwolters/component-core-enum": "0.3.*",
         "florianwolters/component-util-singleton": "0.2.*",
-        "pimple/pimple": "1.0.*",
-        "silex/silex": "1.0.*",
+        "silex/silex": "1.0.*@dev",
         "symfony/config": "2.1.*",
+        "symfony/event-dispatcher": "2.1.*",
         "symfony/form": "2.1.*",
         "symfony/http-foundation": "2.1.*",
+        "symfony/http-kernel": "2.1.*",
         "symfony/locale": "2.1.*",
+        "symfony/routing": "2.1.*",
         "symfony/translation": "2.1.*",
         "symfony/twig-bridge": "2.1.*",
         "symfony/validator": "2.1.*",
         "symfony/yaml": "2.1.*",
-        "twig/twig": ">=1.8,<2.0-dev"
+        "twig/twig": "1.8.*"
     },
     "autoload": {
         "psr-0": {
