@@ -19,26 +19,50 @@ This project is developed during the summer term 2012 of the module *Information
 This project implements the **local alignment variant** of the software.
 
 ## TODO
-- Integration of Help- / Metainformation in Project-Files to auto-include in templates
-- [AS] Button for "Next Step", "Next Row", "Complete Alignment"
-- Send Input-Formular on Enter
-- Provide a "Home" button to return to the index page / provide a "New Search" button
+
+* Make the Smith-Waterman algorithm work with a substitution matrix (API: `new SmithWaterman(SequenceInterface $query, SequenceInterface $target, GapPenalty $gapPenalty, SubstitutionMatrix $subMatrix);`)
+* Integration of Help- / Metainformation in Project-Files to auto-include in templates
+* [AS] Button for "Next Step", "Next Row", "Complete Alignment"
+* Send Input-Formular on Enter
+* Provide a "Home" button to return to the index page / provide a "New Search" button
+* Complete this `README.md` file (features, usage, description of the algorithm, etc)
 
 ## Features
 
 Coming soon.
 
+## Installation
+
+Clone the repository into a new directory.
+
+    git clone git://github.com/FlorianWolters/SequenceAlignment.git
+
+Install the dependencies of this project with the dependency manager [Composer][13]. [Composer][13] can be installed with [PHP][1]:
+
+    php -r "eval('?>'.file_get_contents('http://getcomposer.org/installer'));"
+
+> This will just check a few [PHP][1] settings and then download `composer.phar` to your working directory. This file is the [Composer][13] binary. It is a PHAR ([PHP][1] archive), which is an archive format for [PHP][1] which can be run on the command line, amongst other things.
+>
+> Next, run the `install` command to resolve and download dependencies:
+
+    php composer.phar install
+
+The latest snapshot of [Composer][13] can be downloaded [here][14] (in case the download or the installation with [PHP][1] fails).
+
+The automated tests can be run with [PHPUnit][19]:
+
+    phpunit
+
 ## Used Software
 
 ### Server-side
 
-* [PHP][1] 5.4.0 (or later)
-* [Silex][2] 1.1.0 (or later)
-* [Twig][3] 1.8.0 (or later)
-* [Monolog][4] 1.8.0 (or later)
-* [Symony\Component\Yaml][12] 2.1.0 (or later)
-* [FlorianWolters\Component\Core\Enum][5] 0.3.1 (or later)
-* [FlorianWolters\Component\Util\Singleton][6] 0.2.1 (or later)
+* [PHP][1] 5.4.*
+* [Silex][2] 1.1.*
+* [Twig][3] 1.8.*
+* [Symony\Component\Yaml][12] 2.0.*
+* [FlorianWolters\Component\Core\Enum][5] 0.3.*
+* [FlorianWolters\Component\Util\Singleton][6] 0.2.*
 
 ### Client-side
 
@@ -66,3 +90,5 @@ You should have received a copy of the GNU Lesser General Public License along w
 [10]: http://hs-bremen.de
 [11]: http://hs-bremen.de/internet/de/studium/stg/infmsc
 [12]: http://symfony.com/doc/current/components/yaml.html
+[13]: http://getcomposer.org
+[14]: http://getcomposer.org/composer.phar
