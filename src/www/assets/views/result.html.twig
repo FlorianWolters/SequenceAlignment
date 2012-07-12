@@ -1,5 +1,5 @@
 {# result.html.twig #}
-{% extends "index.html.twig" %}
+{% extends "home.html.twig" %}
 
 {% block main %}
 
@@ -11,10 +11,6 @@
     <button type="button" id="reset" class="btn">Reset</button>
 </fieldset>
 
-<!--
-TODO Hell, isn't this table stuff possible with CSS3 selectors? This sucks!
-This is so fugly, but at least it works. :D Sorry.
--->
 <table>
     <tr>
         <td class="topRow leftColumn topLeftCell"></td>
@@ -46,8 +42,6 @@ This is so fugly, but at least it works. :D Sorry.
 {% endfor %}
 </table>
 
-<form action="{{ path('home') }}">
-    <button class="btn" type="button">Home</button>
-</form>
+<a href="/">Home</a>
 
 {% endblock %}

@@ -1,6 +1,6 @@
 <?php
 /**
- * `SequenceSelectionType.php`
+ * `AlignmentType.php`
  *
  * This program is free software: you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -30,13 +30,12 @@
 
 namespace HochschuleBremen\Application\SequenceAlignment\Form;
 
-use HochschuleBremen\Application\SequenceAlignment\Entity\SequenceSelection;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 
 /**
- * The {@link SequenceSelectionType} class houses the logic for building the
- * form for class {@link SequenceSelectionEntity}.
+ * The {@link AlignmentType} class houses the logic for building the form for
+ * class {@link Alignment}.
  *
  * @category   Biology
  * @package    SequenceAlignment
@@ -48,7 +47,7 @@ use Symfony\Component\Form\FormBuilderInterface;
  * @link       http://github.com/FlorianWolters/SequenceAlignment
  * @since      Class available since Release 0.1.0
  */
-class SequenceSelectionType extends AbstractType
+class AlignmentType extends AbstractType
 {
 
     /**
@@ -58,17 +57,43 @@ class SequenceSelectionType extends AbstractType
      * @param array                $options The options for this form.
      *
      * @return void
-     * @SuppressWarnings(PHPMD.UnusedFormalParameter)
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+        $sequenceType = $options['sequence_type'];
+
         $builder->add(
-            'sequenceType', 'choice', [
-                'label' => 'Type of sequences to align:',
-                'empty_value' => 'Choose a type',
-                'choices' => SequenceSelection::getSequenceTypes(),
+            'query', 'textarea', [
+                'label' => "First {$sequenceType} sequence (source):"
+            ]
+        )->add(
+            'target', 'textarea', [
+                'label' => "Second {$sequenceType} sequence (target):"
+            ]
+        )->add(
+            'substitutionMatrixName', 'choice', [
+                'label' => 'Substitution matrix:',
+                'choices' => \array_combine(
+                    $options['matrices'], $options['matrices']
+                ), 'preferred_choices' => [$options['matrix_choice']]
+            ]
+        )->add(
+            'gap_penalty', new GapPenaltyType, [
+                'label' => 'Gap penalties:'
             ]
         );
+    }
+
+    /**
+     * @return array
+     */
+    public function getDefaultOptions()
+    {
+        return [
+            'sequence_type' => '',
+            'matrices' => false,
+            'matrix_choice' => false
+        ];
     }
 
     /**
@@ -80,7 +105,7 @@ class SequenceSelectionType extends AbstractType
      */
     public function getName()
     {
-        return 'sequence_selection';
+        return 'alignment';
     }
 
 }

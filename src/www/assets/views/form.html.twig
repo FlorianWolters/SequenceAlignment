@@ -1,8 +1,0 @@
-{# form.html.twig #}
-<form action="{{ path(route_name) }}" method="{{ form_method }}" {{ form_enctype(form) }}>
-    <fieldset>
-        <legend>{{ form_legend }}</legend>
-        {{ form_widget(form) }}
-        <button type="submit" class="btn">{{ button_label }}</button>
-    </fieldset>
-</form>

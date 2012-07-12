@@ -1,6 +1,6 @@
 <?php
 /**
- * `SequenceSelection.php`
+ * `GapPenalty.php`
  *
  * This program is free software: you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -30,13 +30,14 @@
 
 namespace HochschuleBremen\Application\SequenceAlignment\Entity;
 
+use HochschuleBremen\Component\Alignment\GapPenalty\GapPenalty
+    as GapPenaltyModel;
 use Symfony\Component\Validator\Mapping\ClassMetadata;
 use Symfony\Component\Validator\Constraints\NotBlank;
-use Symfony\Component\Validator\Constraints\Choice;
+use Symfony\Component\Validator\Constraints\Type;
 
 /**
- * An object of type {@link SequenceSelectionEntity} stores the selection for
- * the type of sequence to align.
+ * TODO
  *
  * @category   Biology
  * @package    SequenceAlignment
@@ -48,15 +49,8 @@ use Symfony\Component\Validator\Constraints\Choice;
  * @link       http://github.com/FlorianWolters/SequenceAlignment
  * @since      Class available since Release 0.1.0
  */
-class SequenceSelection
+class GapPenalty extends GapPenaltyModel
 {
-
-    /**
-     * The type of sequence.
-     *
-     * @var string
-     */
-    private $sequenceType;
 
     /**
      * Adds the constraints for this class.
@@ -67,49 +61,35 @@ class SequenceSelection
      */
     public static function loadValidatorMetadata(ClassMetadata $metadata)
     {
-        $metadata->addGetterConstraint('sequenceType', new NotBlank);
-        $metadata->addGetterConstraint(
-            'sequenceType',
-            new Choice(
-                [
-                    'choices' => ['amino_acid', 'nucleotide'],
-                    'message' => 'Choose a valid sequence type',
-                ]
-            )
-        );
+        $metadata->addGetterConstraint('openPenalty', new NotBlank);
+        $metadata->addGetterConstraint('openPenalty', new Type('integer'));
+        $metadata->addGetterConstraint('extensionPenalty', new NotBlank);
+        $metadata->addGetterConstraint('extensionPenalty', new Type('float'));
     }
 
     /**
-     * Returns the type of the sequence.
+     * Sets the penalty given when a deletion or insertion gap first opens.
      *
-     * @return string The type of the sequence.
-     */
-    public function getSequenceType()
-    {
-        return $this->sequenceType;
-    }
-
-    /**
-     * Sets the type of the sequence.
-     *
-     * @param $sequenceType string The new type of the sequence
+     * @param float $openPenalty The gap open penalty.
      *
      * @return void
      */
-    public function setSequenceType($sequenceType)
+    public function setOpenPenalty($openPenalty)
     {
-        $this->sequenceType = $sequenceType;
+        parent::setOpenPenalty($openPenalty);
     }
 
     /**
-     * @return array
+     * Sets the penalty given when an already open gap elongates by a single
+     * element.
+     *
+     * @param float $extensionPenalty The gap extension penalty.
+     *
+     * @return void
      */
-    public static function getSequenceTypes()
+    public function setExtensionPenalty($extensionPenalty)
     {
-        return [
-            'amino_acid' => 'amino acid',
-            'nucleotide' => 'nucleotide'
-        ];
+        parent::setExtensionPenalty($extensionPenalty);
     }
 
 }

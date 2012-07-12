@@ -16,7 +16,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with this program.  If not, see http://gnu.org/licenses/lgpl.txt.
  *
- * PHP version 5.3
+ * PHP version 5.4
  *
  * @category  Biology
  * @package   SequenceAlignment
@@ -204,7 +204,7 @@ class SequenceAlignmentApplication extends Application
      */
     protected function mountControllerProviders()
     {
-        $this->mount('/', new Controller\IndexControllerProvider);
+        $this->mount('/', new Controller\ControllerProvider);
     }
 
     /**

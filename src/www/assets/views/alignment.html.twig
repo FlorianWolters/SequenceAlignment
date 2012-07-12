@@ -1,0 +1,12 @@
+{# alignment.html.twig #}
+{% extends "home.html.twig" %}
+
+{% block main %}
+<form action="{{ path(app.request.attributes.get('_route')) }}" method="post" {{ form_enctype(form) }}>
+    <fieldset>
+        <legend>Enter the parameters for the pairwise local sequence alignment</legend>
+        {{ form_widget(form) }}
+        <button type="submit" class="btn">Go</button>
+    </fieldset>
+</form>
+{% endblock %}

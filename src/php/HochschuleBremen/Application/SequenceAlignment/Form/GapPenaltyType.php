@@ -1,6 +1,6 @@
 <?php
 /**
- * `SequenceSelectionType.php`
+ * `GapPenaltyType.php`
  *
  * This program is free software: you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -30,13 +30,12 @@
 
 namespace HochschuleBremen\Application\SequenceAlignment\Form;
 
-use HochschuleBremen\Application\SequenceAlignment\Entity\SequenceSelection;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 
 /**
- * The {@link SequenceSelectionType} class houses the logic for building the
- * form for class {@link SequenceSelectionEntity}.
+ * The {@link GapPenaltyType} class houses the logic for building the form for
+ * class {@link GapPenalty}.
  *
  * @category   Biology
  * @package    SequenceAlignment
@@ -48,7 +47,7 @@ use Symfony\Component\Form\FormBuilderInterface;
  * @link       http://github.com/FlorianWolters/SequenceAlignment
  * @since      Class available since Release 0.1.0
  */
-class SequenceSelectionType extends AbstractType
+class GapPenaltyType extends AbstractType
 {
 
     /**
@@ -63,12 +62,24 @@ class SequenceSelectionType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder->add(
-            'sequenceType', 'choice', [
-                'label' => 'Type of sequences to align:',
-                'empty_value' => 'Choose a type',
-                'choices' => SequenceSelection::getSequenceTypes(),
+            'openPenalty', 'number', [
+                'label' => 'Gap open penalty:'
+            ]
+        )->add(
+            'extensionPenalty', 'number', [
+                'label' => 'Gap extend penalty:'
             ]
         );
+    }
+
+    /**
+     * @return array
+     */
+    public function getDefaultOptions()
+    {
+        return [
+            'data_class' => 'HochschuleBremen\Application\SequenceAlignment\Entity\GapPenalty'
+        ];
     }
 
     /**
@@ -80,7 +91,7 @@ class SequenceSelectionType extends AbstractType
      */
     public function getName()
     {
-        return 'sequence_selection';
+        return 'gap_penalty';
     }
 
 }

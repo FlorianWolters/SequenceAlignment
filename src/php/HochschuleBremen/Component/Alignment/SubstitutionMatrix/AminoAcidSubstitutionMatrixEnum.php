@@ -1,6 +1,6 @@
 <?php
 /**
- * `SequenceSelectionType.php`
+ * `AminoAcidSubstitutionMatrixEnum.php`
  *
  * This program is free software: you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -18,8 +18,8 @@
  * PHP version 5.4
  *
  * @category   Biology
- * @package    SequenceAlignment
- * @subpackage Form
+ * @package    Alignment
+ * @subpackage SubstitutionMatrix
  * @author     Florian Wolters <wolters.fl@gmail.com>
  * @copyright  2012 Florian Wolters
  * @license    http://gnu.org/licenses/lgpl.txt LGPL-3.0+
@@ -28,59 +28,52 @@
  * @since      File available since Release 0.1.0
  */
 
-namespace HochschuleBremen\Application\SequenceAlignment\Form;
-
-use HochschuleBremen\Application\SequenceAlignment\Entity\SequenceSelection;
-use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\FormBuilderInterface;
+namespace HochschuleBremen\Component\Alignment\SubstitutionMatrix;
 
 /**
- * The {@link SequenceSelectionType} class houses the logic for building the
- * form for class {@link SequenceSelectionEntity}.
+ * Enumerates substitution matrices for amino acids.
  *
  * @category   Biology
- * @package    SequenceAlignment
- * @subpackage Form
+ * @package    Alignment
+ * @subpackage SubstitutionMatrix
  * @author     Florian Wolters <wolters.fl@gmail.com>
  * @copyright  2012 Florian Wolters
  * @license    http://gnu.org/licenses/lgpl.txt LGPL-3.0+
- * @version    GIT: $Id$
+ * @version    Release: @package_version@
  * @link       http://github.com/FlorianWolters/SequenceAlignment
  * @since      Class available since Release 0.1.0
  */
-class SequenceSelectionType extends AbstractType
+class AminoAcidSubstitutionMatrixEnum extends SubstitutionMatrixEnum
 {
 
     /**
-     * Builds this form.
+     * The BLOcks of Amino Acid SUbstitution Matrix number 60 (BLOSUM62).
      *
-     * @param FormBuilderInterface $builder The form builder.
-     * @param array                $options The options for this form.
-     *
-     * @return void
-     * @SuppressWarnings(PHPMD.UnusedFormalParameter)
+     * @return NucleotideSubstitutionMatrixEnum The BLOSUM60.
      */
-    public function buildForm(FormBuilderInterface $builder, array $options)
+    final public static function BLOSUM60()
     {
-        $builder->add(
-            'sequenceType', 'choice', [
-                'label' => 'Type of sequences to align:',
-                'empty_value' => 'Choose a type',
-                'choices' => SequenceSelection::getSequenceTypes(),
-            ]
-        );
+        return self::getConstant(__CLASS__, __FUNCTION__);
     }
 
     /**
-     * Returns the name of this form.
+     * The BLOcks of Amino Acid SUbstitution Matrix number 62 (BLOSUM62).
      *
-     * This method returns a unique identifier for this form "type".
-     *
-     * @return string The name.
+     * @return NucleotideSubstitutionMatrixEnum The BLOSUM62.
      */
-    public function getName()
+    final public static function BLOSUM62()
     {
-        return 'sequence_selection';
+        return self::getConstant(__CLASS__, __FUNCTION__);
+    }
+
+    /**
+     * The BLOcks of Amino Acid SUbstitution Matrix number 65 (BLOSUM65).
+     *
+     * @return NucleotideSubstitutionMatrixEnum The BLOSUM65.
+     */
+    final public static function BLOSUM65()
+    {
+        return self::getConstant(__CLASS__, __FUNCTION__);
     }
 
 }
