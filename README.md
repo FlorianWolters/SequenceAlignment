@@ -20,11 +20,14 @@ This project implements the **local alignment variant** of the software.
 
 ## TODO
 
-* Make the Smith-Waterman algorithm work with a substitution matrix (API: `new SmithWaterman(SequenceInterface $query, SequenceInterface $target, GapPenalty $gapPenalty, SubstitutionMatrix $subMatrix);`)
-* Integration of Help- / Metainformation in Project-Files to auto-include in templates
+* Add more definitions and help texts to the Twig template files
+* Enlarge font-size (in content) and the scoring table.
+* Fix TODO and @todo comments in the PHP source code
+* Refactoring of the controller class
+* Remove the labels from the sub-forms in the "alignment"-form (don't know how to do that, yet)
 * [AS] Button for "Next Step", "Next Row", "Complete Alignment"
 * Send Input-Formular on Enter
-* Provide a "Home" button to return to the index page / provide a "New Search" button
+* Implement more automated [PHPUnit][15] tests
 * Complete this `README.md` file (features, usage, description of the algorithm, etc)
 
 ## Features
@@ -49,7 +52,7 @@ Install the dependencies of this project with the dependency manager [Composer][
 
 The latest snapshot of [Composer][13] can be downloaded [here][14] (in case the download or the installation with [PHP][1] fails).
 
-The automated tests can be run with [PHPUnit][19]:
+The automated tests can be run with [PHPUnit][15]:
 
     phpunit
 
@@ -92,3 +95,4 @@ You should have received a copy of the GNU Lesser General Public License along w
 [12]: http://symfony.com/doc/current/components/yaml.html
 [13]: http://getcomposer.org
 [14]: http://getcomposer.org/composer.phar
+[15]: http://phpunit.de
