@@ -3,12 +3,20 @@
 
 {% block header %}
 <a href="{{ config.meta.project_url }}">
-    <img style="position: absolute; top: 0; left: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_left_darkblue_121621.png" alt="Fork me on GitHub" />
+    <img id="forkme" src="https://s3.amazonaws.com/github/ribbons/forkme_left_darkblue_121621.png" alt="Fork me on GitHub" />
 </a>
-<h1>{{ config.meta.title }}</h1>
+<a href="/"><h1>{{ config.meta.title }}</h1></a>
+<a href="http://hs-bremen.de">
+    <img id="logo" src="{{ config.dir.assets.img }}/hsb_logo.png" alt="Hochschule Bremen Logo" />
+</a>
 {% endblock %}
 
 {% block main %}
+<h2>Local Alignment</h2>
+<p>
+    This application uses the Smith-Waterman algorithm to calculate the local
+    alignment of two sequences.
+</p>
 <form action="{{ path('home') }}" method="post" {{ form_enctype(form) }}>
     <fieldset>
         <legend>Select the type of the sequences to align</legend>
@@ -16,8 +24,32 @@
         <button type="submit" class="btn">Proceed</button>
     </fieldset>
 </form>
+
+{% block help %}
+<h3>Help</h3>
+<dl>
+    <dt>DNA</dt>
+    <dd>
+        TODO
+    </dd>
+    <dt>RNA</dt>
+    <dd>
+        TODO
+    </dd>
+    <dt>Amino Acid</dt>
+    <dd>
+        TODO
+    </dd>
+    <dt>Local Sequence Alignment</dt>
+    <dd>
+        TODO
+    </dd>
+</dl>
+{% endblock %}
+
 {% endblock %}
 
 {% block footer %}
 <p>&copy; {{ config.meta.year }} {{ config.meta.author }}</p>
+<p><a href="http://gnu.org/licenses/lgpl.txt">LGPL-3.0+</a></p>
 {% endblock %}
