@@ -21,11 +21,11 @@
 # Version:   GIT: $Id$
 # Link:      http://github.com/FlorianWolters/SequenceAlignment
 
-debug: true
-charset: UTF-8
+debug   : true
+charset : UTF-8
 
 meta:
-  title       : Pairwise Local Sequence Alignment
+  title       : Pairwise Sequence Alignment
   description : Web application demonstrating the calculation of a pairwise local sequence alignment.
   keywords    : sequence alignment, local sequence alignment, nuceltide, amino acid, DNA, RNA, proteins
   author      : Andreas Schnieders, Florian Wolters, Michael James Malocha, Olav Hoffmann, Steffen Schütte
@@ -33,13 +33,13 @@ meta:
   year        : 2012
 
 dir:
-  cache : ./../www/cache
-  www   : ./../www
+  cache : ../www/cache
+  www   : ../www
   assets:
-    css   : ./src/www/assets/css
-    img   : ./src/www/assets/img
-    js    : ./src/www/assets/js
-    views : ./assets/views
+    css   : src/www/assets/css
+    img   : src/www/assets/img
+    js    : src/www/assets/js
+    views : assets/views
 
 request:
   http_port  : 80
