@@ -9,4 +9,60 @@
         <button type="submit" class="btn">Go</button>
     </fieldset>
 </form>
+
+{% block help %}
+<dl>
+    <dt>Substitution Matrix</dt>
+    <dd>
+        TODO
+    </dd>
+
+    <dt>BLOSUM</dt>
+    <dd>
+        The BLOcks of amino acid SUbstitution Matrix (BLOSUM) is a substitution
+        matrix used for sequence alignment of proteins. BLOSUM's are used to
+        score alignments between evolutionarily divergent protein sequences; the
+        score is based off of local alignments.
+        <ul>
+            <li><a href="https://en.wikipedia.org/wiki/BLOSUM">https://en.wikipedia.org/wiki/BLOSUM</a></li>
+            <li><a href="https://www.ebi.ac.uk/help/matrix.html">https://www.ebi.ac.uk/help/matrix.html</a></li>
+        </li>
+    </dd>
+
+    <dt>Gap Open Penalty</dt>
+    <dd>
+        This is a typical parameter when using sequence alignment programs. When
+        the gap open penalty is increased, it reduces the frequency of gaps in
+        the alignment. In other words, by raising the gap open penalty, it
+        increases the cost of creating a gap when comparing sequences, which
+        results in fewer gaps in the sequence. Default values for the gap
+        extension penalty very from program to program, though it is important
+        to have a balanced value; too low and almost everything will be aligned
+        creating a relatively worthless comparison, too high and alignments
+        become harder to generate.
+        <ul>
+            <li><a href="http://power.nhri.org.tw/power/OptionClustal.htm">http://power.nhri.org.tw/power/OptionClustal.htm</a></li>
+            <li><a href="https://www.ebi.ac.uk/help/gaps.html">https://www.ebi.ac.uk/help/gaps.html</a></li>
+        </li>
+    </dd>
+
+    <dt>Gap Extend Penalty</dt>
+    <dd>
+        This is a typical parameter when using sequence alignment programs. When
+        the gap extension penalty is increased, it reduces the size of gaps in
+        the alignment. In other words, by raising the gap extension penalty, it
+        increases the cost of making gaps bigger when comparing sequences, which
+        results in smaller gaps in the sequence.
+        Default values for the gap extension penalty very from program to
+        program, though it is important to have a balanced value; too low and
+        almost everything will be aligned creating a relatively worthless
+        comparison, too high and alignments become harder to generate.
+        <ul>
+            <li><a href="http://power.nhri.org.tw/power/OptionClustal.htm">http://power.nhri.org.tw/power/OptionClustal.htm</a></li>
+            <li><a href="https://www.ebi.ac.uk/help/gaps.html">https://www.ebi.ac.uk/help/gaps.html</a></li>
+        </li>
+    </dd>
+</dl>
+{% endblock %}
+
 {% endblock %}
