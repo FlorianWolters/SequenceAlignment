@@ -30,15 +30,16 @@
 
 namespace HochschuleBremen\Application\SequenceAlignment\Entity;
 
-use Symfony\Component\Validator\ExecutionContext;
-use Symfony\Component\Validator\Constraints\Callback;
-use Symfony\Component\Validator\Constraints\NotBlank;
+use HochschuleBremen\Component\Alignment\GapPenalty\GapPenaltyInterface;
+use HochschuleBremen\Component\Sequence\SequenceInterface;
+use Symfony\Component\Validator\Constraints\MaxLength;
+use Symfony\Component\Validator\Constraints\NotNull;
 use Symfony\Component\Validator\Constraints\Type;
 use Symfony\Component\Validator\Mapping\ClassMetadata;
 
 /**
- * An object of type {@link Alignment} represents and stores the data for
- * a pairwise sequence alignment with amino acid sequences.
+ * An object of class Alignment represents and stores the data for a pairwise
+ * sequence alignment.
  *
  * @category   Biology
  * @package    SequenceAlignment
@@ -56,21 +57,21 @@ class Alignment
     /**
      * The first sequence of the pair to align.
      *
-     * @var string
+     * @var SequenceInterface
      */
     private $query;
 
     /**
      * The second sequence of the pair to align.
      *
-     * @var string
+     * @var SequenceInterface
      */
     private $target;
 
 	/**
 	 * The gap penalties used during alignment.
      *
-     * @var GapPenalty
+     * @var GapPenaltyInterface
 	 */
     private $gapPenalty;
 
@@ -90,60 +91,32 @@ class Alignment
      */
     public static function loadValidatorMetadata(ClassMetadata $metadata)
     {
-        self::addGetterConstraintsToSequences($metadata, 'query');
-        self::addGetterConstraintsToSequences($metadata, 'target');
-        $metadata->addConstraint(
-            new Callback(
-                ['methods' => ['isQueryValid', 'isTargetValid']]
+        self::addGetterConstraintsForSequence($metadata, 'query');
+        self::addGetterConstraintsForSequence($metadata, 'target');
+        $metadata->addGetterConstraint('gapPenalty', new NotNull);
+        $metadata->addGetterConstraint(
+            'gapPenalty',
+            new Type(
+                'HochschuleBremen\Component\Alignment\GapPenalty\GapPenaltyInterface'
             )
         );
     }
 
-    /**
-     * @param ClassMetadata $metadata The constraints on this class.
-     * @param string        $name
-     *
-     * @return void
-     */
-    private static function addGetterConstraintsToSequences(
+    private static function addGetterConstraintsForSequence(
         ClassMetadata $metadata, $name
     ) {
-        $metadata->addGetterConstraint($name, new NotBlank);
-        $metadata->addGetterConstraint($name, new Type('string'));
-    }
-
-    // TODO Validate input in dependency of the chosed sequence type.
-
-    public function isQueryValid(ExecutionContext $context)
-    {
-        $query = $this->getQuery();
-        if (1 !== \preg_match('/^[arndcqeghilkmfpstwyv]+$/i', $query)) {
-            $context->addViolation('The first sequence is invalid.');
-        }
-    }
-
-    public function isTargetValid(ExecutionContext $context)
-    {
-        $query = $this->getTarget();
-        if (1 !== \preg_match('/^[arndcqeghilkmfpstwyv]+$/i', $query)) {
-            $context->addViolation('The second sequence is invalid.');
-        }
-    }
-
-    /**
-     * Constructs a new Alignment.
-     */
-    public function __construct(GapPenalty $gapPenalty = null)
-    {
-        $this->gapPenalty = (null === $gapPenalty)
-            ? new GapPenalty
-            : $gapPenalty;
+        $metadata->addGetterConstraint($name, new NotNull);
+        $metadata->addGetterConstraint($name, new MaxLength(2048));
+        $metadata->addGetterConstraint(
+            $name,
+            new Type('HochschuleBremen\Component\Sequence\SequenceInterface')
+        );
     }
 
     /**
      * Returns the query sequence.
      *
-     * @return string The first sequence of the pair to align.
+     * @return SequenceInterface The first sequence of the pair to align.
      */
     public function getQuery()
     {
@@ -153,11 +126,11 @@ class Alignment
     /**
      * Sets the query sequence.
      *
-     * @param string $query The first sequence of the pair to align.
+     * @param SequenceInterface $query The first sequence of the pair to align.
      *
      * @return void
      */
-    public function setQuery($query)
+    public function setQuery(SequenceInterface $query)
     {
         $this->query = $query;
     }
@@ -165,7 +138,7 @@ class Alignment
     /**
      * Returns the target sequence.
      *
-     * @return string The second sequence of the pair to align.
+     * @return SequenceInterface The second sequence of the pair to align.
      */
     public function getTarget()
     {
@@ -175,11 +148,11 @@ class Alignment
     /**
      * Sets the target sequence.
      *
-     * @param string $target The second sequence of the pair to align.
+     * @param SequenceInterface $target The second sequence of the pair to align.
      *
      * @return void
      */
-    public function setTarget($target)
+    public function setTarget(SequenceInterface $target)
     {
         $this->target = $target;
     }
@@ -187,7 +160,7 @@ class Alignment
     /**
      * Returns the gap penalties.
      *
-     * @return GapPenalty The gap penalties used during alignment.
+     * @return GapPenaltyInterface The gap penalties used during alignment.
      */
     public function getGapPenalty()
     {
@@ -197,9 +170,10 @@ class Alignment
     /**
      * Sets the gap penalties.
      *
-     * @param GapPenalty $gapPenalty The gap penalties used during alignment.
+     * @param GapPenaltyInterface $gapPenalty The gap penalties used during
+     *                                        alignment.
      */
-    public function setGapPenalty(GapPenalty $gapPenalty)
+    public function setGapPenalty(GapPenaltyInterface $gapPenalty)
     {
         $this->gapPenalty = $gapPenalty;
     }

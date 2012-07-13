@@ -1,6 +1,6 @@
 <?php
 /**
- * `SequenceSelection.php`
+ * `SequenceTrait.php`
  *
  * This program is free software: you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -30,13 +30,14 @@
 
 namespace HochschuleBremen\Application\SequenceAlignment\Entity;
 
+use Symfony\Component\Validator\ExecutionContext;
 use Symfony\Component\Validator\Mapping\ClassMetadata;
+use Symfony\Component\Validator\Constraints\Callback;
 use Symfony\Component\Validator\Constraints\NotBlank;
-use Symfony\Component\Validator\Constraints\Choice;
+use Symfony\Component\Validator\Constraints\Type;
 
 /**
- * An object of type {@link SequenceSelectionEntity} stores the selection for
- * the type of sequence to align.
+ * TODO
  *
  * @category   Biology
  * @package    SequenceAlignment
@@ -48,15 +49,8 @@ use Symfony\Component\Validator\Constraints\Choice;
  * @link       http://github.com/FlorianWolters/SequenceAlignment
  * @since      Class available since Release 0.1.0
  */
-class SequenceSelection
+trait SequenceTrait
 {
-
-    /**
-     * The type of sequence.
-     *
-     * @var string
-     */
-    private $sequenceType;
 
     /**
      * Adds the constraints for this class.
@@ -67,50 +61,26 @@ class SequenceSelection
      */
     public static function loadValidatorMetadata(ClassMetadata $metadata)
     {
-        $metadata->addGetterConstraint('sequenceType', new NotBlank);
-        $metadata->addGetterConstraint(
-            'sequenceType',
-            new Choice(
-                [
-                    'choices' => ['dna', 'rna', 'amino_acid'],
-                    'message' => 'Choose a valid sequence type',
-                ]
+        $metadata->addGetterConstraint('sequenceStr', new NotBlank);
+        $metadata->addGetterConstraint('sequenceStr', new Type('string'));
+        $metadata->addConstraint(
+            new Callback(
+                ['methods' => ['isSequenceStrValid']]
             )
         );
     }
 
-    /**
-     * Returns the type of the sequence.
-     *
-     * @return string The type of the sequence.
-     */
-    public function getSequenceType()
+    public function isSequenceStrValid(ExecutionContext $context)
     {
-        return $this->sequenceType;
+        $sequenceStr = $this->getSequenceStr();
+        if (false === $this->validateSequenceString($sequenceStr)) {
+            $context->addViolation('The sequence string is invalid.');
+        }
     }
 
-    /**
-     * Sets the type of the sequence.
-     *
-     * @param $sequenceType string The new type of the sequence
-     *
-     * @return void
-     */
-    public function setSequenceType($sequenceType)
+    public function setSequenceStr($sequenceStr)
     {
-        $this->sequenceType = $sequenceType;
-    }
-
-    /**
-     * @return array
-     */
-    public static function getSequenceTypes()
-    {
-        return [
-            'dna' => 'DNA (Deoxyribonucleic acid)',
-            'rna' => 'RNA (Ribonucleic acid)',
-            'amino_acid' => 'Amino acid'
-        ];
+        parent::setSequenceStr($sequenceStr);
     }
 
 }

@@ -1,6 +1,6 @@
 <?php
 /**
- * `GapPenaltyInterface.php`
+ * `DnaSequence.php`
  *
  * This program is free software: you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -18,8 +18,8 @@
  * PHP version 5.4
  *
  * @category   Biology
- * @package    Alignment
- * @subpackage GapPenalty
+ * @package    SequenceAlignment
+ * @subpackage Entity
  * @author     Florian Wolters <wolters.fl@gmail.com>
  * @copyright  2012 Florian Wolters
  * @license    http://gnu.org/licenses/lgpl.txt LGPL-3.0+
@@ -28,38 +28,33 @@
  * @since      File available since Release 0.1.0
  */
 
-namespace HochschuleBremen\Component\Alignment\GapPenalty;
+namespace HochschuleBremen\Application\SequenceAlignment\Entity;
+
+use HochschuleBremen\Component\Sequence\DnaSequence as DnaSequenceModel;
 
 /**
- * Defines a data structure for the gap penalties used during a sequence
- * alignment routine.
+ * TODO
  *
  * @category   Biology
- * @package    Alignment
- * @subpackage GapPenalty
+ * @package    SequenceAlignment
+ * @subpackage Entity
  * @author     Florian Wolters <wolters.fl@gmail.com>
  * @copyright  2012 Florian Wolters
  * @license    http://gnu.org/licenses/lgpl.txt LGPL-3.0+
- * @version    Release: @package_version@
+ * @version    GIT: $Id$
  * @link       http://github.com/FlorianWolters/SequenceAlignment
- * @since      Interface available since Release 0.1.0
+ * @since      Class available since Release 0.1.0
  */
-interface GapPenaltyInterface
+class DnaSequence extends DnaSequenceModel
 {
+    use SequenceTrait;
 
-    /**
-     * Returns the penalty given when a deletion or insertion gap first opens.
-     *
-     * @return integer The gap open penalty.
-     */
-    public function getOpenPenalty();
-
-    /**
-     * Returns the penalty given when an already open gap elongates by a single
-     * element.
-     *
-     * @return integer The gap extension penalty.
-     */
-    public function getExtensionPenalty();
+    public function __construct($sequenceStr = '')
+    {
+        try {
+            parent::__construct($sequenceStr);
+        } catch (\InvalidArgumentException $ex) {
+        }
+    }
 
 }

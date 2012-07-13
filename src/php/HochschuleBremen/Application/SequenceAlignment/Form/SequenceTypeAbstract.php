@@ -1,6 +1,6 @@
 <?php
 /**
- * `AlignmentType.php`
+ * `SequenceTypeAbstract.php`
  *
  * This program is free software: you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -46,7 +46,7 @@ use Symfony\Component\Form\FormBuilderInterface;
  * @link       http://github.com/FlorianWolters/SequenceAlignment
  * @since      Class available since Release 0.1.0
  */
-class AlignmentType extends AbstractType
+abstract class SequenceTypeAbstract extends AbstractType
 {
 
     /**
@@ -56,58 +56,11 @@ class AlignmentType extends AbstractType
      * @param array                $options The options for this form.
      *
      * @return void
+     * @SuppressWarnings(PHPMD.UnusedFormalParameter)
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $sequenceType = $options['sequence_type'];
-        $sequenceTypeName = $sequenceType->getName();
-
-        $builder->add(
-            'query', $sequenceType, [
-                'label' => "First {$sequenceTypeName} sequence (source):"
-            ]
-        )->add(
-            'target', $sequenceType, [
-                'label' => "Second {$sequenceTypeName} sequence (target):"
-            ]
-        )->add(
-            'substitutionMatrixName', 'choice', [
-                'label' => 'Substitution matrix:',
-                'choices' => \array_combine(
-                    $options['matrices'], $options['matrices']
-                ), 'preferred_choices' => [$options['matrix_choice']]
-            ]
-        )->add(
-            'gap_penalty', new GapPenaltyType, ['label' => 'Gap penalties:']
-        );
-    }
-
-    /**
-     * @return array
-     */
-    public function getDefaultOptions()
-    {
-        return [
-            // Nice Symfony guys, just change that cascaded validation
-            // behaviour... Cost me about an hour...
-            // Ensure that the children forms of this form are validated to.
-            'cascade_validation' => true,
-            'sequence_type' => null,
-            'matrices' => [],
-            'matrix_choice' => ''
-        ];
-    }
-
-    /**
-     * Returns the name of this form.
-     *
-     * This method returns a unique identifier for this form "type".
-     *
-     * @return string The name.
-     */
-    public function getName()
-    {
-        return 'alignment';
+        $builder->add('sequenceStr', 'textarea', ['label' => 'Sequence:']);
     }
 
 }

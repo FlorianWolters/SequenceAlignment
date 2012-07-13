@@ -1,6 +1,6 @@
 <?php
 /**
- * `Nuc_4_4.php`
+ * `NucFourFour.php`
  *
  * This program is free software: you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -33,7 +33,7 @@ namespace HochschuleBremen\Component\Alignment\SubstitutionMatrix\Nucleotide;
 use HochschuleBremen\Component\Alignment\SubstitutionMatrix\SubstitutionMatrixAbstract;
 
 /**
- * An object of class Nuc_4_4 wraps the NUC.4.4 substitution matrix into an
+ * An object of class NucFourFour wraps the NUC.4.4 substitution matrix into an
  * object.
  *
  * @category   Biology

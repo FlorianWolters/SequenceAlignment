@@ -73,8 +73,8 @@ abstract class PairwiseSequenceAlignerAbstract extends DynamicProgrammingAbstrac
      * @param integer $mismatch
      * @param integer $gap
      */
-    public function __construct(
-        $firstSequence, $secondSequence, $match = 1, $mismatch = -1, $gap = -1
+    protected function __construct(
+        $firstSequence, $secondSequence, $match, $mismatch, $gap
     ) {
         parent::__construct($firstSequence, $secondSequence);
         $this->match = $match;

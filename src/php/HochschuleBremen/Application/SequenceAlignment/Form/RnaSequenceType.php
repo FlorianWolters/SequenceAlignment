@@ -1,6 +1,6 @@
 <?php
 /**
- * `AlignmentType.php`
+ * `RnaSequenceType.php`
  *
  * This program is free software: you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -30,9 +30,6 @@
 
 namespace HochschuleBremen\Application\SequenceAlignment\Form;
 
-use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\FormBuilderInterface;
-
 /**
  * TODO
  *
@@ -46,41 +43,8 @@ use Symfony\Component\Form\FormBuilderInterface;
  * @link       http://github.com/FlorianWolters/SequenceAlignment
  * @since      Class available since Release 0.1.0
  */
-class AlignmentType extends AbstractType
+class RnaSequenceType extends SequenceTypeAbstract
 {
-
-    /**
-     * Builds this form.
-     *
-     * @param FormBuilderInterface $builder The form builder.
-     * @param array                $options The options for this form.
-     *
-     * @return void
-     */
-    public function buildForm(FormBuilderInterface $builder, array $options)
-    {
-        $sequenceType = $options['sequence_type'];
-        $sequenceTypeName = $sequenceType->getName();
-
-        $builder->add(
-            'query', $sequenceType, [
-                'label' => "First {$sequenceTypeName} sequence (source):"
-            ]
-        )->add(
-            'target', $sequenceType, [
-                'label' => "Second {$sequenceTypeName} sequence (target):"
-            ]
-        )->add(
-            'substitutionMatrixName', 'choice', [
-                'label' => 'Substitution matrix:',
-                'choices' => \array_combine(
-                    $options['matrices'], $options['matrices']
-                ), 'preferred_choices' => [$options['matrix_choice']]
-            ]
-        )->add(
-            'gap_penalty', new GapPenaltyType, ['label' => 'Gap penalties:']
-        );
-    }
 
     /**
      * @return array
@@ -88,13 +52,7 @@ class AlignmentType extends AbstractType
     public function getDefaultOptions()
     {
         return [
-            // Nice Symfony guys, just change that cascaded validation
-            // behaviour... Cost me about an hour...
-            // Ensure that the children forms of this form are validated to.
-            'cascade_validation' => true,
-            'sequence_type' => null,
-            'matrices' => [],
-            'matrix_choice' => ''
+            'data_class' => 'HochschuleBremen\Application\SequenceAlignment\Entity\RnaSequence'
         ];
     }
 
@@ -107,7 +65,7 @@ class AlignmentType extends AbstractType
      */
     public function getName()
     {
-        return 'alignment';
+        return 'RNA';
     }
 
 }

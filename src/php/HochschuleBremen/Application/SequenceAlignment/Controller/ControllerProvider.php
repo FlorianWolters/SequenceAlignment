@@ -32,7 +32,11 @@ namespace HochschuleBremen\Application\SequenceAlignment\Controller;
 
 use FlorianWolters\Component\Core\Enum\EnumUtils;
 use HochschuleBremen\Application\SequenceAlignment\Form\AlignmentType;
+use HochschuleBremen\Application\SequenceAlignment\Form\DnaSequenceType;
+use HochschuleBremen\Application\SequenceAlignment\Form\ProteinSequenceType;
+use HochschuleBremen\Application\SequenceAlignment\Form\RnaSequenceType;
 use HochschuleBremen\Application\SequenceAlignment\Form\SequenceSelectionType;
+use HochschuleBremen\Application\SequenceAlignment\Form\SequenceTypeAbstract;
 use HochschuleBremen\Application\SequenceAlignment\Entity\Alignment;
 use HochschuleBremen\Application\SequenceAlignment\Entity\SequenceSelection;
 use HochschuleBremen\Component\Alignment\SmithWaterman;
@@ -43,7 +47,7 @@ use Silex\Application;
 use Silex\ControllerProviderInterface;
 
 /**
- * TODO Add class comment.
+ * The controller provider for the SequenceAlignmentApplication.
  *
  * @category   Biology
  * @package    SequenceAlignment
@@ -106,7 +110,7 @@ class ControllerProvider implements ControllerProviderInterface
     public function displayProteinForm(Application $app)
     {
         $options = [
-            'sequence_type' => 'protein',
+            'sequence_type' => new ProteinSequenceType,
             'matrices' => AminoAcidSubstitutionMatrixEnum::names(),
             'matrix_choice' => AminoAcidSubstitutionMatrixEnum::BLOSUM62()->getName()
         ];
@@ -130,7 +134,7 @@ class ControllerProvider implements ControllerProviderInterface
         $type = new AlignmentType;
         $entity = new Alignment;
 
-        /* @var $form Symfony\Component\Form\FormFactory */
+        /* @var $form Symfony\Component\Form\Form */
         $form = $app['form.factory']->create($type, $entity, $options);
 
         /* @var $request Symfony\Component\HttpFoundation\Request */
@@ -142,7 +146,7 @@ class ControllerProvider implements ControllerProviderInterface
                 /* @var $data HochschuleBremen\Application\SequenceAlignment\Entity\Alignment */
                 $data = $form->getData();
 
-                // TODO Implement ModelTransformer for this.
+                // TODO Implement a ModelTransformer for the conversion.
                 $substitutionMatrixName = $data->getSubstitutionMatrixName();
                 $substitutionMatrixType = EnumUtils::valueOf(
                     $enumType, $substitutionMatrixName
@@ -152,10 +156,10 @@ class ControllerProvider implements ControllerProviderInterface
 
                 // TODO Modify algorithm and the constructor call.
                 $aligner = new SmithWaterman(
-                    $data->getQuery(),
-                    $data->getTarget(),
-                    1,
-                    -1,
+                    $data->getQuery()->getSequenceStr(),
+                    $data->getTarget()->getSequenceStr(),
+                    5,
+                    -4,
                     $data->getGapPenalty()->getOpenPenalty()/*,
                     $substitutionMatrix*/
                 );
@@ -164,8 +168,8 @@ class ControllerProvider implements ControllerProviderInterface
                     'result.html.twig', [
                         'alignment' => $data,
                         'aligner' => $aligner,
-                        'firstSequence' => \str_split($data->getQuery()),
-                        'secondSequence' => \str_split($data->getTarget())
+                        'query' => \str_split($data->getQuery()),
+                        'target' => \str_split($data->getTarget())
                     ]
                 );
             }
@@ -183,12 +187,25 @@ class ControllerProvider implements ControllerProviderInterface
      *
      * @return string
      */
-    public function displayNucleotideForm(Application $app)
+    public function displayDnaForm(Application $app)
     {
+        return $this->displayNucleotideForm($app, new DnaSequenceType);
+    }
+
+    /**
+     *
+     * @param Application          $app
+     * @param SequenceTypeAbstract $sequenceType
+     *
+     * @return string
+     */
+    private function displayNucleotideForm(
+        Application $app, SequenceTypeAbstract $sequenceType
+    ) {
         $options = [
-            'sequence_type' => 'nucleotide',
+            'sequence_type' => $sequenceType,
             'matrices' => NucleotideSubstitutionMatrixEnum::names(),
-            'matrix_choice' => NucleotideSubstitutionMatrixEnum::NUCFOURFOUR()->getName()
+            'matrix_choice' => NucleotideSubstitutionMatrixEnum::NUCFOURTWO()->getName()
         ];
 
         return $this->displayForm(
@@ -196,6 +213,16 @@ class ControllerProvider implements ControllerProviderInterface
             $options,
             'HochschuleBremen\Component\Alignment\SubstitutionMatrix\NucleotideSubstitutionMatrixEnum'
         );
+    }
+
+    /**
+     * @param Application $app An Application instance.
+     *
+     * @return string
+     */
+    public function displayRnaForm(Application $app)
+    {
+        return $this->displayNucleotideForm($app, new RnaSequenceType);
     }
 
     /**
@@ -219,8 +246,12 @@ class ControllerProvider implements ControllerProviderInterface
             return $this->displayProteinForm($app);
         }, 'GET|POST');
 
-        $controllers->match('/nucleotide', function () use ($app) {
-            return $this->displayNucleotideForm($app);
+        $controllers->match('/dna', function () use ($app) {
+            return $this->displayDnaForm($app);
+        }, 'GET|POST');
+
+        $controllers->match('/rna', function () use ($app) {
+            return $this->displayRnaForm($app);
         }, 'GET|POST');
 
         return $controllers;

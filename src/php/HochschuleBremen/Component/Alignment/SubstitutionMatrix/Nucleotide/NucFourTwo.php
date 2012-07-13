@@ -1,6 +1,6 @@
 <?php
 /**
- * `GapPenaltyInterface.php`
+ * `NucFourTwo.php`
  *
  * This program is free software: you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -19,7 +19,7 @@
  *
  * @category   Biology
  * @package    Alignment
- * @subpackage GapPenalty
+ * @subpackage SubstitutionMatrix
  * @author     Florian Wolters <wolters.fl@gmail.com>
  * @copyright  2012 Florian Wolters
  * @license    http://gnu.org/licenses/lgpl.txt LGPL-3.0+
@@ -28,38 +28,52 @@
  * @since      File available since Release 0.1.0
  */
 
-namespace HochschuleBremen\Component\Alignment\GapPenalty;
+namespace HochschuleBremen\Component\Alignment\SubstitutionMatrix\Nucleotide;
+
+use HochschuleBremen\Component\Alignment\SubstitutionMatrix\SubstitutionMatrixAbstract;
 
 /**
- * Defines a data structure for the gap penalties used during a sequence
- * alignment routine.
+ * An object of class NucFourTwo wraps the NUC.4.2 substitution matrix into an
+ * object.
  *
  * @category   Biology
  * @package    Alignment
- * @subpackage GapPenalty
+ * @subpackage SubstitutionMatrix
  * @author     Florian Wolters <wolters.fl@gmail.com>
  * @copyright  2012 Florian Wolters
  * @license    http://gnu.org/licenses/lgpl.txt LGPL-3.0+
  * @version    Release: @package_version@
  * @link       http://github.com/FlorianWolters/SequenceAlignment
- * @since      Interface available since Release 0.1.0
+ * @since      Class available since Release 0.1.0
  */
-interface GapPenaltyInterface
+class NucFourTwo extends SubstitutionMatrixAbstract
 {
 
     /**
-     * Returns the penalty given when a deletion or insertion gap first opens.
-     *
-     * @return integer The gap open penalty.
+     * Constructs a new NUC.4.2 substitution matrix.
      */
-    public function getOpenPenalty();
+    protected function __construct()
+    {
+        $scores = [
+            ['' , 'A','T','G','C'],
+            ['A',  5, -4, -4, -4 ],
+            ['T', -4,  5, -4, -4 ],
+            ['G', -4, -4,  5, -4 ],
+            ['C', -4, -4, -4,  5 ],
+            ['S', -4, -4,  1,  1 ],
+            ['W',  1,  1, -4, -4 ],
+            ['R',  1, -4,  1, -4 ],
+            ['Y', -4,  1, -4,  1 ],
+            ['K', -4,  1,  1, -4 ],
+            ['M',  1, -4, -4,  1 ],
+            ['B', -4, -1, -1, -1 ],
+            ['V', -1, -4, -1, -1 ],
+            ['H', -1, -1, -4, -1 ],
+            ['D', -1, -1, -1, -4 ],
+            ['N', -2, -2, -2, -2 ]
+        ];
 
-    /**
-     * Returns the penalty given when an already open gap elongates by a single
-     * element.
-     *
-     * @return integer The gap extension penalty.
-     */
-    public function getExtensionPenalty();
+        parent::__construct($scores);
+    }
 
 }

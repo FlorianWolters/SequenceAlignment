@@ -30,14 +30,16 @@
 
 namespace HochschuleBremen\Application\SequenceAlignment\Entity;
 
-use HochschuleBremen\Component\Alignment\GapPenalty\GapPenalty
-    as GapPenaltyModel;
+use HochschuleBremen\Component\Alignment\GapPenalty\SimpleGapPenalty;
 use Symfony\Component\Validator\Mapping\ClassMetadata;
+use Symfony\Component\Validator\Constraints\Min;
+use Symfony\Component\Validator\Constraints\Max;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Validator\Constraints\Type;
 
 /**
- * TODO
+ * An object of class GapPenalty represents and stores the data for the gap
+ * penalties used during alignment.
  *
  * @category   Biology
  * @package    SequenceAlignment
@@ -49,7 +51,7 @@ use Symfony\Component\Validator\Constraints\Type;
  * @link       http://github.com/FlorianWolters/SequenceAlignment
  * @since      Class available since Release 0.1.0
  */
-class GapPenalty extends GapPenaltyModel
+class GapPenalty extends SimpleGapPenalty
 {
 
     /**
@@ -62,9 +64,13 @@ class GapPenalty extends GapPenaltyModel
     public static function loadValidatorMetadata(ClassMetadata $metadata)
     {
         $metadata->addGetterConstraint('openPenalty', new NotBlank);
+        $metadata->addGetterConstraint('openPenalty', new Min(1));
+        $metadata->addGetterConstraint('openPenalty', new Max(100));
         $metadata->addGetterConstraint('openPenalty', new Type('integer'));
         $metadata->addGetterConstraint('extensionPenalty', new NotBlank);
-        $metadata->addGetterConstraint('extensionPenalty', new Type('float'));
+        $metadata->addGetterConstraint('extensionPenalty', new Type('numeric'));
+        $metadata->addGetterConstraint('extensionPenalty', new Min(0.0005));
+        $metadata->addGetterConstraint('extensionPenalty', new Max(10.0));
     }
 
     /**

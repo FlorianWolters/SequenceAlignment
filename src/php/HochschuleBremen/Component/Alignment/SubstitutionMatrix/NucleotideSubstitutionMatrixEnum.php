@@ -49,9 +49,19 @@ class NucleotideSubstitutionMatrixEnum extends SubstitutionMatrixEnum
     /**
      * The NUC.4.4 substitution matrix.
      *
-     * @return AminoAcidSubstitutionMatrixEnum The BLOSUM60.
+     * @return NucleotideSubstitutionMatrixEnum The NUC.4.4.
      */
     final public static function NUCFOURFOUR()
+    {
+        return self::getConstant(__CLASS__, __FUNCTION__);
+    }
+
+    /**
+     * The NUC.4.2 substitution matrix.
+     *
+     * @return NucleotideSubstitutionMatrixEnum The NUC.4.2.
+     */
+    final public static function NUCFOURTWO()
     {
         return self::getConstant(__CLASS__, __FUNCTION__);
     }

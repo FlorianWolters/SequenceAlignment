@@ -61,13 +61,29 @@ class GapPenaltyType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+        $openPenaltyValues = [100, 50, 25, 20, 15, 10, 5, 1];
+        $openPenaltyChoices = \array_combine(
+            $openPenaltyValues, $openPenaltyValues
+        );
+        $gapPenaltyValues = [
+            '0.0005', '0.01', '0.05', '0.1', '0.2', '0.4',
+            '0.5', '0.6', '0.8', '1.0', '5.0', '10.0'
+        ];
+        $gapPenaltyChoices = \array_combine(
+            $gapPenaltyValues, $gapPenaltyValues
+        );
+
         $builder->add(
-            'openPenalty', 'number', [
-                'label' => 'Gap open penalty:'
+            'openPenalty', 'choice', [
+                'label' => 'Gap open penalty:',
+                'choices' => $openPenaltyChoices,
+                'preferred_choices' => [10]
             ]
         )->add(
-            'extensionPenalty', 'number', [
-                'label' => 'Gap extend penalty:'
+            'extensionPenalty', 'choice', [
+                'label' => 'Gap extend penalty:',
+                'choices' => $gapPenaltyChoices,
+                'preferred_choices' => ['0.5']
             ]
         );
     }
@@ -78,7 +94,8 @@ class GapPenaltyType extends AbstractType
     public function getDefaultOptions()
     {
         return [
-            'data_class' => 'HochschuleBremen\Application\SequenceAlignment\Entity\GapPenalty'
+            'data_class' =>
+            'HochschuleBremen\Application\SequenceAlignment\Entity\GapPenalty'
         ];
     }
 

@@ -85,7 +85,7 @@ abstract class DynamicProgrammingAbstract
      * @param string $firstSequence
      * @param string $secondSequence
      */
-    public function __construct($firstSequence, $secondSequence)
+    protected function __construct($firstSequence, $secondSequence)
     {
         $this->firstSequence = $firstSequence;
         $this->secondSequence = $secondSequence;
