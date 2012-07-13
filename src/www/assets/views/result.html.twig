@@ -11,10 +11,19 @@
     <button type="button" id="reset" class="btn">Reset</button>
 </fieldset>
 
-<table>
+<h2>Input Data</h2>
+<ul>
+    <li>Query: {{ alignment.query }} (Length: {{ alignment.query.length }})</li>
+    <li>Target: {{ alignment.target }} (Length: {{ alignment.target.length }})</li>
+    <li>Gap open penalty: {{ alignment.gapPenalty.openPenalty }}</li>
+    <li>Gap extend penalty: {{ alignment.gapPenalty.extensionPenalty }}</li>
+</ul>
+
+<h2>Scoring Matrix</h2>
+<table id="matrix">
     <tr>
         <td class="topRow leftColumn topLeftCell"></td>
-{% for currentCharOfFirstSequence in firstSequence %}
+{% for currentCharOfFirstSequence in query %}
     {% if loop.last %}
         <td class="topRow topRightCell">{{ currentCharOfFirstSequence }}</td>
     {% else %}
@@ -23,25 +32,31 @@
 {% endfor %}
     </tr>
 
-{% for i in range (0, secondSequence|length - 1) %}
+{% for i in range (0, alignment.target.length - 1) %}
     <tr>
     {% if loop.last %}
-        <td class="leftColumn bottomLeftCell">{{ secondSequence[i] }}</td>
+        <td class="leftColumn bottomLeftCell">{{ target[i] }}</td>
     {% else %}
-        <td class="leftColumn">{{ secondSequence[i] }}</td>
+        <td class="leftColumn">{{ target[i] }}</td>
     {% endif %}
 
-    {% for j in range (0, firstSequence|length - 1) %}
+    {% for j in range (0, alignment.query.length - 1) %}
         {% if loop.last and loop.parent.loop.last %}
-        <td class="bottomRightCell">{{ aligner.getScoreTable[j][i] }}</td>
+        <td class="bottomRightCell">{{ aligner.scoreTable[i][j] }}</td>
         {% else %}
-        <td>{{ aligner.getScoreTable[j][i] }}</td>
+        <td>{{ aligner.scoreTable[i][j] }}</td>
         {% endif %}
     {% endfor %}
     </tr>
 {% endfor %}
 </table>
 
-<a href="/">Home</a>
+<h2>Result Data</h2>
+<p>Alignment Score: <strong>{{ aligner.alignmentScore }}</strong></p>
+<p>Alignment:</p>
+<pre>
+{{ aligner.alignment[0] }}
+{{ aligner.alignment[1] }}
+</pre>
 
 {% endblock %}
