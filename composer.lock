@@ -30,8 +30,8 @@
         {
             "package": "silex/silex",
             "version": "dev-master",
-            "source-reference": "344dd201ff448f82cf1ec67d2135d1c44e7ec802",
-            "commit-date": "1342113874"
+            "source-reference": "895c77b6a268c54edfd2f6c56c835430026dc7c0",
+            "commit-date": "1342180423"
         },
         {
             "package": "symfony/config",
@@ -90,8 +90,8 @@
         {
             "package": "symfony/http-kernel",
             "version": "dev-master",
-            "source-reference": "5032709c51ac154be997d99690f80c08b0943057",
-            "commit-date": "1341987182"
+            "source-reference": "dc93ba8c91cb4d6de78bb32e9836cf32088f0626",
+            "commit-date": "1342174453"
         },
         {
             "package": "symfony/locale",
@@ -162,8 +162,8 @@
         {
             "package": "symfony/validator",
             "version": "dev-master",
-            "source-reference": "a9c3cff2694e159f531e04a4c8b7399f3bf13043",
-            "commit-date": "1342108491"
+            "source-reference": "6cd8997a1df02353584883057c840296fa28644e",
+            "commit-date": "1342176696"
         },
         {
             "package": "symfony/yaml",
