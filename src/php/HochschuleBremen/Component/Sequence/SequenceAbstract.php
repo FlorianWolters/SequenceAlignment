@@ -63,7 +63,7 @@ abstract class SequenceAbstract implements SequenceInterface
      *
      * @param string $sequenceStr The sequence string.
      */
-    protected function __construct($sequenceStr)
+    public function __construct($sequenceStr)
     {
         if (false === $this->validateSequenceString($sequenceStr)) {
             throw new \InvalidArgumentException(
