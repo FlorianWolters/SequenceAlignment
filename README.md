@@ -20,15 +20,23 @@ This project implements the **local alignment variant** of the software.
 
 ## TODO
 
-* Add more definitions and help texts to the Twig template files
-* Enlarge font-size (in content) and the scoring table.
-* Fix TODO and @todo comments in the PHP source code
-* Refactoring of the controller class
-* Remove the labels from the sub-forms in the "alignment"-form (don't know how to do that, yet)
-* [AS] Button for "Next Step", "Next Row", "Complete Alignment"
-* Send Input-Formular on Enter
-* Implement more automated [PHPUnit][15] tests
-* Complete this `README.md` file (features, usage, description of the algorithm, etc)
+* Implement client-side backtracking visualization.
+* Add more definitions and help texts to the `.html.twig` template files (see `TODO` marks).
+* Finish this `README.md` file (sections: Features, Usage, Description of the Algorithm, etc.).
+* Enlarge the font size and the score matrix.
+* Send forms on keypress enter.
+* Check/Test the algorithm `HochschuleBremen\Component\Alignment\SmithWaterman`:
+
+  * Add functionality to differ between gap open and gap extend.
+  * Add method comments.
+  * Refactoring of the class: Create a class `SequencePair` that contains the alignment (now: simple array).
+
+* Remove the labels from the subforms in the form `HochschuleBremen\Application\SequenceAlignment\Form\PairwiseAlignmentType` (don't know how to do that).
+* Fix `TODO` and `@todo` comments in the PHP source code.
+* Refactoring of the PHP class `HochschuleBremen\Application\SequenceAlignment\Controller\ControllerProvider`.
+* Add missing DocBlock comments.
+* Run static code analyses.
+* Implement more automated [PHPUnit][15] tests.
 
 ## Features
 
