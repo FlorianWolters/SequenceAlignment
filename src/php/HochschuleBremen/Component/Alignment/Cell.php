@@ -81,13 +81,19 @@ class Cell
      *
      * @param integer $row    The row of the {@link Cell}.
      * @param integer $column The column of the {@link Cell}.
+     * @param integer $score  The score of the {@link Cell}.
      */
-    public function __construct($row, $column)
+    public function __construct($row, $column, $score = 0)
     {
         $this->row = $row;
         $this->column = $column;
-        $this->setScore(~\PHP_INT_MAX);
+        $this->setScore($score);
         $this->setPreviousCell();
+    }
+
+    public function __toString()
+    {
+        return (string) $this->score;
     }
 
     /**
@@ -152,17 +158,6 @@ class Cell
     public function getColumn()
     {
         return $this->column;
-    }
-
-    /**
-     * Returns a string representation of this {@link Cell}.
-     *
-     * @return string The string representation.
-     */
-    public function __toString()
-    {
-        return 'Cell(' . $this->row . ', ' . $this->column
-            . '): score=' . $this->score;
     }
 
 }

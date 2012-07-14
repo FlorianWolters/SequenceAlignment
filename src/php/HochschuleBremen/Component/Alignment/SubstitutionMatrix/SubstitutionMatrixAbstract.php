@@ -59,26 +59,26 @@ abstract class SubstitutionMatrixAbstract
      *
      * @var array
      */
-    private $scores;
+    private $matrix;
 
     /**
-     * The identifier of this substitution matrix.
+     * The name of this substitution matrix.
      *
      * @var string
      */
-    private $id;
+    private $name;
 
     /**
      * Constructs a new substitution matrix with the specified scores and the
      * optionally specified identifier.
      *
      * @param array  $scores The scores of the substitution matrix.
-     * @param string $id     The identifier of the substitution matrix.
+     * @param string $name   The name of the substitution matrix.
      */
-    protected function __construct(array $scores, $id = null)
+    protected function __construct(array $scores, $name = null)
     {
-        $this->setScores($scores);
-        $this->setId($id);
+        $this->setMatrix($scores);
+        $this->setName($name);
     }
 
     /**
@@ -88,76 +88,131 @@ abstract class SubstitutionMatrixAbstract
      *
      * @return void
      */
-    private function setScores(array $scores)
+    private function setMatrix(array $scores)
     {
         if (false === is_array($scores)) {
             throw new \InvalidArgumentException;
         }
 
-        $this->scores = $scores;
+        $this->matrix = $scores;
     }
 
     /**
-     * Sets the identifier of this substitution matrix.
+     * Sets the name of this substitution matrix.
      *
-     * @param string $id The identifier to set.
+     * @param string $name The name.
      *
      * @return void
      */
-    private function setId($id)
+    private function setName($name)
     {
-        if (null === $id) {
+        if (null === $name) {
             $fullClassName = \get_called_class();
             $pos = \strrpos($fullClassName, '\\', 0);
             $className = \substr($fullClassName, $pos + 1);
-            $id = \strtoupper($className);
+            $name = \strtoupper($className);
         }
 
-        $this->id = $id;
+        $this->name = $name;
     }
 
     /**
-     * Returns the scores of this substitution matrix.
+     * Returns the entire substitution matrix.
      *
-     * @return array The scores.
+     * @return array The matrix.
      */
-    public function getScores()
+    public function getMatrix()
     {
-        return $this->scores;
+        return $this->matrix;
     }
 
     /**
-     * Returns the identifier of this substitution matrix.
+     * Returns the name of this substitution matrix.
      *
-     * @return string The identifier.
+     * @return string The name.
      */
-    public function getId()
+    public function getName()
     {
-        return $this->id;
+        return $this->name;
     }
 
     /**
-     * Returns the score from a specified row and a specified column of this
+     * Returns the value in this substitution matrix for conversion from the
+     * first specified compound to the second specified compound.
+     *
+     * @param string $from The original compound.
+     * @param string $to   The replacement compound.
+     *
+     * @return integer The value in this substitution matrix for conversion from
+     *                 the first compund to the second compound.
+     *
+     * @throws OutOfBoundsException If the specified original compound does not
+     *                              exist in this substitution matrix.
+     * @throws OutOfBoundsException If the specified replacement compound does
+     *                              not exist in this substitution matrix.
+     */
+    public function getValue($from, $to)
+    {
+        $row = $this->returnRowForOriginalCompound($from);
+        $column = $this->returnColumnForReplacementCompound($to);
+
+        return $this->matrix[$row][$column];
+    }
+
+    /**
+     * Returns the row index of the specified original compound from this
      * substitution matrix.
      *
-     * @param integer $row    The row.
-     * @param integer $column The column.
+     * @param string $compound The original compound.
      *
-     * @return integer The score.
+     * @return integer The row index.
      *
-     * @throws OutOfBoundsException If the cell with the specified row and the
-     *                              specified column does not exist.
+     * @throws OutOfBoundsException If the specified original compound does not
+     *                              exist in this substitution matrix.
      */
-    public function getScore($row, $column)
+    private function returnRowForOriginalCompound($compound)
     {
-        if (false === isset($this->scores[$row][$column])) {
+        $result = \array_search($compound, $this->matrix[0], true);
+        if (false === $result) {
             throw new \OutOfBoundsException(
-                'A cell with the specified row ' . $row
-                . ' and the specified column ' . $column. ' does not exist.'
+                'The original compound ' . $compound
+                    . ' does not exist in the substitution matrix.'
             );
         }
 
-        return $this->scores[$row][$column];
+        return $result;
+    }
+
+    /**
+     * Returns the column index of the specified replacement compound from this
+     * substitution matrix.
+     *
+     * @param string $compound The replacement compound.
+     *
+     * @return integer The column index.
+     *
+     * @throws OutOfBoundsException If the specified replacement compound does
+     *                              not exist in this substitution matrix.
+     */
+    private function returnColumnForReplacementCompound($compound)
+    {
+        $result = false;
+
+        for ($i = 0; $i < count($this->matrix); ++$i) {
+            if ($compound === $this->matrix[$i][0]) {
+                $result = $i;
+                break;
+            }
+        }
+
+        if (false === $result) {
+            throw new \OutOfBoundsException(
+                'The replacement compound ' . $compound
+                    . ' does not exist in the substitution matrix.'
+            );
+        }
+
+        return $result;
     }
 
 }

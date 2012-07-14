@@ -17,145 +17,502 @@
  *
  * PHP version 5.4
  *
- * @category   Biology
- * @package    Alignment
- * @subpackage Algorithm
- * @author     Florian Wolters <wolters.fl@gmail.com>
- * @copyright  2012 Florian Wolters
- * @license    http://gnu.org/licenses/lgpl.txt LGPL-3.0+
- * @version    GIT: $Id$
- * @link       http://github.com/FlorianWolters/SequenceAlignment
- * @since      File available since Release 0.1.0
+ * @category  Biology
+ * @package   Alignment
+ * @author    Florian Wolters <wolters.fl@gmail.com>
+ * @copyright 2012 Florian Wolters
+ * @license   http://gnu.org/licenses/lgpl.txt LGPL-3.0+
+ * @version   GIT: $Id$
+ * @link      http://github.com/FlorianWolters/SequenceAlignment
+ * @since     File available since Release 0.1.0
  */
 
 namespace HochschuleBremen\Component\Alignment;
 
+use HochschuleBremen\Component\Alignment\GapPenalty\GapPenaltyInterface;
+use HochschuleBremen\Component\Alignment\SubstitutionMatrix\SubstitutionMatrixAbstract;
+use HochschuleBremen\Component\Sequence\SequenceInterface;
+
 /**
- * An implementation of the Smith-Waterman algorithm for biological local
- * pairwise sequence alignment.
+ * Smith and Waterman defined an algorithm for pairwise local sequence
+ * alignments (best match of sections from each sequence).
  *
- * @category   Biology
- * @package    Alignment
- * @subpackage Algorithm
- * @author     Florian Wolters <wolters.fl@gmail.com>
- * @copyright  2012 Florian Wolters
- * @license    http://gnu.org/licenses/lgpl.txt LGPL-3.0+
- * @version    Release: @package_version@
- * @link       http://github.com/FlorianWolters/SequenceAlignment
- * @since      Class available since Release 0.1.0
+ * This class performs such local sequence comparisons efficiently by dynamic
+ * programming.
+ *
+ * @category  Biology
+ * @package   Alignment
+ * @author    Florian Wolters <wolters.fl@gmail.com>
+ * @copyright 2012 Florian Wolters
+ * @license   http://gnu.org/licenses/lgpl.txt LGPL-3.0+
+ * @version   Release: @package_version@
+ * @link      http://github.com/FlorianWolters/SequenceAlignment
+ * @since     Class available since Release 0.1.0
  */
-class SmithWaterman extends PairwiseSequenceAlignerAbstract
+class SmithWaterman
 {
 
     /**
-     * @var Cell
+     * @var integer
      */
-    private $highScoreCell;
+    const INITIAL_SCORE = 0;
 
     /**
-     * @param string  $firstSequence
-     * @param string  $secondSequence
-     * @param integer $match
-     * @param integer $mismatch
-     * @param integer $gap
+     * @var string
+     */
+    const GAP_CHARACTER = '-';
+
+    /**
+     * @var SequenceInterface
+     */
+    private $query;
+
+    /**
+     * @var SequenceInterface
+     */
+    private $target;
+
+    /**
+     * @var GapPenaltyInterface
+     */
+    private $gapPenalty;
+
+    /**
+     * @var SubstitutionMatrixAbstract
+     */
+    private $substitutionMatrix;
+
+    /**
+     * @var integer
+     */
+    private $score = 0;
+
+    /**
+     * @var integer
+     */
+    private $minScore = self::INITIAL_SCORE;
+
+    /**
+     * @var integer
+     */
+    private $maxScore;
+
+    /**
+     * @var array
+     */
+    private $scoreMatrix;
+
+    /**
+     * @Cell
+     */
+    private $scoreCell;
+
+    /**
+     * @var integer
+     */
+    private $scoreMatrixWidth;
+
+    /**
+     * @var integer
+     */
+    private $scoreMatrixHeight;
+
+    /**
+     * @var array
+     */
+    private $pair;
+
+    /**
+     * Prepares for a pairwise local sequence alignment.
+     *
+     * @param SequenceInterface          $query      The first sequence of the
+     *                                               pair to align.
+     * @param SequenceInterface          $target     The second sequence of the
+     *                                               pair to align.
+     * @param GapPenaltyInterface        $gapPenalty The gap penalties used
+     *                                               during alignment.
+     * @param SubstitutionMatrixAbstract $subMatrix  The set of substitution
+     *                                               scores used during
+     *                                               alignment.
      */
     public function __construct(
-        $firstSequence, $secondSequence, $match = 1, $mismatch = -1, $gap = -1
+        SequenceInterface $query, SequenceInterface $target,
+        GapPenaltyInterface $gapPenalty, SubstitutionMatrixAbstract $subMatrix
     ) {
-        parent::__construct(
-            $firstSequence, $secondSequence, $match, $mismatch, $gap
-        );
+        $this->query = $query;
+        $this->target = $target;
+        $this->gapPenalty = $gapPenalty;
+        $this->substitutionMatrix = $subMatrix;
 
-        $this->highScoreCell = $this->scoreTable[0][0];
+        $maxq = 0;
+        $maxt = 0;
+
+        for ($i = 0; $i < $query->getLength(); ++$i) {
+            $compound = \substr($query, $i, 1);
+            $maxq += $this->substitutionMatrix->getValue($compound, $compound);
+        }
+
+        for ($i = 0; $i < $target->getLength(); ++$i) {
+            $compound = \substr($target, $i, 1);
+            $maxt += $this->substitutionMatrix->getValue($compound, $compound);
+        }
+
+        $this->maxScore = \max([$maxq, $maxt]);
+        $this->scoreMatrixWidth = (\strlen($query) + 1);
+        $this->scoreMatrixHeight = (\strlen($target) + 1);
+        $this->initializeScoreMatrix();
+        $this->calculateScoreMatrix();
+        $this->traceback();
     }
 
     /**
+     * Initializes all Cells of the score matrix.
+     *
      * @return void
      */
-    protected function fillInCell(
+    private function initializeScoreMatrix()
+    {
+        for ($i = 0; $i < $this->scoreMatrixHeight; ++$i) {
+            for ($j = 0; $j < $this->scoreMatrixWidth; ++$j) {
+                $this->scoreMatrix[$i][$j] = new Cell(
+                    $i, $j, self::INITIAL_SCORE
+                );
+            }
+        }
+    }
+
+    /**
+     * Calculates all Cells of the score matrix.
+     *
+     * @return void
+     */
+    private function calculateScoreMatrix()
+    {
+        for ($row = 1; $row < $this->scoreMatrixHeight; ++$row) {
+            for ($col = 1; $col < $this->scoreMatrixWidth; ++$col) {
+                $currentCell = $this->scoreMatrix[$row][$col];
+                $cellAbove = $this->scoreMatrix[$row - 1][$col];
+                $cellToLeft = $this->scoreMatrix[$row][$col - 1];
+                $cellAboveLeft = $this->scoreMatrix[$row - 1][$col - 1];
+                $this->calculateCell(
+                    $currentCell, $cellAbove, $cellToLeft, $cellAboveLeft
+                );
+            }
+        }
+    }
+
+    /**
+     * Calculates the current Cell in the score matrix.
+     *
+     * @param Cell $currentCell   The current Cell.
+     * @param Cell $cellAbove     The Cell above the current Cell.
+     * @param Cell $cellToLeft    The Cell to the left of the current Cell.
+     * @param Cell $cellAboveLeft The cell to above and to the left of the
+     *                            current Cell.
+     *
+     * @return void
+     */
+    private function calculateCell(
         Cell $currentCell, Cell $cellAbove,
         Cell $cellToLeft, Cell $cellAboveLeft
     ) {
-        $rowSpaceScore = $cellAbove->getScore() + $this->space;
-        $colSpaceScore = $cellToLeft->getScore() + $this->space;
-        $matchOrMismatchScore = $cellAboveLeft->getScore();
+        $a = $this->returnCompoundFromQuery($currentCell);
+        $b = $this->returnCompoundFromTarget($currentCell);
 
-        if (substr($this->secondSequence, ($currentCell->getRow() - 1), 1) === substr($this->firstSequence, ($currentCell->getColumn() - 1), 1)) {
-            $matchOrMismatchScore += $this->match;
-        } else {
-            $matchOrMismatchScore += $this->mismatch;
-        }
+        // Match/Mismatch
+        $cellAboveLeftScore = $cellAboveLeft->getScore()
+            + $this->weight($a, $b);
+        // Deletion
+        $cellAboveScore = $cellAbove->getScore()
+            + $this->weight($a, self::GAP_CHARACTER);
+        // Insertion
+        $cellToLeftScore = $cellToLeft->getScore()
+            + $this->weight(self::GAP_CHARACTER, $b);
 
-        if ($rowSpaceScore >= $colSpaceScore) {
-            if ($matchOrMismatchScore >= $rowSpaceScore) {
-                if ($matchOrMismatchScore > 0) {
-                    $currentCell->setScore($matchOrMismatchScore);
+        if ($cellAboveScore >= $cellToLeftScore) {
+            if ($cellAboveLeftScore >= $cellAboveScore) {
+                if ($cellAboveLeftScore > self::INITIAL_SCORE) {
+                    $currentCell->setScore($cellAboveLeftScore);
                     $currentCell->setPreviousCell($cellAboveLeft);
                 }
             } else {
-                if ($rowSpaceScore > 0) {
-                    $currentCell->setScore($rowSpaceScore);
+                if ($cellAboveScore > self::INITIAL_SCORE) {
+                    $currentCell->setScore($cellAboveScore);
                     $currentCell->setPreviousCell($cellAbove);
                 }
             }
         } else {
-            if ($matchOrMismatchScore >= $colSpaceScore) {
-                if ($matchOrMismatchScore > 0) {
-                    $currentCell->setScore($matchOrMismatchScore);
+            if ($cellAboveLeftScore >= $cellToLeftScore) {
+                if ($cellAboveLeftScore > self::INITIAL_SCORE) {
+                    $currentCell->setScore($cellAboveLeftScore);
                     $currentCell->setPreviousCell($cellAboveLeft);
                 }
             } else {
-                if ($colSpaceScore > 0) {
-                    $currentCell->setScore($colSpaceScore);
+                if ($cellToLeftScore > self::INITIAL_SCORE) {
+                    $currentCell->setScore($cellToLeftScore);
                     $currentCell->setPreviousCell($cellToLeft);
                 }
             }
         }
 
-        if ($currentCell->getScore() > $this->highScoreCell->getScore()) {
-            $this->highScoreCell = $currentCell;
+        if ($currentCell->getScore() > $this->score) {
+            $this->score = $currentCell->getScore();
+            $this->scoreCell = $currentCell;
+        }
+    }
+
+    private function returnCompoundFromTarget(Cell $currentCell)
+    {
+        return \substr($this->target, ($currentCell->getRow() - 1), 1);
+    }
+
+    private function returnCompoundFromQuery(Cell $currentCell)
+    {
+        return \substr($this->query, ($currentCell->getColumn() - 1), 1);
+    }
+
+    /**
+     * @param string $x The first compound to compare.
+     * @param string $y The second compund to compare.
+     *
+     * @return integer The score to add.
+     * @todo Detect Gap open / gap extend.
+     */
+    private function weight($x, $y) {
+        if (self::GAP_CHARACTER === $x || self::GAP_CHARACTER === $y) {
+            return $this->gapPenalty->getOpenPenalty() * (-1);
+        } else {
+            return $this->substitutionMatrix->getValue($x, $y);
         }
     }
 
     /**
-     * @return string
+     * Runs the traceback.
+     *
+     * @return void
+     */
+    private function traceback()
+    {
+        $alignedQuery = '';
+        $alignedTarget = '';
+
+        // Start at the Cell with the highest score.
+        $currentCell = $this->scoreCell;
+
+        while (true === $this->isTracebackNotDone($currentCell)) {
+
+            $rowDiff = ($currentCell->getRow()
+                - $currentCell->getPreviousCell()->getRow());
+            if (1 === $rowDiff) {
+                $alignedTarget = $this->returnCompoundFromTarget($currentCell)
+                    . $alignedTarget;
+            } else {
+                $alignedTarget = '-' . $alignedTarget;
+            }
+
+            $columnDiff = ($currentCell->getColumn()
+                - $currentCell->getPreviousCell()->getColumn());
+            if (1 === $columnDiff) {
+                $alignedQuery = $this->returnCompoundFromQuery($currentCell)
+                    . $alignedQuery;
+            } else {
+                $alignedQuery = '-' . $alignedQuery;
+            }
+
+            $currentCell = $currentCell->getPreviousCell();
+        }
+
+        $this->pair = [$alignedQuery, $alignedTarget];
+    }
+
+    /**
+     * Checks whether the traceback is *not* done.
+     *
+     * @param Cell $currentCell The current Cell in the score table.
+     *
+     * @return boolean `true`if the traceback is *not* done; `false` otherwise.
+     */
+    private function isTracebackNotDone(Cell $currentCell)
+    {
+        return self::INITIAL_SCORE !== $currentCell->getScore();
+    }
+
+    // Getter
+
+    /**
+     * @return SequenceInterface
+     */
+    public function getQuery()
+    {
+        return $this->query;
+    }
+
+    /**
+     * @return SequenceInterface
+     */
+    public function getTarget()
+    {
+        return $this->target;
+    }
+
+    /**
+     * @return GapPenaltyInterface
+     */
+    public function getGapPenalty()
+    {
+        return $this->gapPenalty;
+    }
+
+    /**
+     * @return SubstitutionMatrixAbstract
+     */
+    public function getSubstitutionMatrix()
+    {
+        return $this->substitutionMatrix;
+    }
+
+    /**
+     * Returns the sequence alignment pair.
+     *
+     * @return array The sequence alignment pair.
+     */
+    public function getPair()
+    {
+        return $this->pair;
+    }
+
+    // Result
+
+    /**
+     * Returns the maximum possible score.
+     *
+     * @return integer The maximum possible score.
+     */
+    public function getMaxScore()
+    {
+        return $this->maxScore;
+    }
+
+    /**
+     * Returns the minimum possible score.
+     *
+     * @return integer The minimum possible score.
+     */
+    public function getMinScore()
+    {
+        return $this->minScore;
+    }
+
+    /**
+     * Returns the score resulting from the algorithm.
+     *
+     * @return integer The score resulting from the algorithm.
+     */
+    public function getScore()
+    {
+        return $this->scoreCell->getScore();
+    }
+
+    /**
+     * Returns the score matrix resulting from the algorithm.
+     *
+     * @return array The score matrix resulting from the algorithm.
+     */
+    public function getScoreMatrix()
+    {
+        return $this->scoreMatrix;
+    }
+
+    /**
+     * Returns score as a distance between 0.0 and the specified scale
+     * (default: 1.0).
+     *
+     * @param float $scale The maximum distance.
+     *
+     * @return float The score as a distance between 0.0 and the specified
+     *               scale (default: 1.0).
+     */
+    public function getDistance($scale = 1.0)
+    {
+        return $scale * ($this->getMaxScore() - $this->getScore())
+            / ($this->getMaxScore() - $this->getMinScore());
+    }
+
+    /**
+     * Returns a score as a similarity between 0.0 and the specified scale
+     * (default: 1.0).
+     *
+     * @param float $scale The maximum similarity.
+     *
+     * @return float The score as a similarity between 0.0 and the specified
+     *               scale (default: 1.0).
+     */
+    public function getSimilarity($scale = 1.0)
+    {
+        return $scale * ($this->getScore() - $this->getMinScore())
+            / ($this->getMaxScore() - $this->getMinScore());
+    }
+
+    /**
+     * Returns a string representation of this algorithm.
+     *
+     * @return string The string representation.
      */
     public function __toString()
     {
-        return "[SmithWaterman: sequence1=" - $this->firstSequence + ", sequence2="
-            . $this->secondSequence . "]";
+        $result = "\t" . self::GAP_CHARACTER;
+
+        foreach (\str_split($this->query) as $currentCharOfFirstSequence) {
+            $result .= "\t" . $currentCharOfFirstSequence;
+        }
+
+        $result .= \PHP_EOL;
+
+        for ($i = 0; $i < $this->target->getLength() + 1; ++$i) {
+            if ($i > 0) {
+                $result .= \substr($this->target, $i - 1, 1);
+            } else {
+                $result .= self::GAP_CHARACTER;
+            }
+
+            for ($j = 0; $j < $this->query->getLength() + 1; ++$j) {
+                $result .= "\t" . $this->scoreMatrix[$i][$j];
+            }
+
+            if ($i < $this->target->getLength()) {
+                $result .= \PHP_EOL;
+            }
+        }
+
+        return $result;
     }
 
     /**
-     * @return boolean
+     * @return string
+     * @todo Create class SequencePair.
      */
-    protected function traceBackIsNotDone(Cell $currentCell)
+    public function formatAlignment()
     {
-        return 0 !== $currentCell->getScore();
-    }
+        $lengthQuery = \strlen($this->pair[0]);
+        $lengthTarget = \strlen($this->pair[1]);
 
-    /**
-     * return Cell
-     */
-    protected function getTracebackStartingCell()
-    {
-        return $this->highScoreCell;
-    }
+        $result = '1 ' . $this->pair[0] . ' ' . $lengthQuery . \PHP_EOL;
+        $result .= '  ';
 
-    /**
-     * return Cell
-     */
-    protected function getInitialPointer($row, $col)
-    {
-        return null;
-    }
+        $min = \min([$lengthQuery, $lengthTarget]);
 
-    /**
-     * return integer
-     */
-    protected function getInitialScore($row, $col)
-    {
-        return 0;
+        for ($i = 0; $i < $min; ++$i) {
+            if (\substr($this->pair[0], $i, 1) === substr($this->pair[1], $i, 1)) {
+                $result .= '|';
+            } else {
+                $result .= ' ';
+            }
+        }
+
+        $result .= \PHP_EOL;
+        $result .= '1 ' . $this->pair[1] . ' ' . $lengthTarget . \PHP_EOL;
+
+        return $result;
     }
 
 }

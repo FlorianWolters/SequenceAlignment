@@ -154,14 +154,11 @@ class ControllerProvider implements ControllerProviderInterface
                 $substitutionMatrix = SubstitutionMatrixFactory::getInstance()
                     ->create($substitutionMatrixType);
 
-                // TODO Modify algorithm and the constructor call.
                 $aligner = new SmithWaterman(
-                    $data->getQuery()->getSequenceStr(),
-                    $data->getTarget()->getSequenceStr(),
-                    5,
-                    -4,
-                    $data->getGapPenalty()->getOpenPenalty()/*,
-                    $substitutionMatrix*/
+                    $data->getQuery(),
+                    $data->getTarget(),
+                    $data->getGapPenalty(),
+                    $substitutionMatrix
                 );
 
                 return $app->render(
