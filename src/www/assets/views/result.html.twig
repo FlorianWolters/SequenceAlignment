@@ -43,7 +43,7 @@
     {% elseif loop.last %}
         <td class="leftColumn bottomLeftCell">{{ target[i - 1] }}</td>
     {% else %}
-        <td class="leftColumn">{{ target[i] }}</td>
+        <td class="leftColumn">{{ target[i - 1] }}</td>
     {% endif %}
 
     {% for j in range (0, alignment.query.length) %}
