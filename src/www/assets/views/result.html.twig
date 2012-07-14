@@ -15,14 +15,18 @@
 <ul>
     <li>Query: {{ alignment.query }} (Length: {{ alignment.query.length }})</li>
     <li>Target: {{ alignment.target }} (Length: {{ alignment.target.length }})</li>
-    <li>Gap open penalty: {{ alignment.gapPenalty.openPenalty }}</li>
-    <li>Gap extend penalty: {{ alignment.gapPenalty.extensionPenalty }}</li>
+    <li>Substitution Matrix: {{ alignment.substitutionMatrixName }}</li>
+    <li>Gap Open Penalty: {{ alignment.gapPenalty.openPenalty }}</li>
+    <li>Gap Extend Penalty: {{ alignment.gapPenalty.extensionPenalty }}</li>
+    <li>Maximum Possible Score: {{ aligner.maxScore }}</li>
+    <li>Minimum Possible Score: {{ aligner.minScore }}</li>
 </ul>
 
 <h2>Scoring Matrix</h2>
 <table id="matrix">
     <tr>
         <td class="topRow leftColumn topLeftCell"></td>
+        <td class="topRow">-</td>
 {% for currentCharOfFirstSequence in query %}
     {% if loop.last %}
         <td class="topRow topRightCell">{{ currentCharOfFirstSequence }}</td>
@@ -32,19 +36,21 @@
 {% endfor %}
     </tr>
 
-{% for i in range (0, alignment.target.length - 1) %}
+{% for i in range (0, alignment.target.length) %}
     <tr>
-    {% if loop.last %}
-        <td class="leftColumn bottomLeftCell">{{ target[i] }}</td>
+    {% if loop.first %}
+        <td class="leftColumn">-</td>
+    {% elseif loop.last %}
+        <td class="leftColumn bottomLeftCell">{{ target[i - 1] }}</td>
     {% else %}
         <td class="leftColumn">{{ target[i] }}</td>
     {% endif %}
 
-    {% for j in range (0, alignment.query.length - 1) %}
+    {% for j in range (0, alignment.query.length) %}
         {% if loop.last and loop.parent.loop.last %}
-        <td class="bottomRightCell">{{ aligner.scoreTable[i][j] }}</td>
+        <td class="bottomRightCell">{{ aligner.scoreMatrix[i][j] }}</td>
         {% else %}
-        <td>{{ aligner.scoreTable[i][j] }}</td>
+        <td>{{ aligner.scoreMatrix[i][j] }}</td>
         {% endif %}
     {% endfor %}
     </tr>
@@ -52,11 +58,10 @@
 </table>
 
 <h2>Result Data</h2>
-<p>Alignment Score: <strong>{{ aligner.alignmentScore }}</strong></p>
+<p>Distance: <strong>{{ aligner.distance }}</strong></p>
+<p>Similarity: <strong>{{ aligner.similarity }}</strong></p>
+<p>Score: <strong>{{ aligner.score }}</strong></p>
 <p>Alignment:</p>
-<pre>
-{{ aligner.alignment[0] }}
-{{ aligner.alignment[1] }}
-</pre>
+<pre>{{ aligner.formatAlignment }}</pre>
 
 {% endblock %}
