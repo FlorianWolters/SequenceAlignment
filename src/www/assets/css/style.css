@@ -130,8 +130,10 @@ td.bottomRightCell {
 
 td.valueHidden {
     visibility: hidden;
+    color: #c5e8f7;
 }
 
 td.valueShown {
     visibility: visible;
+    color: #000000;
 }

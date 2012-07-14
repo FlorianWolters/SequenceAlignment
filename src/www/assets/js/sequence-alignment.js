@@ -105,12 +105,14 @@ function nextRow()
     // Demo of coloring calculation-relevant table-cells for visualisation
     // instead of using tooltips
     /*
-    if (fillCellIndex > (2 * numColums))
-    {
-        $('#matrix').find($('td:eq(' + (fillCellIndex+1) + ')')).css('background-color', '#006699');
-        $('#matrix').find($('td:eq(' + (fillCellIndex-numColums+1) + ')')).css('background-color', '#CC3333');
-        $('#matrix').find($('td:eq(' + (fillCellIndex-numColums) + ')')).css('background-color', '#CC3333');
-    }
+    var currentCellValue     = $('#matrix').find($('td:eq(' + (fillCellIndex) + ')')).html();
+    var topNextCellValue     = $('#matrix').find($('td:eq(' + (fillCellIndex-numColums) + ')')).html();
+    var topLeftNextCellValue = $('#matrix').find($('td:eq(' + (fillCellIndex-numColums-1) + ')')).html();
+    var leftNextCellValue    = $('#matrix').find($('td:eq(' + (fillCellIndex-1) + ')')).html();
+
+    $('#matrix').find($('td:eq(' + (fillCellIndex) + ')')).css('background-color', '#006699');
+    $('#matrix').find($('td:eq(' + (fillCellIndex-numColums) + ')')).css('background-color', '#CC3333');
+    $('#matrix').find($('td:eq(' + (fillCellIndex-numColums-1) + ')')).css('background-color', '#CC3333');
     */
     fillCellIndex += 2;
 }
