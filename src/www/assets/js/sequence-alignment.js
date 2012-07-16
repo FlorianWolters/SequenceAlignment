@@ -38,6 +38,7 @@ function initCells()
         {
             $('#matrix').find($('td:eq(' + i + ')')).removeClass("valueShown");
             $('#matrix').find($('td:eq(' + i + ')')).addClass("valueHidden");
+            $('#matrix').find($('td:eq(' + i + ')')).css('background-color', '');
         }
     }
 }
@@ -110,9 +111,10 @@ function completeAlignment()
         {
             $('#matrix').find($('td:eq(' + i + ')')).removeClass("valueHidden");
             $('#matrix').find($('td:eq(' + i + ')')).addClass("valueShown");
+            
+            fillCellIndex = i;
+            highlightCalculationRelevantCells();
         }
-        
-        highlightCalculationRelevantCells();
     }
 
     initIndexes();
