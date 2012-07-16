@@ -57,7 +57,7 @@ header h1 {
     display: inline;
     line-height: 80px;
     color: black;
-    text-shadow: #eef8fd 0.1em, 0.1em;
+    text-shadow: #eef8fd .1em, .1em;
 }
 
 
@@ -76,7 +76,7 @@ header h1 {
 div[role="main"] {
     background-color: #eef8fd;
     width: 600px;
-    margin: 0.5em auto;
+    margin: .5em auto;
     border-radius: 1.5em;
     padding: 1em;
 }
@@ -88,19 +88,17 @@ footer {
 
 table {
     background-color: #fff;
-    border-radius: 10px;
-    border-spacing: 0;
-    box-shadow: 0 0 3px 1px #4fc4fc;
+    border-radius: .75em;
+    box-shadow: 0 0 2em .25em #4fc4fc;
     text-align: center;
-    vertical-align: central;
 }
 
 td {
     background-color: #c5e8f7;
-    width: 30px;
-    height: 30px;
-    padding: 0px;
-    border-width: 1px;
+    width: 3em;
+    height: 3em;
+    padding: 0;
+    border-width: .1em;
     border-style: solid;
     border-color: #fff;
 }
@@ -122,18 +120,14 @@ td.topRightCell {
     border-top-right-radius: 10px;
 }
 
-/* TODO Does not work, the CSS class is correct, but the background color is not set. */
 td.bottomRightCell {
-    background-color: #c5e8f7;
     border-bottom-right-radius: 10px;
 }
 
 td.valueHidden {
     visibility: hidden;
-    color: #c5e8f7;
 }
 
 td.valueShown {
     visibility: visible;
-    color: #000000;
 }
