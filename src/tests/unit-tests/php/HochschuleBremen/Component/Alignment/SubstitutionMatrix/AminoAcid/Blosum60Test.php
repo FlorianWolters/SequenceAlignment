@@ -19,7 +19,7 @@
  *
  * @category   Biology
  * @package    Alignment
- * @subpackage Model
+ * @subpackage SubstitutionMatrix
  * @author     Florian Wolters <wolters.fl@gmail.com>
  * @copyright  2012 Florian Wolters
  * @license    http://gnu.org/licenses/lgpl.txt LGPL-3.0+
@@ -35,7 +35,7 @@ namespace HochschuleBremen\Component\Alignment\SubstitutionMatrix\AminoAcid;
  *
  * @category   Biology
  * @package    Alignment
- * @subpackage Model
+ * @subpackage SubstitutionMatrix
  * @author     Florian Wolters <wolters.fl@gmail.com>
  * @copyright  2012 Florian Wolters
  * @license    http://gnu.org/licenses/lgpl.txt LGPL-3.0+
@@ -101,7 +101,7 @@ class Blosum60Test extends \PHPUnit_Framework_TestCase
             ['*', -4, -4, -4, -4, -4, -4, -4, -4, -4, -4, -4, -4, -4, -4, -4, -4, -4, -4, -4, -4, -4, -4, -4,  1]
         ];
 
-        $this->assertEquals($expected, $this->matrix->getScores());
+        $this->assertEquals($expected, $this->matrix->getMatrix());
     }
 
 }

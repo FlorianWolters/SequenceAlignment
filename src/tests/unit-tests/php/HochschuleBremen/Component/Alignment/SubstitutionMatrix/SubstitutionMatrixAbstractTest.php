@@ -19,7 +19,7 @@
  *
  * @category   Biology
  * @package    Alignment
- * @subpackage Model
+ * @subpackage SubstitutionMatrix
  * @author     Florian Wolters <wolters.fl@gmail.com>
  * @copyright  2012 Florian Wolters
  * @license    http://gnu.org/licenses/lgpl.txt LGPL-3.0+
@@ -35,7 +35,7 @@ namespace HochschuleBremen\Component\Alignment\SubstitutionMatrix;
  *
  * @category   Biology
  * @package    Alignment
- * @subpackage Model
+ * @subpackage SubstitutionMatrix
  * @author     Florian Wolters <wolters.fl@gmail.com>
  * @copyright  2012 Florian Wolters
  * @license    http://gnu.org/licenses/lgpl.txt LGPL-3.0+

@@ -17,16 +17,15 @@
  *
  * PHP version 5.4
  *
- * @category   Biology
- * @package    Alignment
- * @subpackage Algorithm
- * @author     Steffen Schütte <steffen.schuette@web.de>
- * @author     Florian Wolters <wolters.fl@gmail.com>
- * @copyright  2012 Steffen Schütte, Florian Wolters
- * @license    http://gnu.org/licenses/lgpl.txt LGPL-3.0+
- * @version    GIT: $Id$
- * @link       http://github.com/FlorianWolters/SequenceAlignment
- * @since      File available since Release 0.1.0
+ * @category  Biology
+ * @package   Alignment
+ * @author    Steffen Schütte <steffen.schuette@web.de>
+ * @author    Florian Wolters <wolters.fl@gmail.com>
+ * @copyright 2012 Steffen Schütte, Florian Wolters
+ * @license   http://gnu.org/licenses/lgpl.txt LGPL-3.0+
+ * @version   GIT: $Id$
+ * @link      http://github.com/FlorianWolters/SequenceAlignment
+ * @since     File available since Release 0.1.0
  */
 
 namespace HochschuleBremen\Component\Alignment;
@@ -54,30 +53,51 @@ use HochschuleBremen\Component\Alignment\SubstitutionMatrix\NucleotideSubstituti
  */
 class SmithWatermanTest extends \PHPUnit_Framework_TestCase
 {
+
+    /**
+     * @var SubstitutionMatrixAbstract
+     */
+    private $substitutionMatrix;
+
+    /**
+     * Sets up the fixture.
+     *
+     * This method is called before a test is executed.
+     *
+     * @return void
+     */
+    public function setUp()
+    {
+        $substitutionMatrixFactory = SubstitutionMatrixFactory::getInstance();
+        $this->substitutionMatrix = $substitutionMatrixFactory->create(
+            NucleotideSubstitutionMatrixEnum::NUCFOURTWO()
+        );
+    }
+
     /**
      * @return array
      */
-    public static function providerNucleotideGetScoreTable()
+    public static function providerGetScoreMatrixForSubstitutionMatrixNucFourTwo()
     {
         return [
             [
-                'ACTGGCAGT', // firstSequence
-                'CACTGAT',   // secondSequence
+                'ACTGGCAGT', // query
+                'CACTGAT',   // target
                 [
                     [0,  0,  0,  0,  0,  0,  0,  0,  0,  0], // expected
                     [0,  0,  5,  1,  0,  0,  5,  1,  0,  0],
                     [0,  5,  1,  1,  0,  0,  1, 10,  6,  2],
-                    [0,  1, 10,  6,  2,  0,  6,  6,  6,  2],                    
+                    [0,  1, 10,  6,  2,  0,  6,  6,  6,  2],
                     [0,  0,  6, 15, 11,  7,  3,  2,  2, 11],
                     [0,  0,  2, 11, 20, 25, 21, 17, 22, 18],
                     [0,  5,  1,  7, 16, 21, 21, 26, 22, 18],
-                    [0,  1,  1, 12, 12, 17, 17, 22, 22, 27],
+                    [0,  1,  1, 12, 12, 17, 17, 22, 22, 27]
                 ]
-            ],            [
-                'CTGA', // firstSequence
-                'GTTG',   // secondSequence
+            ], [
+                'CTGA',
+                'GTTG',
                 [
-                    [0,  0,  0,  0,  0], // expected
+                    [0,  0,  0,  0,  0],
                     [0,  0,  0,  5,  1],
                     [0,  0,  5,  1,  1],
                     [0,  0, 10,  6,  2],
@@ -90,21 +110,19 @@ class SmithWatermanTest extends \PHPUnit_Framework_TestCase
     /**
      * @return void
      *
-     * @dataProvider providerGetScoreTable
+     * @dataProvider providerGetScoreMatrixForSubstitutionMatrixNucFourTwo
      * @test
      */
-    public function testNucleotideGetScoreTable(
-        $firstSequence, $secondSequence, $expected
+    public function testGetScoreMatrixForSubstitutionMatrixNucFourTwo(
+        $query, $target, $expected
     ) {
-
-        $substitutionMatrix = SubstitutionMatrix\SubstitutionMatrixFactory::getInstance();
-        
         $smithWaterman = new SmithWaterman(
-                new DnaSequence($firstSequence),
-                    new DnaSequence($secondSequence), 
-                        new SimpleGapPenalty,
-                            $substitutionMatrix->create(NucleotideSubstitutionMatrixEnum::NUCFOURTWO()));
-        
+            new DnaSequence($query),
+            new DnaSequence($target),
+            new SimpleGapPenalty,
+            $this->substitutionMatrix
+        );
+
         $actual = $smithWaterman->getScoreMatrixAsArray();
 
         $this->assertEquals($expected, $actual);
@@ -113,32 +131,36 @@ class SmithWatermanTest extends \PHPUnit_Framework_TestCase
     /**
      * @return array
      */
-    public static function providerNucleotideGetAlignment()
+    public static function providerGetPairForSubstitutionMatrixNucFourTwo()
     {
         return [
-            // firstSequence, secondSequence, expected
-            // First test
-            ['ACTGGCAGT', 'CACTGAT', ['ACTGGCAGT', 'ACT--G-AT']],
-            ['CTGA', 'GTTG', ['-TG', 'TTG']]
+            [
+                'ACTGGCAGT', // query
+                'CACTGAT', // target
+                ['ACTGGCAGT', 'ACT--G-AT'] // expected
+            ], [
+                'CTGA',
+                'GTTG',
+                ['-TG', 'TTG']
+            ]
         ];
     }
 
     /**
      * @return void
      *
-     * @dataProvider providerGetAlignment
+     * @dataProvider providerGetPairForSubstitutionMatrixNucFourTwo
      * @test
      */
-    public function testNucleotideGetAlignment($firstSequence, $secondSequence, $expected)
-    {  
-        $substitutionMatrix = SubstitutionMatrixFactory::getInstance();
-        
+    public function testGetPairForSubstitutionMatrixNucFourTwo($query, $target, $expected)
+    {
         $smithWaterman = new SmithWaterman(
-                new DnaSequence($firstSequence),
-                    new DnaSequence($secondSequence), 
-                        new SimpleGapPenalty, 
-                            $substitutionMatrix->create(NucleotideSubstitutionMatrixEnum::NUCFOURTWO()));
-        
+            new DnaSequence($query),
+            new DnaSequence($target),
+            new SimpleGapPenalty,
+            $this->substitutionMatrix
+        );
+
         $actual = $smithWaterman->getPair();
 
         $this->assertEquals($expected, $actual);
@@ -147,34 +169,40 @@ class SmithWatermanTest extends \PHPUnit_Framework_TestCase
     /**
      * @return array
      */
-    public static function providerNucleotideGetAlignmentScore()
+    public static function providerGetScoreForSubstitutionMatrixNucFourTwo()
     {
         return [
-            // firstSequence, secondSequence, expected
-            ['ACTGGCAGT', 'CACTGAT', 27],
-            ['CTGA', 'GTTG', 15]
+            [
+                'ACTGGCAGT', // query
+                'CACTGAT', // target
+                27 // expected
+            ], [
+                'CTGA',
+                'GTTG',
+                15
+            ]
         ];
     }
 
     /**
      * @return void
      *
-     * @dataProvider providerGetAlignmentScore
+     * @dataProvider providerGetScoreForSubstitutionMatrixNucFourTwo
      * @test
      */
-    public function testNucleotideGetAlignmentScore(
-        $firstSequence, $secondSequence, $expected
+    public function testGetScoreForSubstitutionMatrixNucFourTwo(
+        $query, $target, $expected
     ) {
-        $substitutionMatrix = SubstitutionMatrixFactory::getInstance();
-        
         $smithWaterman = new SmithWaterman(
-                new DnaSequence($firstSequence),
-                    new DnaSequence($secondSequence), 
-                        new SimpleGapPenalty, 
-                            $substitutionMatrix->create(NucleotideSubstitutionMatrixEnum::NUCFOURTWO()));
-        
+            new DnaSequence($query),
+            new DnaSequence($target),
+            new SimpleGapPenalty,
+            $this->substitutionMatrix
+        );
+
         $actual = $smithWaterman->getScore();
 
         $this->assertEquals($expected, $actual);
     }
+
 }
