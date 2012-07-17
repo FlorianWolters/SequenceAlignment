@@ -226,7 +226,6 @@ function completeAlignment()
     }
 
     initIndexes();
-
 }
 
 function completeBacktrack()
@@ -317,7 +316,7 @@ function getScoreAndCellIndex()
     completeAlignment();
     score = $('#score').html();
     
-    for(i = 8; i < totalCells; ++i)
+    for(i = numColums; i < totalCells; ++i)
     {
         if($('#matrix').find($('td:eq(' + (i) + ')')).html() === score)
         {
@@ -351,6 +350,17 @@ function resetCalc()
     initIndexes();
     initCells();
     firstClick = false;
+}
+
+function autoplay()
+{
+    initIndexes();
+    var tmp = fillCellIndex;
+    while(tmp <= (totalCells-1)) 
+    {   
+        setTimeout(nextStepCalc(), 1000);        
+        ++tmp;
+    }
 }
 
 $(document).ready(function() {
@@ -396,6 +406,12 @@ $(document).ready(function() {
         resetBt();
         event.preventDefault();
     });
+    
+    $('#autoplay').click(function(event){
+        autoplay();
+        event.preventDefault();
+    });
+    
     // Send Form on Enter. Only works from inputs that do not allow
     // carriage returns
     $(function() {
