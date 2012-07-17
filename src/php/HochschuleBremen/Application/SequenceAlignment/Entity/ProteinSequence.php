@@ -30,7 +30,7 @@
 
 namespace HochschuleBremen\Application\SequenceAlignment\Entity;
 
-use HochschuleBremen\Component\Sequence\RnaSequence as ProteinSequenceModel;
+use HochschuleBremen\Component\Sequence\ProteinSequence as ProteinSequenceModel;
 
 /**
  * TODO
