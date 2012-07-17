@@ -27,6 +27,7 @@ var numColums = 0;
 var totalCells = 0;
 var numRowsShown = 0;
 var fillCellIndex = 0;
+var score = 0;
 
 function initCells()
 {
@@ -58,7 +59,7 @@ function initIndexes()
 }
 
 // TODO: DOCUMENTATION
-function nextStep()
+function nextStepCalc()
 {
     $('#matrix').find($('td:eq(' + fillCellIndex + ')')).removeClass("valueHidden");
     $('#matrix').find($('td:eq(' + fillCellIndex + ')')).addClass("valueShown");
@@ -81,7 +82,7 @@ function nextStep()
 }
 
 // TODO: DOCUMENTATION
-function nextRow()
+function nextRowCalc()
 {
     if(fillCellIndex > totalCells) return;
     // |0 to 'cast' double-division-result to integer
@@ -131,6 +132,11 @@ function completeAlignment()
     */
 }
 
+function completeBacktrack()
+{
+    getScore();
+}
+
 function highlightCalculationRelevantCells()
 {
     // Demo of coloring calculation-relevant table-cells for visualisation
@@ -151,8 +157,14 @@ function highlightCalculationRelevantCells()
     }
 }
 
+function getScore()
+{
+    completeAlignment();
+    score = $('#score').html();
+}
+
 // TODO: DOCUMENTATION
-function reset()
+function resetCalc()
 {
     initIndexes();
     initCells();
@@ -164,14 +176,14 @@ $(document).ready(function() {
     initCells();
 
     // Stepwise enter the calculated alignment values cell by cell
-    $('#nextStep').click(function(event){
-        nextStep();
+    $('#nextStepCalc').click(function(event){
+        nextStepCalc();
         event.preventDefault();
     });
 
     // Stepwise enter the calculated alignment values row by row
-    $('#nextRow').click(function(event){
-        nextRow();
+    $('#nextRowCalc').click(function(event){
+        nextRowCalc();
         event.preventDefault();
     });
 
@@ -182,11 +194,30 @@ $(document).ready(function() {
     });
 
     // Reset alignment table, clear all values and colors
-    $('#reset').click(function(event){
-        reset();
+    $('#resetCalc').click(function(event){
+        resetCalc();
+        event.preventDefault();
+    });
+    
+    $('#nextStepBt').click(function(event){
+        nextStepBt();
+        event.preventDefault();
+    });
+    
+    $('#nextRowBt').click(function(event){
+        nextRowBt();
         event.preventDefault();
     });
 
+    $('#completeBacktrack').click(function(event){
+        completeBacktrack();
+        event.preventDefault();
+    });
+    
+    $('#resetBt').click(function(event){
+        resetBt();
+        event.preventDefault();
+    });
     // Send Form on Enter. Only works from inputs that do not allow
     // carriage returns
     $(function() {

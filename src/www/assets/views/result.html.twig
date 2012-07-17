@@ -4,11 +4,21 @@
 {% block main %}
 
 <fieldset>
-    <legend>Actions</legend>
-    <button type="button" id="nextStep" class="btn">Next Step</button>
-    <button type="button" id="nextRow" class="btn">Next Row</button>
+    <legend>Calculation Actions</legend>
+    <button type="button" id="nextStepCalc" class="btn">Next Step</button>
+    <button type="button" id="nextRowCalc" class="btn">Next Row</button>
     <button type="button" id="completeAlignment" class="btn">Show Complete Alignment</button>
-    <button type="button" id="reset" class="btn">Reset</button>
+    <button type="button" id="resetCalc" class="btn">Reset</button>
+</fieldset>
+<br>
+<br>
+
+<fieldset>
+    <legend>Backtrack Actions</legend>
+    <button type="button" id="nextStepBt" class="btn">Next Step</button>
+    <button type="button" id="nextRowBt" class="btn">Next Row</button>
+    <button type="button" id="completeBacktrack" class="btn">Show Complete Backtrack</button>
+    <button type="button" id="resetBt" class="btn">Reset</button>
 </fieldset>
 
 <h2>Input Data</h2>
@@ -60,7 +70,7 @@
 <h2>Result Data</h2>
 <p>Distance: <strong>{{ aligner.distance }}</strong></p>
 <p>Similarity: <strong>{{ aligner.similarity }}</strong></p>
-<p>Score: <strong>{{ aligner.score }}</strong></p>
+<p>Score: <strong id="score">{{ aligner.score }}</strong></p>
 <p>Alignment:</p>
 <pre>{{ aligner.formatAlignment }}</pre>
 
