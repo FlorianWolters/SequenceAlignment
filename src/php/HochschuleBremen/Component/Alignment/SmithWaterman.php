@@ -296,10 +296,16 @@ class SmithWaterman
         // Start at the Cell with the highest score.
         $currentCell = $this->scoreCell;
 
+        $alignedQuery = $this->returnCompoundFromQuery($currentCell)
+            . $alignedQuery;
+        $alignedTarget = $this->returnCompoundFromTarget($currentCell)
+            . $alignedTarget;
+        $oldCell = $currentCell;
+        $currentCell = $currentCell->getPreviousCell();
+
         while (true === $this->isTracebackNotDone($currentCell)) {
 
-            $rowDiff = ($currentCell->getRow()
-                - $currentCell->getPreviousCell()->getRow());
+            $rowDiff = ($oldCell->getRow() - $currentCell->getRow());
             if (1 === $rowDiff) {
                 $alignedTarget = $this->returnCompoundFromTarget($currentCell)
                     . $alignedTarget;
@@ -307,8 +313,7 @@ class SmithWaterman
                 $alignedTarget = '-' . $alignedTarget;
             }
 
-            $columnDiff = ($currentCell->getColumn()
-                - $currentCell->getPreviousCell()->getColumn());
+            $columnDiff = ($oldCell->getColumn() - $currentCell->getColumn());
             if (1 === $columnDiff) {
                 $alignedQuery = $this->returnCompoundFromQuery($currentCell)
                     . $alignedQuery;
@@ -316,8 +321,9 @@ class SmithWaterman
                 $alignedQuery = '-' . $alignedQuery;
             }
 
+            $oldCell = $currentCell;
             $currentCell = $currentCell->getPreviousCell();
-        }
+        } 
 
         $this->pair = [$alignedQuery, $alignedTarget];
     }
@@ -513,3 +519,25 @@ class SmithWaterman
     }
 
 }
+//require 'C:\Users\Olav\Documents\GitHub\SequenceAlignment\vendor\autoload.php';
+//
+//use HochschuleBremen\Component\Alignment\SubstitutionMatrix\SubstitutionMatrixFactory;
+//use HochschuleBremen\Component\Alignment\SubstitutionMatrix\NucleotideSubstitutionMatrixEnum;
+//use HochschuleBremen\Component\Sequence\DnaSequence;
+//use HochschuleBremen\Component\Alignment\GapPenalty\SimpleGapPenalty;
+//
+//$substitutionMatrix = SubstitutionMatrixFactory::getInstance()
+//    ->create(NucleotideSubstitutionMatrixEnum::NUCFOURTWO());
+//
+//$query = new DnaSequence('ACTGGCAGT');
+//$target = new DnaSequence('CACTGAT');
+//
+//$aligner = new SmithWaterman(
+//    $query,
+//    $target,
+//    new SimpleGapPenalty,
+//    $substitutionMatrix
+//);
+//
+//$pair = $aligner->getPair();
+//var_dump($pair);
