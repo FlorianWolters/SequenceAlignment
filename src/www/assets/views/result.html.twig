@@ -4,23 +4,16 @@
 {% block main %}
 
 <fieldset>
-    <legend>Calculation Actions</legend>
+    <legend> Actions</legend>
     <button type="button" id="nextStepCalc" class="btn">Next Step</button>
     <button type="button" id="nextRowCalc" class="btn">Next Row</button>
     <button type="button" id="completeAlignment" class="btn">Show Complete Alignment</button>
+    <button type="button" id="completeBacktrack" class="btn">Show Complete Backtrack</button>
     <button type="button" id="resetCalc" class="btn">Reset</button>
 </fieldset>
-<br>
-<br>
+<br/>
 
-<fieldset>
-    <legend>Backtrack Actions</legend>
-    <button type="button" id="nextStepBt" class="btn">Next Step</button>
-    <button type="button" id="nextRowBt" class="btn">Next Row</button>
-    <button type="button" id="completeBacktrack" class="btn">Show Complete Backtrack</button>
-    <button type="button" id="resetBt" class="btn">Reset</button>
-</fieldset>
-
+<div style="float: left; padding-right: 20%">
 <h2>Input Data</h2>
 <ul>
     <li>Query: {{ alignment.query }} (Length: {{ alignment.query.length }})</li>
@@ -31,6 +24,17 @@
     <li>Maximum Possible Score: {{ aligner.maxScore }}</li>
     <li>Minimum Possible Score: {{ aligner.minScore }}</li>
 </ul>
+
+<br/>
+
+<h2>Result Data</h2>
+<p>Distance: <strong>{{ aligner.distance }}</strong></p>
+<p>Similarity: <strong>{{ aligner.similarity }}</strong></p>
+<p>Score: <strong id="score">{{ aligner.score }}</strong></p>
+<p>Alignment:</p>
+<pre>{{ aligner.formatAlignment }}</pre>
+
+</div>
 
 <h2>Scoring Matrix</h2>
 <table id="matrix">
@@ -66,12 +70,6 @@
     </tr>
 {% endfor %}
 </table>
-
-<h2>Result Data</h2>
-<p>Distance: <strong>{{ aligner.distance }}</strong></p>
-<p>Similarity: <strong>{{ aligner.similarity }}</strong></p>
-<p>Score: <strong id="score">{{ aligner.score }}</strong></p>
-<p>Alignment:</p>
-<pre>{{ aligner.formatAlignment }}</pre>
+<br style="clear: left"/>
 
 {% endblock %}

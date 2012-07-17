@@ -54,16 +54,15 @@ use HochschuleBremen\Component\Alignment\SubstitutionMatrix\NucleotideSubstituti
  */
 class SmithWatermanTest extends \PHPUnit_Framework_TestCase
 {
-
     /**
      * @return array
      */
-    public static function providerGetScoreTable()
+    public static function providerNucleotideGetScoreTable()
     {
         return [
             [
                 'ACTGGCAGT', // firstSequence
-                'CACTGAT', // secondSequence
+                'CACTGAT',   // secondSequence
                 [
                     [0,  0,  0,  0,  0,  0,  0,  0,  0,  0], // expected
                     [0,  0,  5,  1,  0,  0,  5,  1,  0,  0],
@@ -74,6 +73,16 @@ class SmithWatermanTest extends \PHPUnit_Framework_TestCase
                     [0,  5,  1,  7, 16, 21, 21, 26, 22, 18],
                     [0,  1,  1, 12, 12, 17, 17, 22, 22, 27],
                 ]
+            ],            [
+                'CTGA', // firstSequence
+                'GTTG',   // secondSequence
+                [
+                    [0,  0,  0,  0,  0], // expected
+                    [0,  0,  0,  5,  1],
+                    [0,  0,  5,  1,  1],
+                    [0,  0, 10,  6,  2],
+                    [0,  0,  6, 15, 11]
+                ]
             ]
         ];
     }
@@ -81,11 +90,10 @@ class SmithWatermanTest extends \PHPUnit_Framework_TestCase
     /**
      * @return void
      *
-     * @covers HochschuleBremen\Component\Alignment\SmithWaterman::getScoreMatrix
      * @dataProvider providerGetScoreTable
      * @test
      */
-    public function testGetScoreTable(
+    public function testNucleotideGetScoreTable(
         $firstSequence, $secondSequence, $expected
     ) {
 
@@ -97,7 +105,7 @@ class SmithWatermanTest extends \PHPUnit_Framework_TestCase
                         new SimpleGapPenalty,
                             $substitutionMatrix->create(NucleotideSubstitutionMatrixEnum::NUCFOURTWO()));
         
-        $actual = $smithWaterman->getScoreMatrix();
+        $actual = $smithWaterman->getScoreMatrixAsArray();
 
         $this->assertEquals($expected, $actual);
     }
@@ -105,23 +113,23 @@ class SmithWatermanTest extends \PHPUnit_Framework_TestCase
     /**
      * @return array
      */
-    public static function providerGetAlignment()
+    public static function providerNucleotideGetAlignment()
     {
         return [
             // firstSequence, secondSequence, expected
             // First test
-            ['ACTGGCAGT', 'CACTGAT', ['-ACTGGCAGT', 'CACT--G-AT']]
+            ['ACTGGCAGT', 'CACTGAT', ['ACTGGCAGT', 'ACT--G-AT']],
+            ['CTGA', 'GTTG', ['-TG', 'TTG']]
         ];
     }
 
     /**
      * @return void
      *
-     * @covers HochschuleBremen\Component\Alignment\PairwiseSequenceAlignerAbstract::getPair
      * @dataProvider providerGetAlignment
      * @test
      */
-    public function testGetAlignment($firstSequence, $secondSequence, $expected)
+    public function testNucleotideGetAlignment($firstSequence, $secondSequence, $expected)
     {  
         $substitutionMatrix = SubstitutionMatrixFactory::getInstance();
         
@@ -139,22 +147,22 @@ class SmithWatermanTest extends \PHPUnit_Framework_TestCase
     /**
      * @return array
      */
-    public static function providerGetAlignmentScore()
+    public static function providerNucleotideGetAlignmentScore()
     {
         return [
             // firstSequence, secondSequence, expected
-            ['ACTGGCAGT', 'CACTGAT', 27]
+            ['ACTGGCAGT', 'CACTGAT', 27],
+            ['CTGA', 'GTTG', 15]
         ];
     }
 
     /**
      * @return void
      *
-     * @covers HochschuleBremen\Component\Alignment\SmithWaterman::getScore
      * @dataProvider providerGetAlignmentScore
      * @test
      */
-    public function testGetAlignmentScore(
+    public function testNucleotideGetAlignmentScore(
         $firstSequence, $secondSequence, $expected
     ) {
         $substitutionMatrix = SubstitutionMatrixFactory::getInstance();

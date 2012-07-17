@@ -29,9 +29,19 @@ var numRowsShown = 0;
 var fillCellIndex = 0;
 var score = 0;
 var scoreCellIndex = -1;
+var firstClick = false;
+var currentColumn = -1;
+var currentRow = -1;
+var lastRow = -1;
+var cellValueSource = -1;
 
 function initCells()
 {
+    for (i = 0; i < totalCells; ++i)
+    {
+        $('#matrix').find($('td:eq(' + i + ')')).css('background-color', '');
+    }
+    
     for (i = fillCellIndex; i < totalCells; ++i)
     {
         var nextRow = (i / numColums)|0;
@@ -40,7 +50,6 @@ function initCells()
         {
             $('#matrix').find($('td:eq(' + i + ')')).removeClass("valueShown");
             $('#matrix').find($('td:eq(' + i + ')')).addClass("valueHidden");
-            $('#matrix').find($('td:eq(' + i + ')')).css('background-color', '');
         }
     }
 }
@@ -62,49 +71,146 @@ function initIndexes()
 // TODO: DOCUMENTATION
 function nextStepCalc()
 {
-    $('#matrix').find($('td:eq(' + fillCellIndex + ')')).removeClass("valueHidden");
-    $('#matrix').find($('td:eq(' + fillCellIndex + ')')).addClass("valueShown");
+    if(fillCellIndex >= (totalCells-1)) return;
     
-    highlightCalculationRelevantCells();
+    if(!firstClick) 
+    {
+        fillZeros();
+        firstClick = true;
+        return;
+    }
+        
+    currentRow    = fillCellIndex - currentColumn;
+    
+    var nextRow   = (fillCellIndex / numColums)|0;
+    nextRow++;
+    
+    if(currentRow != nextRow) 
+    {
+        $('#matrix').find($('td:eq(' + currentRow + ')')).css('background-color', '');
+        lastRow = currentRow;
+    }
 
-    var nextRow = (fillCellIndex / numColums)|0;
-    ++nextRow;
-
-    // if ($('#matrix').find($('td:eq(' + (fillCellIndex+1) + ')')).html() == "")
     if ((fillCellIndex + 1) != (nextRow * numColums))
     {
         ++fillCellIndex;
     }
     else
     {
-        fillCellIndex += 2;
+        $('#matrix').find($('td:eq(' + (numColums-1) + ')')).css('background-color', '');
+        fillCellIndex += 3;
     }
+    currentColumn = (fillCellIndex) % numColums;
+    currentRow    = fillCellIndex - currentColumn;
+    
+    $('#matrix').find($('td:eq(' + (currentColumn-1) + ')')).css('background-color', '');
+    $('#matrix').find($('td:eq(' + cellValueSource + ')')).css('background-color', '');
+    
+    var compareRow    = $('#matrix').find($('td:eq(' + currentRow + ')')).html();
+    var compareColumn = $('#matrix').find($('td:eq(' + currentColumn + ')')).html();
+    
+    var match = false;
+    
+    match = (compareRow === compareColumn);
+    
+    //alert("compareRow(" + compareRow + ") == compareColumn(" + compareColumn + ")? " + (compareRow === compareColumn));        
+    
+    setTimeout(function(){
+        getCellValueSource(fillCellIndex);
+        //alert("fillCellIndex= " + fillCellIndex + " currentRow= " + currentRow + " numColumns= " + numColums);
+        if(match) 
+        {
+            $('#matrix').find($('td:eq(' + currentColumn + ')')).css('background-color', '#00FF33');
+            $('#matrix').find($('td:eq(' + currentRow + ')')).css('background-color', '#00FF33');
+            $('#matrix').find($('td:eq(' + fillCellIndex + ')')).css('background-color', '#72FE95');       
+            $('#matrix').find($('td:eq(' + cellValueSource + ')')).css('background-color', '#72FE95');
+        }
+        else 
+        {
+            $('#matrix').find($('td:eq(' + currentColumn + ')')).css('background-color', '#FF5353');
+            $('#matrix').find($('td:eq(' + currentRow + ')')).css('background-color', '#FF5353');
+            $('#matrix').find($('td:eq(' + fillCellIndex + ')')).css('background-color', '#FF7373');       
+            $('#matrix').find($('td:eq(' + cellValueSource + ')')).css('background-color', '#FF7373');
+        }
+        
+        $('#matrix').find($('td:eq(' + fillCellIndex + ')')).removeClass("valueHidden");
+        $('#matrix').find($('td:eq(' + fillCellIndex + ')')).addClass("valueShown");  
+        
+    }, 200);
+    
+}
 
+function getCellValueSource(index)
+{
+    var topLeftIndex = index-numColums-1;
+    var topIndex     = index-numColums;
+    var leftIndex    = index-1;
+
+    var topLeftCellValue = $('#matrix').find($('td:eq(' + topLeftIndex + ')')).html();
+    var topCellValue     = $('#matrix').find($('td:eq(' + topIndex + ')')).html(); 
+    var leftCellValue    = $('#matrix').find($('td:eq(' + leftIndex + ')')).html(); 
+    
+    clearValueCellsBackgrounds();
+    
+    $('#matrix').find($('td:eq(' + topLeftIndex + ')')).css('background-color', '#C0C0C0');
+    $('#matrix').find($('td:eq(' + topIndex + ')')).css('background-color', '#C0C0C0');
+    $('#matrix').find($('td:eq(' + leftIndex + ')')).css('background-color', '#C0C0C0');
+
+    var tmpMax   = topLeftCellValue;
+    var maxIndex = topLeftIndex;
+
+    //alert("1 topCellValue: " + topCellValue + " tmpMax: " + tmpMax + " (topCellValue|0 > tmpMax|0)= " + ((topCellValue|0) > (tmpMax|0)) );
+    if((topCellValue|0) > (tmpMax|0)) 
+    {
+        maxIndex = topIndex;
+        tmpMax   = topCellValue;
+        //alert("2 tmpMax: " + tmpMax + " maxIndex: " + maxIndex + " topCellValue: " + topCellValue);
+    }
+    if((leftCellValue|0) > (tmpMax|0)) 
+    {
+        maxIndex = leftIndex;
+        //alert("3 tmpMax: " + tmpMax + " maxIndex: " + maxIndex + " leftCellValue: " + leftCellValue);
+    }
+    cellValueSource = maxIndex;
 }
 
 // TODO: DOCUMENTATION
 function nextRowCalc()
-{
-    if(fillCellIndex > totalCells) return;
-    // |0 to 'cast' double-division-result to integer
-    var currentRow = (fillCellIndex / numColums)|0;
-    ++currentRow; // Because row-count starts from 0
-
-    for (i = fillCellIndex; i < (currentRow*numColums); ++i)
+{    
+    if(!firstClick) 
     {
-        $('#matrix').find($('td:eq(' + i + ')')).removeClass("valueHidden");
-        $('#matrix').find($('td:eq(' + i + ')')).addClass("valueShown");
-        fillCellIndex = i;
-        
-        highlightCalculationRelevantCells();
+        fillZeros();
+        firstClick = true;
     }
+    else
+    {
+        if(fillCellIndex > totalCells) return;
+        
+        for (i = 0; i < totalCells; ++i)
+        {
+            $('#matrix').find($('td:eq(' + i + ')')).css('background-color', '');
+        }
+        
+        // |0 to 'cast' double-division-result to integer
+        var currentRow = (fillCellIndex / numColums)|0;
+        ++currentRow; // Because row-count starts from 0
 
-    fillCellIndex += 2;
+        for (i = fillCellIndex; i < (currentRow*numColums); ++i)
+        {
+            $('#matrix').find($('td:eq(' + i + ')')).removeClass("valueHidden");
+            $('#matrix').find($('td:eq(' + i + ')')).addClass("valueShown");
+            fillCellIndex = i;
+
+            highlightCalculationRelevantCells();
+        }
+        fillCellIndex += 2;
+    }
 }
 
 // TODO: DOCUMENTATION
 function completeAlignment()
 {
+    initCells();
     for (i = fillCellIndex; i < totalCells; ++i)
     {
         var nextRow = (i / numColums)|0;
@@ -121,16 +227,6 @@ function completeAlignment()
 
     initIndexes();
 
-    // Demo of coloring calculation-relevant table-cells for visualisation
-    // instead of using tooltips
-    /*
-    if(fillCellIndex > 2*numColums)
-    {
-        $('#matrix').find($('td:eq(' + (fillCellIndex+1) + ')')).css('background-color', '#006699');
-        $('#matrix').find($('td:eq(' + (fillCellIndex-numColums+1) + ')')).css('background-color', '#CC3333');
-        $('#matrix').find($('td:eq(' + (fillCellIndex-numColums) + ')')).css('background-color', '#CC3333');
-    }
-    */
 }
 
 function completeBacktrack()
@@ -140,7 +236,8 @@ function completeBacktrack()
     var currentBacktrackCellIndex = scoreCellIndex;
     var currentRow = ((currentBacktrackCellIndex/numColums)|0)-1;
     
-    $('#matrix').find($('td:eq(' + (currentBacktrackCellIndex) + ')')).css('background-color', '#66FF33');
+    $('#matrix').find($('td:eq(' + (currentBacktrackCellIndex) + ')')).css('background-color', '#CC0000');    
+    $('#matrix').find($('td:eq(' + (currentBacktrackCellIndex) + ')')).css('color', '#FFFFFF');
     
     while(currentRow > 1)
     {
@@ -174,6 +271,19 @@ function completeBacktrack()
         currentRow = ((currentBacktrackCellIndex/numColums)|0)-1;
     }
 
+}
+
+function clearValueCellsBackgrounds()
+{
+    for (i = numColums+1; i < totalCells; ++i)
+    {
+        var nextRow = (i / numColums)|0;
+
+        if (i != (nextRow * numColums))
+        {
+            $('#matrix').find($('td:eq(' + i + ')')).css('background-color', '');
+        }
+    }
 }
 
 function highlightCalculationRelevantCells()
@@ -212,11 +322,31 @@ function getScoreAndCellIndex()
     }
 }
 
+function fillZeros()
+{
+    for (i = fillCellIndex; i < (2*numColums); ++i)
+    {
+        $('#matrix').find($('td:eq(' + i + ')')).html("0");
+        $('#matrix').find($('td:eq(' + i + ')')).removeClass("valueHidden");
+        $('#matrix').find($('td:eq(' + i + ')')).addClass("valueShown");
+    }
+    
+    for( i = (2*numColums)+1; i<totalCells; i+=numColums)
+    {
+        $('#matrix').find($('td:eq(' + i + ')')).html("0");
+        $('#matrix').find($('td:eq(' + i + ')')).removeClass("valueHidden");
+        $('#matrix').find($('td:eq(' + i + ')')).addClass("valueShown");        
+    }
+    
+    fillCellIndex = 2*numColums+1;
+}
+
 // TODO: DOCUMENTATION
 function resetCalc()
 {
     initIndexes();
     initCells();
+    firstClick = false;
 }
 
 $(document).ready(function() {
@@ -250,11 +380,6 @@ $(document).ready(function() {
     
     $('#nextStepBt').click(function(event){
         nextStepBt();
-        event.preventDefault();
-    });
-    
-    $('#nextRowBt').click(function(event){
-        nextRowBt();
         event.preventDefault();
     });
 

@@ -425,6 +425,21 @@ class SmithWaterman
     {
         return $this->scoreMatrix;
     }
+    
+
+    public function getScoreMatrixAsArray()
+    {
+        $result = [];
+        
+        for ($i = 0; $i < $this->scoreMatrixHeight; ++$i) {
+            for ($j = 0; $j < $this->scoreMatrixWidth; ++$j) {
+                $result[$i][$j] = $this->scoreMatrix[$i][$j]->getScore();
+            }
+        }
+        
+        return $result;
+    }
+    
 
     /**
      * Returns score as a distance between 0.0 and the specified scale
