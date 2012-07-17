@@ -54,7 +54,6 @@ use HochschuleBremen\Component\Alignment\SubstitutionMatrix\NucleotideSubstituti
  */
 class SmithWatermanTest extends \PHPUnit_Framework_TestCase
 {
-
     /**
      * @return array
      */
@@ -63,7 +62,7 @@ class SmithWatermanTest extends \PHPUnit_Framework_TestCase
         return [
             [
                 'ACTGGCAGT', // firstSequence
-                'CACTGAT', // secondSequence
+                'CACTGAT',   // secondSequence
                 [
                     [0,  0,  0,  0,  0,  0,  0,  0,  0,  0], // expected
                     [0,  0,  5,  1,  0,  0,  5,  1,  0,  0],
@@ -91,7 +90,6 @@ class SmithWatermanTest extends \PHPUnit_Framework_TestCase
     /**
      * @return void
      *
-     * @covers HochschuleBremen\Component\Alignment\SmithWaterman::getScoreMatrix
      * @dataProvider providerGetScoreTable
      * @test
      */
@@ -107,7 +105,7 @@ class SmithWatermanTest extends \PHPUnit_Framework_TestCase
                         new SimpleGapPenalty,
                             $substitutionMatrix->create(NucleotideSubstitutionMatrixEnum::NUCFOURTWO()));
         
-        $actual = $smithWaterman->getScoreMatrix();
+        $actual = $smithWaterman->getScoreMatrixAsArray();
 
         $this->assertEquals($expected, $actual);
     }
@@ -120,15 +118,14 @@ class SmithWatermanTest extends \PHPUnit_Framework_TestCase
         return [
             // firstSequence, secondSequence, expected
             // First test
-            ['ACTGGCAGT', 'CACTGAT', ['-ACTGGCAGT', 'CACT--G-AT']],
-            ['CTGA', 'GTTG',['-TG', 'TG']]
+            ['ACTGGCAGT', 'CACTGAT', ['ACTGGCAGT', 'ACT--G-AT']],
+            ['CTGA', 'GTTG', ['-TG', 'TTG']]
         ];
     }
 
     /**
      * @return void
      *
-     * @covers HochschuleBremen\Component\Alignment\PairwiseSequenceAlignerAbstract::getPair
      * @dataProvider providerGetAlignment
      * @test
      */
@@ -162,7 +159,6 @@ class SmithWatermanTest extends \PHPUnit_Framework_TestCase
     /**
      * @return void
      *
-     * @covers HochschuleBremen\Component\Alignment\SmithWaterman::getScore
      * @dataProvider providerGetAlignmentScore
      * @test
      */
