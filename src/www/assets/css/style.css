@@ -27,8 +27,6 @@
  * @valid        true
  */
 
-/* TODO Adjust size of content (output should be larger). */
-
 body {
     background-color: #c5e8f7;
     width: 100%;
@@ -76,9 +74,13 @@ header h1 {
 div[role="main"] {
     background-color: #eef8fd;
     width: auto;
-    margin: .5em 8em;
+    margin: 0 5em;
     border-radius: 1.5em;
     padding: 1em;
+}
+
+.scrollable {
+    overflow: auto;
 }
 
 footer {
