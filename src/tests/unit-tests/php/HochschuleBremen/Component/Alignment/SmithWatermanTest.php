@@ -57,7 +57,7 @@ class SmithWatermanTest extends \PHPUnit_Framework_TestCase
     /**
      * @return array
      */
-    public static function providerGetScoreTable()
+    public static function providerNucleotideGetScoreTable()
     {
         return [
             [
@@ -93,7 +93,7 @@ class SmithWatermanTest extends \PHPUnit_Framework_TestCase
      * @dataProvider providerGetScoreTable
      * @test
      */
-    public function testGetScoreTable(
+    public function testNucleotideGetScoreTable(
         $firstSequence, $secondSequence, $expected
     ) {
 
@@ -113,7 +113,7 @@ class SmithWatermanTest extends \PHPUnit_Framework_TestCase
     /**
      * @return array
      */
-    public static function providerGetAlignment()
+    public static function providerNucleotideGetAlignment()
     {
         return [
             // firstSequence, secondSequence, expected
@@ -129,7 +129,7 @@ class SmithWatermanTest extends \PHPUnit_Framework_TestCase
      * @dataProvider providerGetAlignment
      * @test
      */
-    public function testGetAlignment($firstSequence, $secondSequence, $expected)
+    public function testNucleotideGetAlignment($firstSequence, $secondSequence, $expected)
     {  
         $substitutionMatrix = SubstitutionMatrixFactory::getInstance();
         
@@ -147,7 +147,7 @@ class SmithWatermanTest extends \PHPUnit_Framework_TestCase
     /**
      * @return array
      */
-    public static function providerGetAlignmentScore()
+    public static function providerNucleotideGetAlignmentScore()
     {
         return [
             // firstSequence, secondSequence, expected
@@ -162,7 +162,7 @@ class SmithWatermanTest extends \PHPUnit_Framework_TestCase
      * @dataProvider providerGetAlignmentScore
      * @test
      */
-    public function testGetAlignmentScore(
+    public function testNucleotideGetAlignmentScore(
         $firstSequence, $secondSequence, $expected
     ) {
         $substitutionMatrix = SubstitutionMatrixFactory::getInstance();
