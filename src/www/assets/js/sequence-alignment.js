@@ -264,6 +264,10 @@ function completeBacktrack()
             maxIndex = leftIndex;
             //alert("3 tmpMax: " + tmpMax + " maxIndex: " + maxIndex + " leftCellValue: " + leftCellValue);
         }
+        
+        if((currentBacktrackCellIndex%numColums) == 1) {
+            return;
+        }
 
         $('#matrix').find($('td:eq(' + maxIndex + ')')).css('background-color', '#66FF33');
         
