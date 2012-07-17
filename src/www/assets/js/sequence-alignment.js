@@ -29,6 +29,7 @@ var numRowsShown = 0;
 var fillCellIndex = 0;
 var score = 0;
 var scoreCellIndex = -1;
+var firstClick = false;
 
 function initCells()
 {
@@ -62,6 +63,12 @@ function initIndexes()
 // TODO: DOCUMENTATION
 function nextStepCalc()
 {
+    if(!firstClick) 
+    {
+        fillZeros();
+        firstClick = true;
+    }
+    
     $('#matrix').find($('td:eq(' + fillCellIndex + ')')).removeClass("valueHidden");
     $('#matrix').find($('td:eq(' + fillCellIndex + ')')).addClass("valueShown");
     
@@ -77,29 +84,36 @@ function nextStepCalc()
     }
     else
     {
-        fillCellIndex += 2;
+        fillCellIndex += 3;
     }
 
 }
 
 // TODO: DOCUMENTATION
 function nextRowCalc()
-{
-    if(fillCellIndex > totalCells) return;
-    // |0 to 'cast' double-division-result to integer
-    var currentRow = (fillCellIndex / numColums)|0;
-    ++currentRow; // Because row-count starts from 0
-
-    for (i = fillCellIndex; i < (currentRow*numColums); ++i)
+{    
+    if(!firstClick) 
     {
-        $('#matrix').find($('td:eq(' + i + ')')).removeClass("valueHidden");
-        $('#matrix').find($('td:eq(' + i + ')')).addClass("valueShown");
-        fillCellIndex = i;
-        
-        highlightCalculationRelevantCells();
+        fillZeros();
+        firstClick = true;
     }
+    else
+    {
+        if(fillCellIndex > totalCells) return;
+        // |0 to 'cast' double-division-result to integer
+        var currentRow = (fillCellIndex / numColums)|0;
+        ++currentRow; // Because row-count starts from 0
 
-    fillCellIndex += 2;
+        for (i = fillCellIndex; i < (currentRow*numColums); ++i)
+        {
+            $('#matrix').find($('td:eq(' + i + ')')).removeClass("valueHidden");
+            $('#matrix').find($('td:eq(' + i + ')')).addClass("valueShown");
+            fillCellIndex = i;
+
+            highlightCalculationRelevantCells();
+        }
+        fillCellIndex += 3;
+    }
 }
 
 // TODO: DOCUMENTATION
@@ -140,7 +154,8 @@ function completeBacktrack()
     var currentBacktrackCellIndex = scoreCellIndex;
     var currentRow = ((currentBacktrackCellIndex/numColums)|0)-1;
     
-    $('#matrix').find($('td:eq(' + (currentBacktrackCellIndex) + ')')).css('background-color', '#66FF33');
+    $('#matrix').find($('td:eq(' + (currentBacktrackCellIndex) + ')')).css('background-color', '#CC0000');    
+    $('#matrix').find($('td:eq(' + (currentBacktrackCellIndex) + ')')).css('color', '#FFFFFF');
     
     while(currentRow > 1)
     {
@@ -212,11 +227,31 @@ function getScoreAndCellIndex()
     }
 }
 
+function fillZeros()
+{
+    for (i = fillCellIndex; i < (2*numColums); ++i)
+    {
+        $('#matrix').find($('td:eq(' + i + ')')).html("0");
+        $('#matrix').find($('td:eq(' + i + ')')).removeClass("valueHidden");
+        $('#matrix').find($('td:eq(' + i + ')')).addClass("valueShown");
+    }
+    
+    for( i = (2*numColums)+1; i<totalCells; i+=numColums)
+    {
+        $('#matrix').find($('td:eq(' + i + ')')).html("0");
+        $('#matrix').find($('td:eq(' + i + ')')).removeClass("valueHidden");
+        $('#matrix').find($('td:eq(' + i + ')')).addClass("valueShown");        
+    }
+    
+    fillCellIndex = 2*numColums+1;
+}
+
 // TODO: DOCUMENTATION
 function resetCalc()
 {
     initIndexes();
     initCells();
+    firstClick = false;
 }
 
 $(document).ready(function() {
@@ -250,11 +285,6 @@ $(document).ready(function() {
     
     $('#nextStepBt').click(function(event){
         nextStepBt();
-        event.preventDefault();
-    });
-    
-    $('#nextRowBt').click(function(event){
-        nextRowBt();
         event.preventDefault();
     });
 

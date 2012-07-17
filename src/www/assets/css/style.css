@@ -75,8 +75,8 @@ header h1 {
 
 div[role="main"] {
     background-color: #eef8fd;
-    width: 600px;
-    margin: .5em auto;
+    width: auto;
+    margin: .5em 8em;
     border-radius: 1.5em;
     padding: 1em;
 }
@@ -91,12 +91,13 @@ table {
     border-radius: .75em;
     box-shadow: 0 0 2em .25em #4fc4fc;
     text-align: center;
+    font-size: 1.3em;
 }
 
 td {
     background-color: #c5e8f7;
-    width: 3em;
-    height: 3em;
+    width: 2em;
+    height: 2em;
     padding: 0;
     border-width: .1em;
     border-style: solid;
