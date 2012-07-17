@@ -4,6 +4,7 @@
 {% block main %}
 <form action="{{ path(app.request.attributes.get('_route')) }}" method="post" {{ form_enctype(form) }}>
     <fieldset>
+        <p>Only the characters "{{ allowed_compounds }}" are allowed for the sequences.</p>
         <legend>Enter the parameters for the pairwise local sequence alignment</legend>
         {{ form_widget(form) }}
         <button type="submit" class="btn">Go</button>
