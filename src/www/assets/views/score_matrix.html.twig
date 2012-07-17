@@ -1,0 +1,75 @@
+{# result.html.twig #}
+{% extends "home.html.twig" %}
+
+{% block main %}
+
+<fieldset>
+    <legend> Actions</legend>
+    <button type="button" id="nextStepCalc" class="btn">Next Step</button>
+    <button type="button" id="nextRowCalc" class="btn">Next Row</button>
+    <button type="button" id="completeAlignment" class="btn">Show Complete Alignment</button>
+    <button type="button" id="completeBacktrack" class="btn">Show Complete Backtrack</button>
+    <button type="button" id="resetCalc" class="btn">Reset</button>
+</fieldset>
+<br/>
+
+<div style="float: left; padding-right: 20%">
+<h2>Input Data</h2>
+<ul>
+    <li>Query: {{ alignment.query }} (Length: {{ alignment.query.length }})</li>
+    <li>Target: {{ alignment.target }} (Length: {{ alignment.target.length }})</li>
+    <li>Substitution Matrix: {{ alignment.substitutionMatrixName }}</li>
+    <li>Gap Open Penalty: {{ alignment.gapPenalty.openPenalty }}</li>
+    <li>Gap Extend Penalty: {{ alignment.gapPenalty.extensionPenalty }}</li>
+    <li>Maximum Possible Score: {{ aligner.maxScore }}</li>
+    <li>Minimum Possible Score: {{ aligner.minScore }}</li>
+</ul>
+
+<br/>
+
+<h2>Result Data</h2>
+<p>Distance: <strong>{{ aligner.distance }}</strong></p>
+<p>Similarity: <strong>{{ aligner.similarity }}</strong></p>
+<p>Score: <strong id="score">{{ aligner.score }}</strong></p>
+<p>Alignment:</p>
+<pre>{{ aligner.formatAlignment }}</pre>
+
+</div>
+
+<h2>Scoring Matrix</h2>
+<table id="matrix">
+    <tr>
+        <td class="topRow leftColumn topLeftCell"></td>
+        <td class="topRow">-</td>
+{% for currentCharOfFirstSequence in query %}
+    {% if loop.last %}
+        <td class="topRow topRightCell">{{ currentCharOfFirstSequence }}</td>
+    {% else %}
+        <td class="topRow">{{ currentCharOfFirstSequence }}</td>
+    {% endif %}
+{% endfor %}
+    </tr>
+
+{% for i in range (0, alignment.target.length) %}
+    <tr>
+    {% if loop.first %}
+        <td class="leftColumn">-</td>
+    {% elseif loop.last %}
+        <td class="leftColumn bottomLeftCell">{{ target[i - 1] }}</td>
+    {% else %}
+        <td class="leftColumn">{{ target[i - 1] }}</td>
+    {% endif %}
+
+    {% for j in range (0, alignment.query.length) %}
+        {% if loop.last and loop.parent.loop.last %}
+        <td class="bottomRightCell">{{ aligner.scoreMatrix[i][j] }}</td>
+        {% else %}
+        <td>{{ aligner.scoreMatrix[i][j] }}</td>
+        {% endif %}
+    {% endfor %}
+    </tr>
+{% endfor %}
+</table>
+<br style="clear: left"/>
+
+{% endblock %}

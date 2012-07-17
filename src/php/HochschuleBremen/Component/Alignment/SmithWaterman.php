@@ -323,7 +323,7 @@ class SmithWaterman
 
             $oldCell = $currentCell;
             $currentCell = $currentCell->getPreviousCell();
-        } 
+        }
 
         $this->pair = [$alignedQuery, $alignedTarget];
     }
@@ -425,21 +425,21 @@ class SmithWaterman
     {
         return $this->scoreMatrix;
     }
-    
+
 
     public function getScoreMatrixAsArray()
     {
         $result = [];
-        
+
         for ($i = 0; $i < $this->scoreMatrixHeight; ++$i) {
             for ($j = 0; $j < $this->scoreMatrixWidth; ++$j) {
                 $result[$i][$j] = $this->scoreMatrix[$i][$j]->getScore();
             }
         }
-        
+
         return $result;
     }
-    
+
 
     /**
      * Returns score as a distance between 0.0 and the specified scale
@@ -534,18 +534,18 @@ class SmithWaterman
     }
 
 }
-//require 'C:\Users\Olav\Documents\GitHub\SequenceAlignment\vendor\autoload.php';
+
+//require __DIR__ . '/../../../../../vendor/autoload.php';
 //
 //use HochschuleBremen\Component\Alignment\SubstitutionMatrix\SubstitutionMatrixFactory;
 //use HochschuleBremen\Component\Alignment\SubstitutionMatrix\NucleotideSubstitutionMatrixEnum;
 //use HochschuleBremen\Component\Sequence\DnaSequence;
 //use HochschuleBremen\Component\Alignment\GapPenalty\SimpleGapPenalty;
 //
-//$substitutionMatrix = SubstitutionMatrixFactory::getInstance()
-//    ->create(NucleotideSubstitutionMatrixEnum::NUCFOURTWO());
-//
 //$query = new DnaSequence('ACTGGCAGT');
 //$target = new DnaSequence('CACTGAT');
+//$substitutionMatrix = SubstitutionMatrixFactory::getInstance()
+//    ->create(NucleotideSubstitutionMatrixEnum::NUCFOURTWO());
 //
 //$aligner = new SmithWaterman(
 //    $query,
@@ -554,5 +554,4 @@ class SmithWaterman
 //    $substitutionMatrix
 //);
 //
-//$pair = $aligner->getPair();
-//var_dump($pair);
+//echo $aligner;
