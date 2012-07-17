@@ -74,6 +74,16 @@ class SmithWatermanTest extends \PHPUnit_Framework_TestCase
                     [0,  5,  1,  7, 16, 21, 21, 26, 22, 18],
                     [0,  1,  1, 12, 12, 17, 17, 22, 22, 27],
                 ]
+            ],            [
+                'CTGA', // firstSequence
+                'GTTG',   // secondSequence
+                [
+                    [0,  0,  0,  0,  0], // expected
+                    [0,  0,  0,  5,  1],
+                    [0,  0,  5,  1,  1],
+                    [0,  0, 10,  6,  2],
+                    [0,  0,  6, 15, 11]
+                ]
             ]
         ];
     }
@@ -110,7 +120,8 @@ class SmithWatermanTest extends \PHPUnit_Framework_TestCase
         return [
             // firstSequence, secondSequence, expected
             // First test
-            ['ACTGGCAGT', 'CACTGAT', ['-ACTGGCAGT', 'CACT--G-AT']]
+            ['ACTGGCAGT', 'CACTGAT', ['-ACTGGCAGT', 'CACT--G-AT']],
+            ['CTGA', 'GTTG',['-TG', 'TG']]
         ];
     }
 
@@ -143,7 +154,8 @@ class SmithWatermanTest extends \PHPUnit_Framework_TestCase
     {
         return [
             // firstSequence, secondSequence, expected
-            ['ACTGGCAGT', 'CACTGAT', 27]
+            ['ACTGGCAGT', 'CACTGAT', 27],
+            ['CTGA', 'GTTG', 15]
         ];
     }
 
