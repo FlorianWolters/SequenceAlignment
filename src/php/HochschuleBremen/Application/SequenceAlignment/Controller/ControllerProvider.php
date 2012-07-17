@@ -38,6 +38,7 @@ use HochschuleBremen\Application\SequenceAlignment\Form\RnaSequenceType;
 use HochschuleBremen\Application\SequenceAlignment\Form\SequenceSelectionType;
 use HochschuleBremen\Application\SequenceAlignment\Form\SequenceTypeAbstract;
 use HochschuleBremen\Application\SequenceAlignment\Entity\Alignment;
+use HochschuleBremen\Application\SequenceAlignment\Entity\RnaSequence;
 use HochschuleBremen\Application\SequenceAlignment\Entity\SequenceSelection;
 use HochschuleBremen\Component\Alignment\SmithWaterman;
 use HochschuleBremen\Component\Alignment\SubstitutionMatrix\AminoAcidSubstitutionMatrixEnum;
@@ -112,7 +113,11 @@ class ControllerProvider implements ControllerProviderInterface
         $options = [
             'sequence_type' => new ProteinSequenceType,
             'matrices' => AminoAcidSubstitutionMatrixEnum::names(),
-            'matrix_choice' => AminoAcidSubstitutionMatrixEnum::BLOSUM62()->getName()
+            'matrix_choice' => AminoAcidSubstitutionMatrixEnum::BLOSUM62()->getName(),
+            'allowed_compounds' => [
+                'a', 'r', 'n', 'd', 'c', 'q', 'e', 'g', 'h', 'i',
+                'l', 'k', 'm', 'f', 'p', 's', 't', 'w', 'y', 'v'
+            ]
         ];
 
         // TODO This is far from optimal.
@@ -154,9 +159,17 @@ class ControllerProvider implements ControllerProviderInterface
                 $substitutionMatrix = SubstitutionMatrixFactory::getInstance()
                     ->create($substitutionMatrixType);
 
+                $query = $data->getQuery();
+                $target = $data->getTarget();
+
+                if ($query instanceof RnaSequence) {
+                    $query = $query->toDnaSequence();
+                    $target = $target->toDnaSequence();
+                }
+
                 $aligner = new SmithWaterman(
-                    $data->getQuery(),
-                    $data->getTarget(),
+                    $query,
+                    $target,
                     $data->getGapPenalty(),
                     $substitutionMatrix
                 );
@@ -174,7 +187,8 @@ class ControllerProvider implements ControllerProviderInterface
 
         return $app->render(
             'alignment.html.twig', [
-                'form' => $form->createView()
+                'form' => $form->createView(),
+                'allowed_compounds' => \implode($options['allowed_compounds'], ',')
             ]
         );
     }
@@ -186,7 +200,11 @@ class ControllerProvider implements ControllerProviderInterface
      */
     public function displayDnaForm(Application $app)
     {
-        return $this->displayNucleotideForm($app, new DnaSequenceType);
+        return $this->displayNucleotideForm(
+            $app,
+            new DnaSequenceType,
+            ['a', 'c', 'g', 't']
+        );
     }
 
     /**
@@ -197,12 +215,15 @@ class ControllerProvider implements ControllerProviderInterface
      * @return string
      */
     private function displayNucleotideForm(
-        Application $app, SequenceTypeAbstract $sequenceType
+        Application $app,
+        SequenceTypeAbstract $sequenceType,
+        array $allowedCompounds
     ) {
         $options = [
             'sequence_type' => $sequenceType,
             'matrices' => NucleotideSubstitutionMatrixEnum::names(),
-            'matrix_choice' => NucleotideSubstitutionMatrixEnum::NUCFOURTWO()->getName()
+            'matrix_choice' => NucleotideSubstitutionMatrixEnum::NUCFOURTWO()->getName(),
+            'allowed_compounds' => $allowedCompounds
         ];
 
         return $this->displayForm(
@@ -219,7 +240,11 @@ class ControllerProvider implements ControllerProviderInterface
      */
     public function displayRnaForm(Application $app)
     {
-        return $this->displayNucleotideForm($app, new RnaSequenceType);
+        return $this->displayNucleotideForm(
+            $app,
+            new RnaSequenceType,
+            ['a', 'c', 'g', 'u']
+        );
     }
 
     /**

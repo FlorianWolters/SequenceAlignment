@@ -56,4 +56,11 @@ class ProteinSequence extends SequenceAbstract
         );
     }
 
+    public function getAllowedCompounds()
+    {
+        return [
+            'a', 'r', 'n', 'd', 'c', 'q', 'e', 'g', 'h', 'i',
+            'l', 'k', 'm', 'f', 'p', 's', 't', 'w', 'y', 'v'
+        ];
+    }
 }

@@ -49,7 +49,7 @@ abstract class SequenceAbstract implements SequenceInterface
      *
      * @var string
      */
-    private $sequenceStr;
+    protected $sequenceStr;
 
     /**
      * The length of this sequence.

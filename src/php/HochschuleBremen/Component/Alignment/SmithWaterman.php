@@ -219,15 +219,15 @@ class SmithWaterman
         $a = $this->returnCompoundFromQuery($currentCell);
         $b = $this->returnCompoundFromTarget($currentCell);
 
+        // Calculate the weight.
+        $weight = $this->weight($a, $b);
+
         // Match/Mismatch
-        $cellAboveLeftScore = $cellAboveLeft->getScore()
-            + $this->weight($a, $b);
+        $cellAboveLeftScore = $cellAboveLeft->getScore() + $weight;
         // Deletion
-        $cellAboveScore = $cellAbove->getScore()
-            + $this->weight($a, self::GAP_CHARACTER);
+        $cellAboveScore = $cellAbove->getScore() + $weight;
         // Insertion
-        $cellToLeftScore = $cellToLeft->getScore()
-            + $this->weight(self::GAP_CHARACTER, $b);
+        $cellToLeftScore = $cellToLeft->getScore() + $weight;
 
         if ($cellAboveScore >= $cellToLeftScore) {
             if ($cellAboveLeftScore >= $cellAboveScore) {
@@ -272,18 +272,15 @@ class SmithWaterman
     }
 
     /**
+     * Calculates the gap-scoring scheme.
+     *
      * @param string $x The first compound to compare.
      * @param string $y The second compund to compare.
      *
      * @return integer The score to add.
-     * @todo Detect Gap open / gap extend.
      */
     private function weight($x, $y) {
-        if (self::GAP_CHARACTER === $x || self::GAP_CHARACTER === $y) {
-            return $this->gapPenalty->getOpenPenalty() * (-1);
-        } else {
-            return $this->substitutionMatrix->getValue($x, $y);
-        }
+        return $this->substitutionMatrix->getValue($x, $y);
     }
 
     /**

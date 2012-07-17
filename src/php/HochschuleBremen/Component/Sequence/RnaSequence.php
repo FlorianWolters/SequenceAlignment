@@ -59,10 +59,15 @@ class RnaSequence extends SequenceAbstract
      *
      * @return DnaSequence The DnaSequence.
      */
-    public function toRnaSequence()
+    public function toDnaSequence()
     {
-        $sequenceStr = \str_replace('u', 't', $this->__toString);
-        return new RnaSequence($sequenceStr);
+        $sequenceStr = \str_ireplace('U', 'T', $this->sequenceStr);
+        return new DnaSequence($sequenceStr);
+    }
+
+    public function getAllowedCompounds()
+    {
+        return ['c', 'g', 'a', 'u'];
     }
 
 }

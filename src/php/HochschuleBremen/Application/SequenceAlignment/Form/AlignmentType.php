@@ -94,7 +94,8 @@ class AlignmentType extends AbstractType
             'cascade_validation' => true,
             'sequence_type' => null,
             'matrices' => [],
-            'matrix_choice' => ''
+            'matrix_choice' => '',
+            'allowed_compounds' => []
         ];
     }
 
