@@ -31,6 +31,11 @@
 
 namespace HochschuleBremen\Component\Alignment;
 
+use HochschuleBremen\Component\Sequence\DnaSequence;
+use HochschuleBremen\Component\Alignment\GapPenalty\SimpleGapPenalty;
+use HochschuleBremen\Component\Alignment\SubstitutionMatrix\SubstitutionMatrixFactory;
+use HochschuleBremen\Component\Alignment\SubstitutionMatrix\NucleotideSubstitutionMatrixEnum;
+
 /**
  * Test class for {@link SmithWaterman}.
  *
@@ -60,124 +65,15 @@ class SmithWatermanTest extends \PHPUnit_Framework_TestCase
                 'ACACACTA', // firstSequence
                 'AGCACACA', // secondSequence
                 [
-                    [0, 0, 0, 0, 0, 0, 0, 0, 0], // expected
-                    [0, 1, 0, 1, 0, 1, 0, 0, 1],
-                    [0, 0, 0, 0, 0, 0, 0, 0, 0],
-                    [0, 0, 1, 0, 1, 0, 1, 0, 0],
-                    [0, 1, 0, 2, 1, 2, 1, 0, 1],
-                    [0, 0, 2, 1, 3, 2, 3, 2, 1],
-                    [0, 1, 1, 3, 2, 4, 3, 2, 3],
-                    [0, 0, 2, 2, 4, 3, 5, 4, 3],
-                    [0, 1, 1, 3, 3, 5, 4, 4, 5]
+                    [0,  0,  0,  0,  0,  0,  0,  0,  0,  0], // expected
+                    [0,  0,  5,  1,  0,  0,  5,  1,  0,  0],
+                    [0,  5,  1,  1,  0,  0,  1, 10,  6,  2],
+                    [0,  1, 10,  6,  2,  0,  6,  6,  6,  2],                    
+                    [0,  0,  6, 15, 11,  7,  3,  2,  2, 11],
+                    [0,  0,  2, 11, 20, 25, 21, 17, 22, 18],
+                    [0,  5,  1,  7, 16, 21, 21, 26, 22, 18],
+                    [0,  1,  1, 12, 12, 17, 17, 22, 22, 27],
                 ]
-            ], [
-                'ACTTGGAAGT', // firstSequence
-                'GTGAGACT',   // secondSequence
-                [
-                    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-                    [0, 0, 0, 0, 0, 1, 1, 0, 0, 1, 0],
-                    [0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 2],
-                    [0, 0, 0, 0, 0, 2, 1, 0, 0, 1, 1],
-                    [0, 1, 0, 0, 0, 1, 1, 2, 1, 0, 0],
-                    [0, 0, 0, 0, 0, 1, 2, 1, 1, 2, 1],
-                    [0, 1, 0, 0, 0, 0, 1, 3, 2, 1, 1],
-                    [0, 0, 2, 1, 0, 0, 0, 2, 2, 1, 0],
-                    [0, 0, 1, 3, 2, 1, 0, 1, 1, 1, 2]
-                ]
-            ], [
-                'TGGTGGGCAT', // firstSequence
-                'TGGTGGGCAT',   // secondSequence
-                [
-					 [0, 0, 0, 0, 0, 0, 0, 0, 0, 0,  0],
-					 [0, 1, 0, 0, 1, 0, 0, 0, 0, 0,  1],
-					 [0, 0, 2, 1, 0, 2, 1, 1, 0, 0,  0],
-					 [0, 0, 1, 3, 2, 1, 3, 2, 1, 0,  0],
-					 [0, 1, 0, 2, 4, 3, 2, 2, 1, 0,  1],
-					 [0, 0, 2, 1, 3, 5, 4, 3, 2, 1,  0],
-					 [0, 0, 1, 3, 2, 4, 6, 5, 4, 3,  2],
-					 [0, 0, 1, 2, 2, 3, 5, 7, 6, 5,  4],
-					 [0, 0, 0, 1, 1, 2, 4, 6, 8, 7,  6],
-					 [0, 0, 0, 0, 0, 1, 3, 5, 7, 9,  8],
-					 [0, 1, 0, 0, 1, 0, 2, 4, 6, 8, 10]
-                ]
-            ], [
-                'TATTGTCCTA', // firstSequence
-                'TGCCCTGTCC', // secondSequence
-                [
-					[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-					[0, 1, 0, 1, 1, 0, 1, 0, 0, 1, 0],
-					[0, 0, 0, 0, 0, 2, 1, 0, 0, 0, 0],
-					[0, 0, 0, 0, 0, 1, 1, 2, 1, 0, 0],
-					[0, 0, 0, 0, 0, 0, 0, 2, 3, 2, 1],
-					[0, 0, 0, 0, 0, 0, 0, 1, 3, 2, 1],
-					[0, 1, 0, 1, 1, 0, 1, 0, 2, 4, 3],
-					[0, 0, 0, 0, 0, 2, 1, 0, 1, 3, 3],
-					[0, 1, 0, 1, 1, 1, 3, 2, 1, 2, 2],
-					[0, 0, 0, 0, 0, 0, 2, 4, 3, 2, 1],
-					[0, 0, 0, 0, 0, 0, 1, 3, 5, 4, 3]
-				]
-            ], [
-                'GCCCTTTACTAATCTCGTGC', // firstSequence
-                'TCTTCTTTTGACCGCACATA', // secondSequence
-                [
-					[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-					[0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 1, 0, 0, 1, 0, 1, 0, 0, 1, 0, 0],
-					[0, 0, 1, 1, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 2, 1, 2, 1, 0, 0, 1],
-					[0, 0, 0, 0, 0, 2, 1, 1, 0, 0, 2, 1, 0, 1, 1, 3, 2, 1, 2, 1, 0],
-					[0, 0, 0, 0, 0, 1, 3, 2, 1, 0, 1, 1, 0, 1, 0, 2, 2, 1, 2, 1, 0],
-					[0, 0, 1, 1, 1, 0, 2, 2, 1, 2, 1, 0, 0, 0, 2, 1, 3, 2, 1, 1, 2],
-					[0, 0, 0, 0, 0, 2, 1, 3, 2, 1, 3, 2, 1, 1, 1, 3, 2, 2, 3, 2, 1],
-					[0, 0, 0, 0, 0, 1, 3, 2, 2, 1, 2, 2, 1, 2, 1, 2, 2, 1, 3, 2, 1],
-					[0, 0, 0, 0, 0, 1, 2, 4, 3, 2, 2, 1, 1, 2, 1, 2, 1, 1, 2, 2, 1],
-					[0, 0, 0, 0, 0, 1, 2, 3, 3, 2, 3, 2, 1, 2, 1, 2, 1, 0, 2, 1, 1],
-					[0, 1, 0, 0, 0, 0, 1, 2, 2, 2, 2, 2, 1, 1, 1, 1, 1, 2, 1, 3, 2],
-					[0, 0, 0, 0, 0, 0, 0, 1, 3, 2, 1, 3, 3, 2, 1, 0, 0, 1, 1, 2, 2],
-					[0, 0, 1, 1, 1, 0, 0, 0, 2, 4, 3, 2, 2, 2, 3, 2, 1, 0, 0, 1, 3],
-					[0, 0, 1, 2, 2, 1, 0, 0, 1, 3, 3, 2, 1, 1, 3, 2, 3, 2, 1, 0, 2],
-					[0, 1, 0, 1, 1, 1, 0, 0, 0, 2, 2, 2, 1, 0, 2, 2, 2, 4, 3, 2, 1],
-					[0, 0, 2, 1, 2, 1, 0, 0, 0, 1, 1, 1, 1, 0, 1, 1, 3, 3, 3, 2, 3],
-					[0, 0, 1, 1, 1, 1, 0, 0, 1, 0, 0, 2, 2, 1, 0, 0, 2, 2, 2, 2, 2],
-					[0, 0, 1, 2, 2, 1, 0, 0, 0, 2, 1, 1, 1, 1, 2, 1, 1, 1, 1, 1, 3],
-					[0, 0, 0, 1, 1, 1, 0, 0, 1, 1, 1, 2, 2, 1, 1, 1, 0, 0, 0, 0, 2],
-					[0, 0, 0, 0, 0, 2, 2, 1, 0, 0, 2, 1, 1, 3, 2, 2, 1, 0, 1, 0, 1],
-					[0, 0, 0, 0, 0, 1, 1, 1, 2, 1, 1, 3, 2, 2, 2, 1, 1, 0, 0, 0, 0],
-                ]
-            ], [
-                'CCTCCTGTGAGGAACTTAACTTATGACGCA', // firstSequence
-                'GCCACCTTCGGCCGGAGTAAAAGTTTCATC', // secondSequence
-                 [
-					[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-					[0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0],
-					[0, 1, 1, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 2, 1],
-					[0, 1, 2, 1, 1, 2, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 1, 1],
-					[0, 0, 1, 1, 0, 1, 1, 0, 0, 0, 1, 0, 0, 1, 1, 0, 0, 0, 1, 1, 0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 2],
-					[0, 1, 1, 0, 2, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 1, 0, 0, 0, 2, 1, 0, 0, 0, 0, 0, 2, 1, 1, 1],
-					[0, 1, 2, 1, 1, 3, 2, 1, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 1, 1, 2, 1],
-					[0, 0, 1, 3, 2, 2, 4, 3, 2, 1, 0, 0, 0, 0, 0, 0, 2, 2, 1, 0, 0, 2, 2, 1, 1, 0, 0, 0, 0, 1, 1],
-					[0, 0, 0, 2, 2, 1, 3, 3, 4, 3, 2, 1, 0, 0, 0, 0, 1, 3, 2, 1, 0, 1, 3, 2, 2, 1, 0, 0, 0, 0, 0],
-					[0, 1, 1, 1, 3, 3, 2, 2, 3, 3, 2, 1, 0, 0, 0, 1, 0, 2, 2, 1, 2, 1, 2, 2, 1, 1, 0, 1, 0, 1, 0],
-					[0, 0, 0, 0, 2, 2, 2, 3, 2, 4, 3, 3, 2, 1, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 2, 1, 0, 2, 1, 0],
-					[0, 0, 0, 0, 1, 1, 1, 3, 2, 3, 3, 4, 4, 3, 2, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 1, 0, 1, 1, 0],
-					[0, 1, 1, 0, 1, 2, 1, 2, 2, 2, 2, 3, 3, 3, 2, 3, 2, 1, 0, 0, 1, 0, 0, 0, 0, 1, 1, 2, 1, 2, 1],
-					[0, 1, 2, 1, 1, 2, 1, 1, 1, 1, 1, 2, 2, 2, 2, 3, 2, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 2, 1, 2, 1],
-					[0, 0, 1, 1, 0, 1, 1, 2, 1, 2, 1, 2, 3, 2, 1, 2, 2, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 3, 2, 1],
-					[0, 0, 0, 0, 0, 0, 0, 2, 1, 2, 1, 2, 3, 2, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 2, 2, 1],
-					[0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 3, 2, 2, 4, 3, 2, 1, 0, 2, 1, 0, 0, 0, 1, 0, 0, 2, 1, 1, 1, 3],
-					[0, 0, 0, 0, 0, 0, 0, 1, 0, 2, 2, 4, 3, 3, 3, 2, 1, 0, 1, 1, 0, 0, 0, 0, 0, 1, 1, 1, 2, 1, 2],
-					[0, 0, 0, 1, 0, 0, 1, 0, 2, 1, 1, 3, 3, 2, 2, 2, 3, 2, 1, 0, 0, 1, 1, 0, 1, 0, 0, 0, 1, 1, 1],
-					[0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 2, 2, 2, 4, 3, 2, 2, 2, 3, 2, 1, 0, 0, 2, 1, 0, 1, 0, 0, 0, 2],
-					[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 1, 1, 3, 5, 4, 3, 2, 3, 4, 3, 2, 1, 1, 1, 0, 1, 0, 0, 0, 1],
-					[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 2, 4, 4, 3, 2, 3, 4, 3, 2, 1, 2, 1, 0, 1, 0, 0, 0, 1],
-					[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 3, 3, 3, 2, 3, 4, 3, 2, 1, 2, 1, 0, 1, 0, 0, 0, 1],
-					[0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 2, 1, 0, 2, 2, 2, 2, 2, 3, 3, 2, 1, 1, 1, 2, 1, 0, 1, 0, 0],
-					[0, 0, 0, 1, 0, 0, 1, 0, 2, 1, 0, 1, 1, 0, 1, 1, 3, 3, 2, 2, 2, 4, 3, 2, 2, 1, 1, 0, 0, 0, 0],
-					[0, 0, 0, 1, 0, 0, 1, 0, 1, 1, 0, 0, 0, 0, 0, 0, 2, 4, 3, 2, 1, 3, 5, 4, 3, 2, 1, 0, 0, 0, 0],
-					[0, 0, 0, 1, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 3, 3, 2, 1, 2, 4, 4, 5, 4, 3, 2, 1, 0, 0],
-					[0, 1, 1, 0, 2, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 2, 2, 2, 3, 2, 3, 3, 4, 4, 3, 4, 3, 2, 1],
-					[0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 1, 0, 0, 1, 1, 0, 0, 1, 3, 3, 2, 2, 2, 4, 3, 3, 5, 4, 3, 2, 3],
-					[0, 0, 0, 1, 0, 0, 2, 1, 1, 0, 0, 0, 0, 0, 0, 0, 1, 1, 2, 2, 2, 3, 3, 3, 5, 4, 4, 4, 3, 2, 2],
-					[0, 1, 1, 0, 2, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 1, 3, 2, 2, 2, 4, 4, 3, 5, 4, 4, 3]
-				   ]
             ]
         ];
     }
@@ -185,15 +81,23 @@ class SmithWatermanTest extends \PHPUnit_Framework_TestCase
     /**
      * @return void
      *
-     * @covers HochschuleBremen\Component\Alignment\SmithWaterman::getScoreTable
+     * @covers HochschuleBremen\Component\Alignment\SmithWaterman::getScoreMatrix
      * @dataProvider providerGetScoreTable
      * @test
      */
     public function testGetScoreTable(
         $firstSequence, $secondSequence, $expected
     ) {
-        $smithWaterman = new SmithWaterman($firstSequence, $secondSequence);
-        $actual = $smithWaterman->getScoreTable();
+
+        $substitutionMatrix = SubstitutionMatrix\SubstitutionMatrixFactory::getInstance();
+        
+        $smithWaterman = new SmithWaterman(
+                new DnaSequence($firstSequence),
+                    new DnaSequence($secondSequence), 
+                        new SimpleGapPenalty,
+                            $substitutionMatrix->create(NucleotideSubstitutionMatrixEnum::NUCFOURTWO()));
+        
+        $actual = $smithWaterman->getScoreMatrix();
 
         $this->assertEquals($expected, $actual);
     }
@@ -206,32 +110,28 @@ class SmithWatermanTest extends \PHPUnit_Framework_TestCase
         return [
             // firstSequence, secondSequence, expected
             // First test
-            ['ACACACTA', 'AGCACACA', ['CACAC', 'CACAC']],
-            // Second test
-            ['ACTTGGAAGT', 'GTGAGACT', ['TG-GA', 'TGAGA']],
-            // Third test
-            ['CCTCCTGTGAGGAACTTAACTTATGACGCA','GCCACCTTCGGCCGGAGTAAAAGTTTCATC', ['CC-TC--CTGTGAGGAA','CCTTCGGCCG-GAGTAA']],
-            // Fifth test
-            ['GTTCAAACAATGGCGAACCTTCCTCCTCAAGTCTATTACA','GATTTGTATAAGCACCGCAAGTAGCACTCCTCTCAACCTC', ['CAA-TGGCGAACCTTCCTCCTCAA','CAAGTAGC--A-C-TCCT-CTCAA']],
-            // Sixth test
-            ['ACCGACACGTTTATTCAGCAAGTGTCTCGTCTCGGCCGTGGGAGCCTACCTGGCGATCAC','GTGAGTACATAGACTTCGGTGGTTTATCTGCTGGCCCGGTCCGAGTACTCTGGACAGCGT', ['GT-GTCTCGTCT-C-GG-CC-GTGGGAGCCTAC-CTGG','GTGGT-TTATCTGCTGGCCCGGTCCGAG--TACTCTGG']],
-            // Seventh test
-            ['TGGGATGTTTCCCTAAGTAGAGCAAATCCGCGTGGCTTCTATCACACGCACATGTGGACAAGCACCAGCAACAGTAAAGATTACCCACACGCCGGAGATT','CTGTACTCAATATGCGAAGTGTTAGCTAAAAGCCGACCGTTTACCTGTCATTCGCCTGGTGACGTCCTTCGAGGTACTGAATTCTTGCCCAATTACGGTG',
-            ['AAGTAG--AGC--AAATCCG--CGTGGCTT--CTATCACACGCACATGTG-GACAAG-CAC--C-AGCAACAGTAAAGATTACCCA','AAGT-GTTAGCTAAAAGCCGACCGT---TTACCTGTCATTCGC-C-TG-GTGAC--GTC-CTTCGAGGTACTG-AATTCTTGCCCA']]
+            ['ACTGGCAGT', 'CACTGAT', ['-ACTGGCAGT', 'CACT--G-AT']]
         ];
     }
 
     /**
      * @return void
      *
-     * @covers HochschuleBremen\Component\Alignment\PairwiseSequenceAlignerAbstract::getAlignment
+     * @covers HochschuleBremen\Component\Alignment\PairwiseSequenceAlignerAbstract::getPair
      * @dataProvider providerGetAlignment
      * @test
      */
     public function testGetAlignment($firstSequence, $secondSequence, $expected)
-    {
-        $smithWaterman = new SmithWaterman($firstSequence, $secondSequence);
-        $actual = $smithWaterman->getAlignment();
+    {  
+        $substitutionMatrix = SubstitutionMatrixFactory::getInstance();
+        
+        $smithWaterman = new SmithWaterman(
+                new DnaSequence($firstSequence),
+                    new DnaSequence($secondSequence), 
+                        new SimpleGapPenalty, 
+                            $substitutionMatrix->create(NucleotideSubstitutionMatrixEnum::NUCFOURTWO()));
+        
+        $actual = $smithWaterman->getPair();
 
         $this->assertEquals($expected, $actual);
     }
@@ -243,37 +143,30 @@ class SmithWatermanTest extends \PHPUnit_Framework_TestCase
     {
         return [
             // firstSequence, secondSequence, expected
-            ['ACACACTA', 'AGCACACA', 5],
-            ['ACTTGGAAGT', 'GTGAGACT', 3],
-            ['TGGGATGTTTCCCTAAGTAGAGCAAATCCGCGTGGCTTCTATCACACGCACATGTGGACAAGCACCAGCAACAGTAAAGATTACCCACACGCCGGAGATT', 'CTGTACTCAATATGCGAAGTGTTAGCTAAAAGCCGACCGTTTACCTGTCATTCGCCTGGTGACGTCCTTCGAGGTACTGAATTCTTGCCCAATTACGGTG', 16],
-            ['ACGTTTCCGTCAGACCGGTCAGAGCACCCTGCTGCTTTAATATACCTTTGTTTCTGGGAACGTACAGGATGCTCACGGTCGGGGGTCCCG', 'CACTATGACAACCCTCTGGGTTTTAATCACGCCTTTTAGCAGATATGCAGCTTCCATACCTAACCTACAAAAGTAGATCGACATAACCGC', 14],
-            ['CGTCCTATCATCCAGCATGAGTCACTCTGCTTTTTGTAGTCTAGACCGCAGGTTAATGACGCATTGCGAAATGGAGACAA', 'TAACCACCCATAAGTTATTTCTCCGCCGCTACGTTTACCATGGAAATTATCAATTAGTCCTGCTGACCTTACTATACACA', 14],
-            ['GAAACACTCAGATTTATTGTGATTTATAGATATTGTACAACTAAGGCCGATTCTATTGCAACCTGACATC', 'TCCAAGTAATATAGATCTATACCTGGTATAGAAGATACATGGCGCAGGGCGCACTCGCACGAGTCCTAAA', 12],
-            ['ACCGACACGTTTATTCAGCAAGTGTCTCGTCTCGGCCGTGGGAGCCTACCTGGCGATCAC', 'GTGAGTACATAGACTTCGGTGGTTTATCTGCTGGCCCGGTCCGAGTACTCTGGACAGCGT', 12],
-            ['ATCGACAGGGACACACAATCGTGATACCCACTTGAAGTAATGCAGTTGCG', 'ACTGATTTTCTCGGTAATGTGACCCCACAATTGATAGTACTTGGGTGTCG', 15],
-            ['GTTCAAACAATGGCGAACCTTCCTCCTCAAGTCTATTACA', 'GATTTGTATAAGCACCGCAAGTAGCACTCCTCTCAACCTC', 10],
-            ['CCTCCTGTGAGGAACTTAACTTATGACGCA', 'GCCACCTTCGGCCGGAGTAAAAGTTTCATC', 5],
-            ['GCCCTTTACTAATCTCGTGC', 'TCTTCTTTTGACCGCACATA', 4],
-            ['TATTGTCCTA', 'TGCCCTGTCC', 5],
-            ['TGGTGGGCAT', 'TGGTGGGCAT', 10],
-            ['ACACACACAC', 'GTGTGTGTGT', 0]
+            ['ACTGGCAGT', 'CACTGAT', 27]
         ];
     }
 
     /**
      * @return void
      *
-     * @covers HochschuleBremen\Component\Alignment\SmithWaterman::getAlignmentScore
+     * @covers HochschuleBremen\Component\Alignment\SmithWaterman::getScore
      * @dataProvider providerGetAlignmentScore
      * @test
      */
     public function testGetAlignmentScore(
         $firstSequence, $secondSequence, $expected
     ) {
-        $smithWaterman = new SmithWaterman($firstSequence, $secondSequence);
-        $actual = $smithWaterman->getAlignmentScore();
+        $substitutionMatrix = SubstitutionMatrixFactory::getInstance();
+        
+        $smithWaterman = new SmithWaterman(
+                new DnaSequence($firstSequence),
+                    new DnaSequence($secondSequence), 
+                        new SimpleGapPenalty, 
+                            $substitutionMatrix->create(NucleotideSubstitutionMatrixEnum::NUCFOURTWO()));
+        
+        $actual = $smithWaterman->getScore();
 
         $this->assertEquals($expected, $actual);
     }
-
 }
