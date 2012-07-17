@@ -62,8 +62,8 @@ class SmithWatermanTest extends \PHPUnit_Framework_TestCase
     {
         return [
             [
-                'ACACACTA', // firstSequence
-                'AGCACACA', // secondSequence
+                'ACTGGCAGT', // firstSequence
+                'CACTGAT', // secondSequence
                 [
                     [0,  0,  0,  0,  0,  0,  0,  0,  0,  0], // expected
                     [0,  0,  5,  1,  0,  0,  5,  1,  0,  0],
