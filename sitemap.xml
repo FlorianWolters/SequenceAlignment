@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<url>
+	<loc>http://florianwolters.github.com/PHP-Component-Util-Singleton/index.html</loc>
+</url>
+<url>
+	<loc>http://florianwolters.github.com/PHP-Component-Util-Singleton/namespace-HochschuleBremen.html</loc>
+</url>
+<url>
+	<loc>http://florianwolters.github.com/PHP-Component-Util-Singleton/namespace-HochschuleBremen.Application.html</loc>
+</url>
+<url>
+	<loc>http://florianwolters.github.com/PHP-Component-Util-Singleton/namespace-HochschuleBremen.Application.SequenceAlignment.html</loc>
+</url>
+<url>
+	<loc>http://florianwolters.github.com/PHP-Component-Util-Singleton/namespace-HochschuleBremen.Application.SequenceAlignment.Controller.html</loc>
+</url>
+<url>
+	<loc>http://florianwolters.github.com/PHP-Component-Util-Singleton/namespace-HochschuleBremen.Application.SequenceAlignment.Entity.html</loc>
+</url>
+<url>
+	<loc>http://florianwolters.github.com/PHP-Component-Util-Singleton/namespace-HochschuleBremen.Application.SequenceAlignment.Form.html</loc>
+</url>
+<url>
+	<loc>http://florianwolters.github.com/PHP-Component-Util-Singleton/namespace-HochschuleBremen.Component.html</loc>
+</url>
+<url>
+	<loc>http://florianwolters.github.com/PHP-Component-Util-Singleton/namespace-HochschuleBremen.Component.Alignment.html</loc>
+</url>
+<url>
+	<loc>http://florianwolters.github.com/PHP-Component-Util-Singleton/namespace-HochschuleBremen.Component.Alignment.GapPenalty.html</loc>
+</url>
+<url>
+	<loc>http://florianwolters.github.com/PHP-Component-Util-Singleton/namespace-HochschuleBremen.Component.Alignment.SubstitutionMatrix.html</loc>
+</url>
+<url>
+	<loc>http://florianwolters.github.com/PHP-Component-Util-Singleton/namespace-HochschuleBremen.Component.Alignment.SubstitutionMatrix.AminoAcid.html</loc>
+</url>
+<url>
+	<loc>http://florianwolters.github.com/PHP-Component-Util-Singleton/namespace-HochschuleBremen.Component.Alignment.SubstitutionMatrix.Nucleotide.html</loc>
+</url>
+<url>
+	<loc>http://florianwolters.github.com/PHP-Component-Util-Singleton/namespace-HochschuleBremen.Component.Sequence.html</loc>
+</url>
+
+
+<url>
+	<loc>http://florianwolters.github.com/PHP-Component-Util-Singleton/class-HochschuleBremen.Application.SequenceAlignment.Controller.ControllerProvider.html</loc>
+</url>
+<url>
+	<loc>http://florianwolters.github.com/PHP-Component-Util-Singleton/class-HochschuleBremen.Application.SequenceAlignment.Entity.Alignment.html</loc>
+</url>
+<url>
+	<loc>http://florianwolters.github.com/PHP-Component-Util-Singleton/class-HochschuleBremen.Application.SequenceAlignment.Entity.DnaSequence.html</loc>
+</url>
+<url>
+	<loc>http://florianwolters.github.com/PHP-Component-Util-Singleton/class-HochschuleBremen.Application.SequenceAlignment.Entity.GapPenalty.html</loc>
+</url>
+<url>
+	<loc>http://florianwolters.github.com/PHP-Component-Util-Singleton/class-HochschuleBremen.Application.SequenceAlignment.Entity.ProteinSequence.html</loc>
+</url>
+<url>
+	<loc>http://florianwolters.github.com/PHP-Component-Util-Singleton/class-HochschuleBremen.Application.SequenceAlignment.Entity.RnaSequence.html</loc>
+</url>
+<url>
+	<loc>http://florianwolters.github.com/PHP-Component-Util-Singleton/class-HochschuleBremen.Application.SequenceAlignment.Entity.SequenceSelection.html</loc>
+</url>
+<url>
+	<loc>http://florianwolters.github.com/PHP-Component-Util-Singleton/class-HochschuleBremen.Application.SequenceAlignment.Form.AlignmentType.html</loc>
+</url>
+<url>
+	<loc>http://florianwolters.github.com/PHP-Component-Util-Singleton/class-HochschuleBremen.Application.SequenceAlignment.Form.DnaSequenceType.html</loc>
+</url>
+<url>
+	<loc>http://florianwolters.github.com/PHP-Component-Util-Singleton/class-HochschuleBremen.Application.SequenceAlignment.Form.GapPenaltyType.html</loc>
+</url>
+<url>
+	<loc>http://florianwolters.github.com/PHP-Component-Util-Singleton/class-HochschuleBremen.Application.SequenceAlignment.Form.ProteinSequenceType.html</loc>
+</url>
+<url>
+	<loc>http://florianwolters.github.com/PHP-Component-Util-Singleton/class-HochschuleBremen.Application.SequenceAlignment.Form.RnaSequenceType.html</loc>
+</url>
+<url>
+	<loc>http://florianwolters.github.com/PHP-Component-Util-Singleton/class-HochschuleBremen.Application.SequenceAlignment.Form.SequenceSelectionType.html</loc>
+</url>
+<url>
+	<loc>http://florianwolters.github.com/PHP-Component-Util-Singleton/class-HochschuleBremen.Application.SequenceAlignment.Form.SequenceTypeAbstract.html</loc>
+</url>
+<url>
+	<loc>http://florianwolters.github.com/PHP-Component-Util-Singleton/class-HochschuleBremen.Application.SequenceAlignment.SequenceAlignmentApplication.html</loc>
+</url>
+<url>
+	<loc>http://florianwolters.github.com/PHP-Component-Util-Singleton/class-HochschuleBremen.Component.Alignment.Cell.html</loc>
+</url>
+<url>
+	<loc>http://florianwolters.github.com/PHP-Component-Util-Singleton/class-HochschuleBremen.Component.Alignment.GapPenalty.SimpleGapPenalty.html</loc>
+</url>
+<url>
+	<loc>http://florianwolters.github.com/PHP-Component-Util-Singleton/class-HochschuleBremen.Component.Alignment.SmithWaterman.html</loc>
+</url>
+<url>
+	<loc>http://florianwolters.github.com/PHP-Component-Util-Singleton/class-HochschuleBremen.Component.Alignment.SubstitutionMatrix.AminoAcid.Blosum60.html</loc>
+</url>
+<url>
+	<loc>http://florianwolters.github.com/PHP-Component-Util-Singleton/class-HochschuleBremen.Component.Alignment.SubstitutionMatrix.AminoAcid.Blosum62.html</loc>
+</url>
+<url>
+	<loc>http://florianwolters.github.com/PHP-Component-Util-Singleton/class-HochschuleBremen.Component.Alignment.SubstitutionMatrix.AminoAcid.Blosum65.html</loc>
+</url>
+<url>
+	<loc>http://florianwolters.github.com/PHP-Component-Util-Singleton/class-HochschuleBremen.Component.Alignment.SubstitutionMatrix.AminoAcidSubstitutionMatrixEnum.html</loc>
+</url>
+<url>
+	<loc>http://florianwolters.github.com/PHP-Component-Util-Singleton/class-HochschuleBremen.Component.Alignment.SubstitutionMatrix.Nucleotide.NucFourFour.html</loc>
+</url>
+<url>
+	<loc>http://florianwolters.github.com/PHP-Component-Util-Singleton/class-HochschuleBremen.Component.Alignment.SubstitutionMatrix.Nucleotide.NucFourTwo.html</loc>
+</url>
+<url>
+	<loc>http://florianwolters.github.com/PHP-Component-Util-Singleton/class-HochschuleBremen.Component.Alignment.SubstitutionMatrix.NucleotideSubstitutionMatrixEnum.html</loc>
+</url>
+<url>
+	<loc>http://florianwolters.github.com/PHP-Component-Util-Singleton/class-HochschuleBremen.Component.Alignment.SubstitutionMatrix.SubstitutionMatrixAbstract.html</loc>
+</url>
+<url>
+	<loc>http://florianwolters.github.com/PHP-Component-Util-Singleton/class-HochschuleBremen.Component.Alignment.SubstitutionMatrix.SubstitutionMatrixEnum.html</loc>
+</url>
+<url>
+	<loc>http://florianwolters.github.com/PHP-Component-Util-Singleton/class-HochschuleBremen.Component.Alignment.SubstitutionMatrix.SubstitutionMatrixFactory.html</loc>
+</url>
+<url>
+	<loc>http://florianwolters.github.com/PHP-Component-Util-Singleton/class-HochschuleBremen.Component.Sequence.DnaSequence.html</loc>
+</url>
+<url>
+	<loc>http://florianwolters.github.com/PHP-Component-Util-Singleton/class-HochschuleBremen.Component.Sequence.ProteinSequence.html</loc>
+</url>
+<url>
+	<loc>http://florianwolters.github.com/PHP-Component-Util-Singleton/class-HochschuleBremen.Component.Sequence.RnaSequence.html</loc>
+</url>
+<url>
+	<loc>http://florianwolters.github.com/PHP-Component-Util-Singleton/class-HochschuleBremen.Component.Sequence.SequenceAbstract.html</loc>
+</url>
+<url>
+	<loc>http://florianwolters.github.com/PHP-Component-Util-Singleton/class-HochschuleBremen.Component.Alignment.GapPenalty.GapPenaltyInterface.html</loc>
+</url>
+<url>
+	<loc>http://florianwolters.github.com/PHP-Component-Util-Singleton/class-HochschuleBremen.Component.Sequence.SequenceInterface.html</loc>
+</url>
+<url>
+	<loc>http://florianwolters.github.com/PHP-Component-Util-Singleton/class-HochschuleBremen.Application.SequenceAlignment.Entity.SequenceTrait.html</loc>
+</url>
+</urlset>
