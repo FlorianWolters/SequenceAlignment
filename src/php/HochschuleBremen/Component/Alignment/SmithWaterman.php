@@ -514,8 +514,9 @@ class SmithWaterman
         $lengthQuery = \strlen($this->pair[0]);
         $lengthTarget = \strlen($this->pair[1]);
 
-        $result = '1 ' . $this->pair[0] . ' ' . $lengthQuery . \PHP_EOL;
-        $result .= '  ';
+//        $result = '1 ' . $this->pair[0] . ' ' . $lengthQuery . \PHP_EOL;
+        $result = $this->pair[0] . \PHP_EOL;
+//        $result .= '  ';
 
         $min = \min([$lengthQuery, $lengthTarget]);
 
@@ -528,7 +529,8 @@ class SmithWaterman
         }
 
         $result .= \PHP_EOL;
-        $result .= '1 ' . $this->pair[1] . ' ' . $lengthTarget . \PHP_EOL;
+        $result .= $this->pair[1] . \PHP_EOL;
+//        $result .= '1 ' . $this->pair[1] . ' ' . $lengthTarget . \PHP_EOL;
 
         return $result;
     }
