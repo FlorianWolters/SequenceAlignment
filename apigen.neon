@@ -28,7 +28,7 @@ skipDocPath:
 skipDocPrefix:
 main:
 title: HSBremen\ISBio\SequenceAlignment
-baseUrl: http://florianwolters.github.com/PHP-Component-Util-Singleton
+baseUrl: http://florianwolters.github.com/SequenceAlignment
 googleCseId:
 googleCseLabel:
 googleAnalytics:
@@ -45,7 +45,7 @@ internal: no
 php: no
 tree: yes
 deprecated: no
-todo: no
+todo: yes
 sourceCode: yes
 download: yes
 report: review/apigen.log
