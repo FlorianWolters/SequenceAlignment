@@ -6,7 +6,7 @@ Coming soon.
 
 ## Introduction
 
-This project is developed during the summer term 2012 of the module *Information Systems in Bioinformatics* at [Hochschule Bremen][10] ([Informatik M.Sc.][11], Graduate Programme *Komplexe Softwaresysteme*).
+This project is developed during the summer term 2012 of the module *Information Systems in Bioinformatics* at [Hochschule Bremen][28] ([Informatik M.Sc.][29], Graduate Programme *Komplexe Softwaresysteme*).
 
 ## Assignment
 
@@ -18,29 +18,49 @@ This project is developed during the summer term 2012 of the module *Information
 
 This project implements the **local alignment variant** of the software.
 
-## TODO
+## Roadmap/TODO
 
-* Implement client-side backtracking visualization.
-* Add more definitions and help texts to the `.html.twig` template files (see `TODO` marks).
 * Finish this `README.md` file (sections: Features, Usage, Description of the Algorithm, etc.).
-* Enlarge the font size and the score matrix.
-* Send forms on keypress enter.
-* Check/Test the algorithm `HochschuleBremen\Component\Alignment\SmithWaterman`:
+* Extend the algorithm `HochschuleBremen\Component\Alignment\SmithWaterman`:
 
-  * Add functionality to differ between gap open and gap extend.
-  * Add method comments.
+  * Add gap penalty functionality (gap open and gap extend).
   * Refactoring of the class: Create a class `SequencePair` that contains the alignment (now: simple array).
 
 * Remove the labels from the subforms in the form `HochschuleBremen\Application\SequenceAlignment\Form\PairwiseAlignmentType` (don't know how to do that).
 * Fix `TODO` and `@todo` comments in the PHP source code.
 * Refactoring of the PHP class `HochschuleBremen\Application\SequenceAlignment\Controller\ControllerProvider`.
-* Add missing DocBlock comments.
-* Run static code analyses.
-* Implement more automated [PHPUnit][15] tests.
+* Implement more automated [PHPUnit][19] tests.
 
 ## Features
 
+* Artifacts tested with both static and dynamic test procedures:
+  * Component tests (unit tests) implemented with [PHPUnit][19].
+  * Static code analysis with the style checker [PHP_CodeSniffer][14] and the source code analyzer [PHP Mess Detector (PHPMD)][18], [phpcpd][4] and [phpdcd][5].
+* Provides support for the dependency manager [Composer][3].
+* Provides a complete Application Programming Interface (API) documentation generated with the documentation generator [ApiGen][2]. Click [here][1] for the online API documentation.
+* Follows the [PSR-0][6] requirements for autoloader interoperability.
+* Follows the [PSR-1][7] basic coding style guide.
+* Follows the [PSR-2][8] coding style guide.
+
+## Usage
+
 Coming soon.
+
+## Used Software
+
+### Server-side
+
+* [PHP][17] 5.4.*
+* [Silex][21] 1.1.*
+* [Twig][22] 1.8.*
+* [Symony\Component\Yaml][30] 2.0.*
+* [FlorianWolters\Component\Core\Enum][24] 0.3.*
+* [FlorianWolters\Component\Util\Singleton][25] 0.2.*
+
+### Client-side
+
+* [jQuery][27] 1.7.2 (or later)
+* [Twitter Bootstrap][26] 2.0.4 (or later)
 
 ## Installation
 
@@ -64,22 +84,6 @@ The automated tests can be run with [PHPUnit][15]:
 
     phpunit
 
-## Used Software
-
-### Server-side
-
-* [PHP][1] 5.4.*
-* [Silex][2] 1.1.*
-* [Twig][3] 1.8.*
-* [Symony\Component\Yaml][12] 2.0.*
-* [FlorianWolters\Component\Core\Enum][5] 0.3.*
-* [FlorianWolters\Component\Util\Singleton][6] 0.2.*
-
-### Client-side
-
-* [jQuery][8] 1.7.2 (or later)
-* [Twitter Bootstrap][7] 2.0.4 (or later)
-
 ## License
 
 This program is free software: you can redistribute it and/or modify it under the terms of the GNU Lesser General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
@@ -90,17 +94,26 @@ You should have received a copy of the GNU Lesser General Public License along w
 
 
 
-[1]: http://php.net
-[2]: http://silex.sensiolabs.org
-[3]: http://twig.sensiolabs.org
-[4]: https://github.com/Seldaek/monolog
-[5]: https://github.com/FlorianWolters/PHP-Component-Core-Enum
-[6]: https://github.com/FlorianWolters/PHP-Component-Util-Singleton
-[7]: http://twitter.github.com/bootstrap
-[8]: http://jquery.com
-[10]: http://hs-bremen.de
-[11]: http://hs-bremen.de/internet/de/studium/stg/infmsc
-[12]: http://symfony.com/doc/current/components/yaml.html
-[13]: http://getcomposer.org
-[14]: http://getcomposer.org/composer.phar
-[15]: http://phpunit.de
+[1]: http://blog.florianwolters.de/SequenceAlignment
+[2]: http://apigen.org
+[3]: http://getcomposer.org
+[4]: https://github.com/sebastianbergmann/phpcpd
+[5]: https://github.com/sebastianbergmann/phpdcd
+[6]: https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-0.md
+[7]: https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-1-basic-coding-standard.md
+[8]: https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-2-coding-style-guide.md
+[14]: http://pear.php.net/package/PHP_CodeSniffer
+[17]: http://php.net
+[18]: http://phpmd.org
+[19]: http://phpunit.de
+[20]: http://getcomposer.org/composer.phar
+[21]: http://silex.sensiolabs.org
+[22]: http://twig.sensiolabs.org
+[23]: https://github.com/Seldaek/monolog
+[24]: https://github.com/FlorianWolters/PHP-Component-Core-Enum
+[25]: https://github.com/FlorianWolters/PHP-Component-Util-Singleton
+[26]: http://twitter.github.com/bootstrap
+[27]: http://jquery.com
+[28]: http://hs-bremen.de
+[29]: http://hs-bremen.de/internet/de/studium/stg/infmsc
+[30]: http://symfony.com/doc/current/components/yaml.html
