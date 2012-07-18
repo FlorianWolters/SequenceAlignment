@@ -28,22 +28,63 @@
 {% block help %}
 <h3>Help</h3>
 <dl>
+    <dt>Local Sequence Alignment</dt>
+    <dd>
+        Sequence alignment is the process of finding the optimal way to align
+        multiple individual sequences of characters (typically in the form of
+        DNA and amino acid chains). Local sequence alignment is a specialized
+        process of sequence alignment, focusing on finding similar sections
+        within two larger sequences, rather than trying to align the whole
+        sequences to each other.
+    </dd>
+    <dt>
+    <dt>Smith-Waterman Algorithm</dt>
+    <dd>
+        Is a dynamic programming algorithm designed by Temple F. Smith and
+        Michael S. Waterman (hence, hence being called the Smith-Waterman). This
+        algorithm is used to identify likely local alignments between 2
+        sequences, and is based off of the groundwork of the Needleman-Wunsch
+        algorithm, which is used to identify global alignments.
+    </dd>
+    <dt>Dynamic Programming</dt>
+    <dd>
+        Dynamic programming is the process of breaking down a challenging
+        problem in easier sub-problems in a recursive manner. Dynamic
+        programming can be broken down into 2 parts. First, there is the Optimal
+        sub-structure, which could be summed up in trying to find the optimal
+        path; in the case of of sequence alignment, the optimal path is the path
+        of the highest values. The other part of dynamic programming is
+        overlapping sub-problems, which is the process of generating a value
+        based off of the previous value in a sequence, which in the case of
+        sequence alignment, ties into the process of finding the optimal
+        alignment.
+    </dd>
     <dt>DNA</dt>
     <dd>
-        TODO
+        The main information carrying molecule for life. It is a double
+        stranded, helical molecule, and like RNA it is made up from the
+        nucleotides Adenine, Cytosine and Guanine, with the difference of using
+        the nucleotide Thymine rather than Uracil. This molecule is responsible
+        for holding all of the information to make up the organism, from the
+        design of their proteins to the timing of aging, and furthermore this
+        molecule is found in almost every single sell of an organism.
     </dd>
     <dt>RNA</dt>
     <dd>
-        TODO
+        A one of the information carrying molecules crucial for life. It is made
+        up from the nucleotides Adenine, Cytosine, Guanine and Uracil, and is
+        single stranded. It is used as a messenger from DNA to the ribosomes, it
+        is used to transcribe the nucleotide senescence, and it is also used by
+        ribosomes to attach the proper amino acids together in sequence.
     </dd>
     <dt>Amino Acid</dt>
     <dd>
-        TODO
+        Amino acids are organic compounds that act as the building blocks for
+        proteins. Consisting of an alphabet of 20 different compounds, these
+        acids go on to form long sequences that make up the biochemical
+        machinery crucial for life.
     </dd>
-    <dt>Local Sequence Alignment</dt>
-    <dd>
-        TODO
-    </dd>
+
 </dl>
 {% endblock %}
 
