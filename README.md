@@ -2,8 +2,6 @@
 
 [![Build Status](https://secure.travis-ci.org/FlorianWolters/SequenceAlignment.png?branch=master)](http://travis-ci.org/FlorianWolters/SequenceAlignment)
 
-Coming soon.
-
 ## Introduction
 
 This project is developed during the summer term 2012 of the module *Information Systems in Bioinformatics* at [Hochschule Bremen][28] ([Informatik M.Sc.][29], Graduate Programme *Komplexe Softwaresysteme*).
@@ -16,23 +14,36 @@ This project is developed during the summer term 2012 of the module *Information
 > * The global alignment variant should be based on the concept of edit distance using the unit cost model.
 > * The local alignment variant should be based on similarity using the following matrices as scores: nucleic acids, BLOSUM62 for amino acids.
 
-This project implements the **local alignment variant** of the software.
+This project implements the **local pairwise sequence alignment** variant of the software.
 
 ## Roadmap/TODO
 
-* Finish this `README.md` file (sections: Features, Usage, Description of the Algorithm, etc.).
-* Extend the algorithm `HochschuleBremen\Component\Alignment\SmithWaterman`:
+* Enhance the algorithm `HochschuleBremen\Component\Alignment\SmithWaterman`:
 
-  * Add gap penalty functionality (gap open and gap extend).
-  * Refactoring of the class: Create a class `SequencePair` that contains the alignment (now: simple array).
+  * Implement gap penalty functionality (gap open and gap extend).
+  * Refactoring of the class: Create a class `SequencePair` that contains the alignment pair (now: simple array).
 
-* Remove the labels from the subforms in the form `HochschuleBremen\Application\SequenceAlignment\Form\PairwiseAlignmentType` (don't know how to do that).
+* Remove the labels from the subforms in the form `HochschuleBremen\Application\SequenceAlignment\Form\PairwiseAlignmentType`.
 * Fix `TODO` and `@todo` comments in the PHP source code.
 * Refactoring of the PHP class `HochschuleBremen\Application\SequenceAlignment\Controller\ControllerProvider`.
 * Implement more automated [PHPUnit][19] tests.
 
 ## Features
 
+* Calculates a local pairwise sequence alignment using the Smith-Waterman algorithm.
+* Allows to input nucleotide (DNA and RNA) and amino acid sequences. The sequences are validated after submission of the corresponding form.
+* Allows to input simple gap penalties (gap open and gap extension). **Not used by the algorithm, yet.**
+* Clean layout and design of the web application. Each page of the application contains the term definitions at the bottom of the page (to understand the content of the current page).
+* Currently supports three amino acid substitution matrices (BLOSUM60, BLOSUM62, BLOSUM63 by Henikoff & Henikoff) and two nucleotide substitution matrices (NUC.4.4 and NUC.4.2 by Lowe). Additional substitution matrices can be easily added to the application.
+* Modular and Object-Oriented (OO) design with respect to Separation of Concerns (SoC).
+  * The namespace `HSBremen\Component` contains a reusable (but still basic) component library for bioinformatics. Currently the following components are included:
+    * `HSBremen\Component\Alignment`: Implements algorithms, e.g. for sequence alignment. Currently only the Smith-Waterman algorithm is supported.
+    * `HSBremen\Component\Alignment\GapPenalty`: Defines and implements a data structure for the gap penalties used during a sequence alignment routine.
+    * `HSBremen\Component\Alignment\SubstitutionMatrix`: Defines and implements a data structure for the set of substitution scores used during alignment:
+      * `HSBremen\Component\Alignment\SubstitutionMatrix\AminoAcid`: Contains substitution matrices for amino acids, e.g. BLOcks of Amino Acid SUbstitution Matrix (BLOSUM).
+      * `HSBremen\Component\Alignment\SubstitutionMatrix\Nucleotide`: Contains substitution matrices for nucleotides (e.g. DNA and RNA).
+  * The namespace `HSBremen\Application` contains the web application:
+* Built with the microframework Silex (+ Symfony Components) and the template-engine Twig to implement the Model View Controller (MVC) architectural pattern.
 * Artifacts tested with both static and dynamic test procedures:
   * Component tests (unit tests) implemented with [PHPUnit][19].
   * Static code analysis with the style checker [PHP_CodeSniffer][14] and the source code analyzer [PHP Mess Detector (PHPMD)][18], [phpcpd][4] and [phpdcd][5].
@@ -44,7 +55,19 @@ This project implements the **local alignment variant** of the software.
 
 ## Usage
 
-Coming soon.
+1. Start the application from the root directory of the project:
+
+   php -S 0.0.0.0:8000 -t .
+
+   The following should be displayed:
+
+    PHP 5.4.4 Development Server started at Thu Jul 19 20:03:31 2012
+    Listening on 0.0.0.0:8000
+
+2. Open `http://localhost:8000` in a webbrowser (e.g. [Mozilla Firefox](http://firefox.org)). The main page of the application should be displayed.
+3. Chose the type of sequence to align (DNA, RNA or amino acid) and click on the button `Proceed`.
+4. Enter or copy the source (first sequence) and the target (second sequence) in the two text areas. You can chose a substitution matrix optionally.
+5. Click on the button `Go`. The sequence alignment is calculated. The result page of the application should be displayed.
 
 ## Used Software
 
