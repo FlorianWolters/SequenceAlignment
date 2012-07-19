@@ -34,7 +34,8 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 
 /**
- * TODO
+ * The {@link AlignmentType} class houses the logic for building the form for
+ * class {@link Alignment}.
  *
  * @category   Biology
  * @package    SequenceAlignment

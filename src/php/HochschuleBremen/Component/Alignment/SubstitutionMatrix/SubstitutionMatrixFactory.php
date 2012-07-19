@@ -30,7 +30,7 @@
 
 namespace HochschuleBremen\Component\Alignment\SubstitutionMatrix;
 
-use \FlorianWolters\Component\Util\Singleton\SingletonTrait;
+use FlorianWolters\Component\Util\Singleton\SingletonTrait;
 
 /**
  * Constructs instances of substitution matrices.
@@ -57,23 +57,24 @@ class SubstitutionMatrixFactory
      * Constructs and returns the substitution matrix for the specified type of
      * substitution matrix.
      *
-     * @param SubstitutionMatrixEnum $type The type of the substitution matrix
-     *                                     to create.
+     * @param SubstitutionMatrixTypeEnum $type The type of the substitution
+     *                                         matrix to create.
      *
      * @return SubstitutionMatrixAbstract The substitution matrix.
      * @throws InvalidArgumentException If the specified substitution matrix
      *                                  type is not supported.
      */
-    public function create(SubstitutionMatrixEnum $type = null)
+    public function create(SubstitutionMatrixTypeEnum $type = null)
     {
         if (null === $type) {
-            $type = AminoAcidSubstitutionMatrixEnum::BLOSUM62();
+            $type = AminoAcidSubstitutionMatrixTypeEnum::BLOSUM62();
         }
 
         $enumClassName = \get_class($type);
-        $namespace = \str_replace('SubstitutionMatrixEnum', '', $enumClassName);
-        $matrixName = \ucwords(\strtolower($type->getName()));
-        $className = $namespace . '\\' . $matrixName;
+        $namespace = \str_replace(
+            'SubstitutionMatrixTypeEnum', '', $enumClassName
+        );
+        $className = $namespace . '\\' . $type->getName();
 
         if (false === \class_exists($className)) {
             throw new \InvalidArgumentException(

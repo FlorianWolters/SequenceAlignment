@@ -15,7 +15,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with this program.  If not, see http://gnu.org/licenses/lgpl.txt.
  *
- * PHP version 5.
+ * PHP version 5.4
  *
  * @category  Biology
  * @package   Sequence
@@ -62,49 +62,56 @@ abstract class SequenceAbstract implements SequenceInterface
      * Constructs a new sequence from the specified string.
      *
      * @param string $sequenceStr The sequence string.
+     *
+     * @throws InvalidArgumentException If the specified string contains invalid
+     *                                  characters.
      */
     public function __construct($sequenceStr)
     {
-        if (false === $this->validateSequenceString($sequenceStr)) {
+        $this->setSequenceStr($sequenceStr);
+
+        if (false === $this->validateSequenceStr()) {
             throw new \InvalidArgumentException(
                 'The sequence string contains invalid characters.'
             );
         }
-
-        $this->setSequenceStr($sequenceStr);
     }
 
-    public function __toString()
-    {
-        return $this->sequenceStr;
-    }
+    /**
+     * Validates the sequence string of this sequence.
+     *
+     * @return boolean `true` if the sequence string is valid; `false`
+     *                 otherwise.
+     */
+    abstract protected function validateSequenceStr();
 
+    /**
+     * Sets the sequence string of this sequence.
+     *
+     * @param string $sequenceStr The sequence string.
+     */
     protected function setSequenceStr($sequenceStr)
     {
         $this->sequenceStr = \strtoupper($sequenceStr);
         $this->updateLength();
     }
 
+    /**
+     * Updates the length of this sequence.
+     *
+     * @return void
+     */
     private function updateLength()
     {
         $this->length = \strlen($this->sequenceStr);
     }
 
     /**
-     * Validates the specified sequence string.
-     *
-     * @param string $sequenceStr The sequence string.
-     */
-    abstract protected function validateSequenceString($sequenceStr);
-
-    /**
-     * Returns the sequence string of the sequence.
-     *
-     * {@inhritdoc}
+     * Returns the sequence string of this sequence.
      *
      * @return string The sequence string.
      */
-    public function getSequenceStr()
+    public function __toString()
     {
         return $this->sequenceStr;
     }
@@ -119,6 +126,18 @@ abstract class SequenceAbstract implements SequenceInterface
     public function getLength()
     {
         return $this->length;
+    }
+
+    /**
+     * Returns the sequence string of the sequence.
+     *
+     * {@inhritdoc}
+     *
+     * @return string The sequence string.
+     */
+    public function getSequenceStr()
+    {
+        return $this->sequenceStr;
     }
 
 }

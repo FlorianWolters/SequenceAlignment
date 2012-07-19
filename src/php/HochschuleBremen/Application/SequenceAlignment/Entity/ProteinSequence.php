@@ -33,7 +33,7 @@ namespace HochschuleBremen\Application\SequenceAlignment\Entity;
 use HochschuleBremen\Component\Sequence\ProteinSequence as ProteinSequenceModel;
 
 /**
- * TODO
+ * {@inheritdoc}
  *
  * @category   Biology
  * @package    SequenceAlignment
@@ -54,8 +54,9 @@ class ProteinSequence extends ProteinSequenceModel
     use SequenceTrait;
 
     /**
+     * {@inheritdoc}
      *
-     * @param string $sequenceStr
+     * @param string $sequenceStr The sequence string.
      */
     public function __construct($sequenceStr = '')
     {

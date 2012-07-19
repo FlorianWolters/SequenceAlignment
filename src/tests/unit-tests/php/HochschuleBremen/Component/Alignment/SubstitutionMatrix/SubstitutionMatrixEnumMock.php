@@ -44,7 +44,7 @@ namespace HochschuleBremen\Component\Alignment\SubstitutionMatrix;
  * @link       http://github.com/FlorianWolters/SequenceAlignment
  * @since      Class available since Release 0.1.0
  */
-final class SubstitutionMatrixEnumMock extends SubstitutionMatrixEnum
+final class SubstitutionMatrixEnumMock extends SubstitutionMatrixTypeEnum
 {
 
     /**

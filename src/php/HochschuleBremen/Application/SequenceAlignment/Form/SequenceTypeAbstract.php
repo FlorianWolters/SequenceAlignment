@@ -34,7 +34,8 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 
 /**
- * TODO
+ * The base class housing the logic for building the forms for the entity
+ * classes {@link DnaSequence}, {@link RnaSequence} and {@link ProteinSequence}.
  *
  * @category   Biology
  * @package    SequenceAlignment

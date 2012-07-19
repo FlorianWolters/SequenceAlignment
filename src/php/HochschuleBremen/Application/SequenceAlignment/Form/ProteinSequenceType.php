@@ -31,7 +31,8 @@
 namespace HochschuleBremen\Application\SequenceAlignment\Form;
 
 /**
- * TODO
+ * The {@link ProteinSequenceType} class houses the logic for building the form
+ * for class {@link ProteinSequence}.
  *
  * @category   Biology
  * @package    SequenceAlignment
@@ -47,7 +48,11 @@ class ProteinSequenceType extends SequenceTypeAbstract
 {
 
     /**
-     * @return array
+     * Returns the default options for this type.
+     *
+     * {@inheritdoc}
+     *
+     * @return array The default options
      */
     public function getDefaultOptions()
     {
@@ -65,7 +70,7 @@ class ProteinSequenceType extends SequenceTypeAbstract
      */
     public function getName()
     {
-        return 'protein';
+        return 'Protein';
     }
 
 }

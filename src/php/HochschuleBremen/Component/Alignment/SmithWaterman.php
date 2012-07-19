@@ -20,6 +20,7 @@
  * @category  Biology
  * @package   Alignment
  * @author    Florian Wolters <wolters.fl@gmail.com>
+ * @author    Olav Hoffmann <olavhoffmann@gmail.com>
  * @copyright 2012 Florian Wolters
  * @license   http://gnu.org/licenses/lgpl.txt LGPL-3.0+
  * @version   GIT: $Id$
@@ -43,6 +44,7 @@ use HochschuleBremen\Component\Sequence\SequenceInterface;
  * @category  Biology
  * @package   Alignment
  * @author    Florian Wolters <wolters.fl@gmail.com>
+ * @author    Olav Hoffmann <olavhoffmann@gmail.com>
  * @copyright 2012 Florian Wolters
  * @license   http://gnu.org/licenses/lgpl.txt LGPL-3.0+
  * @version   Release: @package_version@
@@ -53,71 +55,92 @@ class SmithWaterman
 {
 
     /**
+     * The initial score of each Cell in the score matrix.
+     *
      * @var integer
      */
     const INITIAL_SCORE = 0;
 
     /**
+     * The gap character.
+     *
      * @var string
      */
     const GAP_CHARACTER = '-';
 
     /**
+     * The first sequence of the pair to align.
+     *
      * @var SequenceInterface
      */
     private $query;
 
     /**
+     * The second sequence of the pair to align.
+     *
      * @var SequenceInterface
      */
     private $target;
 
     /**
+     * The gap penalties used during alignment.
+     *
      * @var GapPenaltyInterface
      */
     private $gapPenalty;
 
     /**
+     * The set of substitution scores used during alignment.
+     *
      * @var SubstitutionMatrixAbstract
      */
     private $substitutionMatrix;
 
     /**
-     * @var integer
+     * The Cell holding the score resulting from the algorithm.
+     *
+     * @var Cell
      */
-    private $score = 0;
+    private $scoreCell;
 
     /**
-     * @var integer
-     */
-    private $minScore = self::INITIAL_SCORE;
-
-    /**
-     * @var integer
-     */
-    private $maxScore;
-
-    /**
+     * The entire score matrix built during alignment.
+     *
      * @var array
      */
     private $scoreMatrix;
 
     /**
-     * @Cell
+     * Returns the minimum possible score.
+     *
+     * @var integer
      */
-    private $scoreCell;
+    private $minimumScore = self::INITIAL_SCORE;
 
     /**
+     * Returns the maximum possible score.
+     *
+     * @var integer
+     */
+    private $maximumScore;
+
+    /**
+     * The width of the score matrix.
+     *
      * @var integer
      */
     private $scoreMatrixWidth;
 
     /**
+     * The height of the score matrix.
+     *
      * @var integer
      */
     private $scoreMatrixHeight;
 
     /**
+     * The sequence alignment pair.
+     *
      * @var array
      */
     private $pair;
@@ -143,21 +166,7 @@ class SmithWaterman
         $this->target = $target;
         $this->gapPenalty = $gapPenalty;
         $this->substitutionMatrix = $subMatrix;
-
-        $maxq = 0;
-        $maxt = 0;
-
-        for ($i = 0; $i < $query->getLength(); ++$i) {
-            $compound = \substr($query, $i, 1);
-            $maxq += $this->substitutionMatrix->getValue($compound, $compound);
-        }
-
-        for ($i = 0; $i < $target->getLength(); ++$i) {
-            $compound = \substr($target, $i, 1);
-            $maxt += $this->substitutionMatrix->getValue($compound, $compound);
-        }
-
-        $this->maxScore = \max([$maxq, $maxt]);
+        $this->maximumScore = $this->calculateMaximumScore();
         $this->scoreMatrixWidth = (\strlen($query) + 1);
         $this->scoreMatrixHeight = (\strlen($target) + 1);
         $this->initializeScoreMatrix();
@@ -166,7 +175,35 @@ class SmithWaterman
     }
 
     /**
-     * Initializes all Cells of the score matrix.
+     * Calculates the maximum possible score.
+     *
+     * @return integer The maximum possible score.
+     */
+    private function calculateMaximumScore()
+    {
+        $maxQuery = 0;
+        $maxTarget = 0;
+
+        for ($i = 0; $i < $this->query->getLength(); ++$i) {
+            $compound = \substr($this->query, $i, 1);
+            $maxQuery += $this->substitutionMatrix->getValue(
+                $compound, $compound
+            );
+        }
+
+        for ($i = 0; $i < $this->target->getLength(); ++$i) {
+            $compound = \substr($this->target, $i, 1);
+            $maxTarget += $this->substitutionMatrix->getValue(
+                $compound, $compound
+            );
+        }
+
+        return \max([$maxQuery, $maxTarget]);
+    }
+
+    /**
+     * Initializes the score matrix with Cell objects that are initialized with
+     * the correct row, the correct column and the initial score.
      *
      * @return void
      */
@@ -179,10 +216,12 @@ class SmithWaterman
                 );
             }
         }
+
+        $this->scoreCell = $this->scoreMatrix[0][0];
     }
 
     /**
-     * Calculates all Cells of the score matrix.
+     * Calculates the score matrix.
      *
      * @return void
      */
@@ -255,8 +294,7 @@ class SmithWaterman
             }
         }
 
-        if ($currentCell->getScore() > $this->score) {
-            $this->score = $currentCell->getScore();
+        if ($currentCell->getScore() > $this->scoreCell->getScore()) {
             $this->scoreCell = $currentCell;
         }
     }
@@ -284,28 +322,21 @@ class SmithWaterman
     }
 
     /**
-     * Runs the traceback.
+     * Calculates the sequence alignment pair.
      *
      * @return void
+     * @todo Fix confusing source code
      */
     private function traceback()
     {
-        $alignedQuery = '';
-        $alignedTarget = '';
-
-        // Start at the Cell with the highest score.
-        $currentCell = $this->scoreCell;
-
-        $alignedQuery = $this->returnCompoundFromQuery($currentCell)
-            . $alignedQuery;
-        $alignedTarget = $this->returnCompoundFromTarget($currentCell)
-            . $alignedTarget;
-        $oldCell = $currentCell;
-        $currentCell = $currentCell->getPreviousCell();
+        // Start at the Cell with the score.
+        $alignedQuery = $this->returnCompoundFromQuery($this->scoreCell);
+        $alignedTarget = $this->returnCompoundFromTarget($this->scoreCell);
+        $previousCell = $this->scoreCell;
+        $currentCell = $this->scoreCell->getPreviousCell();
 
         while (true === $this->isTracebackNotDone($currentCell)) {
-
-            $rowDiff = ($oldCell->getRow() - $currentCell->getRow());
+            $rowDiff = ($previousCell->getRow() - $currentCell->getRow());
             if (1 === $rowDiff) {
                 $alignedTarget = $this->returnCompoundFromTarget($currentCell)
                     . $alignedTarget;
@@ -313,7 +344,8 @@ class SmithWaterman
                 $alignedTarget = '-' . $alignedTarget;
             }
 
-            $columnDiff = ($oldCell->getColumn() - $currentCell->getColumn());
+            $columnDiff = ($previousCell->getColumn()
+                - $currentCell->getColumn());
             if (1 === $columnDiff) {
                 $alignedQuery = $this->returnCompoundFromQuery($currentCell)
                     . $alignedQuery;
@@ -321,7 +353,7 @@ class SmithWaterman
                 $alignedQuery = '-' . $alignedQuery;
             }
 
-            $oldCell = $currentCell;
+            $previousCell = $currentCell;
             $currentCell = $currentCell->getPreviousCell();
         }
 
@@ -333,7 +365,7 @@ class SmithWaterman
      *
      * @param Cell $currentCell The current Cell in the score table.
      *
-     * @return boolean `true`if the traceback is *not* done; `false` otherwise.
+     * @return boolean `true` if the traceback is *not* done; `false` otherwise.
      */
     private function isTracebackNotDone(Cell $currentCell)
     {
@@ -343,7 +375,9 @@ class SmithWaterman
     // Getter
 
     /**
-     * @return SequenceInterface
+     * Returns the first sequence of the pair.
+     *
+     * @return SequenceInterface The first sequence of the pair.
      */
     public function getQuery()
     {
@@ -351,7 +385,9 @@ class SmithWaterman
     }
 
     /**
-     * @return SequenceInterface
+     * Returns the second sequence of the pair.
+     *
+     * @return SequenceInterface The second sequence of the pair.
      */
     public function getTarget()
     {
@@ -359,7 +395,9 @@ class SmithWaterman
     }
 
     /**
-     * @return GapPenaltyInterface
+     * Returns the gap penalties.
+     *
+     * @return GapPenaltyInterface The gap penalties used during alignment.
      */
     public function getGapPenalty()
     {
@@ -367,7 +405,10 @@ class SmithWaterman
     }
 
     /**
-     * @return SubstitutionMatrixAbstract
+     * Returns the substitution matrix.
+     *
+     * @return SubstitutionMatrixAbstract The set of substitution scores used
+     *                                    during alignment.
      */
     public function getSubstitutionMatrix()
     {
@@ -393,7 +434,7 @@ class SmithWaterman
      */
     public function getMaxScore()
     {
-        return $this->maxScore;
+        return $this->maximumScore;
     }
 
     /**
@@ -403,7 +444,7 @@ class SmithWaterman
      */
     public function getMinScore()
     {
-        return $this->minScore;
+        return $this->minimumScore;
     }
 
     /**
@@ -417,17 +458,14 @@ class SmithWaterman
     }
 
     /**
-     * Returns the score matrix resulting from the algorithm.
+     * Returns the entire score matrix built during alignment.
      *
-     * @return array The score matrix resulting from the algorithm.
+     * The first dimension has the length of the first (query) sequence + 1; the
+     * second has the length of the second (target) sequence + 1.
+     *
+     * @return array The score matrix.
      */
     public function getScoreMatrix()
-    {
-        return $this->scoreMatrix;
-    }
-
-
-    public function getScoreMatrixAsArray()
     {
         $result = [];
 
@@ -439,7 +477,6 @@ class SmithWaterman
 
         return $result;
     }
-
 
     /**
      * Returns score as a distance between 0.0 and the specified scale
@@ -457,7 +494,7 @@ class SmithWaterman
     }
 
     /**
-     * Returns a score as a similarity between 0.0 and the specified scale
+     * Returns score as a similarity between 0.0 and the specified scale
      * (default: 1.0).
      *
      * @param float $scale The maximum similarity.
@@ -472,11 +509,12 @@ class SmithWaterman
     }
 
     /**
-     * Returns a string representation of this algorithm.
+     * Returns the string representation of the entire score matrix built during
+     * alignment.
      *
-     * @return string The string representation.
+     * @return string The score matrix as a string.
      */
-    public function __toString()
+    public function scoreMatrixToString()
     {
         $result = "\t" . self::GAP_CHARACTER;
 
@@ -506,22 +544,22 @@ class SmithWaterman
     }
 
     /**
-     * @return string
-     * @todo Create class SequencePair.
+     * Returns the string representation of the sequence alignment pair.
+     *
+     * @return string The sequence alignment pair as a string.
      */
-    public function formatAlignment()
+    public function pairToString()
     {
         $lengthQuery = \strlen($this->pair[0]);
         $lengthTarget = \strlen($this->pair[1]);
-
-//        $result = '1 ' . $this->pair[0] . ' ' . $lengthQuery . \PHP_EOL;
-        $result = $this->pair[0] . \PHP_EOL;
-//        $result .= '  ';
-
         $min = \min([$lengthQuery, $lengthTarget]);
 
+        $result = $this->pair[0] . \PHP_EOL;
+
         for ($i = 0; $i < $min; ++$i) {
-            if (\substr($this->pair[0], $i, 1) === substr($this->pair[1], $i, 1)) {
+            $queryCompund = \substr($this->pair[0], $i, 1);
+            $targetCompund = \substr($this->pair[1], $i, 1);
+            if ($queryCompund === $targetCompund) {
                 $result .= '|';
             } else {
                 $result .= ' ';
@@ -530,30 +568,8 @@ class SmithWaterman
 
         $result .= \PHP_EOL;
         $result .= $this->pair[1] . \PHP_EOL;
-//        $result .= '1 ' . $this->pair[1] . ' ' . $lengthTarget . \PHP_EOL;
 
         return $result;
     }
 
 }
-
-//require __DIR__ . '/../../../../../vendor/autoload.php';
-//
-//use HochschuleBremen\Component\Alignment\SubstitutionMatrix\SubstitutionMatrixFactory;
-//use HochschuleBremen\Component\Alignment\SubstitutionMatrix\NucleotideSubstitutionMatrixEnum;
-//use HochschuleBremen\Component\Sequence\DnaSequence;
-//use HochschuleBremen\Component\Alignment\GapPenalty\SimpleGapPenalty;
-//
-//$query = new DnaSequence('ACTGGCAGT');
-//$target = new DnaSequence('CACTGAT');
-//$substitutionMatrix = SubstitutionMatrixFactory::getInstance()
-//    ->create(NucleotideSubstitutionMatrixEnum::NUCFOURTWO());
-//
-//$aligner = new SmithWaterman(
-//    $query,
-//    $target,
-//    new SimpleGapPenalty,
-//    $substitutionMatrix
-//);
-//
-//echo $aligner;

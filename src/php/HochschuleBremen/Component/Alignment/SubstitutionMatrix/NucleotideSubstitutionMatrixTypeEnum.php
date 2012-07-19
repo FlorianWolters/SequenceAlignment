@@ -1,6 +1,6 @@
 <?php
 /**
- * `NucleotideSubstitutionMatrixEnum.php`
+ * `NucleotideSubstitutionMatrixTypeEnum.php`
  *
  * This program is free software: you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -43,13 +43,13 @@ namespace HochschuleBremen\Component\Alignment\SubstitutionMatrix;
  * @link       http://github.com/FlorianWolters/SequenceAlignment
  * @since      Class available since Release 0.1.0
  */
-class NucleotideSubstitutionMatrixEnum extends SubstitutionMatrixEnum
+class NucleotideSubstitutionMatrixTypeEnum extends SubstitutionMatrixTypeEnum
 {
 
     /**
      * The NUC.4.4 substitution matrix.
      *
-     * @return NucleotideSubstitutionMatrixEnum The NUC.4.4.
+     * @return NucleotideSubstitutionMatrixTypeEnum The NUC.4.4.
      */
     final public static function NUCFOURFOUR()
     {
@@ -59,7 +59,7 @@ class NucleotideSubstitutionMatrixEnum extends SubstitutionMatrixEnum
     /**
      * The NUC.4.2 substitution matrix.
      *
-     * @return NucleotideSubstitutionMatrixEnum The NUC.4.2.
+     * @return NucleotideSubstitutionMatrixTypeEnum The NUC.4.2.
      */
     final public static function NUCFOURTWO()
     {

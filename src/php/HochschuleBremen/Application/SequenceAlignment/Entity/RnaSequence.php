@@ -33,7 +33,7 @@ namespace HochschuleBremen\Application\SequenceAlignment\Entity;
 use HochschuleBremen\Component\Sequence\RnaSequence as RnaSequenceModel;
 
 /**
- * TODO
+ * {@inheritdoc}
  *
  * @category   Biology
  * @package    SequenceAlignment
@@ -48,8 +48,16 @@ use HochschuleBremen\Component\Sequence\RnaSequence as RnaSequenceModel;
 class RnaSequence extends RnaSequenceModel
 {
 
+    /**
+     * Adds validation and getter-/setter-methods.
+     */
     use SequenceTrait;
 
+    /**
+     * {@inheritdoc}
+     *
+     * @param string $sequenceStr The sequence string.
+     */
     public function __construct($sequenceStr = '')
     {
         try {

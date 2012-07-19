@@ -41,8 +41,8 @@ use HochschuleBremen\Application\SequenceAlignment\Entity\Alignment;
 use HochschuleBremen\Application\SequenceAlignment\Entity\RnaSequence;
 use HochschuleBremen\Application\SequenceAlignment\Entity\SequenceSelection;
 use HochschuleBremen\Component\Alignment\SmithWaterman;
-use HochschuleBremen\Component\Alignment\SubstitutionMatrix\AminoAcidSubstitutionMatrixEnum;
-use HochschuleBremen\Component\Alignment\SubstitutionMatrix\NucleotideSubstitutionMatrixEnum;
+use HochschuleBremen\Component\Alignment\SubstitutionMatrix\AminoAcidSubstitutionMatrixTypeEnum;
+use HochschuleBremen\Component\Alignment\SubstitutionMatrix\NucleotideSubstitutionMatrixTypeEnum;
 use HochschuleBremen\Component\Alignment\SubstitutionMatrix\SubstitutionMatrixFactory;
 use Silex\Application;
 use Silex\ControllerProviderInterface;
@@ -112,8 +112,8 @@ class ControllerProvider implements ControllerProviderInterface
     {
         $options = [
             'sequence_type' => new ProteinSequenceType,
-            'matrices' => AminoAcidSubstitutionMatrixEnum::names(),
-            'matrix_choice' => AminoAcidSubstitutionMatrixEnum::BLOSUM62()->getName(),
+            'matrices' => AminoAcidSubstitutionMatrixTypeEnum::names(),
+            'matrix_choice' => AminoAcidSubstitutionMatrixTypeEnum::BLOSUM62()->getName(),
             'allowed_compounds' => [
                 'a', 'r', 'n', 'd', 'c', 'q', 'e', 'g', 'h', 'i',
                 'l', 'k', 'm', 'f', 'p', 's', 't', 'w', 'y', 'v'
@@ -124,7 +124,7 @@ class ControllerProvider implements ControllerProviderInterface
         return $this->displayForm(
             $app,
             $options,
-            'HochschuleBremen\Component\Alignment\SubstitutionMatrix\AminoAcidSubstitutionMatrixEnum'
+            'HochschuleBremen\Component\Alignment\SubstitutionMatrix\AminoAcidSubstitutionMatrixTypeEnum'
         );
     }
 
@@ -221,15 +221,15 @@ class ControllerProvider implements ControllerProviderInterface
     ) {
         $options = [
             'sequence_type' => $sequenceType,
-            'matrices' => NucleotideSubstitutionMatrixEnum::names(),
-            'matrix_choice' => NucleotideSubstitutionMatrixEnum::NUCFOURTWO()->getName(),
+            'matrices' => NucleotideSubstitutionMatrixTypeEnum::names(),
+            'matrix_choice' => NucleotideSubstitutionMatrixTypeEnum::NUCFOURTWO()->getName(),
             'allowed_compounds' => $allowedCompounds
         ];
 
         return $this->displayForm(
             $app,
             $options,
-            'HochschuleBremen\Component\Alignment\SubstitutionMatrix\NucleotideSubstitutionMatrixEnum'
+            'HochschuleBremen\Component\Alignment\SubstitutionMatrix\NucleotideSubstitutionMatrixTypeEnum'
         );
     }
 

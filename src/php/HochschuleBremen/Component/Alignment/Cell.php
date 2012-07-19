@@ -31,8 +31,8 @@
 namespace HochschuleBremen\Component\Alignment;
 
 /**
- * A Cell in a similarity matrix, to hold row, column, score and the previous
- * Cell.
+ * This class models a cell in a score matrix, to hold row, column, score and
+ * the previous cell.
  *
  * @category   Biology
  * @package    Alignment
@@ -48,40 +48,40 @@ class Cell
 {
 
     /**
-     * The previous cell of this {@link Cell}.
+     * The previous cell of this Cell.
      *
      * @var Cell
      */
     private $previousCell;
 
     /**
-     * The row of this {@link Cell}.
+     * The row of this Cell.
      *
      * @var integer
      */
     private $row;
 
     /**
-     * The column of this {@link Cell}.
+     * The column of this Cell.
      *
      * @var integer
      */
     private $column;
 
     /**
-     * The score of this {@link Cell}.
+     * The score of this Cell.
      *
      * @var integer
      */
     private $score;
 
     /**
-     * Constructs a new {@link Cell} with a specified row and a specified
-     * column.
+     * Constructs a new Cell with a specified row, a specified column and a
+     * specified score.
      *
-     * @param integer $row    The row of the {@link Cell}.
-     * @param integer $column The column of the {@link Cell}.
-     * @param integer $score  The score of the {@link Cell}.
+     * @param integer $row    The row of the Cell.
+     * @param integer $column The column of the Cell.
+     * @param integer $score  The score of the Cell.
      */
     public function __construct($row, $column, $score = 0)
     {
@@ -91,13 +91,8 @@ class Cell
         $this->setPreviousCell();
     }
 
-    public function __toString()
-    {
-        return (string) $this->score;
-    }
-
     /**
-     * Sets the score of this {@link Cell}.
+     * Sets the score of this Cell.
      *
      * @param integer $score The score to set.
      *
@@ -109,19 +104,9 @@ class Cell
     }
 
     /**
-     * Returns the previous {@link Cell} of this {@link Cell}.
+     * Sets the previous Cell of this Cell.
      *
-     * @return Cell The previous {@link Cell}.
-     */
-    public function getPreviousCell()
-    {
-       return $this->previousCell;
-    }
-
-    /**
-     * Sets the previous {@link Cell} of this {@link Cell}.
-     *
-     * @param Cell $cell The previous {@link Cell} to set.
+     * @param Cell|null $cell The previous Cell to set.
      *
      * @return void
      */
@@ -131,17 +116,37 @@ class Cell
     }
 
     /**
-     * Returns the score of this {@link Cell}.
+     * Returns the score of this Cell as a string.
      *
-     * @return The score.
+     * @return string The score of this cell as a string.
      */
-    public function getScore()
+    public function __toString()
     {
-        return $this->score;
+        return (string) $this->score;
     }
 
     /**
-     * Returns the row of this {@link Cell}.
+     * Returns the previous Cell of this Cell.
+     *
+     * @return Cell The previous Cell.
+     */
+    public function getPreviousCell()
+    {
+       return $this->previousCell;
+    }
+
+    /**
+     * Returns the column of this Cell.
+     *
+     * @return integer The column.
+     */
+    public function getColumn()
+    {
+        return $this->column;
+    }
+
+    /**
+     * Returns the row of this Cell.
      *
      * @return integer The row.
      */
@@ -151,13 +156,13 @@ class Cell
     }
 
     /**
-     * Returns the column of this {@link Cell}.
+     * Returns the score of this Cell.
      *
-     * @return integer The column.
+     * @return The score.
      */
-    public function getColumn()
+    public function getScore()
     {
-        return $this->column;
+        return $this->score;
     }
 
 }

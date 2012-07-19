@@ -1,6 +1,6 @@
 <?php
 /**
- * `SubstitutionMatrixEnum.php`
+ * `SubstitutionMatrixTypeEnum.php`
  *
  * This program is free software: you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -45,6 +45,6 @@ use \FlorianWolters\Component\Core\Enum\EnumAbstract;
  * @link       http://github.com/FlorianWolters/SequenceAlignment
  * @since      Class available since Release 0.1.0
  */
-abstract class SubstitutionMatrixEnum extends EnumAbstract
+abstract class SubstitutionMatrixTypeEnum extends EnumAbstract
 {
 }

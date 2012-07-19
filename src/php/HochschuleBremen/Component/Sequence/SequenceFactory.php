@@ -1,6 +1,6 @@
 <?php
 /**
- * `SubstitutionMatrixFactory.php`
+ * `SequenceFactory.php`
  *
  * This program is free software: you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -17,35 +17,33 @@
  *
  * PHP version 5.4
  *
- * @category   Biology
- * @package    Alignment
- * @subpackage SubstitutionMatrix
- * @author     Florian Wolters <wolters.fl@gmail.com>
- * @copyright  2012 Florian Wolters
- * @license    http://gnu.org/licenses/lgpl.txt LGPL-3.0+
- * @version    GIT: $Id$
- * @link       http://github.com/FlorianWolters/SequenceAlignment
- * @since      File available since Release 0.1.0
+ * @category  Biology
+ * @package   Sequence
+ * @author    Florian Wolters <wolters.fl@gmail.com>
+ * @copyright 2012 Florian Wolters
+ * @license   http://gnu.org/licenses/lgpl.txt LGPL-3.0+
+ * @version   GIT: $Id$
+ * @link      http://github.com/FlorianWolters/SequenceAlignment
+ * @since     File available since Release 0.1.0
  */
 
-namespace HochschuleBremen\Component\Alignment\SubstitutionMatrix;
+namespace HochschuleBremen\Component\Sequence;
 
-use \FlorianWolters\Component\Util\Singleton\SingletonTrait;
+use FlorianWolters\Component\Util\Singleton\SingletonTrait;
 
 /**
- * Constructs instances of substitution matrices.
+ * Constructs instances of biological sequences.
  *
- * @category   Biology
- * @package    Alignment
- * @subpackage SubstitutionMatrix
- * @author     Florian Wolters <wolters.fl@gmail.com>
- * @copyright  2012 Florian Wolters
- * @license    http://gnu.org/licenses/lgpl.txt LGPL-3.0+
- * @version    Release: @package_version@
- * @link       http://github.com/FlorianWolters/SequenceAlignment
- * @since      Class available since Release 0.1.0
+ * @category  Biology
+ * @package   Sequence
+ * @author    Florian Wolters <wolters.fl@gmail.com>
+ * @copyright 2012 Florian Wolters
+ * @license   http://gnu.org/licenses/lgpl.txt LGPL-3.0+
+ * @version   Release: @package_version@
+ * @link      http://github.com/FlorianWolters/SequenceAlignment
+ * @since     Class available since Release 0.1.0
  */
-class SubstitutionMatrixFactory
+class SequenceFactory
 {
 
     /**
@@ -54,35 +52,26 @@ class SubstitutionMatrixFactory
     use SingletonTrait;
 
     /**
-     * Constructs and returns the substitution matrix for the specified type of
-     * substitution matrix.
+     * Constructs and returns the sequence for the specified type of sequence.
      *
-     * @param SubstitutionMatrixEnum $type The type of the substitution matrix
-     *                                     to create.
+     * @param SequenceTypeEnum $type The type of the sequence to create.
      *
-     * @return SubstitutionMatrixAbstract The substitution matrix.
-     * @throws InvalidArgumentException If the specified substitution matrix
-     *                                  type is not supported.
+     * @return SequenceAbstract The sequence.
+     * @throws InvalidArgumentException If the specified sequence type is not
+     *                                  supported.
      */
-    public function create(SubstitutionMatrixEnum $type = null)
+    public function create(SequenceTypeEnum $type, $sequenceStr)
     {
-        if (null === $type) {
-            $type = AminoAcidSubstitutionMatrixEnum::BLOSUM62();
-        }
-
-        $enumClassName = \get_class($type);
-        $namespace = \str_replace('SubstitutionMatrixEnum', '', $enumClassName);
-        $matrixName = \ucwords(\strtolower($type->getName()));
-        $className = $namespace . '\\' . $matrixName;
+        $className = $type->getName() . '\Sequence';
 
         if (false === \class_exists($className)) {
             throw new \InvalidArgumentException(
-                "The substitution matrix of type {$type} is not supported."
+                "The sequence of type {$type} is not supported."
             );
         }
 
-        /* @var $result SubstitutionMatrixAbstract */
-        $result = $className::getInstance();
+        /* @var $result SequenceAbstract */
+        $result = new $className($sequenceStr);
 
         return $result;
     }

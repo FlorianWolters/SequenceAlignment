@@ -76,6 +76,8 @@ class GapPenalty extends SimpleGapPenalty
     /**
      * Sets the penalty given when a deletion or insertion gap first opens.
      *
+     * {@inheritdoc}
+     *
      * @param float $openPenalty The gap open penalty.
      *
      * @return void
@@ -88,6 +90,8 @@ class GapPenalty extends SimpleGapPenalty
     /**
      * Sets the penalty given when an already open gap elongates by a single
      * element.
+     *
+     * {@inheritdoc}
      *
      * @param float $extensionPenalty The gap extension penalty.
      *

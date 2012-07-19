@@ -37,7 +37,8 @@ use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Validator\Constraints\Type;
 
 /**
- * TODO
+ * Implements default behavior for {@link DnaSequence}, {@link RnaSequence} and
+ * {@link ProteinSequence}.
  *
  * @category   Biology
  * @package    SequenceAlignment
@@ -70,14 +71,24 @@ trait SequenceTrait
         );
     }
 
+    /**
+     * Checks whether the sequence string of this sequence is valid.
+     *
+     * @param ExecutionContext $context The execution context.
+     */
     public function isSequenceStrValid(ExecutionContext $context)
     {
         $sequenceStr = $this->getSequenceStr();
-        if (false === $this->validateSequenceString($sequenceStr)) {
+        if (false === $this->validateSequenceStr($sequenceStr)) {
             $context->addViolation('The sequence string is invalid.');
         }
     }
 
+    /**
+     * Sets the sequence string of this sequence.
+     *
+     * @param string $sequenceStr The sequence string.
+     */
     public function setSequenceStr($sequenceStr)
     {
         parent::setSequenceStr($sequenceStr);

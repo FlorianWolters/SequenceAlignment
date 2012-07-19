@@ -33,7 +33,7 @@ namespace HochschuleBremen\Application\SequenceAlignment\Entity;
 use HochschuleBremen\Component\Sequence\DnaSequence as DnaSequenceModel;
 
 /**
- * TODO
+ * {@inheritdoc}
  *
  * @category   Biology
  * @package    SequenceAlignment
@@ -47,8 +47,17 @@ use HochschuleBremen\Component\Sequence\DnaSequence as DnaSequenceModel;
  */
 class DnaSequence extends DnaSequenceModel
 {
+
+    /**
+     * Adds validation and getter-/setter-methods.
+     */
     use SequenceTrait;
 
+    /**
+     * {@inheritdoc}
+     *
+     * @param string $sequenceStr The sequence string.
+     */
     public function __construct($sequenceStr = '')
     {
         try {

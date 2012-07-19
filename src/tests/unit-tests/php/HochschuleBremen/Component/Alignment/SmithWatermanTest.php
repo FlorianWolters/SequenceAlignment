@@ -33,7 +33,7 @@ namespace HochschuleBremen\Component\Alignment;
 use HochschuleBremen\Component\Sequence\DnaSequence;
 use HochschuleBremen\Component\Alignment\GapPenalty\SimpleGapPenalty;
 use HochschuleBremen\Component\Alignment\SubstitutionMatrix\SubstitutionMatrixFactory;
-use HochschuleBremen\Component\Alignment\SubstitutionMatrix\NucleotideSubstitutionMatrixEnum;
+use HochschuleBremen\Component\Alignment\SubstitutionMatrix\NucleotideSubstitutionMatrixTypeEnum;
 
 /**
  * Test class for {@link SmithWaterman}.
@@ -70,7 +70,7 @@ class SmithWatermanTest extends \PHPUnit_Framework_TestCase
     {
         $substitutionMatrixFactory = SubstitutionMatrixFactory::getInstance();
         $this->substitutionMatrix = $substitutionMatrixFactory->create(
-            NucleotideSubstitutionMatrixEnum::NUCFOURTWO()
+            NucleotideSubstitutionMatrixTypeEnum::NUCFOURTWO()
         );
     }
 
@@ -110,6 +110,7 @@ class SmithWatermanTest extends \PHPUnit_Framework_TestCase
     /**
      * @return void
      *
+     * @covers HochschuleBremen\Component\Alignment\SmithWaterman::getScoreMatrix
      * @dataProvider providerGetScoreMatrixForSubstitutionMatrixNucFourTwo
      * @test
      */
@@ -123,7 +124,7 @@ class SmithWatermanTest extends \PHPUnit_Framework_TestCase
             $this->substitutionMatrix
         );
 
-        $actual = $smithWaterman->getScoreMatrixAsArray();
+        $actual = $smithWaterman->getScoreMatrix();
 
         $this->assertEquals($expected, $actual);
     }
@@ -149,11 +150,13 @@ class SmithWatermanTest extends \PHPUnit_Framework_TestCase
     /**
      * @return void
      *
+     * @covers HochschuleBremen\Component\Alignment\SmithWaterman::getPair
      * @dataProvider providerGetPairForSubstitutionMatrixNucFourTwo
      * @test
      */
-    public function testGetPairForSubstitutionMatrixNucFourTwo($query, $target, $expected)
-    {
+    public function testGetPairForSubstitutionMatrixNucFourTwo(
+        $query, $target, $expected
+    ) {
         $smithWaterman = new SmithWaterman(
             new DnaSequence($query),
             new DnaSequence($target),
@@ -187,6 +190,7 @@ class SmithWatermanTest extends \PHPUnit_Framework_TestCase
     /**
      * @return void
      *
+     * @covers HochschuleBremen\Component\Alignment\SmithWaterman::getScore
      * @dataProvider providerGetScoreForSubstitutionMatrixNucFourTwo
      * @test
      */

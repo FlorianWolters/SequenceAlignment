@@ -15,7 +15,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with this program.  If not, see http://gnu.org/licenses/lgpl.txt.
  *
- * PHP version 5.
+ * PHP version 5.4
  *
  * @category  Biology
  * @package   Sequence
@@ -45,29 +45,29 @@ class DnaSequence extends SequenceAbstract
 {
 
     /**
-     * Validates the specified sequence string.
+     * Validates the sequence string of this DnaSequence.
      *
-     * @param string $sequenceStr The sequence string.
+     * {@inheritdoc}
+     *
+     * @return boolean `true` if the sequence string is valid; `false`
+     *                 otherwise.
      */
-    protected function validateSequenceString($sequenceStr)
+    protected function validateSequenceStr()
     {
-        return (boolean) \preg_match('/^[cgat]+$/i', $sequenceStr);
+        return (boolean) \preg_match('/^[CGAT]+$/i', $this->sequenceStr);
     }
 
     /**
-     * Constructs a new RnaSequence object equivalent to this DnaSequence.
+     * Constructs and returns a new RnaSequence equivalent of this DnaSequence
+     * using default transcription.
      *
-     * @return RnaSequence The RnaSequence.
+     * @return RnaSequence The new RnaSequence.
      */
     public function toRnaSequence()
     {
-        $sequenceStr = \str_ireplace('T', 'U', $this->sequenceStr);
-        return new RnaSequence($sequenceStr);
-    }
+        $sequenceStr = \str_replace('T', 'U', $this->sequenceStr);
 
-    public function getAllowedCompounds()
-    {
-        return ['c', 'g', 'a', 't'];
+        return new RnaSequence($sequenceStr);
     }
 
 }

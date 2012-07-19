@@ -1,6 +1,6 @@
 <?php
 /**
- * `AminoAcidSubstitutionMatrixEnum.php`
+ * `AminoAcidSubstitutionMatrixTypeEnum.php`
  *
  * This program is free software: you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -43,13 +43,13 @@ namespace HochschuleBremen\Component\Alignment\SubstitutionMatrix;
  * @link       http://github.com/FlorianWolters/SequenceAlignment
  * @since      Class available since Release 0.1.0
  */
-class AminoAcidSubstitutionMatrixEnum extends SubstitutionMatrixEnum
+class AminoAcidSubstitutionMatrixTypeEnum extends SubstitutionMatrixTypeEnum
 {
 
     /**
      * The BLOcks of Amino Acid SUbstitution Matrix number 60 (BLOSUM62).
      *
-     * @return NucleotideSubstitutionMatrixEnum The BLOSUM60.
+     * @return NucleotideSubstitutionMatrixTypeEnum The BLOSUM60.
      */
     final public static function BLOSUM60()
     {
@@ -59,7 +59,7 @@ class AminoAcidSubstitutionMatrixEnum extends SubstitutionMatrixEnum
     /**
      * The BLOcks of Amino Acid SUbstitution Matrix number 62 (BLOSUM62).
      *
-     * @return NucleotideSubstitutionMatrixEnum The BLOSUM62.
+     * @return NucleotideSubstitutionMatrixTypeEnum The BLOSUM62.
      */
     final public static function BLOSUM62()
     {
@@ -69,7 +69,7 @@ class AminoAcidSubstitutionMatrixEnum extends SubstitutionMatrixEnum
     /**
      * The BLOcks of Amino Acid SUbstitution Matrix number 65 (BLOSUM65).
      *
-     * @return NucleotideSubstitutionMatrixEnum The BLOSUM65.
+     * @return NucleotideSubstitutionMatrixTypeEnum The BLOSUM65.
      */
     final public static function BLOSUM65()
     {

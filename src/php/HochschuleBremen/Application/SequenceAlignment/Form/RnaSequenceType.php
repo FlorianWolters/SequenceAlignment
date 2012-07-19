@@ -31,7 +31,8 @@
 namespace HochschuleBremen\Application\SequenceAlignment\Form;
 
 /**
- * TODO
+ * The {@link RnaSequenceType} class houses the logic for building the form
+ * for class {@link RnaSequence}.
  *
  * @category   Biology
  * @package    SequenceAlignment
@@ -47,7 +48,11 @@ class RnaSequenceType extends SequenceTypeAbstract
 {
 
     /**
-     * @return array
+     * Returns the default options for this type.
+     *
+     * {@inheritdoc}
+     *
+     * @return array The default options
      */
     public function getDefaultOptions()
     {

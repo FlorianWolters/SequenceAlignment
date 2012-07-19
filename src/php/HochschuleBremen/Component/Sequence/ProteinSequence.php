@@ -15,7 +15,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with this program.  If not, see http://gnu.org/licenses/lgpl.txt.
  *
- * PHP version 5.
+ * PHP version 5.4
  *
  * @category  Biology
  * @package   Sequence
@@ -45,22 +45,18 @@ class ProteinSequence extends SequenceAbstract
 {
 
     /**
-     * Validates the specified sequence string.
+     * Validates the sequence string of this ProteinSequence.
      *
-     * @param string $sequenceStr The sequence string.
+     * {@inheritdoc}
+     *
+     * @return boolean `true` if the sequence string is valid; `false`
+     *                 otherwise.
      */
-    protected function validateSequenceString($sequenceStr)
+    protected function validateSequenceStr()
     {
         return (boolean) \preg_match(
-            '/^[arndcqeghilkmfpstwyv]+$/i', $sequenceStr
+            '/^[ARNDCQEGHILKMFPSTWYV]+$/i', $this->sequenceStr
         );
     }
 
-    public function getAllowedCompounds()
-    {
-        return [
-            'a', 'r', 'n', 'd', 'c', 'q', 'e', 'g', 'h', 'i',
-            'l', 'k', 'm', 'f', 'p', 's', 't', 'w', 'y', 'v'
-        ];
-    }
 }
