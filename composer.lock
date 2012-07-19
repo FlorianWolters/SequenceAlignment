@@ -22,8 +22,8 @@
         {
             "package": "silex/silex",
             "version": "dev-master",
-            "source-reference": "b9277c0e378ff1bce2a3e974cb801b6d9b0b5d5f",
-            "commit-date": "1342380872"
+            "source-reference": "81bafcc6ae67db7aa3be49db382287efe02dfbd4",
+            "commit-date": "1342601028"
         },
         {
             "package": "symfony/config",
