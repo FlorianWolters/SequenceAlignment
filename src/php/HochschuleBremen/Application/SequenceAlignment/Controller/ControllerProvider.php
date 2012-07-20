@@ -65,9 +65,12 @@ class ControllerProvider implements ControllerProviderInterface
 {
 
     /**
+     * Displays the main page of the application and handles the submission of
+     * the form for the sequence selection.
+     *
      * @param Application $app An Application instance.
      *
-     * @return string
+     * @return string The markup.
      */
     public function indexAction(Application $app)
     {
@@ -104,11 +107,13 @@ class ControllerProvider implements ControllerProviderInterface
     }
 
     /**
+     * Displays the form to input amino acid sequences.
+     *
      * @param Application $app An Application instance.
      *
-     * @return string
+     * @return string The markup.
      */
-    public function displayProteinForm(Application $app)
+    public function displayAminoAcidForm(Application $app)
     {
         $options = [
             'sequence_type' => new ProteinSequenceType,
@@ -129,10 +134,12 @@ class ControllerProvider implements ControllerProviderInterface
     }
 
     /**
-     * @param Application $app     An Application instance.
-     * @param array       $options
+     * Displays the form to input sequences.
      *
-     * @return string
+     * @param Application $app     An Application instance.
+     * @param array       $options The options.
+     *
+     * @return string The markup.
      */
     private function displayForm(Application $app, array $options, $enumType)
     {
@@ -194,9 +201,11 @@ class ControllerProvider implements ControllerProviderInterface
     }
 
     /**
+     * Displays the form to input DNA sequences.
+     *
      * @param Application $app An Application instance.
      *
-     * @return string
+     * @return string The markup.
      */
     public function displayDnaForm(Application $app)
     {
@@ -208,11 +217,12 @@ class ControllerProvider implements ControllerProviderInterface
     }
 
     /**
+     * Creates one of the nucleotide forms.
      *
-     * @param Application          $app
-     * @param SequenceTypeAbstract $sequenceType
+     * @param Application          $app          An Application instance.
+     * @param SequenceTypeAbstract $sequenceType The form to create.
      *
-     * @return string
+     * @return string The markup
      */
     private function displayNucleotideForm(
         Application $app,
@@ -234,9 +244,11 @@ class ControllerProvider implements ControllerProviderInterface
     }
 
     /**
+     * Displays the form to input RNA sequences.
+     *
      * @param Application $app An Application instance.
      *
-     * @return string
+     * @return string The markup.
      */
     public function displayRnaForm(Application $app)
     {
@@ -265,7 +277,7 @@ class ControllerProvider implements ControllerProviderInterface
         }, 'GET|POST')->bind('home');
 
         $controllers->match('/amino_acid', function () use ($app) {
-            return $this->displayProteinForm($app);
+            return $this->displayAminoAcidForm($app);
         }, 'GET|POST');
 
         $controllers->match('/dna', function () use ($app) {

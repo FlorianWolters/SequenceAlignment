@@ -50,7 +50,7 @@ interface GapPenaltyInterface
     /**
      * Returns the penalty given when a deletion or insertion gap first opens.
      *
-     * @return integer The gap open penalty.
+     * @return float The gap open penalty.
      */
     public function getOpenPenalty();
 
@@ -58,7 +58,7 @@ interface GapPenaltyInterface
      * Returns the penalty given when an already open gap elongates by a single
      * element.
      *
-     * @return integer The gap extension penalty.
+     * @return float The gap extension penalty.
      */
     public function getExtensionPenalty();
 

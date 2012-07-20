@@ -72,29 +72,25 @@ abstract class SubstitutionMatrixAbstract
      * Constructs a new substitution matrix with the specified scores and the
      * optionally specified identifier.
      *
-     * @param array  $scores The scores of the substitution matrix.
+     * @param array  $matrix The scores of the substitution matrix.
      * @param string $name   The name of the substitution matrix.
      */
-    protected function __construct(array $scores, $name = null)
+    protected function __construct(array $matrix, $name = null)
     {
-        $this->setMatrix($scores);
+        $this->setMatrix($matrix);
         $this->setName($name);
     }
 
     /**
      * Sets the scores of this substitution matrix.
      *
-     * @param array $scores The scores to set.
+     * @param array $matrix The scores to set.
      *
      * @return void
      */
-    private function setMatrix(array $scores)
+    private function setMatrix(array $matrix)
     {
-        if (false === is_array($scores)) {
-            throw new \InvalidArgumentException;
-        }
-
-        $this->matrix = $scores;
+        $this->matrix = $matrix;
     }
 
     /**

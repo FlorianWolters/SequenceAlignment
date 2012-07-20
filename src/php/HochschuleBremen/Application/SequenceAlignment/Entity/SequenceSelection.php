@@ -92,7 +92,7 @@ class SequenceSelection
     /**
      * Sets the type of the sequence.
      *
-     * @param $sequenceType string The new type of the sequence
+     * @param string $sequenceType The type of the sequence.
      *
      * @return void
      */
@@ -102,7 +102,12 @@ class SequenceSelection
     }
 
     /**
-     * @return array
+     * Returns an associative array of the sequence types to select.
+     *
+     * Each key of the array is the value of the selection and each value of the
+     * array is the label of the selection.
+     *
+     * @return array The selectable sequence types.
      */
     public static function getSequenceTypes()
     {

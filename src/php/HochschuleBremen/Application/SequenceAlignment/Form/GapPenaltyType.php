@@ -89,7 +89,11 @@ class GapPenaltyType extends AbstractType
     }
 
     /**
-     * @return array
+     * Returns the default options for this type.
+     *
+     * {@inheritdoc}
+     *
+     * @return array The default options
      */
     public function getDefaultOptions()
     {

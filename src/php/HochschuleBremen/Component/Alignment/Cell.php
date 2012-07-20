@@ -106,13 +106,13 @@ class Cell
     /**
      * Sets the previous Cell of this Cell.
      *
-     * @param Cell|null $cell The previous Cell to set.
+     * @param Cell|null $previousCell The previous Cell to set.
      *
      * @return void
      */
-    public function setPreviousCell(Cell $cell = null)
+    public function setPreviousCell(Cell $previousCell = null)
     {
-        $this->previousCell = $cell;
+        $this->previousCell = $previousCell;
     }
 
     /**

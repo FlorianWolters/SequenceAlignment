@@ -54,7 +54,9 @@ class SequenceFactory
     /**
      * Constructs and returns the sequence for the specified type of sequence.
      *
-     * @param SequenceTypeEnum $type The type of the sequence to create.
+     * @param SequenceTypeEnum $type        The type of the sequence to create.
+     * @param string           $sequenceStr The sequence string of the sequence
+     *                                      to create.
      *
      * @return SequenceAbstract The sequence.
      * @throws InvalidArgumentException If the specified sequence type is not

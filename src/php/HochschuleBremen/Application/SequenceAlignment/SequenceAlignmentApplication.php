@@ -138,6 +138,8 @@ class SequenceAlignmentApplication extends Application
     /**
      * Configures Silex core parameters.
      *
+     * @param array $config The configuration of this application.
+     *
      * @return void
      * @link http://silex.sensiolabs.org/doc/services.html#core-parameters
      */
@@ -171,6 +173,8 @@ class SequenceAlignmentApplication extends Application
 
     /**
      * Configures Silex built-in service providers.
+     *
+     * @param array $config The configuration of this application.
      *
      * @return void
      */

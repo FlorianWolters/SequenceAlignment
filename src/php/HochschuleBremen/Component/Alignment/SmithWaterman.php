@@ -115,14 +115,14 @@ class SmithWaterman
      *
      * @var integer
      */
-    private $minimumScore = self::INITIAL_SCORE;
+    private $minScore = self::INITIAL_SCORE;
 
     /**
      * Returns the maximum possible score.
      *
      * @var integer
      */
-    private $maximumScore;
+    private $maxScore;
 
     /**
      * The width of the score matrix.
@@ -148,25 +148,31 @@ class SmithWaterman
     /**
      * Prepares for a pairwise local sequence alignment.
      *
-     * @param SequenceInterface          $query      The first sequence of the
-     *                                               pair to align.
-     * @param SequenceInterface          $target     The second sequence of the
-     *                                               pair to align.
-     * @param GapPenaltyInterface        $gapPenalty The gap penalties used
-     *                                               during alignment.
-     * @param SubstitutionMatrixAbstract $subMatrix  The set of substitution
-     *                                               scores used during
-     *                                               alignment.
+     * @param SequenceInterface          $query              The first sequence
+     *                                                       of the pair to
+     *                                                       align.
+     * @param SequenceInterface          $target             The second sequence
+     *                                                       of the pair to
+     *                                                       align.
+     * @param GapPenaltyInterface        $gapPenalty         The gap penalties
+     *                                                       used during
+     *                                                       alignment.
+     * @param SubstitutionMatrixAbstract $substitutionMatrix The set of
+     *                                                       substitution scores
+     *                                                       used during
+     *                                                       alignment.
      */
     public function __construct(
-        SequenceInterface $query, SequenceInterface $target,
-        GapPenaltyInterface $gapPenalty, SubstitutionMatrixAbstract $subMatrix
+        SequenceInterface $query,
+        SequenceInterface $target,
+        GapPenaltyInterface $gapPenalty,
+        SubstitutionMatrixAbstract $substitutionMatrix
     ) {
         $this->query = $query;
         $this->target = $target;
         $this->gapPenalty = $gapPenalty;
-        $this->substitutionMatrix = $subMatrix;
-        $this->maximumScore = $this->calculateMaximumScore();
+        $this->substitutionMatrix = $substitutionMatrix;
+        $this->maxScore = $this->calculateMaximumScore();
         $this->scoreMatrixWidth = (\strlen($query) + 1);
         $this->scoreMatrixHeight = (\strlen($target) + 1);
         $this->initializeScoreMatrix();
@@ -299,11 +305,27 @@ class SmithWaterman
         }
     }
 
+    /**
+     * Returns the compound for the specified current Cell from the second
+     * sequence.
+     *
+     * @param Cell $currentCell The current Cell.
+     *
+     * @return string The compound from the second sequence.
+     */
     private function returnCompoundFromTarget(Cell $currentCell)
     {
         return \substr($this->target, ($currentCell->getRow() - 1), 1);
     }
 
+    /**
+     * Returns the compound for the specified current Cell from the first
+     * sequence.
+     *
+     * @param Cell $currentCell The current Cell.
+     *
+     * @return string The compound from the first sequence.
+     */
     private function returnCompoundFromQuery(Cell $currentCell)
     {
         return \substr($this->query, ($currentCell->getColumn() - 1), 1);
@@ -434,7 +456,7 @@ class SmithWaterman
      */
     public function getMaxScore()
     {
-        return $this->maximumScore;
+        return $this->maxScore;
     }
 
     /**
@@ -444,7 +466,7 @@ class SmithWaterman
      */
     public function getMinScore()
     {
-        return $this->minimumScore;
+        return $this->minScore;
     }
 
     /**
