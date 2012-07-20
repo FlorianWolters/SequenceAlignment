@@ -148,7 +148,7 @@ class SubstitutionMatrixFactory
                 $result = Nucleotide\NucFourFour::getInstance();
                 break;
             case NucleotideSubstitutionMatrixTypeEnum::NUCFOURTWO():
-                $result = AminoAcid\NucFourTwo::getInstance();
+                $result = Nucleotide\NucFourTwo::getInstance();
                 break;
             default:
                 throw new \InvalidArgumentException(
