@@ -109,7 +109,7 @@ The automated tests can be run with [PHPUnit][19]:
 
 1. Start the application from the root directory of the project:
 
-    php -S 0.0.0.0:8000 -t .
+    php -S 0.0.0.0:8000
 
 The following should be displayed:
 
