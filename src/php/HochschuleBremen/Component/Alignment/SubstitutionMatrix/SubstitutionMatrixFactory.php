@@ -70,20 +70,93 @@ class SubstitutionMatrixFactory
             $type = AminoAcidSubstitutionMatrixTypeEnum::BLOSUM62();
         }
 
-        $enumClassName = \get_class($type);
-        $namespace = \str_replace(
-            'SubstitutionMatrixTypeEnum', '', $enumClassName
-        );
-        $className = $namespace . '\\' . $type->getName();
+        /* @var $result SubstitutionMatrixAbstract */
+        $result = null;
 
-        if (false === \class_exists($className)) {
-            throw new \InvalidArgumentException(
-                "The substitution matrix of type {$type} is not supported."
+        if ($type instanceof AminoAcidSubstitutionMatrixTypeEnum) {
+            $result = $this->createAminoAcidSubstitutionMatrix($type);
+        } else if ($type instanceof NucleotideSubstitutionMatrixTypeEnum) {
+            $result = $this->createNucleotideSubstitutionMatrix($type);
+        } else {
+             throw new \InvalidArgumentException(
+                'The substitution matrix type '
+                 . $type . ' is not supported.'
             );
         }
 
+        return $result;
+    }
+
+    /**
+     * Constructs and returns the amino acid substitution matrix for the
+     * specified type of substitution matrix.
+     *
+     * @param SubstitutionMatrixTypeEnum $type The type of the amino acid
+     *                                         substitution matrix to create.
+     *
+     * @return SubstitutionMatrixAbstract The amino acid substitution matrix.
+     * @throws InvalidArgumentException If the specified amino acid substitution
+     *                                  matrix type is not supported.
+     */
+    public function createAminoAcidSubstitutionMatrix(
+        SubstitutionMatrixTypeEnum $type
+    ) {
         /* @var $result SubstitutionMatrixAbstract */
-        $result = $className::getInstance();
+        $result = null;
+
+        switch ($type) {
+            case AminoAcidSubstitutionMatrixTypeEnum::BLOSUM60():
+                $result = AminoAcid\Blosum60::getInstance();
+                break;
+            case AminoAcidSubstitutionMatrixTypeEnum::BLOSUM62():
+                $result = AminoAcid\Blosum62::getInstance();
+                break;
+            case AminoAcidSubstitutionMatrixTypeEnum::BLOSUM65():
+                $result = AminoAcid\Blosum65::getInstance();
+                break;
+            default:
+                throw new \InvalidArgumentException(
+                    'The amino acid substitution matrix of type '
+                    . $type . ' is not supported.'
+                );
+                break;
+
+        }
+
+        return $result;
+    }
+
+    /**
+     * Constructs and returns the nucleotide substitution matrix for the
+     * specified type of substitution matrix.
+     *
+     * @param SubstitutionMatrixTypeEnum $type The type of the nucleotide
+     *                                         substitution matrix to create.
+     *
+     * @return SubstitutionMatrixAbstract The nucleotide substitution matrix.
+     * @throws InvalidArgumentException If the specified nucleotide substitution
+     *                                  matrix type is not supported.
+     */
+    public function createNucleotideSubstitutionMatrix(
+        SubstitutionMatrixTypeEnum $type
+    ) {
+        /* @var $result SubstitutionMatrixAbstract */
+        $result = null;
+
+        switch ($type) {
+            case NucleotideSubstitutionMatrixTypeEnum::NUCFOURFOUR():
+                $result = Nucleotide\NucFourFour::getInstance();
+                break;
+            case NucleotideSubstitutionMatrixTypeEnum::NUCFOURTWO():
+                $result = AminoAcid\NucFourTwo::getInstance();
+                break;
+            default:
+                throw new \InvalidArgumentException(
+                    'The nucleotide substitution matrix of type '
+                    . $type . ' is not supported.'
+                );
+                break;
+        }
 
         return $result;
     }
