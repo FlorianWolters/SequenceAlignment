@@ -36,18 +36,18 @@
         "florianwolters/component-util-singleton": "0.2.*",
         "silex/silex": "1.0.*@dev",
         "symfony/config": "2.1.*@beta",
-        "symfony/event-dispatcher": "2.1.*@beta",
-        "symfony/form": "2.1.*@beta",
+        "symfony/event-dispatcher": "2.1.*@dev",
+        "symfony/form": "2.1.*@dev",
         "symfony/http-foundation": "2.1.*@beta",
         "symfony/http-kernel": "2.1.*@beta",
         "symfony/locale": "2.1.*@beta",
         "symfony/options-resolver": "2.1.*@dev",
         "symfony/routing": "2.1.*@beta",
         "symfony/translation": "2.1.*@beta",
-        "symfony/twig-bridge": "2.1.*@beta",
+        "symfony/twig-bridge": "2.1.*@dev",
         "symfony/validator": "2.1.*@beta",
         "symfony/yaml": "2.1.*@beta",
-        "twig/twig": "1.8.*"
+        "twig/twig": "1.9.*"
     },
     "autoload": {
         "psr-0": {

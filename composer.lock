@@ -1,5 +1,5 @@
 {
-    "hash": "6edb5bcc57e5620377e7689e225ebba2",
+    "hash": "e173178a97a8a6a892c49d3d6d0f3213",
     "packages": [
         {
             "package": "florianwolters/component-core-enum",
@@ -22,8 +22,8 @@
         {
             "package": "silex/silex",
             "version": "dev-master",
-            "source-reference": "81bafcc6ae67db7aa3be49db382287efe02dfbd4",
-            "commit-date": "1342601028"
+            "source-reference": "4bd46b806583e4f6467bba3696dbdf953431c630",
+            "commit-date": "1342760935"
         },
         {
             "package": "symfony/config",
@@ -31,11 +31,27 @@
         },
         {
             "package": "symfony/event-dispatcher",
-            "version": "v2.1.0-BETA3"
+            "version": "dev-master",
+            "alias-pretty-version": "2.1.x-dev",
+            "alias-version": "2.1.9999999.9999999-dev"
+        },
+        {
+            "package": "symfony/event-dispatcher",
+            "version": "dev-master",
+            "source-reference": "451e0befb42a5552d4e143edcb74e3b4a9733bea",
+            "commit-date": "1342739894"
         },
         {
             "package": "symfony/form",
-            "version": "v2.1.0-BETA3"
+            "version": "dev-master",
+            "alias-pretty-version": "2.1.x-dev",
+            "alias-version": "2.1.9999999.9999999-dev"
+        },
+        {
+            "package": "symfony/form",
+            "version": "dev-master",
+            "source-reference": "19e9ea993d15f433b8a7859bccf7a13282d627e1",
+            "commit-date": "1342739922"
         },
         {
             "package": "symfony/http-foundation",
@@ -71,7 +87,15 @@
         },
         {
             "package": "symfony/twig-bridge",
-            "version": "v2.1.0-BETA3"
+            "version": "dev-master",
+            "alias-pretty-version": "2.1.x-dev",
+            "alias-version": "2.1.9999999.9999999-dev"
+        },
+        {
+            "package": "symfony/twig-bridge",
+            "version": "dev-master",
+            "source-reference": "da5cc8681e50087b5d4495e3b5f16bc87ac0a72b",
+            "commit-date": "1342598932"
         },
         {
             "package": "symfony/validator",
@@ -83,7 +107,7 @@
         },
         {
             "package": "twig/twig",
-            "version": "v1.8.3"
+            "version": "v1.9.0"
         }
     ],
     "packages-dev": null,
@@ -94,15 +118,15 @@
     "stability-flags": {
         "silex/silex": 20,
         "symfony/config": 10,
-        "symfony/event-dispatcher": 10,
-        "symfony/form": 10,
+        "symfony/event-dispatcher": 20,
+        "symfony/form": 20,
         "symfony/http-foundation": 10,
         "symfony/http-kernel": 10,
         "symfony/locale": 10,
         "symfony/options-resolver": 20,
         "symfony/routing": 10,
         "symfony/translation": 10,
-        "symfony/twig-bridge": 10,
+        "symfony/twig-bridge": 20,
         "symfony/validator": 10,
         "symfony/yaml": 10
     }
