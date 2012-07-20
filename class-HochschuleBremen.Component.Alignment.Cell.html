@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="generator" content="ApiGen 2.7.0" />
+
+	<title>Class HochschuleBremen\Component\Alignment\Cell | HSBremen\ISBio\SequenceAlignment</title>
+
+	<script type="text/javascript" src="resources/combined.js?2388493914"></script>
+	<script type="text/javascript" src="elementlist.js?1851241040"></script>
+	<link rel="stylesheet" type="text/css" media="all" href="resources/style.css?1567499433" />
+
+</head>
+
+<body>
+<div id="left">
+	<div id="menu">
+		<a href="index.html" title="Overview"><span>Overview</span></a>
+
+
+		<div id="groups">
+			<h3>Namespaces</h3>
+			<ul>
+				<li class="active"><a href="namespace-HochschuleBremen.html">HochschuleBremen<span></span></a>
+						<ul>
+				<li><a href="namespace-HochschuleBremen.Application.html">Application<span></span></a>
+						<ul>
+				<li><a href="namespace-HochschuleBremen.Application.SequenceAlignment.html">SequenceAlignment<span></span></a>
+						<ul>
+				<li><a href="namespace-HochschuleBremen.Application.SequenceAlignment.Controller.html">Controller</a>
+						</li>
+				<li><a href="namespace-HochschuleBremen.Application.SequenceAlignment.Entity.html">Entity</a>
+						</li>
+				<li><a href="namespace-HochschuleBremen.Application.SequenceAlignment.Form.html">Form</a>
+						</li>
+				<li><a href="namespace-HochschuleBremen.Application.SequenceAlignment.Model.html">Model<span></span></a>
+						<ul>
+				<li><a href="namespace-HochschuleBremen.Application.SequenceAlignment.Model.Nucleobase.html">Nucleobase</a>
+						</li>
+							</ul></li></ul></li></ul></li>
+				<li class="active"><a href="namespace-HochschuleBremen.Component.html">Component<span></span></a>
+						<ul>
+				<li class="active"><a href="namespace-HochschuleBremen.Component.Alignment.html">Alignment<span></span></a>
+						<ul>
+				<li><a href="namespace-HochschuleBremen.Component.Alignment.GapPenalty.html">GapPenalty</a>
+						</li>
+				<li><a href="namespace-HochschuleBremen.Component.Alignment.SubstitutionMatrix.html">SubstitutionMatrix<span></span></a>
+						<ul>
+				<li><a href="namespace-HochschuleBremen.Component.Alignment.SubstitutionMatrix.AminoAcid.html">AminoAcid</a>
+						</li>
+				<li><a href="namespace-HochschuleBremen.Component.Alignment.SubstitutionMatrix.Nucleotide.html">Nucleotide</a>
+						</li>
+							</ul></li></ul></li>
+				<li><a href="namespace-HochschuleBremen.Component.Sequence.html">Sequence<span></span></a>
+						<ul>
+				<li><a href="namespace-HochschuleBremen.Component.Sequence.Compound.html">Compound</a>
+						</li>
+							</ul></li></ul></li></ul></li>
+			</ul>
+		</div>
+
+		<hr />
+
+
+		<div id="elements">
+			<h3>Classes</h3>
+			<ul>
+				<li class="active"><a href="class-HochschuleBremen.Component.Alignment.Cell.html">Cell</a></li>
+				<li><a href="class-HochschuleBremen.Component.Alignment.SmithWaterman.html">SmithWaterman</a></li>
+			</ul>
+
+
+
+
+
+		</div>
+	</div>
+</div>
+
+<div id="splitter"></div>
+
+<div id="right">
+<div id="rightInner">
+	<form id="search">
+		<input type="hidden" name="cx" value="" />
+		<input type="hidden" name="ie" value="UTF-8" />
+		<input type="text" name="q" class="text" />
+		<input type="submit" value="Search" />
+	</form>
+
+	<div id="navigation">
+		<ul>
+			<li>
+				<a href="index.html" title="Overview"><span>Overview</span></a>
+			</li>
+			<li>
+				<a href="namespace-HochschuleBremen.Component.Alignment.html" title="Summary of HochschuleBremen\Component\Alignment"><span>Namespace</span></a>
+			</li>
+			<li class="active">
+<span>Class</span>			</li>
+		</ul>
+		<ul>
+			<li>
+				<a href="tree.html" title="Tree view of classes, interfaces, traits and exceptions"><span>Tree</span></a>
+			</li>
+			<li>
+				<a href="todo.html" title="Todo list"><span>Todo</span></a>
+			</li>
+		</ul>
+		<ul>
+			<li>
+				<a href="hsbremen-isbio-sequencealignment-api-documentation.zip" title="Download documentation as ZIP archive"><span>Download</span></a>
+			</li>
+		</ul>
+	</div>
+
+<div id="content" class="class">
+	<h1>Class Cell</h1>
+
+
+	<div class="description">
+	
+<p>This class models a cell in a score matrix, to hold row, column, score and
+the previous cell.</p>
+
+	</div>
+
+
+
+
+
+
+
+
+
+	<div class="info">
+		
+		
+		<b>Namespace:</b> <a href="namespace-HochschuleBremen.html">HochschuleBremen</a>\<a href="namespace-HochschuleBremen.Component.html">Component</a>\<a href="namespace-HochschuleBremen.Component.Alignment.html">Alignment</a><br />
+		<b>Package:</b> Alignment\Algorithm<br />
+
+				<b>Category:</b>
+				Biology<br />
+				<b>Copyright:</b>
+				2012 Florian Wolters<br />
+				<b>License:</b>
+				<a href="http://gnu.org/licenses/lgpl.txt">LGPL-3.0+</a><br />
+				<b>Author:</b>
+				Florian Wolters &lt;<a
+href="mailto:wolters.fl&#64;gmail.com">wolters.fl&#64;<!---->gmail.com</a>&gt;<br />
+				<b>Version:</b>
+				Release: @package_version@<br />
+				<b>Since:</b>
+				Class available since Release 0.1.0<br />
+				<b>Link:</b>
+				<a href="http://github.com/FlorianWolters/SequenceAlignment">http://github.com/FlorianWolters/SequenceAlignment</a><br />
+		<b>Located at</b> <a href="source-class-HochschuleBremen.Component.Alignment.Cell.html#33" title="Go to source code">HochschuleBremen/Component/Alignment/Cell.php</a><br />
+	</div>
+
+
+	<table class="summary" id="methods">
+	<caption>Methods summary</caption>
+	<tr data-order="__construct" id="___construct">
+
+		<td class="attributes"><code>
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#___construct">#</a>
+		<code><a href="source-class-HochschuleBremen.Component.Alignment.Cell.html#78" title="Go to source code">__construct</a>( <span>integer <var>$row</var></span>, <span>integer <var>$column</var></span>, <span>integer <var>$score</var> = <span class="php-num">0</span></span> )</code>
+
+		<div class="description short">
+			
+<p>Constructs a new Cell with a specified row, a specified column and a
+specified score.</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Constructs a new Cell with a specified row, a specified column and a
+specified score.</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$row</var></dt>
+					<dd><code>integer</code><br> The row of the Cell.</dd>
+					<dt><var>$column</var></dt>
+					<dd><code>integer</code><br> The column of the Cell.</dd>
+					<dt><var>$score</var></dt>
+					<dd><code>integer</code><br> The score of the Cell.</dd>
+				</dl></div>
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="setScore" id="_setScore">
+
+		<td class="attributes"><code>
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_setScore">#</a>
+		<code><a href="source-class-HochschuleBremen.Component.Alignment.Cell.html#94" title="Go to source code">setScore</a>( <span>integer <var>$score</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Sets the score of this Cell.</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Sets the score of this Cell.</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$score</var></dt>
+					<dd><code>integer</code><br> The score to set.</dd>
+				</dl></div>
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="setPreviousCell" id="_setPreviousCell">
+
+		<td class="attributes"><code>
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_setPreviousCell">#</a>
+		<code><a href="source-class-HochschuleBremen.Component.Alignment.Cell.html#106" title="Go to source code">setPreviousCell</a>( <span><code><a href="class-HochschuleBremen.Component.Alignment.Cell.html">HochschuleBremen\Component\Alignment\Cell</a></code> <var>$previousCell</var> = <span class="php-keyword1">null</span></span> )</code>
+
+		<div class="description short">
+			
+<p>Sets the previous Cell of this Cell.</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Sets the previous Cell of this Cell.</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$previousCell</var></dt>
+					<dd><code><code><a href="class-HochschuleBremen.Component.Alignment.Cell.html">HochschuleBremen\Component\Alignment\Cell</a></code>|null</code><br> The previous Cell to set.</dd>
+				</dl></div>
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="__toString" id="___toString">
+
+		<td class="attributes"><code>
+			 public 
+			string
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#___toString">#</a>
+		<code><a href="source-class-HochschuleBremen.Component.Alignment.Cell.html#118" title="Go to source code">__toString</a>( )</code>
+
+		<div class="description short">
+			
+<p>Returns the score of this Cell as a string.</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Returns the score of this Cell as a string.</p>
+
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>string</code><br>The score of this cell as a string.<br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="getPreviousCell" id="_getPreviousCell">
+
+		<td class="attributes"><code>
+			 public 
+			<code><a href="class-HochschuleBremen.Component.Alignment.Cell.html">HochschuleBremen\Component\Alignment\Cell</a></code>
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_getPreviousCell">#</a>
+		<code><a href="source-class-HochschuleBremen.Component.Alignment.Cell.html#128" title="Go to source code">getPreviousCell</a>( )</code>
+
+		<div class="description short">
+			
+<p>Returns the previous Cell of this Cell.</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Returns the previous Cell of this Cell.</p>
+
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code><code><a href="class-HochschuleBremen.Component.Alignment.Cell.html">HochschuleBremen\Component\Alignment\Cell</a></code></code><br>The previous Cell.<br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="getColumn" id="_getColumn">
+
+		<td class="attributes"><code>
+			 public 
+			integer
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_getColumn">#</a>
+		<code><a href="source-class-HochschuleBremen.Component.Alignment.Cell.html#138" title="Go to source code">getColumn</a>( )</code>
+
+		<div class="description short">
+			
+<p>Returns the column of this Cell.</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Returns the column of this Cell.</p>
+
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>integer</code><br>The column.<br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="getRow" id="_getRow">
+
+		<td class="attributes"><code>
+			 public 
+			integer
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_getRow">#</a>
+		<code><a href="source-class-HochschuleBremen.Component.Alignment.Cell.html#148" title="Go to source code">getRow</a>( )</code>
+
+		<div class="description short">
+			
+<p>Returns the row of this Cell.</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Returns the row of this Cell.</p>
+
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>integer</code><br>The row.<br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="getScore" id="_getScore">
+
+		<td class="attributes"><code>
+			 public 
+			The
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_getScore">#</a>
+		<code><a href="source-class-HochschuleBremen.Component.Alignment.Cell.html#158" title="Go to source code">getScore</a>( )</code>
+
+		<div class="description short">
+			
+<p>Returns the score of this Cell.</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Returns the score of this Cell.</p>
+
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>The</code><br>score.<br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	</table>
+
+
+
+
+
+
+
+
+
+
+</div>
+
+	<div id="footer">
+		HSBremen\ISBio\SequenceAlignment API documentation generated by <a href="http://apigen.org">ApiGen 2.7.0</a>
+	</div>
+</div>
+</div>
+</body>
+</html>

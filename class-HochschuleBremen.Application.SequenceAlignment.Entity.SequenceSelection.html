@@ -7,7 +7,7 @@
 	<title>Class HochschuleBremen\Application\SequenceAlignment\Entity\SequenceSelection | HSBremen\ISBio\SequenceAlignment</title>
 
 	<script type="text/javascript" src="resources/combined.js?2388493914"></script>
-	<script type="text/javascript" src="elementlist.js?10728879"></script>
+	<script type="text/javascript" src="elementlist.js?1851241040"></script>
 	<link rel="stylesheet" type="text/css" media="all" href="resources/style.css?1567499433" />
 
 </head>
@@ -33,7 +33,11 @@
 						</li>
 				<li><a href="namespace-HochschuleBremen.Application.SequenceAlignment.Form.html">Form</a>
 						</li>
-							</ul></li></ul></li>
+				<li><a href="namespace-HochschuleBremen.Application.SequenceAlignment.Model.html">Model<span></span></a>
+						<ul>
+				<li><a href="namespace-HochschuleBremen.Application.SequenceAlignment.Model.Nucleobase.html">Nucleobase</a>
+						</li>
+							</ul></li></ul></li></ul></li>
 				<li><a href="namespace-HochschuleBremen.Component.html">Component<span></span></a>
 						<ul>
 				<li><a href="namespace-HochschuleBremen.Component.Alignment.html">Alignment<span></span></a>
@@ -47,9 +51,11 @@
 				<li><a href="namespace-HochschuleBremen.Component.Alignment.SubstitutionMatrix.Nucleotide.html">Nucleotide</a>
 						</li>
 							</ul></li></ul></li>
-				<li><a href="namespace-HochschuleBremen.Component.Sequence.html">Sequence</a>
+				<li><a href="namespace-HochschuleBremen.Component.Sequence.html">Sequence<span></span></a>
+						<ul>
+				<li><a href="namespace-HochschuleBremen.Component.Sequence.Compound.html">Compound</a>
 						</li>
-							</ul></li></ul></li>
+							</ul></li></ul></li></ul></li>
 			</ul>
 		</div>
 
@@ -104,6 +110,9 @@
 		<ul>
 			<li>
 				<a href="tree.html" title="Tree view of classes, interfaces, traits and exceptions"><span>Tree</span></a>
+			</li>
+			<li>
+				<a href="todo.html" title="Todo list"><span>Todo</span></a>
 			</li>
 		</ul>
 		<ul>
@@ -245,7 +254,7 @@ href="mailto:wolters.fl&#64;gmail.com">wolters.fl&#64;<!---->gmail.com</a>&gt;<b
 
 		<td class="name"><div>
 		<a class="anchor" href="#_setSequenceType">#</a>
-		<code><a href="source-class-HochschuleBremen.Application.SequenceAlignment.Entity.SequenceSelection.html#92" title="Go to source code">setSequenceType</a>( <span>$sequenceType <var>$sequenceType</var></span> )</code>
+		<code><a href="source-class-HochschuleBremen.Application.SequenceAlignment.Entity.SequenceSelection.html#92" title="Go to source code">setSequenceType</a>( <span>string <var>$sequenceType</var></span> )</code>
 
 		<div class="description short">
 			
@@ -262,7 +271,7 @@ href="mailto:wolters.fl&#64;gmail.com">wolters.fl&#64;<!---->gmail.com</a>&gt;<b
 				<h4>Parameters</h4>
 				<div class="list"><dl>
 					<dt><var>$sequenceType</var></dt>
-					<dd><code>$sequenceType</code><br>string The new type of the sequence</dd>
+					<dd><code>string</code><br> The type of the sequence.</dd>
 				</dl></div>
 
 
@@ -287,16 +296,23 @@ href="mailto:wolters.fl&#64;gmail.com">wolters.fl&#64;<!---->gmail.com</a>&gt;<b
 
 		<div class="description short">
 			
+<p>Returns an associative array of the sequence types to select.</p>
+
 		</div>
 
 		<div class="description detailed hidden">
 			
+<p>Returns an associative array of the sequence types to select.</p>
+
+<p>Each key of the array is the value of the selection and each value of the
+array is the label of the selection.</p>
+
 
 
 
 				<h4>Returns</h4>
 				<div class="list">
-					<code>array</code><br />
+					<code>array</code><br>The selectable sequence types.<br />
 				</div>
 
 

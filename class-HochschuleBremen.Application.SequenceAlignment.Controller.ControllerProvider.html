@@ -7,7 +7,7 @@
 	<title>Class HochschuleBremen\Application\SequenceAlignment\Controller\ControllerProvider | HSBremen\ISBio\SequenceAlignment</title>
 
 	<script type="text/javascript" src="resources/combined.js?2388493914"></script>
-	<script type="text/javascript" src="elementlist.js?10728879"></script>
+	<script type="text/javascript" src="elementlist.js?1851241040"></script>
 	<link rel="stylesheet" type="text/css" media="all" href="resources/style.css?1567499433" />
 
 </head>
@@ -33,7 +33,11 @@
 						</li>
 				<li><a href="namespace-HochschuleBremen.Application.SequenceAlignment.Form.html">Form</a>
 						</li>
-							</ul></li></ul></li>
+				<li><a href="namespace-HochschuleBremen.Application.SequenceAlignment.Model.html">Model<span></span></a>
+						<ul>
+				<li><a href="namespace-HochschuleBremen.Application.SequenceAlignment.Model.Nucleobase.html">Nucleobase</a>
+						</li>
+							</ul></li></ul></li></ul></li>
 				<li><a href="namespace-HochschuleBremen.Component.html">Component<span></span></a>
 						<ul>
 				<li><a href="namespace-HochschuleBremen.Component.Alignment.html">Alignment<span></span></a>
@@ -47,9 +51,11 @@
 				<li><a href="namespace-HochschuleBremen.Component.Alignment.SubstitutionMatrix.Nucleotide.html">Nucleotide</a>
 						</li>
 							</ul></li></ul></li>
-				<li><a href="namespace-HochschuleBremen.Component.Sequence.html">Sequence</a>
+				<li><a href="namespace-HochschuleBremen.Component.Sequence.html">Sequence<span></span></a>
+						<ul>
+				<li><a href="namespace-HochschuleBremen.Component.Sequence.Compound.html">Compound</a>
 						</li>
-							</ul></li></ul></li>
+							</ul></li></ul></li></ul></li>
 			</ul>
 		</div>
 
@@ -95,6 +101,9 @@
 		<ul>
 			<li>
 				<a href="tree.html" title="Tree view of classes, interfaces, traits and exceptions"><span>Tree</span></a>
+			</li>
+			<li>
+				<a href="todo.html" title="Todo list"><span>Todo</span></a>
 			</li>
 		</ul>
 		<ul>
@@ -152,6 +161,8 @@ href="mailto:wolters.fl&#64;gmail.com">wolters.fl&#64;<!---->gmail.com</a>&gt;<b
 				Class available since Release 0.1.0<br />
 				<b>Link:</b>
 				<a href="http://github.com/FlorianWolters/SequenceAlignment">http://github.com/FlorianWolters/SequenceAlignment</a><br />
+				<b>Todo:</b>
+				This class requires some serious refactoring.<br />
 		<b>Located at</b> <a href="source-class-HochschuleBremen.Application.SequenceAlignment.Controller.ControllerProvider.html#50" title="Go to source code">HochschuleBremen/Application/SequenceAlignment/Controller/ControllerProvider.php</a><br />
 	</div>
 
@@ -173,10 +184,16 @@ href="mailto:wolters.fl&#64;gmail.com">wolters.fl&#64;<!---->gmail.com</a>&gt;<b
 
 		<div class="description short">
 			
+<p>Displays the main page of the application and handles the submission of the
+form for the sequence selection.</p>
+
 		</div>
 
 		<div class="description detailed hidden">
 			
+<p>Displays the main page of the application and handles the submission of the
+form for the sequence selection.</p>
+
 
 
 				<h4>Parameters</h4>
@@ -187,7 +204,7 @@ href="mailto:wolters.fl&#64;gmail.com">wolters.fl&#64;<!---->gmail.com</a>&gt;<b
 
 				<h4>Returns</h4>
 				<div class="list">
-					<code>string</code><br />
+					<code>string</code><br>The markup.<br />
 				</div>
 
 
@@ -196,7 +213,7 @@ href="mailto:wolters.fl&#64;gmail.com">wolters.fl&#64;<!---->gmail.com</a>&gt;<b
 		</div>
 		</div></td>
 	</tr>
-	<tr data-order="displayProteinForm" id="_displayProteinForm">
+	<tr data-order="displayAminoAcidForm" id="_displayAminoAcidForm">
 
 		<td class="attributes"><code>
 			 public 
@@ -206,15 +223,19 @@ href="mailto:wolters.fl&#64;gmail.com">wolters.fl&#64;<!---->gmail.com</a>&gt;<b
 		</td>
 
 		<td class="name"><div>
-		<a class="anchor" href="#_displayProteinForm">#</a>
-		<code><a href="source-class-HochschuleBremen.Application.SequenceAlignment.Controller.ControllerProvider.html#106" title="Go to source code">displayProteinForm</a>( <span>Silex\Application <var>$app</var></span> )</code>
+		<a class="anchor" href="#_displayAminoAcidForm">#</a>
+		<code><a href="source-class-HochschuleBremen.Application.SequenceAlignment.Controller.ControllerProvider.html#109" title="Go to source code">displayAminoAcidForm</a>( <span>Silex\Application <var>$app</var></span> )</code>
 
 		<div class="description short">
 			
+<p>Displays the form to input amino acid sequences.</p>
+
 		</div>
 
 		<div class="description detailed hidden">
 			
+<p>Displays the form to input amino acid sequences.</p>
+
 
 
 				<h4>Parameters</h4>
@@ -225,7 +246,7 @@ href="mailto:wolters.fl&#64;gmail.com">wolters.fl&#64;<!---->gmail.com</a>&gt;<b
 
 				<h4>Returns</h4>
 				<div class="list">
-					<code>string</code><br />
+					<code>string</code><br>The markup.<br />
 				</div>
 
 
@@ -245,14 +266,18 @@ href="mailto:wolters.fl&#64;gmail.com">wolters.fl&#64;<!---->gmail.com</a>&gt;<b
 
 		<td class="name"><div>
 		<a class="anchor" href="#_displayDnaForm">#</a>
-		<code><a href="source-class-HochschuleBremen.Application.SequenceAlignment.Controller.ControllerProvider.html#196" title="Go to source code">displayDnaForm</a>( <span>Silex\Application <var>$app</var></span> )</code>
+		<code><a href="source-class-HochschuleBremen.Application.SequenceAlignment.Controller.ControllerProvider.html#203" title="Go to source code">displayDnaForm</a>( <span>Silex\Application <var>$app</var></span> )</code>
 
 		<div class="description short">
 			
+<p>Displays the form to input DNA sequences.</p>
+
 		</div>
 
 		<div class="description detailed hidden">
 			
+<p>Displays the form to input DNA sequences.</p>
+
 
 
 				<h4>Parameters</h4>
@@ -263,7 +288,7 @@ href="mailto:wolters.fl&#64;gmail.com">wolters.fl&#64;<!---->gmail.com</a>&gt;<b
 
 				<h4>Returns</h4>
 				<div class="list">
-					<code>string</code><br />
+					<code>string</code><br>The markup.<br />
 				</div>
 
 
@@ -283,14 +308,18 @@ href="mailto:wolters.fl&#64;gmail.com">wolters.fl&#64;<!---->gmail.com</a>&gt;<b
 
 		<td class="name"><div>
 		<a class="anchor" href="#_displayRnaForm">#</a>
-		<code><a href="source-class-HochschuleBremen.Application.SequenceAlignment.Controller.ControllerProvider.html#236" title="Go to source code">displayRnaForm</a>( <span>Silex\Application <var>$app</var></span> )</code>
+		<code><a href="source-class-HochschuleBremen.Application.SequenceAlignment.Controller.ControllerProvider.html#246" title="Go to source code">displayRnaForm</a>( <span>Silex\Application <var>$app</var></span> )</code>
 
 		<div class="description short">
 			
+<p>Displays the form to input RNA sequences.</p>
+
 		</div>
 
 		<div class="description detailed hidden">
 			
+<p>Displays the form to input RNA sequences.</p>
+
 
 
 				<h4>Parameters</h4>
@@ -301,7 +330,7 @@ href="mailto:wolters.fl&#64;gmail.com">wolters.fl&#64;<!---->gmail.com</a>&gt;<b
 
 				<h4>Returns</h4>
 				<div class="list">
-					<code>string</code><br />
+					<code>string</code><br>The markup.<br />
 				</div>
 
 
@@ -321,7 +350,7 @@ href="mailto:wolters.fl&#64;gmail.com">wolters.fl&#64;<!---->gmail.com</a>&gt;<b
 
 		<td class="name"><div>
 		<a class="anchor" href="#_connect">#</a>
-		<code><a href="source-class-HochschuleBremen.Application.SequenceAlignment.Controller.ControllerProvider.html#250" title="Go to source code">connect</a>( <span>Silex\Application <var>$app</var></span> )</code>
+		<code><a href="source-class-HochschuleBremen.Application.SequenceAlignment.Controller.ControllerProvider.html#262" title="Go to source code">connect</a>( <span>Silex\Application <var>$app</var></span> )</code>
 
 		<div class="description short">
 			

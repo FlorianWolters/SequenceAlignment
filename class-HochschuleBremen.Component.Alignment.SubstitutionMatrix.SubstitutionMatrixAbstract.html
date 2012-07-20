@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="generator" content="ApiGen 2.7.0" />
+
+	<title>Class HochschuleBremen\Component\Alignment\SubstitutionMatrix\SubstitutionMatrixAbstract | HSBremen\ISBio\SequenceAlignment</title>
+
+	<script type="text/javascript" src="resources/combined.js?2388493914"></script>
+	<script type="text/javascript" src="elementlist.js?1851241040"></script>
+	<link rel="stylesheet" type="text/css" media="all" href="resources/style.css?1567499433" />
+
+</head>
+
+<body>
+<div id="left">
+	<div id="menu">
+		<a href="index.html" title="Overview"><span>Overview</span></a>
+
+
+		<div id="groups">
+			<h3>Namespaces</h3>
+			<ul>
+				<li class="active"><a href="namespace-HochschuleBremen.html">HochschuleBremen<span></span></a>
+						<ul>
+				<li><a href="namespace-HochschuleBremen.Application.html">Application<span></span></a>
+						<ul>
+				<li><a href="namespace-HochschuleBremen.Application.SequenceAlignment.html">SequenceAlignment<span></span></a>
+						<ul>
+				<li><a href="namespace-HochschuleBremen.Application.SequenceAlignment.Controller.html">Controller</a>
+						</li>
+				<li><a href="namespace-HochschuleBremen.Application.SequenceAlignment.Entity.html">Entity</a>
+						</li>
+				<li><a href="namespace-HochschuleBremen.Application.SequenceAlignment.Form.html">Form</a>
+						</li>
+				<li><a href="namespace-HochschuleBremen.Application.SequenceAlignment.Model.html">Model<span></span></a>
+						<ul>
+				<li><a href="namespace-HochschuleBremen.Application.SequenceAlignment.Model.Nucleobase.html">Nucleobase</a>
+						</li>
+							</ul></li></ul></li></ul></li>
+				<li class="active"><a href="namespace-HochschuleBremen.Component.html">Component<span></span></a>
+						<ul>
+				<li class="active"><a href="namespace-HochschuleBremen.Component.Alignment.html">Alignment<span></span></a>
+						<ul>
+				<li><a href="namespace-HochschuleBremen.Component.Alignment.GapPenalty.html">GapPenalty</a>
+						</li>
+				<li class="active"><a href="namespace-HochschuleBremen.Component.Alignment.SubstitutionMatrix.html">SubstitutionMatrix<span></span></a>
+						<ul>
+				<li><a href="namespace-HochschuleBremen.Component.Alignment.SubstitutionMatrix.AminoAcid.html">AminoAcid</a>
+						</li>
+				<li><a href="namespace-HochschuleBremen.Component.Alignment.SubstitutionMatrix.Nucleotide.html">Nucleotide</a>
+						</li>
+							</ul></li></ul></li>
+				<li><a href="namespace-HochschuleBremen.Component.Sequence.html">Sequence<span></span></a>
+						<ul>
+				<li><a href="namespace-HochschuleBremen.Component.Sequence.Compound.html">Compound</a>
+						</li>
+							</ul></li></ul></li></ul></li>
+			</ul>
+		</div>
+
+		<hr />
+
+
+		<div id="elements">
+			<h3>Classes</h3>
+			<ul>
+				<li><a href="class-HochschuleBremen.Component.Alignment.SubstitutionMatrix.AminoAcidSubstitutionMatrixTypeEnum.html">AminoAcidSubstitutionMatrixTypeEnum</a></li>
+				<li><a href="class-HochschuleBremen.Component.Alignment.SubstitutionMatrix.NucleotideSubstitutionMatrixTypeEnum.html">NucleotideSubstitutionMatrixTypeEnum</a></li>
+				<li><a href="class-HochschuleBremen.Component.Alignment.SubstitutionMatrix.SequenceTypeEnum.html">SequenceTypeEnum</a></li>
+				<li class="active"><a href="class-HochschuleBremen.Component.Alignment.SubstitutionMatrix.SubstitutionMatrixAbstract.html">SubstitutionMatrixAbstract</a></li>
+				<li><a href="class-HochschuleBremen.Component.Alignment.SubstitutionMatrix.SubstitutionMatrixFactory.html">SubstitutionMatrixFactory</a></li>
+				<li><a href="class-HochschuleBremen.Component.Alignment.SubstitutionMatrix.SubstitutionMatrixTypeEnum.html">SubstitutionMatrixTypeEnum</a></li>
+			</ul>
+
+
+
+
+
+		</div>
+	</div>
+</div>
+
+<div id="splitter"></div>
+
+<div id="right">
+<div id="rightInner">
+	<form id="search">
+		<input type="hidden" name="cx" value="" />
+		<input type="hidden" name="ie" value="UTF-8" />
+		<input type="text" name="q" class="text" />
+		<input type="submit" value="Search" />
+	</form>
+
+	<div id="navigation">
+		<ul>
+			<li>
+				<a href="index.html" title="Overview"><span>Overview</span></a>
+			</li>
+			<li>
+				<a href="namespace-HochschuleBremen.Component.Alignment.SubstitutionMatrix.html" title="Summary of HochschuleBremen\Component\Alignment\SubstitutionMatrix"><span>Namespace</span></a>
+			</li>
+			<li class="active">
+<span>Class</span>			</li>
+		</ul>
+		<ul>
+			<li>
+				<a href="tree.html" title="Tree view of classes, interfaces, traits and exceptions"><span>Tree</span></a>
+			</li>
+			<li>
+				<a href="todo.html" title="Todo list"><span>Todo</span></a>
+			</li>
+		</ul>
+		<ul>
+			<li>
+				<a href="hsbremen-isbio-sequencealignment-api-documentation.zip" title="Download documentation as ZIP archive"><span>Download</span></a>
+			</li>
+		</ul>
+	</div>
+
+<div id="content" class="class">
+	<h1>Class SubstitutionMatrixAbstract</h1>
+
+
+	<div class="description">
+	
+<p>An object of class SubstitutionMatrixAbstract wraps a substitution matrix
+into an object.</p>
+
+	</div>
+
+
+
+	<div>
+		<h4>Direct known subclasses</h4>
+			<a href="class-HochschuleBremen.Component.Alignment.SubstitutionMatrix.AminoAcid.Blosum60.html">HochschuleBremen\Component\Alignment\SubstitutionMatrix\AminoAcid\Blosum60</a>, 
+			<a href="class-HochschuleBremen.Component.Alignment.SubstitutionMatrix.AminoAcid.Blosum62.html">HochschuleBremen\Component\Alignment\SubstitutionMatrix\AminoAcid\Blosum62</a>, 
+			<a href="class-HochschuleBremen.Component.Alignment.SubstitutionMatrix.AminoAcid.Blosum65.html">HochschuleBremen\Component\Alignment\SubstitutionMatrix\AminoAcid\Blosum65</a>, 
+			<a href="class-HochschuleBremen.Component.Alignment.SubstitutionMatrix.Nucleotide.NucFourFour.html">HochschuleBremen\Component\Alignment\SubstitutionMatrix\Nucleotide\NucFourFour</a>, 
+			<a href="class-HochschuleBremen.Component.Alignment.SubstitutionMatrix.Nucleotide.NucFourTwo.html">HochschuleBremen\Component\Alignment\SubstitutionMatrix\Nucleotide\NucFourTwo</a>
+	</div>
+
+
+
+
+
+
+	<div class="info">
+		<b>Abstract</b><br />
+		
+		<b>Namespace:</b> <a href="namespace-HochschuleBremen.html">HochschuleBremen</a>\<a href="namespace-HochschuleBremen.Component.html">Component</a>\<a href="namespace-HochschuleBremen.Component.Alignment.html">Alignment</a>\<a href="namespace-HochschuleBremen.Component.Alignment.SubstitutionMatrix.html">SubstitutionMatrix</a><br />
+		<b>Package:</b> Alignment\SubstitutionMatrix<br />
+
+				<b>Category:</b>
+				Biology<br />
+				<b>Copyright:</b>
+				2012 Florian Wolters<br />
+				<b>License:</b>
+				<a href="http://gnu.org/licenses/lgpl.txt">LGPL-3.0+</a><br />
+				<b>Author:</b>
+				Florian Wolters &lt;<a
+href="mailto:wolters.fl&#64;gmail.com">wolters.fl&#64;<!---->gmail.com</a>&gt;<br />
+				<b>Version:</b>
+				Release: @package_version@<br />
+				<b>Since:</b>
+				Class available since Release 0.1.0<br />
+				<b>Link:</b>
+				<a href="http://github.com/FlorianWolters/SequenceAlignment">http://github.com/FlorianWolters/SequenceAlignment</a><br />
+		<b>Located at</b> <a href="source-class-HochschuleBremen.Component.Alignment.SubstitutionMatrix.SubstitutionMatrixAbstract.html#33" title="Go to source code">HochschuleBremen/Component/Alignment/SubstitutionMatrix/SubstitutionMatrixAbstract.php</a><br />
+	</div>
+
+
+	<table class="summary" id="methods">
+	<caption>Methods summary</caption>
+	<tr data-order="__construct" id="___construct">
+
+		<td class="attributes"><code>
+			 protected 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#___construct">#</a>
+		<code><a href="source-class-HochschuleBremen.Component.Alignment.SubstitutionMatrix.SubstitutionMatrixAbstract.html#64" title="Go to source code">__construct</a>( <span>array <var>$matrix</var></span>, <span>string <var>$name</var> = <span class="php-keyword1">null</span></span> )</code>
+
+		<div class="description short">
+			
+<p>Constructs a new substitution matrix with the specified scores and the
+optionally specified identifier.</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Constructs a new substitution matrix with the specified scores and the
+optionally specified identifier.</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$matrix</var></dt>
+					<dd><code>array</code><br> The scores of the substitution matrix.</dd>
+					<dt><var>$name</var></dt>
+					<dd><code>string</code><br> The name of the substitution matrix.</dd>
+				</dl></div>
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="getMatrix" id="_getMatrix">
+
+		<td class="attributes"><code>
+			 public 
+			array
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_getMatrix">#</a>
+		<code><a href="source-class-HochschuleBremen.Component.Alignment.SubstitutionMatrix.SubstitutionMatrixAbstract.html#108" title="Go to source code">getMatrix</a>( )</code>
+
+		<div class="description short">
+			
+<p>Returns the entire substitution matrix.</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Returns the entire substitution matrix.</p>
+
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>array</code><br>The matrix.<br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="getName" id="_getName">
+
+		<td class="attributes"><code>
+			 public 
+			string
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_getName">#</a>
+		<code><a href="source-class-HochschuleBremen.Component.Alignment.SubstitutionMatrix.SubstitutionMatrixAbstract.html#118" title="Go to source code">getName</a>( )</code>
+
+		<div class="description short">
+			
+<p>Returns the name of this substitution matrix.</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Returns the name of this substitution matrix.</p>
+
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>string</code><br>The name.<br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="getValue" id="_getValue">
+
+		<td class="attributes"><code>
+			 public 
+			integer
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_getValue">#</a>
+		<code><a href="source-class-HochschuleBremen.Component.Alignment.SubstitutionMatrix.SubstitutionMatrixAbstract.html#128" title="Go to source code">getValue</a>( <span>string <var>$from</var></span>, <span>string <var>$to</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Returns the value in this substitution matrix for conversion from the first
+specified compound to the second specified compound.</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Returns the value in this substitution matrix for conversion from the first
+specified compound to the second specified compound.</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$from</var></dt>
+					<dd><code>string</code><br> The original compound.</dd>
+					<dt><var>$to</var></dt>
+					<dd><code>string</code><br> The replacement compound.</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>integer</code><br>The value in this substitution matrix for conversion from the first compund to
+the second compound.<br />
+				</div>
+
+				<h4>Throws</h4>
+				<div class="list">
+					<code>OutOfBoundsException</code><br>If the specified original compound does not exist in this substitution matrix.<br />
+					<code>OutOfBoundsException</code><br>If the specified replacement compound does not exist in this substitution
+matrix.<br />
+				</div>
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	</table>
+
+
+
+
+
+
+
+
+
+
+</div>
+
+	<div id="footer">
+		HSBremen\ISBio\SequenceAlignment API documentation generated by <a href="http://apigen.org">ApiGen 2.7.0</a>
+	</div>
+</div>
+</div>
+</body>
+</html>

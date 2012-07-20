@@ -1,0 +1,787 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="generator" content="ApiGen 2.7.0" />
+
+	<title>Class HochschuleBremen\Component\Alignment\SmithWaterman | HSBremen\ISBio\SequenceAlignment</title>
+
+	<script type="text/javascript" src="resources/combined.js?2388493914"></script>
+	<script type="text/javascript" src="elementlist.js?1851241040"></script>
+	<link rel="stylesheet" type="text/css" media="all" href="resources/style.css?1567499433" />
+
+</head>
+
+<body>
+<div id="left">
+	<div id="menu">
+		<a href="index.html" title="Overview"><span>Overview</span></a>
+
+
+		<div id="groups">
+			<h3>Namespaces</h3>
+			<ul>
+				<li class="active"><a href="namespace-HochschuleBremen.html">HochschuleBremen<span></span></a>
+						<ul>
+				<li><a href="namespace-HochschuleBremen.Application.html">Application<span></span></a>
+						<ul>
+				<li><a href="namespace-HochschuleBremen.Application.SequenceAlignment.html">SequenceAlignment<span></span></a>
+						<ul>
+				<li><a href="namespace-HochschuleBremen.Application.SequenceAlignment.Controller.html">Controller</a>
+						</li>
+				<li><a href="namespace-HochschuleBremen.Application.SequenceAlignment.Entity.html">Entity</a>
+						</li>
+				<li><a href="namespace-HochschuleBremen.Application.SequenceAlignment.Form.html">Form</a>
+						</li>
+				<li><a href="namespace-HochschuleBremen.Application.SequenceAlignment.Model.html">Model<span></span></a>
+						<ul>
+				<li><a href="namespace-HochschuleBremen.Application.SequenceAlignment.Model.Nucleobase.html">Nucleobase</a>
+						</li>
+							</ul></li></ul></li></ul></li>
+				<li class="active"><a href="namespace-HochschuleBremen.Component.html">Component<span></span></a>
+						<ul>
+				<li class="active"><a href="namespace-HochschuleBremen.Component.Alignment.html">Alignment<span></span></a>
+						<ul>
+				<li><a href="namespace-HochschuleBremen.Component.Alignment.GapPenalty.html">GapPenalty</a>
+						</li>
+				<li><a href="namespace-HochschuleBremen.Component.Alignment.SubstitutionMatrix.html">SubstitutionMatrix<span></span></a>
+						<ul>
+				<li><a href="namespace-HochschuleBremen.Component.Alignment.SubstitutionMatrix.AminoAcid.html">AminoAcid</a>
+						</li>
+				<li><a href="namespace-HochschuleBremen.Component.Alignment.SubstitutionMatrix.Nucleotide.html">Nucleotide</a>
+						</li>
+							</ul></li></ul></li>
+				<li><a href="namespace-HochschuleBremen.Component.Sequence.html">Sequence<span></span></a>
+						<ul>
+				<li><a href="namespace-HochschuleBremen.Component.Sequence.Compound.html">Compound</a>
+						</li>
+							</ul></li></ul></li></ul></li>
+			</ul>
+		</div>
+
+		<hr />
+
+
+		<div id="elements">
+			<h3>Classes</h3>
+			<ul>
+				<li><a href="class-HochschuleBremen.Component.Alignment.Cell.html">Cell</a></li>
+				<li class="active"><a href="class-HochschuleBremen.Component.Alignment.SmithWaterman.html">SmithWaterman</a></li>
+			</ul>
+
+
+
+
+
+		</div>
+	</div>
+</div>
+
+<div id="splitter"></div>
+
+<div id="right">
+<div id="rightInner">
+	<form id="search">
+		<input type="hidden" name="cx" value="" />
+		<input type="hidden" name="ie" value="UTF-8" />
+		<input type="text" name="q" class="text" />
+		<input type="submit" value="Search" />
+	</form>
+
+	<div id="navigation">
+		<ul>
+			<li>
+				<a href="index.html" title="Overview"><span>Overview</span></a>
+			</li>
+			<li>
+				<a href="namespace-HochschuleBremen.Component.Alignment.html" title="Summary of HochschuleBremen\Component\Alignment"><span>Namespace</span></a>
+			</li>
+			<li class="active">
+<span>Class</span>			</li>
+		</ul>
+		<ul>
+			<li>
+				<a href="tree.html" title="Tree view of classes, interfaces, traits and exceptions"><span>Tree</span></a>
+			</li>
+			<li>
+				<a href="todo.html" title="Todo list"><span>Todo</span></a>
+			</li>
+		</ul>
+		<ul>
+			<li>
+				<a href="hsbremen-isbio-sequencealignment-api-documentation.zip" title="Download documentation as ZIP archive"><span>Download</span></a>
+			</li>
+		</ul>
+	</div>
+
+<div id="content" class="class">
+	<h1>Class SmithWaterman</h1>
+
+
+	<div class="description">
+	
+<p>Smith and Waterman defined an algorithm for pairwise local sequence
+alignments (best match of sections from each sequence).</p>
+
+<p>This class performs such local sequence comparisons efficiently by dynamic
+programming.</p>
+
+	</div>
+
+
+
+
+
+
+
+
+
+	<div class="info">
+		
+		
+		<b>Namespace:</b> <a href="namespace-HochschuleBremen.html">HochschuleBremen</a>\<a href="namespace-HochschuleBremen.Component.html">Component</a>\<a href="namespace-HochschuleBremen.Component.Alignment.html">Alignment</a><br />
+		<b>Package:</b> Alignment<br />
+
+				<b>Category:</b>
+				Biology<br />
+				<b>Copyright:</b>
+				2012 Florian Wolters<br />
+				<b>License:</b>
+				<a href="http://gnu.org/licenses/lgpl.txt">LGPL-3.0+</a><br />
+				<b>Author:</b>
+				Florian Wolters &lt;<a
+href="mailto:wolters.fl&#64;gmail.com">wolters.fl&#64;<!---->gmail.com</a>&gt;<br />
+				<b>Author:</b>
+				Olav Hoffmann &lt;<a
+href="mailto:olavhoffmann&#64;gmail.com">olavhoffmann&#64;<!---->gmail.com</a>&gt;<br />
+				<b>Version:</b>
+				Release: @package_version@<br />
+				<b>Since:</b>
+				Class available since Release 0.1.0<br />
+				<b>Link:</b>
+				<a href="http://github.com/FlorianWolters/SequenceAlignment">http://github.com/FlorianWolters/SequenceAlignment</a><br />
+		<b>Located at</b> <a href="source-class-HochschuleBremen.Component.Alignment.SmithWaterman.html#37" title="Go to source code">HochschuleBremen/Component/Alignment/SmithWaterman.php</a><br />
+	</div>
+
+
+	<table class="summary" id="methods">
+	<caption>Methods summary</caption>
+	<tr data-order="__construct" id="___construct">
+
+		<td class="attributes"><code>
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#___construct">#</a>
+		<code><a href="source-class-HochschuleBremen.Component.Alignment.SmithWaterman.html#148" title="Go to source code">__construct</a>( <span><code><a href="class-HochschuleBremen.Component.Sequence.SequenceInterface.html">HochschuleBremen\Component\Sequence\SequenceInterface</a></code> <var>$query</var></span>, <span><code><a href="class-HochschuleBremen.Component.Sequence.SequenceInterface.html">HochschuleBremen\Component\Sequence\SequenceInterface</a></code> <var>$target</var></span>, <span><code><a href="class-HochschuleBremen.Component.Alignment.GapPenalty.GapPenaltyInterface.html">HochschuleBremen\Component\Alignment\GapPenalty\GapPenaltyInterface</a></code> <var>$gapPenalty</var></span>, <span><code><a href="class-HochschuleBremen.Component.Alignment.SubstitutionMatrix.SubstitutionMatrixAbstract.html">HochschuleBremen\Component\Alignment\SubstitutionMatrix\SubstitutionMatrixAbstract</a></code> <var>$substitutionMatrix</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Prepares for a pairwise local sequence alignment.</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Prepares for a pairwise local sequence alignment.</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$query</var></dt>
+					<dd><code><code><a href="class-HochschuleBremen.Component.Sequence.SequenceInterface.html">HochschuleBremen\Component\Sequence\SequenceInterface</a></code></code><br> The first sequence of the pair to align.</dd>
+					<dt><var>$target</var></dt>
+					<dd><code><code><a href="class-HochschuleBremen.Component.Sequence.SequenceInterface.html">HochschuleBremen\Component\Sequence\SequenceInterface</a></code></code><br> The second sequence of the pair to align.</dd>
+					<dt><var>$gapPenalty</var></dt>
+					<dd><code><code><a href="class-HochschuleBremen.Component.Alignment.GapPenalty.GapPenaltyInterface.html">HochschuleBremen\Component\Alignment\GapPenalty\GapPenaltyInterface</a></code></code><br> The gap penalties used during alignment.</dd>
+					<dt><var>$substitutionMatrix</var></dt>
+					<dd><code><code><a href="class-HochschuleBremen.Component.Alignment.SubstitutionMatrix.SubstitutionMatrixAbstract.html">HochschuleBremen\Component\Alignment\SubstitutionMatrix\SubstitutionMatrixAbstract</a></code></code><br> The set of substitution scores used during alignment.</dd>
+				</dl></div>
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="getQuery" id="_getQuery">
+
+		<td class="attributes"><code>
+			 public 
+			<code><a href="class-HochschuleBremen.Component.Sequence.SequenceInterface.html">HochschuleBremen\Component\Sequence\SequenceInterface</a></code>
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_getQuery">#</a>
+		<code><a href="source-class-HochschuleBremen.Component.Alignment.SmithWaterman.html#399" title="Go to source code">getQuery</a>( )</code>
+
+		<div class="description short">
+			
+<p>Returns the first sequence of the pair.</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Returns the first sequence of the pair.</p>
+
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code><code><a href="class-HochschuleBremen.Component.Sequence.SequenceInterface.html">HochschuleBremen\Component\Sequence\SequenceInterface</a></code></code><br>The first sequence of the pair.<br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="getTarget" id="_getTarget">
+
+		<td class="attributes"><code>
+			 public 
+			<code><a href="class-HochschuleBremen.Component.Sequence.SequenceInterface.html">HochschuleBremen\Component\Sequence\SequenceInterface</a></code>
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_getTarget">#</a>
+		<code><a href="source-class-HochschuleBremen.Component.Alignment.SmithWaterman.html#409" title="Go to source code">getTarget</a>( )</code>
+
+		<div class="description short">
+			
+<p>Returns the second sequence of the pair.</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Returns the second sequence of the pair.</p>
+
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code><code><a href="class-HochschuleBremen.Component.Sequence.SequenceInterface.html">HochschuleBremen\Component\Sequence\SequenceInterface</a></code></code><br>The second sequence of the pair.<br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="getGapPenalty" id="_getGapPenalty">
+
+		<td class="attributes"><code>
+			 public 
+			<code><a href="class-HochschuleBremen.Component.Alignment.GapPenalty.GapPenaltyInterface.html">HochschuleBremen\Component\Alignment\GapPenalty\GapPenaltyInterface</a></code>
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_getGapPenalty">#</a>
+		<code><a href="source-class-HochschuleBremen.Component.Alignment.SmithWaterman.html#419" title="Go to source code">getGapPenalty</a>( )</code>
+
+		<div class="description short">
+			
+<p>Returns the gap penalties.</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Returns the gap penalties.</p>
+
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code><code><a href="class-HochschuleBremen.Component.Alignment.GapPenalty.GapPenaltyInterface.html">HochschuleBremen\Component\Alignment\GapPenalty\GapPenaltyInterface</a></code></code><br>The gap penalties used during alignment.<br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="getSubstitutionMatrix" id="_getSubstitutionMatrix">
+
+		<td class="attributes"><code>
+			 public 
+			<code><a href="class-HochschuleBremen.Component.Alignment.SubstitutionMatrix.SubstitutionMatrixAbstract.html">HochschuleBremen\Component\Alignment\SubstitutionMatrix\SubstitutionMatrixAbstract</a></code>
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_getSubstitutionMatrix">#</a>
+		<code><a href="source-class-HochschuleBremen.Component.Alignment.SmithWaterman.html#429" title="Go to source code">getSubstitutionMatrix</a>( )</code>
+
+		<div class="description short">
+			
+<p>Returns the substitution matrix.</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Returns the substitution matrix.</p>
+
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code><code><a href="class-HochschuleBremen.Component.Alignment.SubstitutionMatrix.SubstitutionMatrixAbstract.html">HochschuleBremen\Component\Alignment\SubstitutionMatrix\SubstitutionMatrixAbstract</a></code></code><br>The set of substitution scores used during alignment.<br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="getPair" id="_getPair">
+
+		<td class="attributes"><code>
+			 public 
+			array
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_getPair">#</a>
+		<code><a href="source-class-HochschuleBremen.Component.Alignment.SmithWaterman.html#440" title="Go to source code">getPair</a>( )</code>
+
+		<div class="description short">
+			
+<p>Returns the sequence alignment pair.</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Returns the sequence alignment pair.</p>
+
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>array</code><br>The sequence alignment pair.<br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="getMaxScore" id="_getMaxScore">
+
+		<td class="attributes"><code>
+			 public 
+			integer
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_getMaxScore">#</a>
+		<code><a href="source-class-HochschuleBremen.Component.Alignment.SmithWaterman.html#452" title="Go to source code">getMaxScore</a>( )</code>
+
+		<div class="description short">
+			
+<p>Returns the maximum possible score.</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Returns the maximum possible score.</p>
+
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>integer</code><br>The maximum possible score.<br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="getMinScore" id="_getMinScore">
+
+		<td class="attributes"><code>
+			 public 
+			integer
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_getMinScore">#</a>
+		<code><a href="source-class-HochschuleBremen.Component.Alignment.SmithWaterman.html#462" title="Go to source code">getMinScore</a>( )</code>
+
+		<div class="description short">
+			
+<p>Returns the minimum possible score.</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Returns the minimum possible score.</p>
+
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>integer</code><br>The minimum possible score.<br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="getScore" id="_getScore">
+
+		<td class="attributes"><code>
+			 public 
+			integer
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_getScore">#</a>
+		<code><a href="source-class-HochschuleBremen.Component.Alignment.SmithWaterman.html#472" title="Go to source code">getScore</a>( )</code>
+
+		<div class="description short">
+			
+<p>Returns the score resulting from the algorithm.</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Returns the score resulting from the algorithm.</p>
+
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>integer</code><br>The score resulting from the algorithm.<br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="getScoreMatrix" id="_getScoreMatrix">
+
+		<td class="attributes"><code>
+			 public 
+			array
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_getScoreMatrix">#</a>
+		<code><a href="source-class-HochschuleBremen.Component.Alignment.SmithWaterman.html#482" title="Go to source code">getScoreMatrix</a>( )</code>
+
+		<div class="description short">
+			
+<p>Returns the entire score matrix built during alignment.</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Returns the entire score matrix built during alignment.</p>
+
+<p>The first dimension has the length of the first (query) sequence + 1; the
+second has the length of the second (target) sequence + 1.</p>
+
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>array</code><br>The score matrix.<br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="getDistance" id="_getDistance">
+
+		<td class="attributes"><code>
+			 public 
+			float
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_getDistance">#</a>
+		<code><a href="source-class-HochschuleBremen.Component.Alignment.SmithWaterman.html#503" title="Go to source code">getDistance</a>( <span>float <var>$scale</var> = <span class="php-num">1.0</span></span> )</code>
+
+		<div class="description short">
+			
+<p>Returns score as a distance between 0.0 and the specified scale (default:
+1.0).</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Returns score as a distance between 0.0 and the specified scale (default:
+1.0).</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$scale</var></dt>
+					<dd><code>float</code><br> The maximum distance.</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>float</code><br>The score as a distance between 0.0 and the specified scale (default: 1.0).<br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="getSimilarity" id="_getSimilarity">
+
+		<td class="attributes"><code>
+			 public 
+			float
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_getSimilarity">#</a>
+		<code><a href="source-class-HochschuleBremen.Component.Alignment.SmithWaterman.html#518" title="Go to source code">getSimilarity</a>( <span>float <var>$scale</var> = <span class="php-num">1.0</span></span> )</code>
+
+		<div class="description short">
+			
+<p>Returns score as a similarity between 0.0 and the specified scale (default:
+1.0).</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Returns score as a similarity between 0.0 and the specified scale (default:
+1.0).</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$scale</var></dt>
+					<dd><code>float</code><br> The maximum similarity.</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>float</code><br>The score as a similarity between 0.0 and the specified scale (default: 1.0).<br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="scoreMatrixToString" id="_scoreMatrixToString">
+
+		<td class="attributes"><code>
+			 public 
+			string
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_scoreMatrixToString">#</a>
+		<code><a href="source-class-HochschuleBremen.Component.Alignment.SmithWaterman.html#533" title="Go to source code">scoreMatrixToString</a>( )</code>
+
+		<div class="description short">
+			
+<p>Returns the string representation of the entire score matrix built during
+alignment.</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Returns the string representation of the entire score matrix built during
+alignment.</p>
+
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>string</code><br>The score matrix as a string.<br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="pairToString" id="_pairToString">
+
+		<td class="attributes"><code>
+			 public 
+			string
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_pairToString">#</a>
+		<code><a href="source-class-HochschuleBremen.Component.Alignment.SmithWaterman.html#568" title="Go to source code">pairToString</a>( )</code>
+
+		<div class="description short">
+			
+<p>Returns the string representation of the sequence alignment pair.</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Returns the string representation of the sequence alignment pair.</p>
+
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>string</code><br>The sequence alignment pair as a string.<br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	</table>
+
+
+
+
+	<table class="summary" id="constants">
+	<caption>Constants summary</caption>
+	<tr data-order="INITIAL_SCORE" id="INITIAL_SCORE">
+
+		<td class="attributes"><code>
+			integer
+		</code></td>
+		<td class="name"><code>
+				<a href="source-class-HochschuleBremen.Component.Alignment.SmithWaterman.html#57" title="Go to source code"><b>INITIAL_SCORE</b></a>
+		</code></td>
+		<td class="value"><code><span class="php-num">0</span></code></td>
+		<td class="description"><div>
+			<a href="#INITIAL_SCORE" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>The initial score of each Cell in the score matrix.</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>The initial score of each Cell in the score matrix.</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="GAP_CHARACTER" id="GAP_CHARACTER">
+
+		<td class="attributes"><code>
+			string
+		</code></td>
+		<td class="name"><code>
+				<a href="source-class-HochschuleBremen.Component.Alignment.SmithWaterman.html#64" title="Go to source code"><b>GAP_CHARACTER</b></a>
+		</code></td>
+		<td class="value"><code><span class="php-quote">'-'</span></code></td>
+		<td class="description"><div>
+			<a href="#GAP_CHARACTER" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>The gap character.</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>The gap character.</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	</table>
+
+
+
+
+
+
+</div>
+
+	<div id="footer">
+		HSBremen\ISBio\SequenceAlignment API documentation generated by <a href="http://apigen.org">ApiGen 2.7.0</a>
+	</div>
+</div>
+</div>
+</body>
+</html>
